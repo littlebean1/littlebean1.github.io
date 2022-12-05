@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="集合源码HashMap1、hashmap底层扩容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础源码">
+<meta property="og:url" content="http://example.com/2022/11/17/java%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81/index.html">
+<meta property="og:site_name" content="我要去大厂">
+<meta property="og:description" content="集合源码HashMap1、hashmap底层扩容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165105613.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165047896.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221121143948496.png?raw=true">
+<meta property="article:published_time" content="2022-11-17T08:49:50.000Z">
+<meta property="article:modified_time" content="2022-12-05T08:01:49.226Z">
+<meta property="article:author" content="bean">
+<meta property="article:tag" content="源码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165105613.png?raw=true">
+
+
+<link rel="canonical" href="http://example.com/2022/11/17/java%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/11/17/java%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81/","path":"2022/11/17/java基础源码/","title":"java基础源码"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>java基础源码 | 我要去大厂</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">我要去大厂</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">集合源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">1.1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81hashmap%E5%BA%95%E5%B1%82%E6%89%A9%E5%AE%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、hashmap底层扩容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81hashmap%E9%80%9A%E8%BF%87entrySet%E9%81%8D%E5%8E%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、hashmap通过entrySet遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81String%E3%80%81StringBuilder%E3%80%81StringBuffer"><span class="nav-number">1.1.3.</span> <span class="nav-text">3、String、StringBuilder、StringBuffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81Mybatis%E7%9A%84-%E5%92%8C-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.4.</span> <span class="nav-text">4、Mybatis的#{}和${}有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81Mybatis%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.5.</span> <span class="nav-text">5、Mybatis的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81Java%E7%9A%84%E5%BC%82%E5%B8%B8%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.1.6.</span> <span class="nav-text">6、Java的异常有哪些</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bean"
+      src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+  <p class="site-author-name" itemprop="name">bean</p>
+  <div class="site-description" itemprop="description">博客记录学习生活</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/17/java%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="java基础源码 | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java基础源码
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-17 16:49:50" itemprop="dateCreated datePublished" datetime="2022-11-17T16:49:50+08:00">2022-11-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-05 16:01:49" itemprop="dateModified" datetime="2022-12-05T16:01:49+08:00">2022-12-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="集合源码"><a href="#集合源码" class="headerlink" title="集合源码"></a>集合源码</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="1、hashmap底层扩容"><a href="#1、hashmap底层扩容" class="headerlink" title="1、hashmap底层扩容"></a>1、hashmap底层扩容</h3><span id="more"></span>
+
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165105613.png?raw=true" alt="image-20221117165105613"></p>
+<h3 id="2、hashmap通过entrySet遍历"><a href="#2、hashmap通过entrySet遍历" class="headerlink" title="2、hashmap通过entrySet遍历"></a>2、hashmap通过entrySet遍历</h3><p>Node类实现了Map.Entry的接口，所以在遍历时可以直接遍历Entry并使用Entry的getkey() 与 getvalue()</p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165047896.png?raw=true" alt="image-20221117165047896"></p>
+<h3 id="3、String、StringBuilder、StringBuffer"><a href="#3、String、StringBuilder、StringBuffer" class="headerlink" title="3、String、StringBuilder、StringBuffer"></a>3、String、StringBuilder、StringBuffer</h3><p>​		String类中的字符数组被final修饰，StringBuilder和StringBuffer继承自AbstractStringBuilder类，该类中维护了一个非final字符数组，StringBuffer线程安全，StringBuilder线程不安全</p>
+<h3 id="4、Mybatis的-和-有什么区别"><a href="#4、Mybatis的-和-有什么区别" class="headerlink" title="4、Mybatis的#{}和${}有什么区别"></a>4、Mybatis的#{}和${}有什么区别</h3><p>​		$是字符串替换，无法防止sql注入，主要用于动态传递表名和排序字段</p>
+<p>​		#是预编译处理，等同于jdbc中的?占位符，调用preparedStatement对sql预编译后的，使用set对?赋值，根据属性添加单引号，有效防止sql注入，大量使用</p>
+<h3 id="5、Mybatis的优缺点"><a href="#5、Mybatis的优缺点" class="headerlink" title="5、Mybatis的优缺点"></a>5、Mybatis的优缺点</h3><p>​		消除了JDBC大量冗余代码，不需要手动开关连接，提供编写动态sql语句，支持对象与数据库的ORM字段映射，sql写在XML里与代码解耦便于统一管理，mybatis的数据库移植性较差</p>
+<h3 id="6、Java的异常有哪些"><a href="#6、Java的异常有哪些" class="headerlink" title="6、Java的异常有哪些"></a>6、Java的异常有哪些</h3><p>​		<img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221121143948496.png?raw=true" alt="image-20221121143948496"></p>
+<p>Error：主要指在虚拟机运行时的错误，内存不足错误(OutOfMemoryError)，栈溢出错误(StackOverFlowError)</p>
+<p>Exception：可以捕获并且处理的异常，包含程序运行时发生的异常和非运行时(编译时)的异常</p>
+<ul>
+<li><p>非运行时异常是指在编译的过程中出现的异常，未找到某个类(ClassNotFoundException)，I&#x2F;O流异常(IOException)</p>
+</li>
+<li><p>运行时异常是指在运行过程中出现某种错误，空指针错误(NullPointerException), 数组下标超限(IndexOutOfBoundsException)，计算异常(ArithmeticException)</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BA%90%E7%A0%81/" rel="tag"># 源码</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="prev" title="计算机网络">
+                  <i class="fa fa-chevron-left"></i> 计算机网络
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/23/linux%E5%91%BD%E4%BB%A4/" rel="next" title="linux命令">
+                  linux命令 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bean</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

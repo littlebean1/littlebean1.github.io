@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Redis的内存处理redis过期删除策略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis">
+<meta property="og:url" content="http://example.com/2022/10/16/redis/index.html">
+<meta property="og:site_name" content="我要去大厂">
+<meta property="og:description" content="Redis的内存处理redis过期删除策略">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141834880.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115143017553.png?raw=true?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141948937.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115170352663.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115172440822.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116104210773.png?raw=true">
+<meta property="og:image" content="file:///C:/Users/19094/AppData/Roaming/Typora/typora-user-images/image-20221115141824141.png?raw=true?lastModify=1668564765">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116105202189.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116105223166.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101924212.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101939610.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116145341219.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101250658.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116110707618.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116114206050.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115912733.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115806333.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115731949.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116134731704.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116144548959.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221122200943822.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221122200956718.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221124203744462.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221124211547737.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125164247130.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125201625463.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125193052913.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125193243372.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125202133335.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126140241320.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126213756602.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126174401626.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126210244915.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126214631747.png?raw=true">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126220035968.png?raw=true">
+<meta property="article:published_time" content="2022-10-16T11:20:46.000Z">
+<meta property="article:modified_time" content="2022-12-05T08:01:41.173Z">
+<meta property="article:author" content="bean">
+<meta property="article:tag" content="图解redis面试题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141834880.png?raw=true">
+
+
+<link rel="canonical" href="http://example.com/2022/10/16/redis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/10/16/redis/","path":"2022/10/16/redis/","title":"redis"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>redis | 我要去大厂</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">我要去大厂</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Redis的内存处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#redis%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5"><span class="nav-number">1.1.</span> <span class="nav-text">redis过期删除策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="nav-number">1.2.</span> <span class="nav-text">redis内存淘汰策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">Redis底层数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%95%E5%B1%82%E7%9A%84%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">底层的总体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%95%E5%B1%82string%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">底层string的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%95%E5%B1%82ZipList%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.</span> <span class="nav-text">底层ZipList数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%95%E5%B1%82QuickList%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.4.</span> <span class="nav-text">底层QuickList的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%ADList%E7%9A%84%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84-%E9%87%87%E7%94%A8QuickList"><span class="nav-number">2.5.</span> <span class="nav-text">Redis中List的整体结构(采用QuickList)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%ADSet%E7%9A%84%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84-%E9%87%87%E7%94%A8Dict%E6%88%96IntSet"><span class="nav-number">2.6.</span> <span class="nav-text">Redis中Set的整体结构(采用Dict或IntSet)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%ADZSet%E7%9A%84%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84-%E9%87%87%E7%94%A8ZipList%E6%88%96SkipList-Dict"><span class="nav-number">2.7.</span> <span class="nav-text">Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%ADHash%E7%9A%84%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84-ZipList%E6%88%96Dict"><span class="nav-number">2.8.</span> <span class="nav-text">Redis中Hash的整体结构(ZipList或Dict)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%ADbitmap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.9.</span> <span class="nav-text">Redis中bitmap数据结构和命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E8%A7%A3%E5%86%B3%E8%B6%85%E4%B9%B0%E8%B6%85%E5%8D%96%E9%97%AE%E9%A2%98"><span class="nav-number">2.10.</span> <span class="nav-text">Redis分布式锁解决超买超卖问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E7%BC%93%E5%AD%98%E4%B8%8E%E9%9B%86%E7%BE%A4"><span class="nav-number">3.</span> <span class="nav-text">Redis缓存与集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">3.1.</span> <span class="nav-text">Redis缓存穿透</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">3.2.</span> <span class="nav-text">Redis缓存雪崩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-number">3.3.</span> <span class="nav-text">Redis缓存击穿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8Eredis%E7%BC%93%E5%AD%98%E4%B8%8D%E4%B8%80%E8%87%B4%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.</span> <span class="nav-text">数据库与redis缓存不一致问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDB"><span class="nav-number">3.5.</span> <span class="nav-text">RDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF"><span class="nav-number">3.6.</span> <span class="nav-text">AOF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDB%E4%B8%8EAOF%E5%AF%B9%E6%AF%94"><span class="nav-number">3.7.</span> <span class="nav-text">RDB与AOF对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E4%B8%BB%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5"><span class="nav-number">3.8.</span> <span class="nav-text">Redis主从数据同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4-%E4%B8%80%E4%B8%AAmaster%EF%BC%8C%E5%A4%9A%E4%B8%AAslave"><span class="nav-number">3.9.</span> <span class="nav-text">哨兵集群(一个master，多个slave)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4-%E5%A4%9A%E4%B8%AAmaster%EF%BC%8C%E5%A4%9A%E4%B8%AAslave"><span class="nav-number">3.10.</span> <span class="nav-text">分片集群(多个master，多个slave)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">Redis网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-x2F-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%EF%BC%9Aselect%EF%BC%8Cpoll%EF%BC%8Cepoll"><span class="nav-number">4.1.</span> <span class="nav-text">I&#x2F;O多路复用：select，poll，epoll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.2.</span> <span class="nav-text">Redis是单线程还是多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis%E9%80%89%E6%8B%A9%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E5%8E%9F%E5%9B%A0%EF%BC%9A"><span class="nav-number">4.2.0.1.</span> <span class="nav-text">redis选择单线程处理命令原因：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Redis常见面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E5%A4%A7Key%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">5.1.</span> <span class="nav-text">Redis大Key的解决方案</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bean"
+      src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+  <p class="site-author-name" itemprop="name">bean</p>
+  <div class="site-description" itemprop="description">博客记录学习生活</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/16/redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="redis | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          redis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-16 19:20:46" itemprop="dateCreated datePublished" datetime="2022-10-16T19:20:46+08:00">2022-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-05 16:01:41" itemprop="dateModified" datetime="2022-12-05T16:01:41+08:00">2022-12-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Redis的内存处理"><a href="#Redis的内存处理" class="headerlink" title="Redis的内存处理"></a>Redis的内存处理</h1><h2 id="redis过期删除策略"><a href="#redis过期删除策略" class="headerlink" title="redis过期删除策略"></a>redis过期删除策略</h2><span id="more"></span>
+
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141834880.png?raw=true" alt="image-20221115141834880"></p>
+<h2 id="redis内存淘汰策略"><a href="#redis内存淘汰策略" class="headerlink" title="redis内存淘汰策略"></a>redis内存淘汰策略</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115143017553.png?raw=true?raw=true" alt="image-20221115143017553"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141948937.png?raw=true" alt="image-20221115141948937"></p>
+<h1 id="Redis底层数据结构"><a href="#Redis底层数据结构" class="headerlink" title="Redis底层数据结构"></a>Redis底层数据结构</h1><h2 id="底层的总体架构"><a href="#底层的总体架构" class="headerlink" title="底层的总体架构"></a>底层的总体架构</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115170352663.png?raw=true" alt="image-20221115170352663"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115172440822.png?raw=true" alt="image-20221115172440822"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116104210773.png?raw=true" alt="image-20221116104210773"></p>
+<h2 id="底层string的数据结构"><a href="#底层string的数据结构" class="headerlink" title="底层string的数据结构"></a>底层string的数据结构</h2><p><img src="file:///C:/Users/19094/AppData/Roaming/Typora/typora-user-images/image-20221115141824141.png?raw=true?lastModify=1668564765" alt="image-20221115141824141"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116105202189.png?raw=true" alt="image-20221116105202189"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116105223166.png?raw=true" alt="image-20221116105223166"></p>
+<p>应用场景：</p>
+<ul>
+<li>计数器</li>
+<li>分布式锁</li>
+<li>缓存对象</li>
+</ul>
+<h2 id="底层ZipList数据结构"><a href="#底层ZipList数据结构" class="headerlink" title="底层ZipList数据结构"></a>底层ZipList数据结构</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101924212.png?raw=true" alt="image-20221116101924212"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101939610.png?raw=true" alt="image-20221116101939610"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116145341219.png?raw=true" alt="image-20221116145341219"></p>
+<h2 id="底层QuickList的数据结构"><a href="#底层QuickList的数据结构" class="headerlink" title="底层QuickList的数据结构"></a>底层QuickList的数据结构</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101250658.png?raw=true" alt="image-20221116101250658"></p>
+<h2 id="Redis中List的整体结构-采用QuickList"><a href="#Redis中List的整体结构-采用QuickList" class="headerlink" title="Redis中List的整体结构(采用QuickList)"></a>Redis中List的整体结构(采用QuickList)</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116110707618.png?raw=true" alt="image-20221116110707618"></p>
+<p>应用场景：</p>
+<ul>
+<li>消息队列</li>
+</ul>
+<h2 id="Redis中Set的整体结构-采用Dict或IntSet"><a href="#Redis中Set的整体结构-采用Dict或IntSet" class="headerlink" title="Redis中Set的整体结构(采用Dict或IntSet)"></a>Redis中Set的整体结构(采用Dict或IntSet)</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116114206050.png?raw=true" alt="image-20221116114206050"></p>
+<p>应用场景：</p>
+<ul>
+<li><p>点赞</p>
+</li>
+<li><p>共同关注</p>
+</li>
+</ul>
+<h2 id="Redis中ZSet的整体结构-采用ZipList或SkipList-Dict"><a href="#Redis中ZSet的整体结构-采用ZipList或SkipList-Dict" class="headerlink" title="Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)"></a>Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115912733.png?raw=true" alt="image-20221116115912733"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115806333.png?raw=true" alt="image-20221116115806333"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115731949.png?raw=true" alt="image-20221116115731949"></p>
+<p>由于ziplist无法排序并且数据量小，所以在使用ziplist存储结构时，可以在业务编码时进行排序。</p>
+<p>常用命令：</p>
+<ul>
+<li>zadd key score1 value1</li>
+<li>zrem key value1</li>
+<li>zrange key start end</li>
+<li>zincrby key num1 value1 </li>
+<li>zrangebyscore key</li>
+</ul>
+<p>应用场景：</p>
+<ul>
+<li>排行榜</li>
+<li>对点赞数目、电话号码排序</li>
+</ul>
+<h2 id="Redis中Hash的整体结构-ZipList或Dict"><a href="#Redis中Hash的整体结构-ZipList或Dict" class="headerlink" title="Redis中Hash的整体结构(ZipList或Dict)"></a>Redis中Hash的整体结构(ZipList或Dict)</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116134731704.png?raw=true" alt="image-20221116134731704"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116144548959.png?raw=true" alt="image-20221116144548959"></p>
+<p>应用场景：</p>
+<ul>
+<li>缓存用户</li>
+<li>缓存购物车</li>
+</ul>
+<h2 id="Redis中bitmap数据结构和命令"><a href="#Redis中bitmap数据结构和命令" class="headerlink" title="Redis中bitmap数据结构和命令"></a>Redis中bitmap数据结构和命令</h2><p>bitmap底层采用redis中string数据结构存储，即sds，一个字符数组。</p>
+<p>redis中string最大为512MB，能够存储2^32个bitmap数据</p>
+<p>常用命令：</p>
+<ul>
+<li>setbit login_2022_10 2 1    [commend，key，index，value]</li>
+<li>getbit login_2022_10 2</li>
+<li>bitcount login_2022_10 1  [comment，key，value]</li>
+<li>bitpos login_2022_10 1      &#x2F;&#x2F;login_2022_10里面以1开头的下标</li>
+</ul>
+<p>应用场景：</p>
+<ul>
+<li>签到统计</li>
+<li>判断登录状态</li>
+</ul>
+<h2 id="Redis分布式锁解决超买超卖问题"><a href="#Redis分布式锁解决超买超卖问题" class="headerlink" title="Redis分布式锁解决超买超卖问题"></a>Redis分布式锁解决超买超卖问题</h2><p>​		redis虽然支持事务，但是与数据库的事务不同，虽然redis事务能保证原子性，但不能保证一致性。因此需要编写lua脚本搭配redis解决一致性问题</p>
+<h1 id="Redis缓存与集群"><a href="#Redis缓存与集群" class="headerlink" title="Redis缓存与集群"></a>Redis缓存与集群</h1><h2 id="Redis缓存穿透"><a href="#Redis缓存穿透" class="headerlink" title="Redis缓存穿透"></a>Redis缓存穿透</h2><p>​		客户端请求的数据在缓存和数据库中都不存在，缓存永远不会失效，这些请求会一直打入到数据库</p>
+<p>​		解决方法：</p>
+<ul>
+<li><p>缓存空对象：可能造成短期内数据不一致问题，数据库数据修改缓存不知道</p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221122200943822.png?raw=true" alt="image-20221122200943822"></p>
+</li>
+<li><p>布隆过滤：占用内存少，实现复杂</p>
+<p>将数据库中的数据利用hash算法转化为hashcode，存储到布隆过滤器(bitMap)里边对应hashcode位置是否为1</p>
+</li>
+</ul>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221122200956718.png?raw=true" alt="image-20221122200956718"></p>
+<h2 id="Redis缓存雪崩"><a href="#Redis缓存雪崩" class="headerlink" title="Redis缓存雪崩"></a>Redis缓存雪崩</h2><p>​		同一时间段大量的缓存key同时失效或者Redis服务宕机，导致大量请求到达数据库，带来巨大压力。</p>
+<p>​		解决方案：</p>
+<ul>
+<li>利用Redis集群高可用</li>
+<li>给不同的key的TTL添加随机值，随机时间到期</li>
+<li>给业务添加多级缓存</li>
+<li>给缓存业务添加降级限流</li>
+</ul>
+<h2 id="Redis缓存击穿"><a href="#Redis缓存击穿" class="headerlink" title="Redis缓存击穿"></a>Redis缓存击穿</h2><p>​		又称为热点Key问题，就是一个频繁访问并且缓存重建业务较复杂的key突然失效了，无数的请求访问会在瞬间给数据库很大冲击。</p>
+<p>​		解决方案：</p>
+<ul>
+<li>互斥锁策略</li>
+<li>逻辑过期策略</li>
+</ul>
+<h2 id="数据库与redis缓存不一致问题"><a href="#数据库与redis缓存不一致问题" class="headerlink" title="数据库与redis缓存不一致问题"></a>数据库与redis缓存不一致问题</h2><ul>
+<li><p>先修改数据库，后修改缓存(不可行)</p>
+</li>
+<li><p>先修改缓存，后修改数据库(不可行)</p>
+</li>
+<li><p>采用分布式锁来进行解决(是否读写分离，分布式读写锁)</p>
+</li>
+</ul>
+<h2 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h2><p>​		RDB：redis数据备份文件，数据快照，把内存中所有数据记录到磁盘中，redis实例故障重启后，从磁盘读取数据快照恢复数据。</p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221124203744462.png?raw=true" alt="image-20221124203744462"></p>
+<p>​		RDB的bgsave的基本流程：</p>
+<ul>
+<li><p>fork主进程得到一个子进程，共享内存空间 (本质上是将主进程用于访问内存的页表复制给子进程)</p>
+</li>
+<li><p>子进程通过页表读取内存数据写入新的RDB文件</p>
+</li>
+<li><p>用新的RDB文件替换旧的</p>
+</li>
+</ul>
+<p>​		RDB执行的时机是：①自己设置的save 10 100，②正常关闭服务器</p>
+<p>​		RDB的缺点：每两次持久化之间产生的数据可能会因为宕机而丢失，而且fork子进程耗时间 </p>
+<h2 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h2><p>​		Redis每处理一个写命令都会记录在AOF文件中，是一个命令日志文件。AOF可以每条命令记录刷盘一次，也可以每一秒刷盘一次。AOF文件长度增加一倍或者总体积超过64mb时，触发bgrewriteaof，将AOF文件压缩。</p>
+<h2 id="RDB与AOF对比"><a href="#RDB与AOF对比" class="headerlink" title="RDB与AOF对比"></a>RDB与AOF对比</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221124211547737.png?raw=true" alt="image-20221124211547737"></p>
+<h2 id="Redis主从数据同步"><a href="#Redis主从数据同步" class="headerlink" title="Redis主从数据同步"></a>Redis主从数据同步</h2><p>​		slave结点加入到集群之后，发出数据同步请求</p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125164247130.png?raw=true" alt="image-20221125164247130"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125201625463.png?raw=true" alt="image-20221125201625463"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125193052913.png?raw=true" alt="image-20221125193052913"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125193243372.png?raw=true" alt="image-20221125193243372"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125202133335.png?raw=true" alt="image-20221125202133335"></p>
+<h2 id="哨兵集群-一个master，多个slave"><a href="#哨兵集群-一个master，多个slave" class="headerlink" title="哨兵集群(一个master，多个slave)"></a>哨兵集群(一个master，多个slave)</h2><p>​		Sentinel具有监控、故障转移、通知的作用</p>
+<p>​		Sentinel每隔1s发送一次ping命令，如果超过一定时间没有响应则认为主观下线，如果主观下线超过一半，则服务下线。当master发生故障时，Sentinel会选择一个slave作为新的master执行slaveof no one，其余结点执行slaveof 新master，修改故障结点配置文件slaveof 新master</p>
+<p>​		Sentinel选举新master的方式：首先判断slave结点与master结点的断开时间长短，断开时间长的slave会被排除，然后判断slave节点的slave-priority值，值越小优先级越高；若slave-priority相同，则判断slave结点的offset大小，越大说明数据越全，优先级高；最后判断slave结点的id，越小优先级越高。</p>
+<h2 id="分片集群-多个master，多个slave"><a href="#分片集群-多个master，多个slave" class="headerlink" title="分片集群(多个master，多个slave)"></a>分片集群(多个master，多个slave)</h2><p>​		分片集群支持高并发写操作，通过插槽slot存储数据，每个master包含一定数量的slot</p>
+<p>​		故障转移：分为自动故障转移和手动故障转移( cluster failover命令将主-从替换为从-主 )</p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126140241320.png?raw=true" alt="image-20221126140241320"></p>
+<h1 id="Redis网络模型"><a href="#Redis网络模型" class="headerlink" title="Redis网络模型"></a>Redis网络模型</h1><h2 id="I-x2F-O多路复用：select，poll，epoll"><a href="#I-x2F-O多路复用：select，poll，epoll" class="headerlink" title="I&#x2F;O多路复用：select，poll，epoll"></a>I&#x2F;O多路复用：select，poll，epoll</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126213756602.png?raw=true" alt="image-20221126213756602"></p>
+<p>​		select存在的问题：</p>
+<ul>
+<li>最大能监听的FD (通过FD可以找到对应的文件) 不超过1024</li>
+<li>每次select都需要把所有要监听的FD(包括部分不需要监听的FD)拷贝到内核空间</li>
+<li>内核将整个FD数组拷贝到用户空间</li>
+<li>用户空间每次要遍历所有FD来判断就绪状态</li>
+</ul>
+<p>​		poll存在的问题：</p>
+<ul>
+<li>poll模式利用链表解决了select中监听FD数量受限的问题，但是由于要监听的FD较多，性能会很低</li>
+</ul>
+<p>​		epoll解决的问题：</p>
+<ul>
+<li>epoll中采用红黑树的结构保存要监听的FD，增删改查效率高，性能不会随着FD数量的增加而下降</li>
+<li>每个FD只需要执行一次epoll_ctl添加到红黑树，无需重复拷贝FD数据到内核空间，准备就绪的FD会添加到list链表中，客户端发送请求给内核(如果链表为空，则等待FD就绪)，执行epoll_wait函数将链表中的结点传到用户空间</li>
+</ul>
+<p>epoll_create：创建epoll实例，包括一颗红黑树，一个链表</p>
+<p>epoll_ctl：注册FD，添加到红黑树</p>
+<p>epoll_wait：链表中的FD就绪，该函数将数据发送到用户空间</p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126174401626.png?raw=true" alt="image-20221126174401626"></p>
+<p>​		IO多路复用事件通知机制，当链表中有FD准备就绪时，调用epoll_wait方法可以得到通知，事件通知的模式有两种：</p>
+<ul>
+<li>LevelTriggered(水平触发)：LT，当FD就绪时，会发送多次通知直到数据发送完，epoll默认模式</li>
+<li>EdgeTriggered(边缘触发)：ET，当FD就绪时，只会通知一次，不管数据是否发送完；循环读取数据，搭配NIO</li>
+</ul>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126210244915.png?raw=true" alt="image-20221126210244915"> </p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126214631747.png?raw=true" alt="image-20221126214631747"></p>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126220035968.png?raw=true" alt="image-20221126220035968"></p>
+<h2 id="Redis是单线程还是多线程"><a href="#Redis是单线程还是多线程" class="headerlink" title="Redis是单线程还是多线程"></a>Redis是单线程还是多线程</h2><p>​		redis单线程是指在redis中始终是由主线程来处理客户端请求的，因此redis的单线程就是意味着只有一个线程处理命令</p>
+<p>​		redis多线程是指在redis4.0后除了主线程之外还引入了后台线程，后台线程主要负责异步释放redis内存，在redis6.0之后再网络模型中引入了多线程，提高对多核CPU的利用率。</p>
+<h4 id="redis选择单线程处理命令原因："><a href="#redis选择单线程处理命令原因：" class="headerlink" title="redis选择单线程处理命令原因："></a>redis选择单线程处理命令原因：</h4><ul>
+<li>redis是纯内存操作，执行速度非常快，多线程不会带来很大提升</li>
+<li>多线程会导致上下文切换浪费CPU资源</li>
+<li>多线程要面临线程安全问题，解决安全问题的实现复杂度高</li>
+</ul>
+<h1 id="Redis常见面试题"><a href="#Redis常见面试题" class="headerlink" title="Redis常见面试题"></a>Redis常见面试题</h1><h2 id="Redis大Key的解决方案"><a href="#Redis大Key的解决方案" class="headerlink" title="Redis大Key的解决方案"></a>Redis大Key的解决方案</h2><p>​		采用hash打散的方式存储，将100000条数据打散为1000000&#x2F;1000&#x3D;1000个hash表中，实现打散拆解大Key。在删除redis中的大key时，不使用del命令去处理而是使用unlink key等命令，因为del命令会导致主线程卡顿阻塞。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E8%A7%A3redis%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 图解redis面试题</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/12/%E7%AE%97%E6%B3%95-java%E8%AF%AD%E6%B3%95api/" rel="prev" title="算法-java语法api">
+                  <i class="fa fa-chevron-left"></i> 算法-java语法api
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/16/kafka/" rel="next" title="kafka">
+                  kafka <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bean</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
