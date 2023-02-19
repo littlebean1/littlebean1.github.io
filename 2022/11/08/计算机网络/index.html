@@ -28,7 +28,6 @@
 <meta property="og:description" content="计算机网络1、从输入url 到网站显示发生了什么①在地址栏输入url​		URL称为统一资源定位符，用于定位互联网的资源，在地址栏输入URL后，浏览器首先判断URL是否合法，如果不合法输入的内容将会作为搜索条件匹配相关内容。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115144222305.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221121161515794.png?raw=true">
 <meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115144154495.png?raw=true">
 <meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221122164619376.png?raw=true">
 <meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221122163108513.png?raw=true">
@@ -37,8 +36,10 @@
 <meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116155726639.png?raw=true">
 <meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116172203220.png?raw=true">
 <meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116203111210.png?raw=true">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230210140442645.png">
+<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221121161515794.png?raw=true">
 <meta property="article:published_time" content="2022-11-08T06:34:04.000Z">
-<meta property="article:modified_time" content="2022-12-10T07:20:43.687Z">
+<meta property="article:modified_time" content="2023-02-19T05:11:21.167Z">
 <meta property="article:author" content="bean">
 <meta property="article:tag" content="八股文">
 <meta name="twitter:card" content="summary">
@@ -128,7 +129,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">计算机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%BB%8E%E8%BE%93%E5%85%A5url-%E5%88%B0%E7%BD%91%E7%AB%99%E6%98%BE%E7%A4%BA%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">1、从输入url 到网站显示发生了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0%E5%9C%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5url"><span class="nav-number">1.1.1.</span> <span class="nav-text">①在地址栏输入url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1%E8%BF%9B%E8%A1%8CDNS%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.2.</span> <span class="nav-text">②进行DNS解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A2%E5%BB%BA%E7%AB%8BTCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.3.</span> <span class="nav-text">③建立TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A3%E5%8F%91%E9%80%81HTTP-x2F-HTTPS%E8%AF%B7%E6%B1%82"><span class="nav-number">1.1.4.</span> <span class="nav-text">④发送HTTP&#x2F;HTTPS请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94%E8%AF%B7%E6%B1%82"><span class="nav-number">1.1.5.</span> <span class="nav-text">⑤服务器响应请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A5-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%A3%E6%9E%90%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.1.6.</span> <span class="nav-text">⑥ 浏览器解析渲染页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A6HTTP%E8%AF%B7%E6%B1%82%E7%BB%93%E6%9D%9F%EF%BC%8C%E6%96%AD%E5%BC%80TCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.7.</span> <span class="nav-text">⑦HTTP请求结束，断开TCP连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E5%85%B3"><span class="nav-number">1.2.</span> <span class="nav-text">网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.1.</span> <span class="nav-text">交换机-路由器区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get%E4%B8%8Epost%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.2.</span> <span class="nav-text">get与post区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">TCP三次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%A4%E6%AC%A1%E6%8C%A5%E6%89%8B%E4%B8%8D%E5%8F%AF%E8%A1%8C%EF%BC%9A"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">为什么两次挥手不可行：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">TCP报文格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">1.2.4.</span> <span class="nav-text">TCP四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88SYN-x2F-FIN%E4%B8%8D%E5%8C%85%E5%90%AB%E6%95%B0%E6%8D%AE%E5%8D%B4%E8%A6%81%E6%B6%88%E8%80%97%E4%B8%80%E4%B8%AA%E5%BA%8F%E5%88%97%E5%8F%B7"><span class="nav-number">1.2.5.</span> <span class="nav-text">为什么SYN&#x2F;FIN不包含数据却要消耗一个序列号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TFO-tcp-fast-open-%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.6.</span> <span class="nav-text">TFO(tcp fast open)原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%9A%84%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0"><span class="nav-number">1.2.7.</span> <span class="nav-text">TCP的超时重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%9A%84%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="nav-number">1.2.8.</span> <span class="nav-text">TCP的快速重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%9A%84%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">1.2.9.</span> <span class="nav-text">TCP的滑动窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%9A%84%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">1.2.10.</span> <span class="nav-text">TCP的流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="nav-number">1.2.11.</span> <span class="nav-text">TCP可靠传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E4%B8%8EUDP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.12.</span> <span class="nav-text">TCP与UDP协议的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8C%81%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.13.</span> <span class="nav-text">TCP如何保持连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E5%B1%82%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.14.</span> <span class="nav-text">各层的协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS%E6%AF%94HTTP%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8"><span class="nav-number">1.2.15.</span> <span class="nav-text">HTTPS比HTTP协议安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.16.</span> <span class="nav-text">HTTP缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">1.2.17.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.18.</span> <span class="nav-text">HTTP协议报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-x2F-1-1%E5%92%8CHTTP-x2F-2-0"><span class="nav-number">1.2.19.</span> <span class="nav-text">HTTP&#x2F;1.1和HTTP&#x2F;2.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.2.20.</span> <span class="nav-text">DNS负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-UDP-%E5%85%B1%E5%90%8C%E5%8D%A0%E7%94%A8%E4%B8%80%E4%B8%AA%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">1.2.21.</span> <span class="nav-text">TCP UDP 共同占用一个端口号</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">计算机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%BB%8E%E8%BE%93%E5%85%A5url-%E5%88%B0%E7%BD%91%E7%AB%99%E6%98%BE%E7%A4%BA%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">1、从输入url 到网站显示发生了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0%E5%9C%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5url"><span class="nav-number">1.1.1.</span> <span class="nav-text">①在地址栏输入url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1%E8%BF%9B%E8%A1%8CDNS%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.2.</span> <span class="nav-text">②进行DNS解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A2%E5%BB%BA%E7%AB%8BTCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.3.</span> <span class="nav-text">③建立TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A3%E5%8F%91%E9%80%81HTTP-x2F-HTTPS%E8%AF%B7%E6%B1%82"><span class="nav-number">1.1.4.</span> <span class="nav-text">④发送HTTP&#x2F;HTTPS请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94%E8%AF%B7%E6%B1%82"><span class="nav-number">1.1.5.</span> <span class="nav-text">⑤服务器响应请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A5-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%A3%E6%9E%90%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.1.6.</span> <span class="nav-text">⑥ 浏览器解析渲染页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A6HTTP%E8%AF%B7%E6%B1%82%E7%BB%93%E6%9D%9F%EF%BC%8C%E6%96%AD%E5%BC%80TCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.7.</span> <span class="nav-text">⑦HTTP请求结束，断开TCP连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E5%85%B3"><span class="nav-number">1.2.</span> <span class="nav-text">网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.1.</span> <span class="nav-text">交换机-路由器区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get%E4%B8%8Epost%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.2.</span> <span class="nav-text">get与post区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">TCP三次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%A4%E6%AC%A1%E6%8C%A5%E6%89%8B%E4%B8%8D%E5%8F%AF%E8%A1%8C%EF%BC%9A"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">为什么两次挥手不可行：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">TCP报文格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">1.2.4.</span> <span class="nav-text">TCP四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-TIME-WAIT-%E7%AD%89%E5%BE%85%E7%9A%84%E6%97%B6%E9%97%B4%E6%98%AF-2MSL%EF%BC%9F"><span class="nav-number">1.2.5.</span> <span class="nav-text">为什么 TIME_WAIT 等待的时间是 2MSL？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88SYN-x2F-FIN%E4%B8%8D%E5%8C%85%E5%90%AB%E6%95%B0%E6%8D%AE%E5%8D%B4%E8%A6%81%E6%B6%88%E8%80%97%E4%B8%80%E4%B8%AA%E5%BA%8F%E5%88%97%E5%8F%B7"><span class="nav-number">1.2.6.</span> <span class="nav-text">为什么SYN&#x2F;FIN不包含数据却要消耗一个序列号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TFO-tcp-fast-open-%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.7.</span> <span class="nav-text">TFO(tcp fast open)原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%9A%84%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0-RTO"><span class="nav-number">1.2.8.</span> <span class="nav-text">TCP的超时重传 (RTO)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%9A%84%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="nav-number">1.2.9.</span> <span class="nav-text">TCP的快速重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%9A%84%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">1.2.10.</span> <span class="nav-text">TCP的滑动窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%9A%84%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">1.2.11.</span> <span class="nav-text">TCP的流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="nav-number">1.2.12.</span> <span class="nav-text">TCP可靠传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E4%B8%8EUDP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.13.</span> <span class="nav-text">TCP与UDP协议的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8C%81%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.14.</span> <span class="nav-text">TCP如何保持连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E5%B1%82%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.15.</span> <span class="nav-text">各层的协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS%E6%AF%94HTTP%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8"><span class="nav-number">1.2.16.</span> <span class="nav-text">HTTPS比HTTP协议安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Https%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.17.</span> <span class="nav-text">Https加密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.18.</span> <span class="nav-text">HTTP缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">1.2.19.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.20.</span> <span class="nav-text">HTTP协议报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-x2F-1-1%E5%92%8CHTTP-x2F-2-0"><span class="nav-number">1.2.21.</span> <span class="nav-text">HTTP&#x2F;1.1和HTTP&#x2F;2.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.2.22.</span> <span class="nav-text">DNS负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.23.</span> <span class="nav-text">DNS解析过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.2.24.</span> <span class="nav-text">负载均衡算法有哪些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-UDP-%E5%85%B1%E5%90%8C%E5%8D%A0%E7%94%A8%E4%B8%80%E4%B8%AA%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">1.2.25.</span> <span class="nav-text">TCP UDP 共同占用一个端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.2.26.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.2.27.</span> <span class="nav-text">反向代理</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -143,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -154,7 +155,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -229,7 +230,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-10 15:20:43" itemprop="dateModified" datetime="2022-12-10T15:20:43+08:00">2022-12-10</time>
+      <time title="修改时间：2023-02-19 13:11:21" itemprop="dateModified" datetime="2023-02-19T13:11:21+08:00">2023-02-19</time>
     </span>
 
   
@@ -252,7 +253,6 @@
 <h3 id="⑥-浏览器解析渲染页面"><a href="#⑥-浏览器解析渲染页面" class="headerlink" title="⑥ 浏览器解析渲染页面"></a>⑥ 浏览器解析渲染页面</h3><p>​		当浏览器收到服务器响应后，开始渲染页面，首先处理HTML标记并构建DOM树，然后处理CSS标记并构建CSSOM树，在然后将DOM树和CSSOM树合并成一个渲染树，将各个节点渲染到页面上</p>
 <h3 id="⑦HTTP请求结束，断开TCP连接"><a href="#⑦HTTP请求结束，断开TCP连接" class="headerlink" title="⑦HTTP请求结束，断开TCP连接"></a>⑦HTTP请求结束，断开TCP连接</h3><p>​		当浏览器页面关闭时，TCP连接会关闭，关闭的过程是四次挥手</p>
 <p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115144222305.png?raw=true" alt="image-20221115144222305"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221121161515794.png?raw=true" alt="image-20221121161515794"></p>
 <h2 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h2><p>一个网络连接到另一个网络的“关口”，实质上是一个网络通向其他网络的IP地址。实现两个不同网段的设备(IP)进行通信。</p>
 <h3 id="交换机-路由器区别"><a href="#交换机-路由器区别" class="headerlink" title="交换机-路由器区别"></a>交换机-路由器区别</h3><p>交换机负责同一个网段的通信，而路由器负责不同网段的通信</p>
 <h3 id="get与post区别"><a href="#get与post区别" class="headerlink" title="get与post区别"></a>get与post区别</h3><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115144154495.png?raw=true" alt="image-20221115144154495"></p>
@@ -269,10 +269,22 @@
 <p>​		第二次挥手丢失：客户端收不到ACK, 超时重传第一次挥手FIN，客户端断开连接</p>
 <p>​		第三次挥手丢失：服务端重传第三次挥手的FIN，多次重传还是丢失则服务端断开连接，客户端在FIN_WAIT_2状态中tcp_fin_timeout后断开连接</p>
 <p>​		第四次挥手丢失：服务端重传第三次挥手的FIN，多次重传还是丢失则服务端断开连接，客户端在TIME_WAIT 状态中2MSL (<strong>报文最大生存时间</strong>) 后断开连接</p>
+<h3 id="为什么-TIME-WAIT-等待的时间是-2MSL？"><a href="#为什么-TIME-WAIT-等待的时间是-2MSL？" class="headerlink" title="为什么 TIME_WAIT 等待的时间是 2MSL？"></a>为什么 TIME_WAIT 等待的时间是 2MSL？</h3><p>MSL 与 TTL 的区别： MSL 是最大报文生存时间，而 TTL 是经过路由跳数。首先，，<strong>MSL 应该要大于等于 TTL 消耗为 0 的时间</strong>，MSL&gt;TTL，以确保报文已被自然消亡。TIME_WAIT 等待 2 倍的 MSL，比较合理的解释是： 网络中可能存在来自发送方的数据包，当这些发送方的数据包被接收方处理后又会向对方发送响应，所以一来一回需要等待 2 倍的时间。如果被动关闭方没有收到断开连接的最后的 ACK 报文，此时已经过了1MSL，ACK报文已经失效，触发超时重发 FIN 报文，另一方客户端接收到 FIN 后，会重发 ACK 给被动关闭方， 一来一去正好 2 个 MSL，如果另一方没有收到FIN报文则到达1MSL时，FIN报文失效，此时time_wait已经超过2MSL，客户端断开连接。</p>
 <h3 id="为什么SYN-x2F-FIN不包含数据却要消耗一个序列号"><a href="#为什么SYN-x2F-FIN不包含数据却要消耗一个序列号" class="headerlink" title="为什么SYN&#x2F;FIN不包含数据却要消耗一个序列号"></a>为什么SYN&#x2F;FIN不包含数据却要消耗一个序列号</h3><p>​		因为凡是需要对端进行确认的，都需要消耗TCP报文的序列号，ACK不携带其他数据不需要消耗序列号</p>
-<h3 id="TFO-tcp-fast-open-原理"><a href="#TFO-tcp-fast-open-原理" class="headerlink" title="TFO(tcp fast open)原理"></a>TFO(tcp fast open)原理</h3><p>在三次握手，四次挥手的时候，第一次发送SYN包的同时携带者cookie，服务端将cookie存放到header里，此时把cookie存储到本地。当再次发出三次挥手请求的时候携带cookie，并发送请求，服务端可立即响应</p>
+<p>​		序号(sequence number)：seq序号，占32位，用来标识从TCP源端向目的端发送的字节流，发起方发送数据时对此进行标记。</p>
+<p>​		确认号（acknowledgement number）：ack序号，占32位，只有ACK标志位为1时，确认序号字段才有效，ack&#x3D;seq+1。</p>
+<p>​		标志位（Flags）：共6个，即URG、ACK、PSH、RST、SYN、FIN等。具体含义如下：</p>
+<ul>
+<li>URG：紧急指针（urgent pointer）有效。</li>
+<li>ACK：确认序号有效。（为了与确认号ack区分开，我们用大写表示）</li>
+<li>PSH：接收方应该尽快将这个报文交给应用层。</li>
+<li>RST：重置连接。</li>
+<li>SYN：发起一个新连接。</li>
+<li>FIN：释放一个连接。</li>
+</ul>
+<h3 id="TFO-tcp-fast-open-原理"><a href="#TFO-tcp-fast-open-原理" class="headerlink" title="TFO(tcp fast open)原理"></a>TFO(tcp fast open)原理</h3><p>在三次握手，四次挥手的时候，第一次发送SYN包的同时携带着cookie，服务端将cookie存放到header里，此时把cookie存储到本地。当再次发出三次挥手请求的时候携带cookie，并发送请求，服务端可立即响应</p>
 <p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116155726639.png?raw=true" alt="image-20221116155726639"></p>
-<h3 id="TCP的超时重传"><a href="#TCP的超时重传" class="headerlink" title="TCP的超时重传"></a>TCP的超时重传</h3><p>​		在发送数据报文时，设定一个定时器，每间隔一段时间RTO，没有收到对方的ACK确认应答报文，就会重发该报文。如果RTO比较小，可能会导致网络阻塞，频繁重传；如果RTO比较大，如果发生丢包，导致长时间才会再次重传。因此我们便采用<strong>Jacobson</strong>算法来计算SRTT：SRTT&#x3D;(1-α)SRTT + αRTT</p>
+<h3 id="TCP的超时重传-RTO"><a href="#TCP的超时重传-RTO" class="headerlink" title="TCP的超时重传 (RTO)"></a>TCP的超时重传 (RTO)</h3><p>​		在发送数据报文时，设定一个定时器，每间隔一段时间RTO，没有收到对方的ACK确认应答报文，就会重发该报文。如果RTO比较小，可能会导致网络阻塞，频繁重传；如果RTO比较大，如果发生丢包，导致长时间才会再次重传。因此我们便采用<strong>Jacobson</strong>算法来计算SRTT：SRTT&#x3D;(1-α)SRTT + αRTT</p>
 <h3 id="TCP的快速重传"><a href="#TCP的快速重传" class="headerlink" title="TCP的快速重传"></a>TCP的快速重传</h3><p>​		快速重传机制不以时间驱动，而是以数据驱动。它基于接收端的反馈信息来引发重传。当发送端发送的某个数据包(2)丢包，接收端未收到时，后方发送的三个数据包(3,4,5)会出现同样的ACK回复报文(ACK 2)，此时会重传丢失的报文，然后修改ACK回复为6</p>
 <p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116172203220.png?raw=true" alt="image-20221116172203220"></p>
 <h3 id="TCP的滑动窗口"><a href="#TCP的滑动窗口" class="headerlink" title="TCP的滑动窗口"></a>TCP的滑动窗口</h3><p>​		指定一个窗口，在该窗口内，发送方无需等待接收方确认便可继续发送数据。接收方每次收到数据包，在发送确认报文的时候，同时告诉发送方，自己的缓存区还有多少空余空间，缓冲区的空余空间就是接收窗口大小，这就是win。TCP的滑动窗口分为两种，发送窗口和接收窗口。</p>
@@ -280,7 +292,7 @@
 <p>​		接收窗口包含三部分：已接收已确认，未接收但可接收，未接收且不可接收</p>
 <h3 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h3><p>​		TCP 提供一种机制可以让「发送方」根据「接收方」的实际接收能力控制发送的数据量，这就是所谓的流量控制。</p>
 <p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116203111210.png?raw=true" alt="image-20221116203111210"></p>
-<h3 id="TCP可靠传输"><a href="#TCP可靠传输" class="headerlink" title="TCP可靠传输"></a>TCP可靠传输</h3><p>​		使用差错检验技术 (如循环冗余检验) 判断在传输过程是否产生了误码。</p>
+<h3 id="TCP可靠传输"><a href="#TCP可靠传输" class="headerlink" title="TCP可靠传输"></a>TCP可靠传输</h3><p>​		链路层使用差错检验技术 (如循环冗余检验CRC) 判断在传输过程是否产生了误码。</p>
 <p>​		TCP提供可靠地服务，在传输数据时无差错、不丢失、不重复且有序到达</p>
 <p>​		TCP保证可靠传输的方式有：序列号，确认应答号，建立连接，超时重传，流量控制，拥塞控制</p>
 <h3 id="TCP与UDP协议的区别"><a href="#TCP与UDP协议的区别" class="headerlink" title="TCP与UDP协议的区别"></a>TCP与UDP协议的区别</h3><p>​		TCP：需要建立连接，传输数据完整，可靠传输、超时重传、流量控制、拥塞控制实现安全有序，采用流式传输，TCP支持一对一，tcp首部开销大 20字节(确认号，序列号)；常用于HTTP&#x2F;HTTPS，FTP传输。</p>
@@ -296,7 +308,41 @@
 <h3 id="HTTPS比HTTP协议安全"><a href="#HTTPS比HTTP协议安全" class="headerlink" title="HTTPS比HTTP协议安全"></a>HTTPS比HTTP协议安全</h3><p>​		HTTP明文传输，安全性差；HTTPS对传输的数据进行加密，安全性好</p>
 <p>​		HTTP建立连接只需要TCP三次握手；HTTPS建立连接除了三次握手还需要SSL握手</p>
 <p>​		HTTP采用80端口；HTTPS采用443端口，并且采用SSL&#x2F;TLS协议的原因，更耗费资源</p>
-<p>​		SSL的加密方式：对称加密，非对称加密，数字签名</p>
+<p>​		TLS&#x2F;SSL的加密方式：对称加密，非对称加密，混合加密</p>
+<h3 id="Https加密过程"><a href="#Https加密过程" class="headerlink" title="Https加密过程"></a>Https加密过程</h3><img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230210140442645.png" alt="image-20230210140442645" style="zoom: 67%;" />
+
+<p>HTTPS采用混合加密的方式，在通信建立前采用<strong>非对称加密</strong>的方式，在通信过程中全部使用<strong>对称加密</strong></p>
+<p>SSL&#x2F;TLS 的「握手阶段」涉及<strong>四次</strong>通信：</p>
+<ul>
+<li><p>1、首先客户端向服务端发送加密请求，请求包括</p>
+<ul>
+<li><p>SSL&#x2F;TSL版本号</p>
+</li>
+<li><p>客户端支持的加密算法列表</p>
+</li>
+<li><p>产生一个随机数，我们叫<strong>第1随机数</strong></p>
+</li>
+</ul>
+</li>
+<li><p>2、服务端收到请求后，向客户端发出响应，响应包括</p>
+<ul>
+<li>确认SSL&#x2F;TSL版本号</li>
+<li>确认加密算法</li>
+<li>生成一个随机数，我们叫<strong>第2随机数</strong></li>
+<li>服务器会把自己的公钥注册到CA，服务器再向客户端发送数字证书</li>
+</ul>
+</li>
+<li><p>3、客户端收到服务端一系列响应后，校验数字证书并从证书取出公钥</p>
+<ul>
+<li>生成一个随机数，我们叫第3随机数或者<strong>预主密钥</strong>，客户端计算出会话密钥，此预主密钥通过公钥进行加密并发送给服务端</li>
+</ul>
+</li>
+<li><p>4、服务端收到客户端数据后，使用私钥对预主密钥进行解密，服务端通过第一、二随机数+预主密钥计算出<strong>会话密钥</strong></p>
+<ul>
+<li>服务端向客户端发送加密通信算法改变通知，以后通过<strong>会话密钥</strong>通信</li>
+</ul>
+</li>
+</ul>
 <h3 id="HTTP缓存"><a href="#HTTP缓存" class="headerlink" title="HTTP缓存"></a>HTTP缓存</h3><p>​		包括强制缓存和协商缓存。</p>
 <p>​		强制缓存：只要浏览器判断缓存没有过期，则直接使用浏览器的本地缓存，浏览器决定可否使用缓存。强缓存是利用HTTP响应头部的Cache-Control字段来实现的。流程：浏览器第一次访问服务器资源时，服务器在返回资源的同时，会在Response头部加上Cache-Control，并且设置了相对存活时间；当浏览器再次访问服务器中的该资源时，会将当前时间与Cache-Control中设置的存活时间比较，判断是否过期，如果没有过期，则使用该缓存，如果过期则访问服务器后再缓存。</p>
 <p>​		协商缓存：浏览器与服务端协商之后，通过协商结果判断是否可用本地缓存(更新后老的不可用)。使用协商缓存需要将cache-control字段设为no-cache，协商缓存普遍采用响应头etag搭配请求头if-none-match的方式判断请求资源是否更新( 请求头中if-none-match&#x3D;(etag的值) )，该方式可以在1s内判断资源是否发生改变，如果资源改变则服务器中的etag会发生改变，响应头中的etag同步发生改变，并返回200状态码，更新本地的缓存，如果服务器未更新资源，则etag&#x3D;&#x3D;if-none-match，返回304状态码，从本地缓存中取出资源。而last-modified不能在1s内判断资源是否改变。协商缓存能够解决强制缓存资源不更新的问题。</p>
@@ -328,7 +374,7 @@
 <h3 id="HTTP协议报文格式"><a href="#HTTP协议报文格式" class="headerlink" title="HTTP协议报文格式"></a>HTTP协议报文格式</h3><p>​		<strong>请求报文</strong>：请求行+请求头+请求体</p>
 <ul>
 <li>请求行：请求方法(GET&#x2F;POST)，http协议版本，发出请求的主机ip和port</li>
-<li>请求头：if-none-match，if-modified-since</li>
+<li>请求头：if-none-match，if-modified-since (文件是否修改，未修改返回304状态码)</li>
 <li>请求体：发出请求时携带的客户端数据</li>
 </ul>
 <p>​		<strong>响应报文</strong>：状态行+响应头+响应体</p>
@@ -343,7 +389,22 @@
 <p>​		在使用时通常需要配置两台DNS服务器，一台是主服务器用于提供服务，另一台是备用服务器(主服务器不能用时启用)</p>
 <p>​		优点：将负载均衡工作交给了DNS服务器，不需要独立维护。</p>
 <p>​		缺点：当某个服务器下线时，DNS服务器无法监测下线，会把域名解析到已下线的服务器上。轮询算法不能合理的考虑到不同服务器的负载状态。</p>
+<h3 id="DNS解析过程"><a href="#DNS解析过程" class="headerlink" title="DNS解析过程"></a>DNS解析过程</h3><ol>
+<li>如果主机所询问的本地域名服务器不知道被查询域名的IP地址， 那么本地域名服务器就以DNS客户的身份， 向其<strong>根域名服务器</strong>发出查询。</li>
+<li>当根域名服务器收到本地域名服务器发出的查询请求报文时，要么给出所要查询的IP地址， 要么根域名服务器把自己知道的顶级域名服务器（二级域名服务器）的IP地址告诉本地域名服务器， 让本地域名服务器再向顶级域名服务器查询。</li>
+<li>顶级域名服务器在收到本地域名服务器的查询请求后， 要么给出所要查询的IP地址， 要么告诉本地域名服务器下一步应当向哪一个权限域名服务器（三级域名服务器）进行查询， 本地域名服务器就这样进行迭代查询。</li>
+<li>最后， 知道了所要解析的域名的IP地址， 然后把这个结果返回给发起查询的主机</li>
+</ol>
+<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221121161515794.png?raw=true" alt="image-20221121161515794"></p>
+<h3 id="负载均衡算法有哪些"><a href="#负载均衡算法有哪些" class="headerlink" title="负载均衡算法有哪些"></a>负载均衡算法有哪些</h3><ul>
+<li>轮询法</li>
+<li>加权轮询法 （根据服务器的性能不同，给每个服务器配置一个权重，发挥服务器的最大性能）</li>
+<li>源地址(ip)哈希法</li>
+</ul>
 <h3 id="TCP-UDP-共同占用一个端口号"><a href="#TCP-UDP-共同占用一个端口号" class="headerlink" title="TCP UDP 共同占用一个端口号"></a>TCP UDP 共同占用一个端口号</h3><p>​		在计算机系统中，不同的端口代表不同的应用程序，由于TCP&#x2F;IP传输层的两个协议TCP和UDP是完全独立的两个软件模块，因此各自的端口号也相互独立，如TCP有一个255号端口，UDP也可以有一个255号端口，二者并不冲突。在确认连接时，会根据 port+ip+protocol 传输数据</p>
+<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>代理客户端，为客户端发送请求，向服务器隐藏自己的真实客户端，服务器不知道真正的客户端是谁，正向代理应用（加速器&#x2F;VPN）</p>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>代理服务器来接收客户端的请求，然后将请求转发给内部网络上的服务器，代理服务器再将结果返回给客户端，客户端不知道真正的服务器是谁。</p>
+<p>用处：负载均衡，隐藏服务器的IP地址</p>
 
     </div>
 
@@ -388,7 +449,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
