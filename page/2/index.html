@@ -134,12 +134,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -205,9 +205,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-10-12 14:43:58 / 修改时间：15:01:33" itemprop="dateCreated datePublished" datetime="2022-10-12T14:43:58+08:00">2022-10-12</time>
+      <time title="创建时间：2022-10-12 14:43:58" itemprop="dateCreated datePublished" datetime="2022-10-12T14:43:58+08:00">2022-10-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-21 22:26:02" itemprop="dateModified" datetime="2023-02-21T22:26:02+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -229,20 +235,57 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><ul>
+          <span id="more"></span>
+
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><ul>
 <li>Stack<Integer> stack &#x3D; new Stack();</li>
 <li>stack.push(1);</li>
 <li>stack.pop(1);</li>
 <li>stack.peek();     &#x2F;&#x2F;获得栈顶元素</li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/12/%E7%AE%97%E6%B3%95-java%E8%AF%AD%E6%B3%95api/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><ul>
+<li><p>Queue<Integer> queue &#x3D; new LinkedList();</p>
+</li>
+<li><p>Queue<Integer> priorityQueue &#x3D; new PriorityQueue(new Comparator<Integer>(){</p>
+<p>​			@Override</p>
+<p>​			public int compare (Integer l1, Integer l2){</p>
+<p>​					return l1-l2;</p>
+<p>​			}</p>
+<p>});</p>
+</li>
+<li><p>queue.add(1);</p>
+</li>
+<li><p>queue.peek();</p>
+</li>
+<li><p>queue.poll();      &#x2F;&#x2F;出队并返回出队的元素</p>
+</li>
+</ul>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><ul>
+<li>List<Integer> list &#x3D; new ArrayList();</li>
+<li>list.add(1);</li>
+<li>list.get(index);</li>
+<li>list.remove(index);     &#x2F;&#x2F;删除下标对应的元素</li>
+<li>list.remove(obj);         &#x2F;&#x2F;删除元素</li>
+<li>list.contains(obj);        &#x2F;&#x2F;是否包含某个元素</li>
+<li>list.indexOf();              &#x2F;&#x2F;第一个该值得索引</li>
+<li>list.lastIndexOf();        &#x2F;&#x2F;最后一个该值得索引</li>
+</ul>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><ul>
+<li>HashMap&lt;Integer,Boolean&gt; map &#x3D; new HashMap();</li>
+<li>map.put(1,true);</li>
+<li>map.getOrDefault(1,false);     &#x2F;&#x2F;获取元素1对应的哈希值，没有元素1则默认返回false</li>
+<li>map.get(1);</li>
+<li>map.containsKey(1);</li>
+<li>map.keySet();</li>
+</ul>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><ul>
+<li>Set<Integer> set &#x3D; new HashSet();</li>
+<li>set.add(1);</li>
+<li>set.clear( );</li>
+<li>set. contains(1);</li>
+<li>set.remove(1);</li>
+</ul>
+
       
     </div>
 
@@ -296,9 +339,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-10-12 14:33:45 / 修改时间：14:43:08" itemprop="dateCreated datePublished" datetime="2022-10-12T14:33:45+08:00">2022-10-12</time>
+      <time title="创建时间：2022-10-12 14:33:45" itemprop="dateCreated datePublished" datetime="2022-10-12T14:33:45+08:00">2022-10-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-21 22:26:11" itemprop="dateModified" datetime="2023-02-21T22:26:11+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -320,18 +369,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="leetcode-207-课程表-https-leetcode-cn-problems-course-schedule-拓扑判环"><a href="#leetcode-207-课程表-https-leetcode-cn-problems-course-schedule-拓扑判环" class="headerlink" title="[leetcode-207 课程表][https://leetcode.cn/problems/course-schedule/] - 拓扑判环"></a>[leetcode-207 课程表][<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/course-schedule/]">https://leetcode.cn/problems/course-schedule/]</a> - 拓扑判环</h3><h4 id="排序思路"><a href="#排序思路" class="headerlink" title="排序思路"></a>排序思路</h4><p>1，创建indegree数组，用来记录图中每个节点的入度</p>
+          <span id="more"></span>
+
+<h3 id="leetcode-207-课程表-https-leetcode-cn-problems-course-schedule-拓扑判环"><a href="#leetcode-207-课程表-https-leetcode-cn-problems-course-schedule-拓扑判环" class="headerlink" title="[leetcode-207 课程表][https://leetcode.cn/problems/course-schedule/] - 拓扑判环"></a>[leetcode-207 课程表][<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/course-schedule/]">https://leetcode.cn/problems/course-schedule/]</a> - 拓扑判环</h3><h4 id="排序思路"><a href="#排序思路" class="headerlink" title="排序思路"></a>排序思路</h4><p>1，创建indegree数组，用来记录图中每个节点的入度</p>
 <p>2，寻找入度为0的点，加入到栈中</p>
 <p>3，栈中只要有元素(栈中有入度为0的节点)，就将该节点出栈，并将与该节点相连的节点的度数-1</p>
 <p>4，计算出栈次数与节点的总数，判断两者大小即可判断是否含有环路</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/12/%E7%AE%97%E6%B3%95-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;ArrayList&lt;Integer&gt;&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();	<span class="comment">//定义二维数组，等同于c++的vector</span></span><br><span class="line">   <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canFinish</span><span class="params">(<span class="type">int</span> numCourses, <span class="type">int</span>[][] prerequisites)</span> &#123;</span><br><span class="line">       <span class="type">int</span> i,j,count=<span class="number">0</span>;</span><br><span class="line">       <span class="type">int</span>[] inDegree= <span class="keyword">new</span> <span class="title class_">int</span>[numCourses];</span><br><span class="line">       Arrays.fill(inDegree,<span class="number">0</span>);</span><br><span class="line">       Stack&lt;Integer&gt; stack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line">       <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;numCourses;i++)				<span class="comment">//初始化二位数组</span></span><br><span class="line">           list.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;());</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;prerequisites.length;i++)&#123;    <span class="comment">//入度数组</span></span><br><span class="line">           inDegree[prerequisites[i][<span class="number">0</span>]]++;</span><br><span class="line">           list.get(prerequisites[i][<span class="number">1</span>]).add(prerequisites[i][<span class="number">0</span>]);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;numCourses;i++)               <span class="comment">//将入度为0的点加入栈</span></span><br><span class="line">           <span class="keyword">if</span>(inDegree[i]==<span class="number">0</span>)</span><br><span class="line">               stack.push(i);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">while</span>(!stack.isEmpty())&#123;                <span class="comment">//栈不为空则处理度为0的点</span></span><br><span class="line">           <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> stack.peek();</span><br><span class="line">           stack.pop();</span><br><span class="line">           count++;							<span class="comment">//统计出栈次数</span></span><br><span class="line">           ArrayList&lt;Integer&gt; tempList = list.get(temp);</span><br><span class="line">           <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;tempList.size();i++)&#123;</span><br><span class="line">               inDegree[tempList.get(i)]--;</span><br><span class="line">               <span class="keyword">if</span>(inDegree[tempList.get(i)]==<span class="number">0</span>)</span><br><span class="line">                   stack.push(tempList.get(i));</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> count==numCourses?<span class="literal">true</span>:<span class="literal">false</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -385,9 +431,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-10-11 11:39:55 / 修改时间：11:43:45" itemprop="dateCreated datePublished" datetime="2022-10-11T11:39:55+08:00">2022-10-11</time>
+      <time title="创建时间：2022-10-11 11:39:55" itemprop="dateCreated datePublished" datetime="2022-10-11T11:39:55+08:00">2022-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-21 22:26:14" itemprop="dateModified" datetime="2023-02-21T22:26:14+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -409,7 +461,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">char</span>[][] grid)</span>&#123;</span><br><span class="line">    queue.add(<span class="keyword">new</span> <span class="title class_">Pair</span>(x,y));        </span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    grid[x][y]=<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">        x = queue.peek().x;</span><br><span class="line">        y = queue.peek().y;</span><br><span class="line">        queue.poll();</span><br><span class="line">        <span class="comment">//grid[x][y]=&#x27;0&#x27;;	 不能在出队列时标记，会导致超时，因为出队的时候在标记可能会导致标记前重复的元素入队，因此入队前标记	</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)</span><br><span class="line">            <span class="keyword">if</span>(x+xx[i]&gt;=<span class="number">0</span>&amp;&amp;x+xx[i]&lt;grid.length&amp;&amp;y+yy[i]&gt;=<span class="number">0</span>&amp;&amp;y+yy[i]&lt;grid[<span class="number">0</span>].length&amp;&amp;grid[x+xx[i]][y+yy[i]]==<span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">                grid[x+xx[i]][y+yy[i]]=<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                queue.add(<span class="keyword">new</span> <span class="title class_">Pair</span>(x+xx[i],y+yy[i]));</span><br><span class="line">            &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <span id="more"></span>
+
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">bfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">char</span>[][] grid)</span>&#123;</span><br><span class="line">    queue.add(<span class="keyword">new</span> <span class="title class_">Pair</span>(x,y));        </span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    grid[x][y]=<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">        x = queue.peek().x;</span><br><span class="line">        y = queue.peek().y;</span><br><span class="line">        queue.poll();</span><br><span class="line">        <span class="comment">//grid[x][y]=&#x27;0&#x27;;	 不能在出队列时标记，会导致超时，因为出队的时候在标记可能会导致标记前重复的元素入队，因此入队前标记	</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)</span><br><span class="line">            <span class="keyword">if</span>(x+xx[i]&gt;=<span class="number">0</span>&amp;&amp;x+xx[i]&lt;grid.length&amp;&amp;y+yy[i]&gt;=<span class="number">0</span>&amp;&amp;y+yy[i]&lt;grid[<span class="number">0</span>].length&amp;&amp;grid[x+xx[i]][y+yy[i]]==<span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">                grid[x+xx[i]][y+yy[i]]=<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                queue.add(<span class="keyword">new</span> <span class="title class_">Pair</span>(x+xx[i],y+yy[i]));</span><br><span class="line">            &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -475,7 +529,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-05 14:54:40" itemprop="dateModified" datetime="2022-12-05T14:54:40+08:00">2022-12-05</time>
+      <time title="修改时间：2023-02-21 22:26:06" itemprop="dateModified" datetime="2023-02-21T22:26:06+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -497,20 +551,32 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="字符串哈希法"><a href="#字符串哈希法" class="headerlink" title="字符串哈希法"></a>字符串哈希法</h3><ul>
+          <span id="more"></span>
+
+<h3 id="字符串哈希法"><a href="#字符串哈希法" class="headerlink" title="字符串哈希法"></a>字符串哈希法</h3><ul>
 <li>leetcode-219</li>
 <li>leetcode-1044</li>
 </ul>
 <p>在将string类型的值放入到hash表中时，计算hashcode的复杂度高，因此需要将string的hashcode预处理为整形(long)来运算</p>
-<h4 id=""><a href="#" class="headerlink" title=""></a>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/07/%E7%AE%97%E6%B3%95-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h4 id="图解分析："><a href="#图解分析：" class="headerlink" title="图解分析："></a>图解分析：</h4><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/hashsuanfa.png?raw=true" alt="hashsuanfa.png"></p>
+<h4 id="模板代码："><a href="#模板代码：" class="headerlink" title="模板代码："></a>模板代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span>[] P,H;	<span class="comment">//P用来表示乘方，H用来表示hash函数</span></span><br><span class="line"><span class="type">int</span> p=<span class="number">131313</span>; <span class="comment">//让p为尽量大的质数，使得hash值尽量不冲突</span></span><br><span class="line">HashMap&lt;Long,Long&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">P = <span class="keyword">new</span> <span class="title class_">long</span>(n+<span class="number">10</span>);</span><br><span class="line">H = <span class="keyword">new</span> <span class="title class_">long</span>(n+<span class="number">10</span>);</span><br><span class="line"><span class="comment">//表示字符串的前缀和的hashcode,O(n)</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">    H[i+<span class="number">1</span>]=H[i]*p+str.charAt(i);</span><br><span class="line">    P[i+<span class="number">1</span>]=P[i]*p;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//表示字符串的区间和的hashcode,O(n)</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;str.length()-len;i++)&#123;	<span class="comment">//区间跨度为len,即长度为len的字符串</span></span><br><span class="line">    <span class="keyword">if</span>(map.containsKey( H[i+len]-H[i]*P[len] ))&#123;	<span class="comment">//H[i+len]与H[i]相差了p^len</span></span><br><span class="line">        ..............	<span class="comment">//字符串已经存在</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        map.put(H[i+len]-H[i]*P[len],<span class="number">1L</span>);		<span class="comment">//字符串不存在，存入map中</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">H[i]: 前i个字符的hashcode</span><br><span class="line">H[i+len]-H[i]: 第i+<span class="number">1</span>~i+len个字符的hashcode</span><br><span class="line">P[i]: p^i，用增大hashcode减少冲突</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="leetcode-219程序代码-字符串哈希"><a href="#leetcode-219程序代码-字符串哈希" class="headerlink" title="leetcode-219程序代码(字符串哈希)"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-palindrome/">leetcode-219</a>程序代码(字符串哈希)</h4><ul>
+<li>补齐字符后构成回文串，则判断不补齐时从0下标开始最大的回文串是多少</li>
+<li>判断回文串的方法：采用字符串逆序比较hash编码的方式来进行</li>
+<li>时间复杂度：字符串哈希—O(n)，中心扩散法(遍历)—O(n^2)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">long</span>[] P,H,HH;</span><br><span class="line">    HashMap&lt;Long,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>(); </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">shortestPalindrome</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        <span class="type">int</span> i,j,p=<span class="number">13131</span>,len=s.length();</span><br><span class="line">        P=<span class="keyword">new</span> <span class="title class_">long</span>[len+<span class="number">10</span>];</span><br><span class="line">        H=<span class="keyword">new</span> <span class="title class_">long</span>[len+<span class="number">10</span>];</span><br><span class="line">        HH=<span class="keyword">new</span> <span class="title class_">long</span>[len+<span class="number">10</span>];</span><br><span class="line">        P[<span class="number">0</span>]=<span class="number">1</span>; H[<span class="number">0</span>]=<span class="number">0</span>; HH[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(s);</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sb.reverse().toString();</span><br><span class="line">        <span class="comment">//记录正序字符串前缀和hashcode</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">            H[i+<span class="number">1</span>]=H[i]*p+(s.charAt(i));</span><br><span class="line">            P[i+<span class="number">1</span>]=P[i]*p;</span><br><span class="line">            map.put(H[i+<span class="number">1</span>],<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//记录逆序字符串前缀和hashcode</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len;i++)</span><br><span class="line">            HH[i+<span class="number">1</span>]=HH[i]*p+str.charAt(i);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey( HH[len]-HH[i]*P[len-i] ))&#123;    <span class="comment">//len-i表示回文串的长度，代表字符串[i+1,len]</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i==len)  <span class="keyword">return</span> str+s;</span><br><span class="line">        <span class="keyword">else</span>		<span class="keyword">return</span> str.substring(<span class="number">0</span>,i)+s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="leetcode-1044程序代码-字符串哈希-二分-滑动窗口"><a href="#leetcode-1044程序代码-字符串哈希-二分-滑动窗口" class="headerlink" title="leetcode-1044程序代码 (字符串哈希+二分+滑动窗口)"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-duplicate-substring/">leetcode-1044</a>程序代码 (字符串哈希+二分+滑动窗口)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">long</span>[] P,H;</span><br><span class="line">    HashMap&lt;Long,Long&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    String ans=<span class="string">&quot;&quot;</span>,str;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">check</span><span class="params">(<span class="type">int</span> len)</span>&#123;</span><br><span class="line">        <span class="type">int</span> i,j;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=str.length()-len;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey( H[i+len]-H[i]*P[len] ))&#123;</span><br><span class="line">                ans = str.substring(i,i+len);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                map.put(H[i+len]-H[i]*P[len],<span class="number">1L</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">longestDupSubstring</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        <span class="type">int</span> i,j,left,right,mid,p=<span class="number">13131</span>;</span><br><span class="line">        left=<span class="number">1</span>; right=s.length()-<span class="number">1</span>;</span><br><span class="line">        str=s;</span><br><span class="line">        P=<span class="keyword">new</span> <span class="title class_">long</span>[str.length()+<span class="number">10</span>];      H=<span class="keyword">new</span> <span class="title class_">long</span>[str.length()+<span class="number">10</span>];</span><br><span class="line">        H[<span class="number">0</span>]=<span class="number">0</span>; P[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</span><br><span class="line">            H[i+<span class="number">1</span>]=H[i]*p+str.charAt(i);</span><br><span class="line">            P[i+<span class="number">1</span>]=P[i]*p;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">            mid = (left+right)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(check(mid))&#123;</span><br><span class="line">                left=mid+<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                right=mid-<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -572,7 +638,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-17 22:47:52" itemprop="dateModified" datetime="2023-02-17T22:47:52+08:00">2023-02-17</time>
+      <time title="修改时间：2023-02-21 22:25:51" itemprop="dateModified" datetime="2023-02-21T22:25:51+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -594,7 +660,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h3><ul>
+          <span id="more"></span>
+
+<h3 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h3><ul>
 <li><p>git init                              &#x2F;&#x2F;初始化git</p>
 </li>
 <li><p>git status                         &#x2F;&#x2F;查看本地工作区状态</p>
@@ -602,106 +670,32 @@
 <li><p>git add a.txt                    &#x2F;&#x2F;将本地工作区的a.txt文件推到缓存区</p>
 </li>
 <li><p>git rm –cached  a.txt     &#x2F;&#x2F;删除缓存区的a.txt文件</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/09/29/git%E5%AD%A6%E4%B9%A0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+</li>
+<li><p>git commit -m “first commit” a.txt     &#x2F;&#x2F;第一次提交a.txt文件到本地库</p>
+</li>
+<li><p>git log                              &#x2F;&#x2F;查看版本信息</p>
+</li>
+<li><p>git reset –hard 版本号前七位      &#x2F;&#x2F;版本穿梭</p>
+</li>
+<li><p>git branch -v                   &#x2F;&#x2F;查看所有分支</p>
+</li>
+<li><p>git branch branch1       &#x2F;&#x2F;创建分支branch1</p>
+</li>
+<li><p>git checkout branch1    &#x2F;&#x2F;切换到分支branch1 ，修改分支branch1不会影响分支master</p>
+</li>
+<li><p>git remote -v                   &#x2F;&#x2F;查看当前仓库门</p>
+</li>
+<li><p>git remote add littleberan1 <a target="_blank" rel="noopener" href="https://github.com/littlebean1/littlebean1.github.io.git">https://github.com/littlebean1/littlebean1.github.io.git</a>  &#x2F;&#x2F;给远程仓库重命名</p>
+</li>
+<li><p>git push littlebean1 master  &#x2F;&#x2F;向littlebean1仓库推送master分支</p>
+</li>
+<li><p>git pull littlebean1 master    &#x2F;&#x2F;从littlebean1仓库拉取master分支</p>
+</li>
+<li><p>git clone  <a target="_blank" rel="noopener" href="https://github.com/littlebean1/littlebean1.github.io.git">https://github.com/littlebean1/littlebean1.github.io.git</a>   &#x2F;&#x2F;克隆littlebean1仓库到本地库</p>
+</li>
+</ul>
+<p>GIT常用命令、功能和原理</p>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/22/Mysql%E8%BF%9B%E9%98%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
-      <meta itemprop="name" content="bean">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我要去大厂">
-      <meta itemprop="description" content="博客记录学习生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 我要去大厂">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/22/Mysql%E8%BF%9B%E9%98%B6/" class="post-title-link" itemprop="url">Mysql进阶</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-22 18:26:10" itemprop="dateCreated datePublished" datetime="2022-09-22T18:26:10+08:00">2022-09-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-16 14:10:01" itemprop="dateModified" datetime="2023-02-16T14:10:01+08:00">2023-02-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="mysql-进阶"><a href="#mysql-进阶" class="headerlink" title="mysql 进阶"></a>mysql 进阶</h1><h2 id="mysql5-7-和-mysql8-0在编码方面的区别"><a href="#mysql5-7-和-mysql8-0在编码方面的区别" class="headerlink" title="mysql5.7 和 mysql8.0在编码方面的区别"></a>mysql5.7 和 mysql8.0在编码方面的区别</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/09/22/Mysql%E8%BF%9B%E9%98%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -763,7 +757,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-16 19:17:23" itemprop="dateModified" datetime="2023-02-16T19:17:23+08:00">2023-02-16</time>
+      <time title="修改时间：2023-02-21 22:25:17" itemprop="dateModified" datetime="2023-02-21T22:25:17+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -785,12 +779,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="NIO核心组件"><a href="#NIO核心组件" class="headerlink" title="NIO核心组件"></a>NIO核心组件</h3><ul>
+          <span id="more"></span>     
+
+<h3 id="NIO核心组件"><a href="#NIO核心组件" class="headerlink" title="NIO核心组件"></a>NIO核心组件</h3><ul>
 <li>Channel</li>
 <li>Buffer</li>
 <li>Selector：配合一个线程来管理多个channel，获取channel上发生的事件并将事件交给thread处理，channel工作在非阻塞模式下，不会让线程阻塞在一个channel上，适合连接数多但流量低的场景</li>
 </ul>
-<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230216191711411.png" alt="image-20230216191711411" style="zoom:50%;" />
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230216191711411.png" alt="image-20230216191711411" style="zoom:50%;" />
 
 
 
@@ -818,6 +814,281 @@
 
 
 
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/22/Mysql%E8%BF%9B%E9%98%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/22/Mysql%E8%BF%9B%E9%98%B6/" class="post-title-link" itemprop="url">Mysql进阶</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-22 18:26:10" itemprop="dateCreated datePublished" datetime="2022-09-22T18:26:10+08:00">2022-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-21 22:25:22" itemprop="dateModified" datetime="2023-02-21T22:25:22+08:00">2023-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <span id="more"></span>     
+
+<h1 id="mysql-进阶"><a href="#mysql-进阶" class="headerlink" title="mysql 进阶"></a>mysql 进阶</h1><h2 id="mysql5-7-和-mysql8-0在编码方面的区别"><a href="#mysql5-7-和-mysql8-0在编码方面的区别" class="headerlink" title="mysql5.7 和 mysql8.0在编码方面的区别"></a>mysql5.7 和 mysql8.0在编码方面的区别</h2><h3 id="mysql5-7"><a href="#mysql5-7" class="headerlink" title="mysql5.7:"></a>mysql5.7:</h3><p>底层编码采用latin1，在输入汉语时会发生乱码，如果要存储汉语需要修改编码规则，修改编码后表中已经存在的数据需要删除再导入</p>
+<h3 id="mysql8-0"><a href="#mysql8-0" class="headerlink" title="mysql8.0"></a>mysql8.0</h3><p>底层编码采用utf8m4，输入汉语时不会发生乱码</p>
+<h2 id="mysql的逻辑结构"><a href="#mysql的逻辑结构" class="headerlink" title="mysql的逻辑结构"></a>mysql的逻辑结构</h2><ul>
+<li>连接层：建立TCP连接，三次握手后，客户端与数据库连接池链接</li>
+<li>服务层：接受mysql指令，进行语法、词义分析，构建语法树，对sql进行优化</li>
+<li>引擎层：与底层的文件系统交互，cpu将文件系统中的数据加载到内存中</li>
+</ul>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221018222337264.png?raw=true?raw=true"></p>
+<h2 id="存储引擎："><a href="#存储引擎：" class="headerlink" title="存储引擎："></a>存储引擎：</h2><p>数据库表在底层的存储类型，mysql8的默认存储引擎为InnoDB</p>
+<h3 id="InnoDB引擎"><a href="#InnoDB引擎" class="headerlink" title="InnoDB引擎"></a>InnoDB引擎</h3><ul>
+<li><p>事务存储引擎，支持事务</p>
+</li>
+<li><p>提供行锁，操作时只锁某一行，适合高并发的操作</p>
+</li>
+<li><p>以更新删除为主时，优先选择InnoDB</p>
+</li>
+<li><p>缓存索引与真实数据，对内存要求高—(聚簇索引)</p>
+</li>
+</ul>
+<h3 id="MyIsam引擎"><a href="#MyIsam引擎" class="headerlink" title="MyIsam引擎"></a>MyIsam引擎</h3><ul>
+<li><p>非事务处理存储引擎，不支持事务</p>
+</li>
+<li><p>提供表锁，不支持行锁，操作表中一条记录也会锁住整个表，不适合高并发</p>
+</li>
+<li><p>以增加和查询为主时，优先选择MyIsam</p>
+</li>
+<li><p>只缓存索引，不缓存真实数据—(非聚簇索引)</p>
+</li>
+<li><p>xxx.sdi文件存储表结构信息，xxx.MYD存储数据，xxx。MYI存储索引</p>
+</li>
+<li><p>不能使用外键</p>
+</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引有哪几种数据结构"><a href="#索引有哪几种数据结构" class="headerlink" title="索引有哪几种数据结构"></a>索引有哪几种数据结构</h3><p>​		hash索引，B树索引，B+树索引</p>
+<h3 id="hash索引的特点"><a href="#hash索引的特点" class="headerlink" title="hash索引的特点"></a>hash索引的特点</h3><ul>
+<li>通过hash函数将key转为hash值映射到槽位上，每个槽位有一个链表存储hash冲突的数据</li>
+<li>只能用于简单的比较，不能进行范围查询</li>
+<li>数据的存储是无序的，使用order by时需要重排序</li>
+</ul>
+<h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><p>​		B+树种结点占用一个页16KB，非叶子结点不存储数据，只存储主键值和页面索引 (费聚簇索引格外存储索引列)，叶子结点存储真实数据。B+树的各个叶子结点之间形成一个双向链表，叶子结点内部是一个单向链表。此外B+树结点只存储索引项，但是B树结点需要存储数据浪费空间导致可一个页可索引的数目少，而且B+树通过链表查找速度快。                                                       </p>
+<h4 id="为什么B-树一般需要三层"><a href="#为什么B-树一般需要三层" class="headerlink" title="为什么B+树一般需要三层"></a>为什么B+树一般需要三层</h4><p>​		InnoDB存储引擎中页的大小为16KB ，假设一个索引项长为16B，则三层B+树可以存储1000 * 1000 *  1000个索引项，实际情况中，每个节点可能填不满，因此B+树的高度个能达到3-4层。Mysql的InnoDB存储引擎将根节点常驻内存(根节点的地址是永恒不变的，每次扩充根节点地址始终是最上层)，因此要查找某一键值需要2-3次磁盘I&#x2F;O操作</p>
+<h4 id="B树与B-树的区别"><a href="#B树与B-树的区别" class="headerlink" title="B树与B+树的区别"></a>B树与B+树的区别</h4><ul>
+<li>B树种所有的结点都存储真实数据，B+树只有叶子结点存储真实数据，非叶子结点存储索引项</li>
+<li>B树由于页中存储真实数据，占用空间大，页中存储的节点数量有限，一个页可索引的数目少，B+树页中只存储索引项，一个页中支持大量索引16KB&#x2F;16B&#x3D;1000</li>
+<li>B树在查询数据时，比如a&gt;10查询复杂，而B+树的所有叶子结点都是通过双向链表连接的，查询数据方便</li>
+<li>B树一个页面中n个关键字对应n+1个子节点，B+树的孩子结点的数量等于节点内关键字的数量，因为每个关键字存储着一个页号，页号对应一个页面</li>
+</ul>
+<h4 id="B-树的缺点"><a href="#B-树的缺点" class="headerlink" title="B+树的缺点"></a>B+树的缺点</h4><ul>
+<li>如果主键不是递增的，会导致每次插入数据产生大量的数据迁移，影响性能</li>
+<li>即使主键是有序的，随着新数据的插入叶子结点会慢慢分裂，分裂后的数据可能在磁盘上相隔很远，会产生大量的随机IO</li>
+</ul>
+<h1 id="b-树怎么长的"><a href="#b-树怎么长的" class="headerlink" title="b+树怎么长的"></a>b+树怎么长的</h1><h3 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h3><p>​		表中的记录与数据存储处在一起，以主键id为索引，整个B+树存储在.ibd文件中</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221208142355072.png?raw=true?raw=true" alt="image-20221208142355072"></p>
+<p>一个非主键字段</p>
+<h3 id="二级索引-联合索引，非聚簇索引"><a href="#二级索引-联合索引，非聚簇索引" class="headerlink" title="二级索引 (联合索引，非聚簇索引)"></a>二级索引 (联合索引，非聚簇索引)</h3><p>​		叶子节点中存储的是<strong>索引的字段+主键</strong>，通过主键去聚簇索引中找到需要的值 (回表)</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221208144432411.png?raw=true" alt="image-20221208144432411"></p>
+<h3 id="联合索引的注意事项"><a href="#联合索引的注意事项" class="headerlink" title="联合索引的注意事项"></a>联合索引的注意事项</h3><p>​		将查询需求频繁或者字段选择性高的列放在索引的前面。</p>
+<p>​		为经常需要排序、分组的字段建立索引</p>
+<h2 id="哪些情况下不应该使用索引"><a href="#哪些情况下不应该使用索引" class="headerlink" title="哪些情况下不应该使用索引"></a>哪些情况下不应该使用索引</h2><ol>
+<li>数据唯一性差的字段不要使用索引，回表次数过多(访问磁盘)</li>
+<li>频繁更新的字段不要使用索引</li>
+<li>字段不在where语句出现时不要添加索引</li>
+<li>数据量少的表不要使用索引</li>
+</ol>
+<h3 id="MyIsam"><a href="#MyIsam" class="headerlink" title="MyIsam"></a>MyIsam</h3><p>​		myisam的索引方式都是非聚簇索引，这意味着myisam中建立的索引全部都是二级索引，都需要回表操作，但是与InnoDB不同的是，innoDB的回表是拿主键到聚簇索引找到对应的记录；myisam的回表拿到的是对应记录的地址，查询速度很快。</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221208153018169.png?raw=true" alt="image-20221208153018169"></p>
+<h3 id="回表或者二次查询"><a href="#回表或者二次查询" class="headerlink" title="回表或者二次查询"></a>回表或者二次查询</h3><p>​		使用聚簇索引查询可以直接定位到记录，而非聚簇索引(不包括覆盖索引)通常需要扫描两遍索引树，即先通过非聚簇索引索引定位到主键值，在通过聚簇索引定位到行记录，这就是所谓的回表查询，它的性能比扫描一遍索引树低。</p>
+<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>​		一个索引包含了满足查询结果的数据叫覆盖索引。在建立非聚复合索引时，包括这整个sql语句的所有属性列都在整个 (索引+主键) 中时，可以直接从B+树叶子结点中取出数据，不需要回表。有主键是因为B+树结点必然包含着主键列，回表是通过主键来完成的</p>
+<p>​		</p>
+<h3 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h3><ul>
+<li><p>where语句中有计算，函数，类型转换会导致索引失效</p>
+</li>
+<li><p>最左前缀法，检索数据时从联合索引的最左侧开始匹配 ，where子句搜索条件顺序调换不影响索引使用，因为查询优化器会自动优化查询顺序</p>
+</li>
+<li><p>范围条件右侧的列索引都失效，INDEX(age,id,name)  where age&#x3D;30 and id&gt;20 and name&#x3D;’abc’，命中age和id索引</p>
+</li>
+<li><p>like以通配符%开头</p>
+</li>
+<li><p>or前面和后面存在非索引的列</p>
+</li>
+<li><p>联合查询时，驱动表索引无效，被驱动表索引有效 select * from a(驱动表) left join b (被驱动表) on a.id&#x3D;b.id</p>
+</li>
+</ul>
+<h3 id="主键索引和唯一索引的区别"><a href="#主键索引和唯一索引的区别" class="headerlink" title="主键索引和唯一索引的区别"></a>主键索引和唯一索引的区别</h3><ul>
+<li>主键不允许有空值，唯一键可以有空值</li>
+<li>主键是一个唯一性索引，唯一性索引不一定市住建</li>
+<li>一个表只能创建一个主键，但可以有多个唯一键</li>
+<li>主键可以被其他表引用为外键，唯一键不可以</li>
+</ul>
+<h2 id="事务的ACID原理"><a href="#事务的ACID原理" class="headerlink" title="事务的ACID原理"></a>事务的ACID原理</h2><h3 id="事务与隔离级别"><a href="#事务与隔离级别" class="headerlink" title="事务与隔离级别"></a>事务与隔离级别</h3><p>​		事务是一系列操作的集合，是一个执行单元。</p>
+<p>​		事务的四个特性：原子性，一致性，隔离性，持久性</p>
+<p>​		隔离级别：脏读(未提交读取)，不可重复读(delete，update，针对某条数据，多次读取信息不一致)，幻读(insert，针对大量信息，多次读取数据数目不一样)</p>
+<p>​		在Mysql中，默认的隔离级别是可重复读，由于mysql采用MVCC的机制，所以可重复度解决了幻读的问题</p>
+<h3 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h3><p>​		重做日志：记录的是事务提交时数据页的物理修改，用来实现事务的持久性</p>
+<p>​		该日志由两部分组成，重做日志缓冲(redo	 log buffer，位于内存中)和重做日志文件(redo log file，位于磁盘中)，当事务提交之前会把所有修改信息都存到redo log buffer中，当事务提交后会把redo log buffer中修改后的数据发送到page cache，由操作系统将page cache数据再发送到redo log file文件中，用于在刷新脏页到磁盘发生错误时，进行数据恢复</p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221206152808752.png?raw=true" alt="image-20221206152808752" style="zoom:50%;" />
+
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221206153329043.png?raw=true" alt="image-20221206153329043" style="zoom: 67%;" />
+
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221206153430242.png?raw=true" alt="image-20221206153430242"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221206151149232.png?raw=true" alt="image-20221206151149232"></p>
+<h3 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h3><p>​		回滚日志：用于记录数据修改前的信息，提供回滚和MVCC，用来实现事务的原子性和一致性</p>
+<p>​		该日志是逻辑日志 ( 一系列操作时真真切切发生了，只不过在逻辑上相互抵消了而当做没发生 )，每当delete一条数据时，undo log会记录一条对应insert记录，updata同理。当执行回滚时，从undo log中的逻辑记录中读取对应的内容进行回滚。undo log在事务执行时产生，事务提交时并不会立即删除undo log，因为可用于MVCC</p>
+<p>​		undo log分为insert undo log和update undo log：</p>
+<ul>
+<li><p>insert undo log是指在insert操作中产生的undo log，因为在可重复读的隔离级别下，insert操作的记录，只对事务本身可见，其他事务不可见，该undo log在事务提交后可以直接删除</p>
+</li>
+<li><p>update undo log是指在update和delete操作中产生的undo log，该undo log可能需要提供MVCC机制所需要的版本链，因此在事务提交时不能立即删除，等待其他的线程删除</p>
+</li>
+</ul>
+<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><h3 id="innodb引擎中每个行记录都含有隐藏字段："><a href="#innodb引擎中每个行记录都含有隐藏字段：" class="headerlink" title="innodb引擎中每个行记录都含有隐藏字段："></a>innodb引擎中每个行记录都含有隐藏字段：</h3><ul>
+<li>DB_TRX_ID：记录插入这条记录或最后一次修改该记录的事务ID</li>
+<li>DB_ROLL_PTR：回滚指针，配合undo log，指向这条记录的上一个版本</li>
+<li><em>DB_ROW_ID：隐藏主键，如果表中无主键，则会添加该字段</em></li>
+</ul>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221206224627632.png?raw=true" alt="image-20221206224627632" style="zoom:50%;" />
+
+
+
+<h3 id="版本链："><a href="#版本链：" class="headerlink" title="版本链："></a>版本链：</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221205214426932.png?raw=true" alt="image-20221205214426932"></p>
+<h3 id="ReadView的组成结构："><a href="#ReadView的组成结构：" class="headerlink" title="ReadView的组成结构："></a>ReadView的组成结构：</h3><ul>
+<li><p>trx_id：事务的id</p>
+</li>
+<li><p>trx_ids：已执行但还未提交的事务的列表，[10,20]</p>
+</li>
+<li><p>up_limit_id：trx_ids表中最小的事务id，表示活跃事务的id下限</p>
+</li>
+<li><p>low_limit_id：事务id不能超过所有事务中id的最大值+1</p>
+</li>
+</ul>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221205222840342.png?raw=true" alt="image-20221205222840342"></p>
+<p>在不可以访问的情况下，需要查询undo log的版本链，向前找到可见的记录并返回</p>
+<h3 id="可重复读隔离级别下的MVCC"><a href="#可重复读隔离级别下的MVCC" class="headerlink" title="可重复读隔离级别下的MVCC"></a>可重复读隔离级别下的MVCC</h3><p>​		事务在执行第一条select语句时生成新的ReadView，此时ReadView的trx_ids列表内容为[10, 20]，从undo log的版本链中找出可见的记录；当该事务后面的select语句再次读取同一数据时，直接复用之前生成的ReadView，也就是说，如果在执行第一条select后有其他事务已经提交，所读取的数据仍然是第一次select读取的结果。</p>
+<h3 id="读已提交隔离级别下的MVCC"><a href="#读已提交隔离级别下的MVCC" class="headerlink" title="读已提交隔离级别下的MVCC"></a>读已提交隔离级别下的MVCC</h3><p>​		事务在执行第一条select语句时生成新的ReadView，此时ReadView的trx_ids列表内容为[10, 20]，从undo log的版本链中找出可见的记录；当该事务后面的select语句再次读取同一数据时，重新生成新的ReadView，在该select语句执行之前，若有事务执行完成，则根据undo log版本链可以找到已提交的事务的更新的数据</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221205224025496.png?raw=true" alt="image-20221205224025496"></p>
+<h2 id="锁的粒度"><a href="#锁的粒度" class="headerlink" title="锁的粒度"></a>锁的粒度</h2><p>​		InnoDB支持多粒度锁，行级锁可以和表级锁可以共存，意向锁在保证并发性的前提下，实现了行锁和表锁的共存</p>
+<h3 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h3><ul>
+<li>表级别的S锁、X锁</li>
+<li>意向锁</li>
+<li>自增锁</li>
+<li>元数据锁</li>
+</ul>
+<p>​		当对表中某一行添加排他锁时，会默认给表添加一个意向排它锁；对表中两条不同的数据添加行级锁时，意向排他锁是可以兼容的。意向锁的作用是当别的事务想要获取表级锁的时候不需要去扫描全表来查看是否有行级锁</p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221207153257584.png?raw=true" alt="image-20221207153257584" style="zoom:33%;" />
+
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221207153311723.png?raw=true" alt="image-20221207153311723" style="zoom:33%;" />
+
+<h3 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h3><ul>
+<li>记录锁</li>
+<li>间隙锁</li>
+<li>临键锁</li>
+<li>插入意向锁</li>
+</ul>
+<p>​		记录锁：分为S型记录锁和X型记录锁，针对已存在的记录。当一个事务获取了一条记录的S型记录锁后，其他事务也可以继续获取该记录的S型记录锁，但不可取X型记录锁。当一个事务获取了一条记录的X型记录锁后，其他事务既不可以继续获取该记录的S型记录锁，也不获取X型记录锁。</p>
+<p>​		间隙锁：针对不存在的记录，该锁是为了防止插入幻影记录而提出的。当我们在访问某条不存在的记录时，会对该记录主键所位于的区间添加间隙锁，如果后来其他本事务或事务执行insert操作，且主键位于间隙锁的区间内，则会阻塞insert操作。</p>
+<p>​		记录锁和间隙锁可以同时用，并不冲突。如果对一条记录加了gap锁，不会限制其他事务对该记录加记录锁	</p>
+<h4 id="在RR级别下，解决幻读的方式有两种："><a href="#在RR级别下，解决幻读的方式有两种：" class="headerlink" title="在RR级别下，解决幻读的方式有两种："></a>在RR级别下，解决幻读的方式有两种：</h4><ul>
+<li>快照读(读取旧数据)是通过MVCC和undo log来实现的</li>
+<li>当前读(读取最新数据)是通过加记录锁和间隙锁来实现的。</li>
+</ul>
+<h2 id="持久性怎么实现的"><a href="#持久性怎么实现的" class="headerlink" title="持久性怎么实现的"></a>持久性怎么实现的</h2><h2 id="原子性怎么实现的"><a href="#原子性怎么实现的" class="headerlink" title="原子性怎么实现的"></a>原子性怎么实现的</h2><h2 id="innodb引擎有哪些锁，默认使用什么锁"><a href="#innodb引擎有哪些锁，默认使用什么锁" class="headerlink" title="innodb引擎有哪些锁，默认使用什么锁"></a>innodb引擎有哪些锁，默认使用什么锁</h2><p>​		共享锁，排他锁，意向锁，自增锁，记录锁，间隙锁，临键锁，插入意向锁</p>
+<p>​		MyISAM和InnoDB都支持表级锁，但是InnoDB默认的是行级锁</p>
+<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><p>第一范式：表中每个字段不可以再次划分</p>
+<p>第二范式：非主键字段必须完全依赖主键</p>
+<p>第三范式：所有非主键字段不能依赖于其他非主键字段</p>
+<h2 id="Mysql慢查询日志"><a href="#Mysql慢查询日志" class="headerlink" title="Mysql慢查询日志"></a>Mysql慢查询日志</h2><h3 id="如何调优sql"><a href="#如何调优sql" class="headerlink" title="如何调优sql"></a>如何调优sql</h3><ul>
+<li><p>开启mysql慢查询日志变量，根据慢日志定位慢查询SQL</p>
+</li>
+<li><p>使用explain语句分析SQL，查看type字段命中索引情况</p>
+</li>
+<li><p>修改SQL语句或者创建索引，尽量让SQL走索引</p>
+</li>
+</ul>
+<h3 id="varchar-10-可以存储10个字母、10个数字、10个汉字"><a href="#varchar-10-可以存储10个字母、10个数字、10个汉字" class="headerlink" title="varchar(10)可以存储10个字母、10个数字、10个汉字"></a>varchar(10)可以存储10个字母、10个数字、10个汉字</h3><h3 id="如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办"><a href="#如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办" class="headerlink" title="如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办"></a>如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办</h3><h3 id="MySQL中select语句的执行过程"><a href="#MySQL中select语句的执行过程" class="headerlink" title="MySQL中select语句的执行过程"></a>MySQL中select语句的执行过程</h3><ul>
+<li><p>连接器：TCP三次握手建立连接，校验用户身份</p>
+</li>
+<li><p>查询缓存：在缓存中查找是否存在结果,如果存在直接返回,否则继续执行.MySQL8.0删除了查询缓存</p>
+</li>
+<li><p>解析器：经过词法分析得到SQL语句中的关键字并构建SQL语法树.根据语法分析分许SQL语句是否符合MySQL语法</p>
+</li>
+<li><p>优化器：在开始执行SQL之前，优化器根据表中的索引选择使用哪个索引，选择最优方案。</p>
+</li>
+<li><p>执行器：</p>
+<ul>
+<li>预处理阶段：判断表和字段是否存在,将*扩展为表上所有列</li>
+<li>执行阶段：执行SQL语句，从存储引擎中读取数据返回给客户端.</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -880,7 +1151,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-12-05 14:54:33" itemprop="dateModified" datetime="2022-12-05T14:54:33+08:00">2022-12-05</time>
+      <time title="修改时间：2023-02-21 22:28:00" itemprop="dateModified" datetime="2023-02-21T22:28:00+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -888,7 +1159,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">日常</span></a>
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
         </span>
     </span>
 
@@ -902,16 +1173,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h2><p>leetcode131-分割回文串，列出来所有的序列，采用回溯法，若需要求出有多少种可能应该需要用动态规划</p>
+          <span id="more"></span>
+
+<h2 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h2><p>leetcode131-分割回文串，列出来所有的序列，采用回溯法，若需要求出有多少种可能应该需要用动态规划</p>
 <p>leetcode261-组合总和III，列出来所有的序列，采用回溯法，若需要求出有多少种等价于背包问题</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/09/18/%E5%AD%A6%E4%B9%A0%E6%89%93%E5%8D%A1-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h2 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h2><p>leetcode37-解数独，带bool返回值的回溯法，if(backtracking()) return true;	在需要退步的时候返回false，在合适的地方选择return true；</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/jieShuDu.png?raw=true" alt="image-20220921202911431"></p>
+<h2 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h2><p>leetcode15-三数之和，暴力解法三个for循环，采用双指针法。双指针法展现出效率的优势：<strong>通过两个指针在一个for循环下完成两个for循环的工作</strong>。</p>
+<h2 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h2><p>leetcode49-字母异位词分组，[[“bat”],[“nat”,”tan”],[“ate”,”eat”,”tea”]]，对于同一字符串的不同序列可以采用排序的方式变成字符串的统一标识，类似于设计散列函数，其中 Hash(str) &#x3D; sort(str.begin(),str.end()) 则归为一类</p>
+
       
     </div>
 

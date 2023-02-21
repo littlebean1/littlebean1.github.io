@@ -20,26 +20,26 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="集合源码HashMaphashmap底层扩容">
+    <meta name="description" content="集合源码HashMaphashmap底层扩容 HashMap的put方法 首先判断hashmap是否为null，长度是否为0，如果是多hashmap数组进行resize扩容 根据传递过来的key计算hash码得到数组的位置 hashmap底层维护了一个Node&lt;K,V&gt;类的数组 判断对应数组位置是否为null，为null则将key直接插入 不为null则判断该位置下的链表或红黑树是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java基础源码">
 <meta property="og:url" content="http://example.com/2022/11/17/java%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81/index.html">
 <meta property="og:site_name" content="我要去大厂">
-<meta property="og:description" content="集合源码HashMaphashmap底层扩容">
+<meta property="og:description" content="集合源码HashMaphashmap底层扩容 HashMap的put方法 首先判断hashmap是否为null，长度是否为0，如果是多hashmap数组进行resize扩容 根据传递过来的key计算hash码得到数组的位置 hashmap底层维护了一个Node&lt;K,V&gt;类的数组 判断对应数组位置是否为null，为null则将key直接插入 不为null则判断该位置下的链表或红黑树是">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165105613.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165047896.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221121143948496.png?raw=true">
-<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230219152618720.png">
-<meta property="og:image" content="c:\Users\19094\AppData\Local\Temp\Image.png">
-<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230209120030580.png">
-<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230213201811442.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165105613.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165047896.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221121143948496.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230219152618720.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230220160048565.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230219190257989.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230213201811442.png">
 <meta property="article:published_time" content="2022-11-17T08:49:50.000Z">
-<meta property="article:modified_time" content="2023-02-19T07:37:07.413Z">
+<meta property="article:modified_time" content="2023-02-21T14:28:49.602Z">
 <meta property="article:author" content="bean">
-<meta property="article:tag" content="源码">
+<meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165105613.png?raw=true">
+<meta name="twitter:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165105613.png?raw=true">
 
 
 <link rel="canonical" href="http://example.com/2022/11/17/java%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81/">
@@ -125,7 +125,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">集合源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">1.1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hashmap%E5%BA%95%E5%B1%82%E6%89%A9%E5%AE%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">hashmap底层扩容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashmap%E9%80%9A%E8%BF%87entrySet%E9%81%8D%E5%8E%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">hashmap通过entrySet遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String%E3%80%81StringBuilder%E3%80%81StringBuffer"><span class="nav-number">1.1.3.</span> <span class="nav-text">String、StringBuilder、StringBuffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E7%9A%84-%E5%92%8C-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.4.</span> <span class="nav-text">Mybatis的#{}和${}有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.5.</span> <span class="nav-text">Mybatis的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%9A%84%E5%BC%82%E5%B8%B8%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.1.6.</span> <span class="nav-text">Java的异常有哪些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK-%E5%92%8C-JRE-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.7.</span> <span class="nav-text">JDK 和 JRE 有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList%E5%92%8CLinkedList%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.8.</span> <span class="nav-text">ArrayList和LinkedList区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS"><span class="nav-number">1.1.9.</span> <span class="nav-text">CAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCL%E5%8D%95%E4%BE%8B-volatile-double-check-lock"><span class="nav-number">1.1.10.</span> <span class="nav-text">DCL单例 (volatile+ double check lock)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile%E6%98%AF%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8F%90%E4%BE%9B%E7%9A%84%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6"><span class="nav-number">1.1.11.</span> <span class="nav-text">volatile是虚拟机提供的轻量级的同步机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">1.1.12.</span> <span class="nav-text">volatile指令重排的原理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E9%A5%B1%E6%B1%89%E5%BC%8F-%E9%A5%BF%E6%B1%89%E5%BC%8F"><span class="nav-number">1.1.13.</span> <span class="nav-text">单例模式：饱汉式+饿汉式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="nav-number">1.1.14.</span> <span class="nav-text">java对象的内存结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Synchronized%E9%94%81%E5%8D%87%E7%BA%A7"><span class="nav-number">1.1.15.</span> <span class="nav-text">Synchronized锁升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.1.16.</span> <span class="nav-text">对象的分配过程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.17.</span> <span class="nav-text">sleep和wait的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.18.</span> <span class="nav-text">抽象类和接口的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spirng%E9%83%A8%E5%88%86"><span class="nav-number">1.2.</span> <span class="nav-text">Spirng部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">spring事务传播机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">spring事务实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E4%BA%8B%E5%8A%A1%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%A4%B1%E6%95%88"><span class="nav-number">1.2.3.</span> <span class="nav-text">spring事务什么时候失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E6%A1%86%E6%9E%B6%E4%B8%AD%E4%BD%BF%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.4.</span> <span class="nav-text">spring框架中使用了哪些设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.2.5.</span> <span class="nav-text">bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-AOP%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.6.</span> <span class="nav-text">spring AOP原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanPostProcessor%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%9C%E7%94%A8"><span class="nav-number">1.2.7.</span> <span class="nav-text">BeanPostProcessor后置处理器作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XxxAware%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.8.</span> <span class="nav-text">XxxAware原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96"><span class="nav-number">1.2.9.</span> <span class="nav-text">循环依赖</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">集合源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">1.1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hashmap%E5%BA%95%E5%B1%82%E6%89%A9%E5%AE%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">hashmap底层扩容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap%E7%9A%84put%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">HashMap的put方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashmap%E9%80%9A%E8%BF%87entrySet%E9%81%8D%E5%8E%86"><span class="nav-number">1.1.3.</span> <span class="nav-text">hashmap通过entrySet遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String%E3%80%81StringBuilder%E3%80%81StringBuffer"><span class="nav-number">1.1.4.</span> <span class="nav-text">String、StringBuilder、StringBuffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E7%9A%84-%E5%92%8C-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.5.</span> <span class="nav-text">Mybatis的#{}和${}有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.6.</span> <span class="nav-text">Mybatis的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%9A%84%E5%BC%82%E5%B8%B8%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.1.7.</span> <span class="nav-text">Java的异常有哪些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK-%E5%92%8C-JRE-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.8.</span> <span class="nav-text">JDK 和 JRE 有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList%E5%92%8CLinkedList%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.9.</span> <span class="nav-text">ArrayList和LinkedList区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%80%BC%E4%BC%A0%E9%80%92"><span class="nav-number">1.1.10.</span> <span class="nav-text">Java值传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS"><span class="nav-number">1.1.11.</span> <span class="nav-text">CAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCL%E5%8D%95%E4%BE%8B-volatile-double-check-lock"><span class="nav-number">1.1.12.</span> <span class="nav-text">DCL单例 (volatile+ double check lock)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile%E6%98%AF%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8F%90%E4%BE%9B%E7%9A%84%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6"><span class="nav-number">1.1.13.</span> <span class="nav-text">volatile是虚拟机提供的轻量级的同步机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">1.1.14.</span> <span class="nav-text">volatile指令重排的原理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%87%92%E6%B1%89%E5%BC%8F-%E9%A5%BF%E6%B1%89%E5%BC%8F"><span class="nav-number">1.1.15.</span> <span class="nav-text">单例模式：懒汉式+饿汉式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Synchronized%E9%94%81%E5%8D%87%E7%BA%A7"><span class="nav-number">1.1.16.</span> <span class="nav-text">Synchronized锁升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep%E5%92%8Cwait%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.17.</span> <span class="nav-text">sleep和wait的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.18.</span> <span class="nav-text">抽象类和接口的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spirng%E9%83%A8%E5%88%86"><span class="nav-number">1.2.</span> <span class="nav-text">Spirng部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">spring事务传播机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">spring事务实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E4%BA%8B%E5%8A%A1%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%A4%B1%E6%95%88"><span class="nav-number">1.2.3.</span> <span class="nav-text">spring事务什么时候失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E6%A1%86%E6%9E%B6%E4%B8%AD%E4%BD%BF%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.4.</span> <span class="nav-text">spring框架中使用了哪些设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.2.5.</span> <span class="nav-text">bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-IOC%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.6.</span> <span class="nav-text">Spring IOC原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-AOP%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.7.</span> <span class="nav-text">spring AOP原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanPostProcessor%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%9C%E7%94%A8"><span class="nav-number">1.2.8.</span> <span class="nav-text">BeanPostProcessor后置处理器作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XxxAware%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.9.</span> <span class="nav-text">XxxAware原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96"><span class="nav-number">1.2.10.</span> <span class="nav-text">循环依赖</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -146,12 +146,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -226,7 +226,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-19 15:37:07" itemprop="dateModified" datetime="2023-02-19T15:37:07+08:00">2023-02-19</time>
+      <time title="修改时间：2023-02-21 22:28:49" itemprop="dateModified" datetime="2023-02-21T22:28:49+08:00">2023-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">面试题</span></a>
+        </span>
     </span>
 
   
@@ -239,16 +248,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="集合源码"><a href="#集合源码" class="headerlink" title="集合源码"></a>集合源码</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="hashmap底层扩容"><a href="#hashmap底层扩容" class="headerlink" title="hashmap底层扩容"></a>hashmap底层扩容</h3><span id="more"></span>
+        <span id="more"></span>
 
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165105613.png?raw=true" alt="image-20221117165105613"></p>
+<h1 id="集合源码"><a href="#集合源码" class="headerlink" title="集合源码"></a>集合源码</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="hashmap底层扩容"><a href="#hashmap底层扩容" class="headerlink" title="hashmap底层扩容"></a>hashmap底层扩容</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165105613.png?raw=true" alt="image-20221117165105613"></p>
+<h3 id="HashMap的put方法"><a href="#HashMap的put方法" class="headerlink" title="HashMap的put方法"></a>HashMap的put方法</h3><ul>
+<li>首先判断hashmap是否为null，长度是否为0，如果是多hashmap数组进行resize扩容</li>
+<li>根据传递过来的key计算hash码得到数组的位置</li>
+<li>hashmap底层维护了一个Node&lt;K,V&gt;类的数组</li>
+<li>判断对应数组位置是否为null，为null则将key直接插入</li>
+<li>不为null则判断该位置下的链表或红黑树是否已存储该key</li>
+<li>如果未存储则加入链表或红黑树，如果存在则覆盖旧value (注意插入链表时必须为尾插法)</li>
+<li>插入成功后，判断hashmap大小是否超过阈值，哈希因子判断</li>
+<li>如果超过阈值则扩容</li>
+</ul>
 <h3 id="hashmap通过entrySet遍历"><a href="#hashmap通过entrySet遍历" class="headerlink" title="hashmap通过entrySet遍历"></a>hashmap通过entrySet遍历</h3><p>Node类实现了Map.Entry的接口，所以在遍历时可以直接遍历Entry并使用Entry的getkey() 与 getvalue()</p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221117165047896.png?raw=true" alt="image-20221117165047896"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165047896.png?raw=true" alt="image-20221117165047896"></p>
 <h3 id="String、StringBuilder、StringBuffer"><a href="#String、StringBuilder、StringBuffer" class="headerlink" title="String、StringBuilder、StringBuffer"></a>String、StringBuilder、StringBuffer</h3><p>​		String类中的字符数组被final修饰，StringBuilder和StringBuffer继承自AbstractStringBuilder类，该类中维护了一个非final字符数组，StringBuffer线程安全，StringBuilder线程不安全</p>
 <h3 id="Mybatis的-和-有什么区别"><a href="#Mybatis的-和-有什么区别" class="headerlink" title="Mybatis的#{}和${}有什么区别"></a>Mybatis的#{}和${}有什么区别</h3><p>​		$是字符串替换，无法防止sql注入，主要用于动态传递表名和排序字段</p>
 <p>​		#是预编译处理，等同于jdbc中的?占位符，调用preparedStatement对sql预编译后的，使用set对?赋值，根据属性添加单引号，有效防止sql注入，大量使用</p>
 <h3 id="Mybatis的优缺点"><a href="#Mybatis的优缺点" class="headerlink" title="Mybatis的优缺点"></a>Mybatis的优缺点</h3><p>​		消除了JDBC大量冗余代码，不需要手动开关连接，提供编写动态sql语句，支持对象与数据库的ORM字段映射，sql写在XML里与代码解耦便于统一管理，mybatis的数据库移植性较差</p>
-<h3 id="Java的异常有哪些"><a href="#Java的异常有哪些" class="headerlink" title="Java的异常有哪些"></a>Java的异常有哪些</h3><p>​		<img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221121143948496.png?raw=true" alt="image-20221121143948496"></p>
+<h3 id="Java的异常有哪些"><a href="#Java的异常有哪些" class="headerlink" title="Java的异常有哪些"></a>Java的异常有哪些</h3><p>​		<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221121143948496.png?raw=true" alt="image-20221121143948496"></p>
 <p>Error：主要指在虚拟机运行时的错误，内存不足错误(OutOfMemoryError)，栈溢出错误(StackOverFlowError)</p>
 <p>Exception：可以捕获并且处理的异常，包含程序运行时发生的异常和非运行时(编译时)的异常</p>
 <ul>
@@ -261,11 +280,16 @@
 <li>JDK是Java开发工具包，包括JRE、java编译器、java基础类库</li>
 <li>JRE是java运行环境，用于执行Java的字节码文件，包括JVM以及java核心类库</li>
 </ul>
-<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230219152618720.png" alt="image-20230219152618720" style="zoom:33%;" />
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230219152618720.png" alt="image-20230219152618720" style="zoom:33%;" />
 
 
 
-<h3 id="ArrayList和LinkedList区别"><a href="#ArrayList和LinkedList区别" class="headerlink" title="ArrayList和LinkedList区别"></a>ArrayList和LinkedList区别</h3><h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>基于硬件级别的指令实现的同步原语，JUC中许多同步类基于CAS构建</p>
+<h3 id="ArrayList和LinkedList区别"><a href="#ArrayList和LinkedList区别" class="headerlink" title="ArrayList和LinkedList区别"></a>ArrayList和LinkedList区别</h3><ul>
+<li>arrayList底层是数组，继承RandomAccess接口支持随机存取，增删数据为O(n)</li>
+<li>linkedList底层是双向链表(1.7之前是双向循环链表)，实现链表需要浪费一定的空间存放前驱和后继</li>
+</ul>
+<h3 id="Java值传递"><a href="#Java值传递" class="headerlink" title="Java值传递"></a>Java值传递</h3><p>java中只有值传递，没有引用传递。java在传递对象的时候，地址值也是值，传递地址值不一定就是引用传递。值传递和引用传递的区别并不是传递的内容。而是实参到底有没有被<strong>复制一份给形参</strong></p>
+<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>基于硬件级别的指令实现的同步原语，JUC中许多同步类基于CAS构建</p>
 <p>CAS包含三个操作数-内存位置值(V)、旧的预期值(A)、新值(B)。首先取出内存位置值，如果内存位置值(V)与旧的预期值(A)相同，那么处理器会自动将内存位置值替换成新值(B)。如果CAS执行失败，则会重新取内存中的值，继续CAS，直到成功，如果竞争激烈，则会竞争次数过多。</p>
 <p>CAS存在的问题ABA问题：CAS过程中其他线程将变量从A修改为B,再将B修改为A,CAS判断没变化执行操作，实际上值是被修改的，与设计原语不符。Automic包中引入AtomicStampedReference类来解决这个问题。每次更新时将变量的版本号+1，之前的ABA问题，版本号就会变成3，从而解决了ABA。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">AtomicInteger</span> <span class="variable">atomicInteger</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>();</span><br><span class="line">atomicInteger.getAndIncrement();    <span class="comment">//普通原子类操作</span></span><br><span class="line"></span><br><span class="line">AtomicStampedReference&lt;Object&gt; stampedReference = <span class="keyword">new</span> <span class="title class_">AtomicStampedReference</span>&lt;&gt;(<span class="number">0</span>,<span class="number">1</span>);     </span><br><span class="line"><span class="comment">//添加时间戳，避免出现ABA问题,( 如首先执行线程1，线程1读取到内存的值为0，此时线程1放弃CPU使用权，线程2把数据从0-&gt;2,又从2-&gt;0，此时线程1再次执行取得内存的值为0认为数据没有发生改变，实际上改变了，这就是ABA问题。)</span></span><br><span class="line">stampedReference.compareAndSet(<span class="number">0</span>,<span class="number">1</span>,stampedReference.getStamp(),stampedReference.getStamp()+<span class="number">1</span>);    </span><br><span class="line"></span><br><span class="line">Unsafe类</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">getAndAddInt</span><span class="params">(Object var1, <span class="type">long</span> var2, <span class="type">int</span> var4)</span> &#123;</span><br><span class="line">    <span class="type">int</span> var5;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        var5 = <span class="built_in">this</span>.getIntVolatile(var1, var2);</span><br><span class="line">    &#125; <span class="keyword">while</span>(!<span class="built_in">this</span>.compareAndSwapInt(var1, var2, var5, var5 + var4));    </span><br><span class="line">        <span class="comment">//do-while自旋锁，多个线程取不到var5的正确值一直在处循环中，直到正确含有值的线程过来才会执行成功，更新var5的值，进而执行下一条线程。底层调用C++源代码，c++源代码使用了硬件级别的lock锁(执行lock cmpxchg命令)，该命令对当前执行比较的线程加锁，不允许被打断。</span></span><br><span class="line">    <span class="keyword">return</span> var5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -301,26 +325,20 @@
 <li>在hotspot层面表现为内存屏障。     </li>
 <li>在c++层面调用了lock指令。</li>
 </ul>
-<h3 id="单例模式：饱汉式-饿汉式"><a href="#单例模式：饱汉式-饿汉式" class="headerlink" title="单例模式：饱汉式+饿汉式"></a>单例模式：饱汉式+饿汉式</h3><h3 id="java对象的内存结构："><a href="#java对象的内存结构：" class="headerlink" title="java对象的内存结构："></a>java对象的内存结构：</h3><ul>
-<li>对象头markword (GC年龄、synchronized锁标识、对象hashcode)	8字节  </li>
-<li>类型指针  (xxx.class)    4字节</li>
-<li>实例数据  (instance_data)    4字节</li>
-<li>对齐填充  (padding)    填充凑成8的整数</li>
+<h3 id="单例模式：懒汉式-饿汉式"><a href="#单例模式：懒汉式-饿汉式" class="headerlink" title="单例模式：懒汉式+饿汉式"></a>单例模式：懒汉式+饿汉式</h3><ul>
+<li><p>懒汉式在第一次调用的时候才会实例化</p>
+</li>
+<li><p>饿汉式类初始化时就进行实例化</p>
+</li>
 </ul>
-<h3 id="Synchronized锁升级"><a href="#Synchronized锁升级" class="headerlink" title="Synchronized锁升级"></a>Synchronized锁升级</h3><img src="C:\Users\19094\AppData\Local\Temp\Image.png" alt="Image" style="zoom: 67%;" />
-
-<ol>
+<h3 id="Synchronized锁升级"><a href="#Synchronized锁升级" class="headerlink" title="Synchronized锁升级"></a>Synchronized锁升级</h3><ol>
 <li>无锁时，该对象是个普通对象，锁标志位为01，<strong>偏向锁位为0</strong></li>
 <li>当一个线程A抢到该锁时，锁标志位依然是01，<strong>偏向锁位为1</strong>，记录A线程的线程ID，此时锁升级为<strong>偏向锁</strong></li>
 <li>当线程A再次抢该锁时，锁标志位依然是01，偏向锁位依然为1，线程ID依然是线程A自己的ID，<strong>无需再次加锁解锁和CAS更新对象头</strong>。</li>
 <li>此时，线程B也来抢夺该锁，如果争抢成功，记录B线程的线程ID，如果争抢失败，则说明当前锁存在一定的竞争，偏向锁就升级为<strong>轻量级锁</strong>(轻量级锁是个do-while循环过程即CAS，实际上无锁) ，锁标志位改为00，JVM会在线程的栈中开辟一块单独的空间，里面保存指向对象头MarkWord的指针，同时在对象头MarkWord中保存指向线程栈那块空间的指针。</li>
 <li>轻量级锁循环一定次数之后仍然未抢到锁，会升级至<strong>重量级锁</strong>，<strong>锁标志位改为10</strong>，在这个状态下，未抢到锁的线程都会被阻塞，等待操作系统的调用，在对象头MarkWord中保存指向堆中monitor对象的指针，存在用户态和内核态的转换。<strong>monitorenter</strong> -&gt; 执行同步代码块 -&gt; <strong>monitorexit</strong></li>
 </ol>
-<h3 id="对象的分配过程："><a href="#对象的分配过程：" class="headerlink" title="对象的分配过程："></a>对象的分配过程：</h3><p>​	通过逃逸分析判断是否分配在栈上还是在内存上</p>
-<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230209120030580.png" alt="image-20230209120030580" style="zoom:50%;" />
-
-
-
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230220160048565.png" alt="image-20230220160048565"></p>
 <h3 id="sleep和wait的区别"><a href="#sleep和wait的区别" class="headerlink" title="sleep和wait的区别"></a>sleep和wait的区别</h3><ul>
 <li>sleep()来自Thread类，wait()来自Object类，调用sleep方法线程不会释放对象锁，调用wait方法线程会释放对象锁进入阻塞状态</li>
 <li>调用sleep会睡眠不让出CPU资源，调用wait会让出CPU资源</li>
@@ -331,6 +349,7 @@
 <li>一个类可以实现多个接口，但只能继承一个抽象类</li>
 <li>接口类里面的修饰符只能是public，抽象类里的修饰符没有限制，但是抽象方法不能使用 private 修饰</li>
 <li>接口中不能使用静态代码块，抽象类中可以使用静态代码块</li>
+<li>一个非抽象的类要实现接口，需要把接口中的方法都加以实现，抽象类可以重写接口中的方法，并添加自己的方法，这样子类在重写时，可以直接继承抽象类，而不用直接实现接口</li>
 </ul>
 <h2 id="Spirng部分"><a href="#Spirng部分" class="headerlink" title="Spirng部分"></a>Spirng部分</h2><h3 id="spring事务传播机制"><a href="#spring事务传播机制" class="headerlink" title="spring事务传播机制"></a>spring事务传播机制</h3><p>​	事务的传播是指不同方法的嵌套调用过程中应该使用同一个事务还是不同的事务，出现异常的时候是回滚还是提交</p>
 <ul>
@@ -364,10 +383,10 @@
 <h3 id="spring框架中使用了哪些设计模式"><a href="#spring框架中使用了哪些设计模式" class="headerlink" title="spring框架中使用了哪些设计模式"></a>spring框架中使用了哪些设计模式</h3><ul>
 <li>工厂模式，spring中的BeanFactory，用于创建bean实例</li>
 <li>单例模式，spring容器中的bean是单例的</li>
-<li>代理模式，spring AOP利用了AspectJ实现，AspectJ底层是动态代理</li>
+<li>代理模式，spring AOP利用了AspectJ实现，AspectJ底层是动态代理，代理对象具备真实对象的功能并对被代理对象进行加强</li>
 <li>观察者模式，spring中的ApplicationEvent，ApplicationListener，如发布容器刷新完成事件</li>
-<li>策略模式，将多个if-else改为策略模式来实现，如选择ClassPathResource，ServletContextResource，UrlResource</li>
-<li>模板模式，子类继承父类，实现父类的抽象方法</li>
+<li>策略模式，将多个if-else改为策略模式来实现，如选择ClassPathResource，ServletContextResource，UrlResource，选择 Resource 的实现类也就是确定具体的资源访问策略</li>
+<li>模板模式，子类继承父类，实现父类的抽象方法。在Spring的AbstractApplicationContext类中onRefresh方法提供给我们用子类去扩展</li>
 <li>适配器模式</li>
 <li>装饰者模式</li>
 </ul>
@@ -395,6 +414,7 @@
 <li><p>销毁容器后调用destory方法</p>
 </li>
 </ul>
+<h3 id="Spring-IOC原理"><a href="#Spring-IOC原理" class="headerlink" title="Spring IOC原理"></a>Spring IOC原理</h3><p>​	全称控制反转，是一种设计思想。IOC意味着你将设计好的对象交给容器控制，而不是自己直接控制。IOC容器就像是一个工厂一样，当需要某个对象时，可以直接从IOC容器中获取，实现了程序间的解耦。把IOC容器的工作模式看做是工厂模式的升华，可以把IOC容器看作是一个工厂，这个工厂里要生产的对象都在配置文件中给出，然后利用反射机制，根据配置文件中给出的类名生成对象</p>
 <h3 id="spring-AOP原理"><a href="#spring-AOP原理" class="headerlink" title="spring AOP原理"></a>spring AOP原理</h3><p>​	概述：aop即面向切面编程，是指在不修改业务代码的情况下，使用动态代理的技术对已有代码实现逻辑增强，实现了解耦的操作。aop主要用于日志、事务、权限校验等场景中，具有jdk代理和cglib代理两种实现方式。当被代理的类有接口的情况下，使用JDK动态代理；没有接口的情况下，使用cglib动态代理</p>
 <p>​	jdk动态代理，创建接口的实现类代理对象</p>
 <p>​	cglib动态代理，创建一个子类继承父类，在子类中调用父类的方法，不影响被代理类的使用</p>
@@ -414,12 +434,22 @@
 </li>
 </ul>
 </li>
-<li>在执行目标方法时代理对象会调用intercept(cglib)或invoke(jdk)方法，根据拦截器链，调用proceed方法依次执行链中的每一个拦截器(前置通知-&gt;目标方法-&gt;后置通知-&gt;返回通知)</li>
+<li>在执行目标方法时代理对象会调用intercept(cglib)或invoke(jdk)方法，根据拦截器链，调用proceed方法依次执行链中的每一个拦截器(前置通知@Before-&gt; 目标方法-&gt; 后置通知@AfterReturning-&gt; 异常通知@AfterThrowing-&gt; 最终通知@After)</li>
 </ul>
+<p>@Around环绕增强</p>
+<ul>
+<li>在目标方法的前和后都能增强功能</li>
+<li>控制目标方法是否执行</li>
+<li>修改目标方法的执行结果。</li>
+</ul>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230219190257989.png" alt="image-20230219190257989" style="zoom: 50%;" />
+
+
+
 <h3 id="BeanPostProcessor后置处理器作用"><a href="#BeanPostProcessor后置处理器作用" class="headerlink" title="BeanPostProcessor后置处理器作用"></a>BeanPostProcessor后置处理器作用</h3><p>后置处理器可用于bean对象初始化前后进行逻辑增强。<br>Spring提供了BeanPostProcessor接口的很多实现类，例如AutowiredAnnotationBeanPostProcessor用于@Autowired注解的实现，AnnotationAwareAspectJAutoProxyCreator用于Spring AOP的动态代理等等。</p>
 <h3 id="XxxAware原理"><a href="#XxxAware原理" class="headerlink" title="XxxAware原理"></a>XxxAware原理</h3><p>XxxAware接口的底层原理是由XxxAwareProcessor实现类实现的，也就是说每一个XxxAware接口都有它自己对应的XxxAwareProcessor实现类。 例如，我们这里以ApplicationContextAware接口为例，ApplicationContextAware接口的底层原理就是由ApplicationContextAwareProcessor类实现的。从ApplicationContextAwareProcessor类的源码可以看出，其实现了BeanPostProcessor接口，本质上是一个后置处理器。</p>
 <h3 id="循环依赖"><a href="#循环依赖" class="headerlink" title="循环依赖"></a>循环依赖</h3><p>spring循环依赖是指A依赖B，B也依赖A，这种情况就会出现循环依赖</p>
-<p><img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230213201811442.png" alt="image-20230213201811442"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230213201811442.png" alt="image-20230213201811442"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">instanceWrapper = createBeanInstance(beanName, mbd, args);	<span class="comment">//实例化bean对象</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">earlySingletonExposure</span> <span class="operator">=</span> (mbd.isSingleton()&amp;&amp;<span class="built_in">this</span>.allowCircularReferences&amp;&amp;isSingletonCurrentlyInCreation(beanName));</span><br><span class="line">	<span class="keyword">if</span> (earlySingletonExposure)		<span class="comment">//如果是单例且在创建过程中</span></span><br><span class="line">       addSingletonFactory(beanName,()-&gt;getEarlyBeanReference(beanName,mbd,bean)<span class="comment">/**判断是否为代理对象*/</span>); <span class="comment">//无论是否代理都添加到三级缓存</span></span><br><span class="line">populateBean(beanName, mbd, instanceWrapper);		<span class="comment">//完成赋值并且判断是否有依赖注入</span></span><br><span class="line">exposedObject = initializeBean(beanName, exposedObject, mbd);	<span class="comment">//生成代理对象</span></span><br></pre></td></tr></table></figure>
 
 
@@ -448,7 +478,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%BA%90%E7%A0%81/" rel="tag"># 源码</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
           </div>
 
         

@@ -20,59 +20,59 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Redis命令 keys k*     列出所有前缀为k的键值 exists key    判断key是否存在于数据库中 expire k1 10    设置key的最大生存时间 ttl k1   查看key的剩余生存时间">
+    <meta name="description" content="Redis命令 keys k*     列出所有前缀为k的键值 exists key    判断key是否存在于数据库中 expire k1 10    设置key的最大生存时间 ttl k1   查看key的剩余生存时间  Redis的内存处理redis过期删除策略   redis内存淘汰策略  Redis底层数据结构底层的总体架构   底层string的数据结构   应用场景：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis">
 <meta property="og:url" content="http://example.com/2022/10/16/redis/index.html">
 <meta property="og:site_name" content="我要去大厂">
-<meta property="og:description" content="Redis命令 keys k*     列出所有前缀为k的键值 exists key    判断key是否存在于数据库中 expire k1 10    设置key的最大生存时间 ttl k1   查看key的剩余生存时间">
+<meta property="og:description" content="Redis命令 keys k*     列出所有前缀为k的键值 exists key    判断key是否存在于数据库中 expire k1 10    设置key的最大生存时间 ttl k1   查看key的剩余生存时间  Redis的内存处理redis过期删除策略   redis内存淘汰策略  Redis底层数据结构底层的总体架构   底层string的数据结构   应用场景：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141834880.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115143017553.png?raw=true?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141948937.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115170352663.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115172440822.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116104210773.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141824141.png?raw=true?lastModify=1668564765">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116105202189.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116105223166.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101924212.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101939610.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116145341219.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101250658.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116110707618.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116114206050.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115912733.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115806333.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115731949.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116134731704.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221116144548959.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221122200943822.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221122200956718.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221124203744462.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221124211547737.png?raw=true">
-<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20221209151737449.png">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125164247130.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125201625463.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125193052913.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125193243372.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221125202133335.png?raw=true">
-<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20221209151945054.png">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126140241320.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126213756602.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126174401626.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126210244915.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126214631747.png?raw=true">
-<meta property="og:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221126220035968.png?raw=true">
-<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230211210341364.png">
-<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230211211841853.png">
-<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230211212024840.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141834880.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115143017553.png?raw=true?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141948937.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115170352663.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115172440822.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116104210773.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141824141.png?raw=true?lastModify=1668564765">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116105202189.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116105223166.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101924212.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101939610.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116145341219.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101250658.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116110707618.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116114206050.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115912733.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115806333.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115731949.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116134731704.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116144548959.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221122200943822.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221122200956718.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221124203744462.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221124211547737.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221209151737449.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125164247130.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125201625463.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125193052913.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125193243372.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125202133335.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221209151945054.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126140241320.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126213756602.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126174401626.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126210244915.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126214631747.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126220035968.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211210341364.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211211841853.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211212024840.png">
 <meta property="article:published_time" content="2022-10-16T11:20:46.000Z">
-<meta property="article:modified_time" content="2023-02-12T05:03:58.209Z">
+<meta property="article:modified_time" content="2023-02-21T14:29:52.820Z">
 <meta property="article:author" content="bean">
-<meta property="article:tag" content="图解redis面试题">
+<meta property="article:tag" content="图解redis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141834880.png?raw=true">
+<meta name="twitter:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141834880.png?raw=true">
 
 
 <link rel="canonical" href="http://example.com/2022/10/16/redis/">
@@ -179,12 +179,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -259,7 +259,16 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-12 13:03:58" itemprop="dateModified" datetime="2023-02-12T13:03:58+08:00">2023-02-12</time>
+      <time title="修改时间：2023-02-21 22:29:52" itemprop="dateModified" datetime="2023-02-21T22:29:52+08:00">2023-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">面试题</span></a>
+        </span>
     </span>
 
   
@@ -272,43 +281,41 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h1><ul>
+        <span id="more"></span>     
+
+<h1 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h1><ul>
 <li>keys k*     列出所有前缀为k的键值</li>
 <li>exists key    判断key是否存在于数据库中</li>
 <li>expire k1 10    设置key的最大生存时间</li>
 <li>ttl k1   查看key的剩余生存时间</li>
 </ul>
-<span id="more"></span>
-
-
-
 <h1 id="Redis的内存处理"><a href="#Redis的内存处理" class="headerlink" title="Redis的内存处理"></a>Redis的内存处理</h1><h2 id="redis过期删除策略"><a href="#redis过期删除策略" class="headerlink" title="redis过期删除策略"></a>redis过期删除策略</h2><!--more-->
 
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141834880.png?raw=true" alt="image-20221115141834880"></p>
-<h2 id="redis内存淘汰策略"><a href="#redis内存淘汰策略" class="headerlink" title="redis内存淘汰策略"></a>redis内存淘汰策略</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115143017553.png?raw=true?raw=true" alt="image-20221115143017553"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141948937.png?raw=true" alt="image-20221115141948937"></p>
-<h1 id="Redis底层数据结构"><a href="#Redis底层数据结构" class="headerlink" title="Redis底层数据结构"></a>Redis底层数据结构</h1><h2 id="底层的总体架构"><a href="#底层的总体架构" class="headerlink" title="底层的总体架构"></a>底层的总体架构</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115170352663.png?raw=true" alt="image-20221115170352663"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115172440822.png?raw=true" alt="image-20221115172440822"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116104210773.png?raw=true" alt="image-20221116104210773"></p>
-<h2 id="底层string的数据结构"><a href="#底层string的数据结构" class="headerlink" title="底层string的数据结构"></a>底层string的数据结构</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221115141824141.png?raw=true?lastModify=1668564765" alt="image-20221115141824141"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116105202189.png?raw=true" alt="image-20221116105202189"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116105223166.png?raw=true" alt="image-20221116105223166"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141834880.png?raw=true" alt="image-20221115141834880"></p>
+<h2 id="redis内存淘汰策略"><a href="#redis内存淘汰策略" class="headerlink" title="redis内存淘汰策略"></a>redis内存淘汰策略</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115143017553.png?raw=true?raw=true" alt="image-20221115143017553"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141948937.png?raw=true" alt="image-20221115141948937"></p>
+<h1 id="Redis底层数据结构"><a href="#Redis底层数据结构" class="headerlink" title="Redis底层数据结构"></a>Redis底层数据结构</h1><h2 id="底层的总体架构"><a href="#底层的总体架构" class="headerlink" title="底层的总体架构"></a>底层的总体架构</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115170352663.png?raw=true" alt="image-20221115170352663"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115172440822.png?raw=true" alt="image-20221115172440822"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116104210773.png?raw=true" alt="image-20221116104210773"></p>
+<h2 id="底层string的数据结构"><a href="#底层string的数据结构" class="headerlink" title="底层string的数据结构"></a>底层string的数据结构</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141824141.png?raw=true?lastModify=1668564765" alt="image-20221115141824141"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116105202189.png?raw=true" alt="image-20221116105202189"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116105223166.png?raw=true" alt="image-20221116105223166"></p>
 <p>应用场景：</p>
 <ul>
 <li>计数器</li>
 <li>分布式锁</li>
 <li>缓存对象</li>
 </ul>
-<h2 id="底层ZipList数据结构"><a href="#底层ZipList数据结构" class="headerlink" title="底层ZipList数据结构"></a>底层ZipList数据结构</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101924212.png?raw=true" alt="image-20221116101924212"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101939610.png?raw=true" alt="image-20221116101939610"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116145341219.png?raw=true" alt="image-20221116145341219"></p>
-<h2 id="底层QuickList的数据结构"><a href="#底层QuickList的数据结构" class="headerlink" title="底层QuickList的数据结构"></a>底层QuickList的数据结构</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116101250658.png?raw=true" alt="image-20221116101250658"></p>
-<h2 id="Redis中List的整体结构-采用QuickList"><a href="#Redis中List的整体结构-采用QuickList" class="headerlink" title="Redis中List的整体结构(采用QuickList)"></a>Redis中List的整体结构(采用QuickList)</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116110707618.png?raw=true" alt="image-20221116110707618"></p>
+<h2 id="底层ZipList数据结构"><a href="#底层ZipList数据结构" class="headerlink" title="底层ZipList数据结构"></a>底层ZipList数据结构</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101924212.png?raw=true" alt="image-20221116101924212"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101939610.png?raw=true" alt="image-20221116101939610"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116145341219.png?raw=true" alt="image-20221116145341219"></p>
+<h2 id="底层QuickList的数据结构"><a href="#底层QuickList的数据结构" class="headerlink" title="底层QuickList的数据结构"></a>底层QuickList的数据结构</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101250658.png?raw=true" alt="image-20221116101250658"></p>
+<h2 id="Redis中List的整体结构-采用QuickList"><a href="#Redis中List的整体结构-采用QuickList" class="headerlink" title="Redis中List的整体结构(采用QuickList)"></a>Redis中List的整体结构(采用QuickList)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116110707618.png?raw=true" alt="image-20221116110707618"></p>
 <p>应用场景：</p>
 <ul>
 <li>消息队列</li>
 </ul>
-<h2 id="Redis中Set的整体结构-采用Dict或IntSet"><a href="#Redis中Set的整体结构-采用Dict或IntSet" class="headerlink" title="Redis中Set的整体结构(采用Dict或IntSet)"></a>Redis中Set的整体结构(采用Dict或IntSet)</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116114206050.png?raw=true" alt="image-20221116114206050"></p>
+<h2 id="Redis中Set的整体结构-采用Dict或IntSet"><a href="#Redis中Set的整体结构-采用Dict或IntSet" class="headerlink" title="Redis中Set的整体结构(采用Dict或IntSet)"></a>Redis中Set的整体结构(采用Dict或IntSet)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116114206050.png?raw=true" alt="image-20221116114206050"></p>
 <p>应用场景：</p>
 <ul>
 <li><p>点赞</p>
@@ -316,9 +323,9 @@
 <li><p>共同关注</p>
 </li>
 </ul>
-<h2 id="Redis中ZSet的整体结构-采用ZipList或SkipList-Dict"><a href="#Redis中ZSet的整体结构-采用ZipList或SkipList-Dict" class="headerlink" title="Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)"></a>Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115912733.png?raw=true" alt="image-20221116115912733"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115806333.png?raw=true" alt="image-20221116115806333"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116115731949.png?raw=true" alt="image-20221116115731949"></p>
+<h2 id="Redis中ZSet的整体结构-采用ZipList或SkipList-Dict"><a href="#Redis中ZSet的整体结构-采用ZipList或SkipList-Dict" class="headerlink" title="Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)"></a>Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115912733.png?raw=true" alt="image-20221116115912733"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115806333.png?raw=true" alt="image-20221116115806333"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115731949.png?raw=true" alt="image-20221116115731949"></p>
 <p>由于ziplist无法排序并且数据量小，所以在使用ziplist存储结构时，可以在业务编码时进行排序。</p>
 <p>常用命令：</p>
 <ul>
@@ -333,8 +340,8 @@
 <li>排行榜</li>
 <li>对点赞数目、电话号码排序</li>
 </ul>
-<h2 id="Redis中Hash的整体结构-ZipList或Dict"><a href="#Redis中Hash的整体结构-ZipList或Dict" class="headerlink" title="Redis中Hash的整体结构(ZipList或Dict)"></a>Redis中Hash的整体结构(ZipList或Dict)</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116134731704.png?raw=true" alt="image-20221116134731704"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221116144548959.png?raw=true" alt="image-20221116144548959"></p>
+<h2 id="Redis中Hash的整体结构-ZipList或Dict"><a href="#Redis中Hash的整体结构-ZipList或Dict" class="headerlink" title="Redis中Hash的整体结构(ZipList或Dict)"></a>Redis中Hash的整体结构(ZipList或Dict)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116134731704.png?raw=true" alt="image-20221116134731704"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116144548959.png?raw=true" alt="image-20221116144548959"></p>
 <p>应用场景：</p>
 <ul>
 <li>缓存用户</li>
@@ -355,17 +362,17 @@
 <li>判断登录状态</li>
 </ul>
 <h2 id="Redis分布式锁解决超买超卖问题"><a href="#Redis分布式锁解决超买超卖问题" class="headerlink" title="Redis分布式锁解决超买超卖问题"></a>Redis分布式锁解决超买超卖问题</h2><p>​		redis虽然支持事务，但是与数据库的事务不同，虽然redis事务能保证原子性，但不能保证一致性。因此需要编写lua脚本搭配redis解决一致性问题</p>
-<h1 id="Redis缓存与集群"><a href="#Redis缓存与集群" class="headerlink" title="Redis缓存与集群"></a>Redis缓存与集群</h1><h2 id="Redis缓存穿透"><a href="#Redis缓存穿透" class="headerlink" title="Redis缓存穿透"></a>Redis缓存穿透</h2><p>​		客户端请求的数据在缓存和数据库中都不存在，缓存永远不会失效，这些请求会一直打入到数据库</p>
+<h1 id="Redis缓存与集群"><a href="#Redis缓存与集群" class="headerlink" title="Redis缓存与集群"></a>Redis缓存与集群</h1><h2 id="Redis缓存穿透"><a href="#Redis缓存穿透" class="headerlink" title="Redis缓存穿透"></a>Redis缓存穿透</h2><p>​		客户端请求的数据在缓存和数据库中都不存在，缓存永远不会生效，这些请求会一直打入到数据库</p>
 <p>​		解决方法：</p>
 <ul>
 <li><p>缓存空对象：可能造成短期内数据不一致问题，数据库数据修改缓存不知道</p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221122200943822.png?raw=true" alt="image-20221122200943822"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221122200943822.png?raw=true" alt="image-20221122200943822"></p>
 </li>
 <li><p>布隆过滤：占用内存少，实现复杂</p>
 <p>将数据库中的数据利用hash算法转化为hashcode，存储到布隆过滤器(bitMap)里边对应hashcode位置是否为1</p>
 </li>
 </ul>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221122200956718.png?raw=true" alt="image-20221122200956718"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221122200956718.png?raw=true" alt="image-20221122200956718"></p>
 <h2 id="Redis缓存雪崩"><a href="#Redis缓存雪崩" class="headerlink" title="Redis缓存雪崩"></a>Redis缓存雪崩</h2><p>​		同一时间段大量的缓存key同时失效或者Redis服务宕机，导致大量请求到达数据库，带来巨大压力。</p>
 <p>​		解决方案：</p>
 <ul>
@@ -389,7 +396,7 @@
 </li>
 </ul>
 <h2 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h2><p>​		RDB：redis数据备份文件，数据快照，把内存中所有数据记录到磁盘中，redis实例故障重启后，从磁盘读取数据快照恢复数据。</p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221124203744462.png?raw=true" alt="image-20221124203744462"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221124203744462.png?raw=true" alt="image-20221124203744462"></p>
 <p>​		RDB的bgsave的基本流程：</p>
 <ul>
 <li><p>fork主进程得到一个子进程，共享内存空间 (本质上是将主进程用于访问内存的页表复制给子进程)</p>
@@ -402,22 +409,22 @@
 <p>​		RDB执行的时机是：①自己设置的save 10 100，②正常关闭服务器</p>
 <p>​		RDB的缺点：每两次持久化之间产生的数据可能会因为宕机而丢失，而且fork子进程耗时间 </p>
 <h2 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h2><p>​		Redis每处理一个写命令都会记录在AOF文件中，是一个命令日志文件。AOF可以每条命令记录刷盘一次，也可以每一秒刷盘一次。AOF文件长度增加一倍或者总体积超过64mb时，触发bgrewriteaof，将AOF文件压缩。</p>
-<h2 id="RDB与AOF对比"><a href="#RDB与AOF对比" class="headerlink" title="RDB与AOF对比"></a>RDB与AOF对比</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221124211547737.png?raw=true" alt="image-20221124211547737"></p>
-<h2 id="主从集群-一主多从，读写分离"><a href="#主从集群-一主多从，读写分离" class="headerlink" title="主从集群(一主多从，读写分离)"></a>主从集群(一主多从，读写分离)</h2><p><img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20221209151737449.png" alt="image-20221209151737449"></p>
+<h2 id="RDB与AOF对比"><a href="#RDB与AOF对比" class="headerlink" title="RDB与AOF对比"></a>RDB与AOF对比</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221124211547737.png?raw=true" alt="image-20221124211547737"></p>
+<h2 id="主从集群-一主多从，读写分离"><a href="#主从集群-一主多从，读写分离" class="headerlink" title="主从集群(一主多从，读写分离)"></a>主从集群(一主多从，读写分离)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221209151737449.png" alt="image-20221209151737449"></p>
 <h3 id="数据同步"><a href="#数据同步" class="headerlink" title="数据同步"></a>数据同步</h3><p>​		slave结点加入到集群之后，发出数据同步请求</p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125164247130.png?raw=true" alt="image-20221125164247130"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125201625463.png?raw=true" alt="image-20221125201625463"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125193052913.png?raw=true" alt="image-20221125193052913"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125193243372.png?raw=true" alt="image-20221125193243372"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221125202133335.png?raw=true" alt="image-20221125202133335"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125164247130.png?raw=true" alt="image-20221125164247130"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125201625463.png?raw=true" alt="image-20221125201625463"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125193052913.png?raw=true" alt="image-20221125193052913"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125193243372.png?raw=true" alt="image-20221125193243372"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125202133335.png?raw=true" alt="image-20221125202133335"></p>
 <h2 id="哨兵集群-一个master，多个slave"><a href="#哨兵集群-一个master，多个slave" class="headerlink" title="哨兵集群(一个master，多个slave)"></a>哨兵集群(一个master，多个slave)</h2><p>​		Sentinel具有监控、故障转移、通知的作用</p>
 <p>​		Sentinel每隔1s发送一次ping命令，如果超过一定时间没有响应则认为主观下线，如果主观下线超过一半，则服务下线。当master发生故障时，Sentinel会选择一个slave作为新的master执行slaveof no one，其余结点执行slaveof 新master，修改故障结点配置文件slaveof 新master</p>
 <p>​		Sentinel选举新master的方式：首先判断slave结点与master结点的断开时间长短，断开时间长的slave会被排除，然后判断slave节点的slave-priority值，值越小优先级越高；若slave-priority相同，则判断slave结点的offset大小，越大说明数据越全，优先级高；最后判断slave结点的id，越小优先级越高。</p>
-<p><img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20221209151945054.png" alt="image-20221209151945054"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221209151945054.png" alt="image-20221209151945054"></p>
 <h2 id="分片集群-多个master，多个slave"><a href="#分片集群-多个master，多个slave" class="headerlink" title="分片集群(多个master，多个slave)"></a>分片集群(多个master，多个slave)</h2><p>​		分片集群支持高并发写操作，通过插槽slot存储数据，每个master包含一定数量的slot</p>
 <p>​		故障转移：分为自动故障转移和手动故障转移( cluster failover命令将主-从替换为从-主 )</p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126140241320.png?raw=true" alt="image-20221126140241320"></p>
-<h1 id="Redis网络模型"><a href="#Redis网络模型" class="headerlink" title="Redis网络模型"></a>Redis网络模型</h1><h2 id="I-x2F-O多路复用：select，poll，epoll"><a href="#I-x2F-O多路复用：select，poll，epoll" class="headerlink" title="I&#x2F;O多路复用：select，poll，epoll"></a>I&#x2F;O多路复用：select，poll，epoll</h2><p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126213756602.png?raw=true" alt="image-20221126213756602"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126140241320.png?raw=true" alt="image-20221126140241320"></p>
+<h1 id="Redis网络模型"><a href="#Redis网络模型" class="headerlink" title="Redis网络模型"></a>Redis网络模型</h1><h2 id="I-x2F-O多路复用：select，poll，epoll"><a href="#I-x2F-O多路复用：select，poll，epoll" class="headerlink" title="I&#x2F;O多路复用：select，poll，epoll"></a>I&#x2F;O多路复用：select，poll，epoll</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126213756602.png?raw=true" alt="image-20221126213756602"></p>
 <p>​		select存在的问题：</p>
 <ul>
 <li>最大能监听的FD (通过FD可以找到对应的文件) 不超过1024</li>
@@ -437,15 +444,15 @@
 <p>epoll_create：创建epoll实例，包括一颗红黑树，一个链表</p>
 <p>epoll_ctl：注册FD，添加到红黑树</p>
 <p>epoll_wait：链表中的FD就绪，该函数将数据发送到用户空间</p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126174401626.png?raw=true" alt="image-20221126174401626"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126174401626.png?raw=true" alt="image-20221126174401626"></p>
 <p>​		IO多路复用事件通知机制，当链表中有FD准备就绪时，调用epoll_wait方法可以得到通知，事件通知的模式有两种：</p>
 <ul>
 <li>LevelTriggered(水平触发)：LT，当FD就绪时，会发送多次通知直到数据发送完，epoll默认模式</li>
 <li>EdgeTriggered(边缘触发)：ET，当FD就绪时，只会通知一次，不管数据是否发送完；循环读取数据，搭配NIO</li>
 </ul>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126210244915.png?raw=true" alt="image-20221126210244915"> </p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126214631747.png?raw=true" alt="image-20221126214631747"></p>
-<p><img src="https://github.com/littlebean1/photoRepo/blob/master/image-20221126220035968.png?raw=true" alt="image-20221126220035968"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126210244915.png?raw=true" alt="image-20221126210244915"> </p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126214631747.png?raw=true" alt="image-20221126214631747"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126220035968.png?raw=true" alt="image-20221126220035968"></p>
 <h2 id="Redis是单线程还是多线程"><a href="#Redis是单线程还是多线程" class="headerlink" title="Redis是单线程还是多线程"></a>Redis是单线程还是多线程</h2><p>​		redis单线程是指在redis中始终是由主线程来处理客户端请求的，因此redis的单线程就是意味着只有一个线程处理命令</p>
 <p>​		redis多线程是指在redis4.0后除了主线程之外还引入了后台线程，后台线程主要负责异步释放redis内存，在redis6.0之后再网络模型中引入了多线程，提高对多核CPU的利用率。</p>
 <h4 id="redis选择单线程处理命令原因："><a href="#redis选择单线程处理命令原因：" class="headerlink" title="redis选择单线程处理命令原因："></a>redis选择单线程处理命令原因：</h4><ul>
@@ -463,7 +470,7 @@
 </ul>
 </li>
 </ul>
-<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230211210341364.png" alt="image-20230211210341364" style="zoom:67%;" />
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211210341364.png" alt="image-20230211210341364" style="zoom:67%;" />
 
 
 
@@ -475,7 +482,7 @@
 <li>将需要删除的key发送给消息队列</li>
 <li>程序自己消费消息，获取需要删除的key，继续重试删除操作直到成功</li>
 </ul>
-<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230211211841853.png" alt="image-20230211211841853" style="zoom:50%;" />
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211211841853.png" alt="image-20230211211841853" style="zoom:50%;" />
 </li>
 <li><p>基于binlog (缓存删除失败)</p>
 <ul>
@@ -489,7 +496,7 @@
 </ul>
 </li>
 </ul>
-<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230211212024840.png" alt="image-20230211212024840" style="zoom:67%;" />
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211212024840.png" alt="image-20230211212024840" style="zoom:67%;" />
 
 
 
@@ -508,7 +515,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%9B%BE%E8%A7%A3redis%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 图解redis面试题</a>
+              <a href="/tags/%E5%9B%BE%E8%A7%A3redis/" rel="tag"># 图解redis</a>
           </div>
 
         
