@@ -213,7 +213,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:29:14" itemprop="dateModified" datetime="2023-02-21T22:29:14+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:35:35" itemprop="dateModified" datetime="2023-02-21T22:35:35+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -235,233 +235,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>     
-
-<h3 id="java类加载过程"><a href="#java类加载过程" class="headerlink" title="java类加载过程                     "></a>java类加载过程                     <img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230221213330928.png" alt="image-20230221213330928"></h3><p>Loading：  </p>
-<ul>
-<li>通过一个类的全类名获取当前类的二进制字节流  </li>
-<li>将该字节流所代表的静态存储结构转化为方法区的运行时数据结构  </li>
-<li>在内存中生成一个Class对象，作为方法区这个类的各种数据的访问入口</li>
-</ul>
-<p>Linking：   </p>
-<ul>
-<li>验证：验证.class文件是否符合jvm要求，如魔数开头、版本、字节码、符号引用等(这些均在编译期已生成)  </li>
-<li>准备：为<strong>类变量(static修饰)<strong>分配内存并且为这些变量设置默认值，零值(0，null)，  但不包含被static final修饰的变量，因为</strong>final在编译</strong>的时候就会进行初始化  此处不会为实例变量默认初始化，类变量存储在方法区的常量池，而实例变量保存在java堆中  </li>
-<li>解析：将常量池内的符号引用转换为直接引用</li>
-</ul>
-<p>Initializer：  </p>
-<ul>
-<li>执行类构造器方法 <clinit>( ) 。此方法不需要定义，<strong>为所有类变量初始化赋值和并执行静态代码块</strong>。   </li>
-<li><clinit>( ) 不同于类的构造器( 构造器是虚拟机下的 <init>( ) )。   </li>
-<li>如果当前类具有父类，JVM保证子类的<clinit>( ) 执行前，先执行父类的<clinit>( ) 。  </li>
-<li><clinit>( )方法在多线程下是同步加锁的</li>
-<li>如果类中调用了反射也会调用<clinit>( )方法</li>
-</ul>
-<h3 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h3><p>​		启动类加载器：加载java基础类</p>
-<p>​		扩展类加载器：加载java核心类</p>
-<p>​		应用程序类加载器：加载classpath下的类和包</p>
-<p>​    	Java虚拟机对class文件采用按需加载的方式，也就是说当需要使用该类时，才会将他的class文件加载到内存中生成class对象，而加载某个类的class文件时，Java虚拟机采用的是双亲委派机制，即把请求交给父类处理     </p>
-<p>​		优势：避免类的重复加载；保护程序安全，防止核心API被恶意篡改   </p>
-<p>​		执行流程：   </p>
-<ol>
-<li>如果一个类加载器收到了类加载请求，他不会自己先去加载，而是把这个请求委托给父亲的加载器去执行</li>
-<li>如果父类加载器还存在其父类加载器，则进一步向上委托，请求最终到达顶层的引导类加载器</li>
-<li>如果父类加载器可以完成类加载任务，则成功返回，如果父类加载器无法完成此加载任务，则会将请求下抛，子类加载器尝试去加载</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ParentTask</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">test</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">java</span>.lang.test();        </span><br><span class="line">        <span class="comment">//可以被引用类加载器扫描，但是引用类加载器无法在相应的jar包内扫描到该类(发生SecurityException错误，保护核心api)。</span></span><br><span class="line">        System.out.println(test.getClass().getClassLoader());</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">java</span>.lang.String();       </span><br><span class="line">        <span class="comment">//可以被引用类加载器扫描，但是引用类加载器会加载JDK自带的String类，以此实现对java核心源代码的保护，称之沙箱安全机制。</span></span><br><span class="line">        System.out.println(s.getClass().getClassLoader());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="不想用双亲委派模型怎么办"><a href="#不想用双亲委派模型怎么办" class="headerlink" title="不想用双亲委派模型怎么办"></a>不想用双亲委派模型怎么办</h3><p>​		自定义加载器的话，需要继承 <code>ClassLoader</code> 。如果我们不想打破双亲委派模型，就重写 <code>ClassLoader</code> 类中的 <code>findClass()</code> 方法即可，无法被父类加载器加载的类最终会通过这个方法被加载。但是，如果想打破双亲委派模型则需要重写 <code>loadClass()</code> 方法</p>
-<h3 id="如何判断两个类相等"><a href="#如何判断两个类相等" class="headerlink" title="如何判断两个类相等"></a>如何判断两个类相等</h3><p>​		如果两个类相等，首先必须是由同一个类加载器来加载，如果类加载器不同则不相等</p>
-<ul>
-<li><p>在java中，一个类用其全限定类名标识即包名+类名</p>
-</li>
-<li><p>在jvm中，一个类用其全限定类名+其类加载器标识—包名+类名+类加载器名</p>
-</li>
-</ul>
-<h3 id="JVM内存划分"><a href="#JVM内存划分" class="headerlink" title="JVM内存划分"></a>JVM内存划分</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230220133457003.png" alt="image-20230220133457003"></p>
-<ul>
-<li>程序计算器：线程私有，存储着下一条需要执行的字节码指令，实现对代码的流程控制如顺序执行，异常处理，能够记录多线程情况下当前线程执行的位置，便于切换。唯一一个不会出现 <code>OutOfMemoryError</code> 的内存区域</li>
-<li>虚拟机栈：线程私有，记录当前线程除本地方法的执行方法栈，每个方法调用对应一个栈帧，栈帧中存有操作数栈，局部变量表(存储八种基本数据类型，对象引用类型)，动态链接(不同方法相互调用时，将符号引用转为内存地址中的直接引用)，返回地址。</li>
-<li>本地方法栈：线程私有，用来管理本地方法的调用</li>
-<li>堆：存放对象实例，几乎所有的对象实例以及数组都在这里分配内存，字符串常量池</li>
-<li>字符串常量池：底层是通过StringTable来实现的，本质是HashSet<String>，StringTable中保存字符串对象的引用，引用指向堆中的字符串对象</li>
-<li>元空间：(1.8以前称为方法区，在堆内，有内存限制)，1.8以后使用本地内存，存储类信息，方法信息，运行时常量池</li>
-<li>直接内存：又称为堆外内存，由操作系统管理，避免了在 Java 堆和 Native 堆之间来回复制数据，能够显著提高性能</li>
-</ul>
-<h3 id="Java对象的创建过程"><a href="#Java对象的创建过程" class="headerlink" title="Java对象的创建过程"></a>Java对象的创建过程</h3><ul>
-<li>类加载检查：虚拟机遇到一条 new 指令时，检查这个类是否已被加载过、连接和初始化过，没有则加载</li>
-<li>分配内存：类加载完毕后，在堆上分配确定大小的空间给对象，分配方式有 “指针碰撞” 和 “空闲列表” <ul>
-<li>指针碰撞：适用于没有内存碎片的情况下( 实现标记-压缩算法的收集器 )，使用的内存都在一边，分界指针直接移动对象内存大小的位置</li>
-<li>空闲列表：适用于具有内存碎片的情况下，从空闲块列表选出足够大的内存块分给对象</li>
-</ul>
-</li>
-<li>初始化零值：对象的属性初始化为0，null</li>
-<li>设置对象头：存放锁标志，哈希码，GC年龄</li>
-<li>执行init方法：执行父类和子类的构造函数</li>
-</ul>
-<h3 id="内存分配的线程安全问题"><a href="#内存分配的线程安全问题" class="headerlink" title="内存分配的线程安全问题"></a><strong>内存分配的线程安全问题</strong></h3><p>​		虚拟机采用两种方式来保证线程安全</p>
-<ul>
-<li>采用CAS机制，配合失败重试的方式保证更新操作的原子性，效率低。</li>
-<li>为每一个线程预先在Eden区分配一块内存，JVM给线程中的对象分配内存时，首先在TLAB分配，当TLAB不足时，采用CAS+失败重试<ul>
-<li>通过设置-XX:UseTLAB参数开启TLAB，TLAB允许每个线程都有分配指针，其他线程仍然可以访问TLAB里面的对象。</li>
-</ul>
-</li>
-</ul>
-<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230220210826632.png" alt="image-20230220210826632" style="zoom:50%;" />
-
-
-
-<h3 id="Java对象的内存结构："><a href="#Java对象的内存结构：" class="headerlink" title="Java对象的内存结构："></a>Java对象的内存结构：</h3><ul>
-<li>对象头markword (GC年龄、synchronized锁标识、对象hashcode)	8字节  </li>
-<li>类型指针  (xxx.class)    4字节</li>
-<li>实例数据  (instance_data)    4字节</li>
-<li>对齐填充  (padding)    填充凑成8的整数</li>
-</ul>
-<h3 id="Java中init和clinit方法"><a href="#Java中init和clinit方法" class="headerlink" title="Java中init和clinit方法"></a>Java中init和clinit方法</h3><p>​		clinit一定比init先执行，因为clinit是在类加载过程中执行的，而init是在对象实例化时执行的。</p>
-<ul>
-<li>父类静态变量初始化-&gt;父类静态语句块-&gt;子类静态变量初始化-&gt;子类静态语句块  (若父类为接口，则不会调用父类的clinit方法，一个类可以没有clinit方法)</li>
-<li>父类变量初始化-&gt;父类语句块-&gt;父类构造函数-&gt;子类变量初始化-&gt;类语句块-&gt;子类构造函数</li>
-</ul>
-<h3 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h3><ul>
-<li>句柄</li>
-<li>直接指针</li>
-</ul>
-<h3 id="JVM如何判断对象是否存活"><a href="#JVM如何判断对象是否存活" class="headerlink" title="JVM如何判断对象是否存活"></a>JVM如何判断对象是否存活</h3><p> 判断对象是否存活有两种方式：引用计数法和可达性分析算法。     </p>
-<ul>
-<li>引用计数法：对于内存中的一个对象A，如果存在一个对象引用了A，则A的引用计数器就加1，如果引用失效，引用计数器就减1。当A的引用计数器的值为0时，表示对象A不会被使用，可进行回收。此方法不能解决循环引用，JVM未采取该垃圾收集算法。     </li>
-<li>可达性分析算法：执行高效，能够解决循环引用的问题。以GC roots为起点，搜索过得路径称为引用链，如果对象没有任何引用链，就意味着该对象已经死亡，可标记为垃圾对象。GC roots可以是虚拟机栈中引用的对象，本地方法栈中引用的对象，元空间静态属性和常量引用的对象 ，同步锁持有的对象</li>
-</ul>
-<h3 id="Java的四种引用类型"><a href="#Java的四种引用类型" class="headerlink" title="Java的四种引用类型"></a>Java的四种引用类型</h3><ul>
-<li>强引用：Object object &#x3D; new Object()，只要强引用关系在，垃圾收集器就永远不会回收掉被引用的对象</li>
-<li>软引用：内存不足时才会回收，可用来实现内存敏感的高速缓存</li>
-<li>弱引用：只要被GC发现就会回收</li>
-<li>虚引用： 形同虚设</li>
-</ul>
-<h3 id="JVM垃圾清除算法"><a href="#JVM垃圾清除算法" class="headerlink" title="JVM垃圾清除算法"></a>JVM垃圾清除算法</h3><ul>
-<li>标记-清除算法：从GC root开始遍历，标记被引用的对象，回收未标记的对象，维护一个空闲列表，内存碎片化，效率低</li>
-<li>复制算法：将内存分为两块，每次使用一块，在垃圾回收时将内存中存活的对象复制到未使用的内存块中，清除正在使用的内存块中的所有对象，速度快，例如Survivor区</li>
-<li>标记-压缩算法(Full GC)：在标记清除算法的基础上，堆内存碎片进行整理，速度慢</li>
-</ul>
-<p>​	在JDK8中，虚拟机采用分带收集算法，年轻代采用复制算法，老年代采用标记-压缩算法</p>
-<h3 id="Jvm-GC分类"><a href="#Jvm-GC分类" class="headerlink" title="Jvm GC分类"></a>Jvm GC分类</h3><ul>
-<li>部分收集(Partial GC)：不是完整的收集java堆中的垃圾<ul>
-<li>新生代收集(Young GC&#x2F;Minor GC)：只负责新生代的垃圾收集<ul>
-<li>Eden区空间不足时，就会触发Young GC，Survivor区满并不会触发YGC</li>
-</ul>
-</li>
-<li>老年代收集(Old GC&#x2F;Major GC)：只负责老年代的垃圾收集</li>
-<li>混合收集(Mixed GC)：整个新生代以及部分老年代的垃圾收集 (G1收集器)</li>
-</ul>
-</li>
-<li>整堆收集(Full GC)：负责整个Java堆和方法区的垃圾收集<ul>
-<li>老年代空间不足时</li>
-<li>方法区空间不足时</li>
-<li>Young GC后进入老年代的对象大小大于可用内存</li>
-</ul>
-</li>
-</ul>
-<p>​		在执行垃圾回收机制( Young GC，Old  GC，Full GC )时会触发STW，暂停用户的线程，等垃圾回收结束，用户线程才会恢复。</p>
-<h3 id="Jvm垃圾收集器"><a href="#Jvm垃圾收集器" class="headerlink" title="Jvm垃圾收集器"></a>Jvm垃圾收集器</h3><ul>
-<li>Serial：串行，标记-复制+标记-压缩</li>
-<li>Parnew：并行，标记-复制+标记-压缩</li>
-<li>Parallel Scavenge (JDK8默认)：并行，标记-复制+标记-压缩，是一个吞吐量优先的并行垃圾收集器</li>
-<li>CMS (Concurrent-Mark-Sweep)收集器：减少垃圾回收的停顿时间，垃圾收集线程与用户线程并发减少停顿时间<ul>
-<li>初始标记：停止用户线程STW，仅标记所有与GC root直接相连的对象</li>
-<li>并发标记：GC与用户线程并发执行，遍历所有GC root可达的对象</li>
-<li>重新标记：停止用户线程STW，修正并发标记期间标记可能发生变动的对象的记录</li>
-<li>并发清除：开启用户线程，同时GC线程对未标记对象清理<ul>
-<li>缺点：无法处理浮动垃圾(并发过程中产生的垃圾，只能下一次GC处理)，标记去清除算法导致内存碎片化</li>
-<li>优点：低延迟</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>G1 (Garbage-First) 收集器：标记-整理算法，高吞吐量，低延迟。将整个堆空间划分为一个个Region，在后台维护了一个优先列表，每次根据允许的收集时间，优先选择回收价值最大的 Region，避免整个新生代或整个老年代的垃圾回收，使得stop the world的时间更短，同时在有限的时间内可以获得最高的回收效率。除常见的Eden，Survivor，Old，还增加了H区，当一个对象大小超过Region一半时直接在一个新的Region或多个连续的Region中分配<ul>
-<li>初始标记：停止用户线程STW，停止用户线程STW，仅标记所有与GC root直接相连的对象</li>
-<li>并发标记：GC与用户线程并发执行，遍历所有GC root可达的对象</li>
-<li>最终标记：停止用户线程STW，修正并发标记期间标记可能发生变动的对象的记录</li>
-<li>筛选回收：停止用户线程STW，对每个Region的回收成本进行排序，根据允许的收集时间，优先选择回收价值最大的 Region</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230220145528147.png" alt="image-20230220145528147"></p>
-<h3 id="Java堆分配对象的原则"><a href="#Java堆分配对象的原则" class="headerlink" title="Java堆分配对象的原则"></a>Java堆分配对象的原则</h3><ul>
-<li>对象优先分配到Eden区  </li>
-<li>大对象直接分配到老年代</li>
-<li>长期存活的对象移动到老年代  </li>
-<li>动态判断对象年龄( 将survivor区内相同年龄的对象大小总和大于 Survivor空间的一半的对象放到老年代中  ) </li>
-<li>空间分配担保，确保在 Young GC 之前老年代本身还有容纳新生代所有对象的剩余空间</li>
-</ul>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230221221235374.png" alt="image-20230221221235374"></p>
-<h3 id="频繁Full-GC"><a href="#频繁Full-GC" class="headerlink" title="频繁Full GC"></a>频繁Full GC</h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
-<li>每次Young GC后存活的对象太多，Survivor区过小，内存分配不合理导致对象频繁进入老年代，触发Full GC</li>
-<li>系统中大对象过多，导致频繁有大对象进入老年代，触发Full GC</li>
-<li>发生了内存泄露，大量对象无法回收一直在老年代，触发Full GC</li>
-<li>错误调用System.gc()，触发Full GC</li>
-</ul>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><ul>
-<li>扩大Survivor区，根据实际情况合理内存分配</li>
-<li>使用VirtualVM查看heap dump，分析内存中各个区的使用情况</li>
-</ul>
-<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>​		对象不被程序引用，但是GC又不能及时回收这些对象，造成内存占用越来越大而发生OOM。</p>
-<p>​		内存泄漏的实例： </p>
-<ul>
-<li><p>单例模式程序中的单例的是生命周期和程序是一样长的，如果单例持有对外部对象的引用的话，那么外部的对象也不能回收，导致内存泄漏 。       h&#x3D;new HelloWorld( );  h.arg1&#x3D;new Hello( )；  </p>
-</li>
-<li><p>一些连接资源未及时关闭close，数据库连接connection.close ，网络连接socket.close，io.close</p>
-</li>
-</ul>
-<h3 id="OOM的排查"><a href="#OOM的排查" class="headerlink" title="OOM的排查"></a>OOM的排查</h3><p>​		安装JDK中的VirtualVM获取heap dump，该文件中记录java中内存的使用情况，包括java的类信息，实例信息，各个内存分区的使用情况，CPU的使用情况</p>
-<h3 id="三色标记法"><a href="#三色标记法" class="headerlink" title="三色标记法"></a>三色标记法</h3><p>​		CMS，G1，golang垃圾收集器标记算法</p>
-<ul>
-<li>白色：未访问过</li>
-<li>灰色：对象已访问，但本对象引用到的其他对象没有全部访问完</li>
-<li>黑色：对象已访问，且本对象引用到的其他对象也全部访问完了</li>
-</ul>
-<p>​		过程</p>
-<ul>
-<li>开始的时候，所有对象都是白色的</li>
-<li>利用根可达算法将第一层对象都标记为灰色</li>
-<li>将灰色对象引用的对象都标记为灰色</li>
-<li>重复上一步骤，扫完所有灰色对象，引用到的对象都扫完本对象变成黑色</li>
-<li>最后对没有标记黑色的进行垃圾回收</li>
-</ul>
-<h3 id="JVM参数总结"><a href="#JVM参数总结" class="headerlink" title="JVM参数总结"></a>JVM参数总结</h3><ul>
-<li><p>显式指定堆内存<code>–Xms</code>和<code>-Xmx</code></p>
-</li>
-<li><p>显式指定新生代大小<code>-XX:NewSize</code></p>
-</li>
-<li><p>显式指定永久代大小<code>-XX:PermSize</code></p>
-</li>
-<li><p>显式指定新生代老年代比例<code>-XX:NewRatio</code></p>
-</li>
-<li><p>显式指定Eden区与Survivor区比例<code>-XXSurvivorRatio</code></p>
-</li>
-<li><p>选择垃圾收集器</p>
-<ul>
-<li>-XX:+UseSerialGC</li>
-<li>-XX:+UseParallelGC</li>
-<li>-XX:+UseParNewGC</li>
-<li>-XX:+UseG1GC</li>
-</ul>
-</li>
-<li><p>GC日志</p>
-<ul>
-<li>-XX:+PrintGCDetails     打印基本 GC 信息</li>
-<li>-XX:+PrintGCApplicationStoppedTime     打印STW时间</li>
-<li>-XX:+PrintHeapAtGC    打印堆数据</li>
-<li>-XX:+PrintTenuringDistribution    打印对象分布</li>
-</ul>
-</li>
-<li><p>OOM</p>
-<ul>
-<li>XX:+HeapDumpOnOutOfMemoryError    JVM 在遇到OOM错误时将堆内存转储到物理文件中</li>
-</ul>
-</li>
-</ul>
-
+          <h1 id="JVM合集"><a href="#JVM合集" class="headerlink" title="JVM合集"></a>JVM合集</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/20/JVM/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -523,7 +305,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:27:37" itemprop="dateModified" datetime="2023-02-21T22:27:37+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:34:13" itemprop="dateModified" datetime="2023-02-21T22:34:13+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -545,25 +327,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-
-<h3 id="进程的组成："><a href="#进程的组成：" class="headerlink" title="进程的组成："></a>进程的组成：</h3><p>进程就是运行起来的程序的实体</p>
-<p>进程由程序控制块（PCB）、程序段、数据段组成</p>
-<p>操作系统通过PCB来管理进程，因此PCB中存放操作系统对进程管理的各种信息，如进程描述信息，进程控制和管理信息，资源分配清单相关信息等。</p>
-<p>程序段：程序代码存放的位置</p>
-<p>数据段：程序运行时使用，产生的运算数据。如全局变量，局部变量，宏定义的常量就存放在数据段内</p>
-<h3 id="线程和进程的区别"><a href="#线程和进程的区别" class="headerlink" title="线程和进程的区别"></a>线程和进程的区别</h3><ul>
-<li>进程是资源分配的基本单位（包括内存，磁盘），线程是CPU调度的基本单位</li>
-<li>线程和进程相似，同样具有三种基本状态：就绪、阻塞、运行，同样具有状态之间的转换关系</li>
-<li>线程能减少并发执行的时间和空间开销，具体体现在：<ul>
-<li>线程创建时间比进程快：进程创建需要大量的资源管理信息，如内存管理，文件管理，而线程不需要关心，因为线程共享这些信息</li>
-<li>线程终止时间比进程快：线程释放的资源比进程少</li>
-<li>线程切换更快：线程有相同地址空间，不需要切换表</li>
-<li>线程数据传递不需要经过内核，因为线程之间共享资源</li>
-</ul>
-</li>
-</ul>
-
+          <h1 id="操作系统合集"><a href="#操作系统合集" class="headerlink" title="操作系统合集"></a>操作系统合集</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -625,7 +397,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:27:14" itemprop="dateModified" datetime="2023-02-21T22:27:14+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:34:07" itemprop="dateModified" datetime="2023-02-21T22:34:07+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -647,15 +419,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-
-<h2 id="在海量IP中找出访问次数最多的100个IP"><a href="#在海量IP中找出访问次数最多的100个IP" class="headerlink" title="在海量IP中找出访问次数最多的100个IP"></a>在海量IP中找出访问次数最多的100个IP</h2><p>​	必须保证每种IP地址只在一个文件中出现，比如我们可以采用模100的算法，将0,1,2,3,4…分别放入一百个文件中，然后使用HashMap分别统计每个文件中IP出现的次数。用K个数据构建最小堆，后面的数据依次判断是否入堆，如果入堆则进行调整，最后得到的就是次数最多的一百个IP。</p>
-<ol>
-<li>将ip地址放入多个小文件中，保证每种IP只出现在一个文件中</li>
-<li>利用hashmap统计每个小文件中IP出现的次数</li>
-<li>利用最小堆得到所有IP访问次数最多的100个</li>
-</ol>
-
+          <h1 id="场景题合集"><a href="#场景题合集" class="headerlink" title="场景题合集"></a>场景题合集</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/09/%E5%9C%BA%E6%99%AF%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -717,7 +489,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:28:55" itemprop="dateModified" datetime="2023-02-21T22:28:55+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:35:14" itemprop="dateModified" datetime="2023-02-21T22:35:14+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -739,14 +511,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-
-<h1 id="多线程锁"><a href="#多线程锁" class="headerlink" title="多线程锁"></a>多线程锁</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="keyword">synchronized</span> <span class="title function_">sendEmail</span><span class="params">()</span>&#123;&#125;				<span class="comment">//锁对象，this，该方法由this调用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="keyword">synchronized</span> <span class="title function_">sendEmail</span><span class="params">()</span>&#123;&#125;		<span class="comment">//锁类，Class，该方法由Class调用</span></span><br></pre></td></tr></table></figure>
-
-<p>jps &#x3D; java ps -ef</p>
-<h3 id="线程池参数"><a href="#线程池参数" class="headerlink" title="线程池参数"></a>线程池参数</h3><p>- </p>
-<h1 id="中断机制"><a href="#中断机制" class="headerlink" title="中断机制"></a>中断机制</h1><h1 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h1><p>​		三大特性：可见性，原子性，有序性</p>
-<h1 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h1><h1 id="原子类"><a href="#原子类" class="headerlink" title="原子类"></a>原子类</h1><h1 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h1><h1 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h1>
+          <h1 id="多线程锁"><a href="#多线程锁" class="headerlink" title="多线程锁"></a>多线程锁</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/09/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -808,7 +581,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:29:35" itemprop="dateModified" datetime="2023-02-21T22:29:35+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:35:47" itemprop="dateModified" datetime="2023-02-21T22:35:47+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -830,31 +603,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>     
-
-<h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><ul>
-<li>top命令：动态显示系统中进程的相关信息，包括内存占用，CPU占用，进程ID</li>
-</ul>
-<p>第一行显示系统当前时间，系统运行时间，当前登录的用户数目</p>
-<p>第二行显示系统当前的进程数目，总进程数，正在运行的进程数，睡眠的进程数</p>
-<p>第三行显示CPU的相关信息</p>
-<p>第四行显示物理内存的总量和使用情况 (使用+空闲+缓存 &#x3D; 总量)</p>
-<p>第五行显示交换区总量和使用情况 (使用+空闲+缓存 &#x3D; 总量)</p>
-<p>下面显示的一些进程的详细信息</p>
-<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221204204727229.png?raw=true" alt="image-20221204204727229" style="zoom: 67%;" />
-
-
-
-<ul>
-<li><p>ps命令：查看系统正在运行的进程的情况，包括进程号，CPU运行进程时间，进程运行的命令</p>
-</li>
-<li><p>netstat命令：用来查看linux系统的网络状态，netstat -ntlp</p>
-<ul>
-<li>-t:tcp，-u:udp，-a:all，-l:listening，-p:进程id和程序名，-r:路由表，-n:显示ip&#x2F;port</li>
-</ul>
-</li>
-</ul>
-
+          <h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/11/23/linux%E5%91%BD%E4%BB%A4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -916,7 +673,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:28:49" itemprop="dateModified" datetime="2023-02-21T22:28:49+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:35:11" itemprop="dateModified" datetime="2023-02-21T22:35:11+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -938,228 +695,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-
-<h1 id="集合源码"><a href="#集合源码" class="headerlink" title="集合源码"></a>集合源码</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="hashmap底层扩容"><a href="#hashmap底层扩容" class="headerlink" title="hashmap底层扩容"></a>hashmap底层扩容</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165105613.png?raw=true" alt="image-20221117165105613"></p>
-<h3 id="HashMap的put方法"><a href="#HashMap的put方法" class="headerlink" title="HashMap的put方法"></a>HashMap的put方法</h3><ul>
-<li>首先判断hashmap是否为null，长度是否为0，如果是多hashmap数组进行resize扩容</li>
-<li>根据传递过来的key计算hash码得到数组的位置</li>
-<li>hashmap底层维护了一个Node&lt;K,V&gt;类的数组</li>
-<li>判断对应数组位置是否为null，为null则将key直接插入</li>
-<li>不为null则判断该位置下的链表或红黑树是否已存储该key</li>
-<li>如果未存储则加入链表或红黑树，如果存在则覆盖旧value (注意插入链表时必须为尾插法)</li>
-<li>插入成功后，判断hashmap大小是否超过阈值，哈希因子判断</li>
-<li>如果超过阈值则扩容</li>
-</ul>
-<h3 id="hashmap通过entrySet遍历"><a href="#hashmap通过entrySet遍历" class="headerlink" title="hashmap通过entrySet遍历"></a>hashmap通过entrySet遍历</h3><p>Node类实现了Map.Entry的接口，所以在遍历时可以直接遍历Entry并使用Entry的getkey() 与 getvalue()</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165047896.png?raw=true" alt="image-20221117165047896"></p>
-<h3 id="String、StringBuilder、StringBuffer"><a href="#String、StringBuilder、StringBuffer" class="headerlink" title="String、StringBuilder、StringBuffer"></a>String、StringBuilder、StringBuffer</h3><p>​		String类中的字符数组被final修饰，StringBuilder和StringBuffer继承自AbstractStringBuilder类，该类中维护了一个非final字符数组，StringBuffer线程安全，StringBuilder线程不安全</p>
-<h3 id="Mybatis的-和-有什么区别"><a href="#Mybatis的-和-有什么区别" class="headerlink" title="Mybatis的#{}和${}有什么区别"></a>Mybatis的#{}和${}有什么区别</h3><p>​		$是字符串替换，无法防止sql注入，主要用于动态传递表名和排序字段</p>
-<p>​		#是预编译处理，等同于jdbc中的?占位符，调用preparedStatement对sql预编译后的，使用set对?赋值，根据属性添加单引号，有效防止sql注入，大量使用</p>
-<h3 id="Mybatis的优缺点"><a href="#Mybatis的优缺点" class="headerlink" title="Mybatis的优缺点"></a>Mybatis的优缺点</h3><p>​		消除了JDBC大量冗余代码，不需要手动开关连接，提供编写动态sql语句，支持对象与数据库的ORM字段映射，sql写在XML里与代码解耦便于统一管理，mybatis的数据库移植性较差</p>
-<h3 id="Java的异常有哪些"><a href="#Java的异常有哪些" class="headerlink" title="Java的异常有哪些"></a>Java的异常有哪些</h3><p>​		<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221121143948496.png?raw=true" alt="image-20221121143948496"></p>
-<p>Error：主要指在虚拟机运行时的错误，内存不足错误(OutOfMemoryError)，栈溢出错误(StackOverFlowError)</p>
-<p>Exception：可以捕获并且处理的异常，包含程序运行时发生的异常和非运行时(编译时)的异常</p>
-<ul>
-<li><p>非运行时异常是指在编译的过程中出现的异常，未找到某个类(ClassNotFoundException)，I&#x2F;O流异常(IOException)</p>
-</li>
-<li><p>运行时异常是指在运行过程中出现某种错误，空指针错误(NullPointerException), 数组下标超限(IndexOutOfBoundsException)，计算异常(ArithmeticException)</p>
-</li>
-</ul>
-<h3 id="JDK-和-JRE-有什么区别"><a href="#JDK-和-JRE-有什么区别" class="headerlink" title="JDK 和 JRE 有什么区别"></a>JDK 和 JRE 有什么区别</h3><ul>
-<li>JDK是Java开发工具包，包括JRE、java编译器、java基础类库</li>
-<li>JRE是java运行环境，用于执行Java的字节码文件，包括JVM以及java核心类库</li>
-</ul>
-<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230219152618720.png" alt="image-20230219152618720" style="zoom:33%;" />
-
-
-
-<h3 id="ArrayList和LinkedList区别"><a href="#ArrayList和LinkedList区别" class="headerlink" title="ArrayList和LinkedList区别"></a>ArrayList和LinkedList区别</h3><ul>
-<li>arrayList底层是数组，继承RandomAccess接口支持随机存取，增删数据为O(n)</li>
-<li>linkedList底层是双向链表(1.7之前是双向循环链表)，实现链表需要浪费一定的空间存放前驱和后继</li>
-</ul>
-<h3 id="Java值传递"><a href="#Java值传递" class="headerlink" title="Java值传递"></a>Java值传递</h3><p>java中只有值传递，没有引用传递。java在传递对象的时候，地址值也是值，传递地址值不一定就是引用传递。值传递和引用传递的区别并不是传递的内容。而是实参到底有没有被<strong>复制一份给形参</strong></p>
-<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>基于硬件级别的指令实现的同步原语，JUC中许多同步类基于CAS构建</p>
-<p>CAS包含三个操作数-内存位置值(V)、旧的预期值(A)、新值(B)。首先取出内存位置值，如果内存位置值(V)与旧的预期值(A)相同，那么处理器会自动将内存位置值替换成新值(B)。如果CAS执行失败，则会重新取内存中的值，继续CAS，直到成功，如果竞争激烈，则会竞争次数过多。</p>
-<p>CAS存在的问题ABA问题：CAS过程中其他线程将变量从A修改为B,再将B修改为A,CAS判断没变化执行操作，实际上值是被修改的，与设计原语不符。Automic包中引入AtomicStampedReference类来解决这个问题。每次更新时将变量的版本号+1，之前的ABA问题，版本号就会变成3，从而解决了ABA。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">AtomicInteger</span> <span class="variable">atomicInteger</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>();</span><br><span class="line">atomicInteger.getAndIncrement();    <span class="comment">//普通原子类操作</span></span><br><span class="line"></span><br><span class="line">AtomicStampedReference&lt;Object&gt; stampedReference = <span class="keyword">new</span> <span class="title class_">AtomicStampedReference</span>&lt;&gt;(<span class="number">0</span>,<span class="number">1</span>);     </span><br><span class="line"><span class="comment">//添加时间戳，避免出现ABA问题,( 如首先执行线程1，线程1读取到内存的值为0，此时线程1放弃CPU使用权，线程2把数据从0-&gt;2,又从2-&gt;0，此时线程1再次执行取得内存的值为0认为数据没有发生改变，实际上改变了，这就是ABA问题。)</span></span><br><span class="line">stampedReference.compareAndSet(<span class="number">0</span>,<span class="number">1</span>,stampedReference.getStamp(),stampedReference.getStamp()+<span class="number">1</span>);    </span><br><span class="line"></span><br><span class="line">Unsafe类</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">getAndAddInt</span><span class="params">(Object var1, <span class="type">long</span> var2, <span class="type">int</span> var4)</span> &#123;</span><br><span class="line">    <span class="type">int</span> var5;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        var5 = <span class="built_in">this</span>.getIntVolatile(var1, var2);</span><br><span class="line">    &#125; <span class="keyword">while</span>(!<span class="built_in">this</span>.compareAndSwapInt(var1, var2, var5, var5 + var4));    </span><br><span class="line">        <span class="comment">//do-while自旋锁，多个线程取不到var5的正确值一直在处循环中，直到正确含有值的线程过来才会执行成功，更新var5的值，进而执行下一条线程。底层调用C++源代码，c++源代码使用了硬件级别的lock锁(执行lock cmpxchg命令)，该命令对当前执行比较的线程加锁，不允许被打断。</span></span><br><span class="line">    <span class="keyword">return</span> var5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="DCL单例-volatile-double-check-lock"><a href="#DCL单例-volatile-double-check-lock" class="headerlink" title="DCL单例 (volatile+ double check lock)"></a>DCL单例 (volatile+ double check lock)</h3><p>全称双重检测锁，用于单例模式的懒汉式方法，使用时需要添加volatile关键字，防止对象创建的时机，发生指令重排。</p>
-<p>在创建对象时，字节码操作如下： </p>
-<ol>
-<li>new #3 &lt;com&#x2F;threadtest&#x2F;InstractResortTest&gt;                     申请内存空间 </li>
-<li>dup </li>
-<li>invokespecial #4 &lt;com&#x2F;threadtest&#x2F;InstractResortTest.<init>&gt;        执行构造方法，<strong>能与下部分指令发生指令重排</strong> </li>
-<li>astore_1                                                   将申请的内存空间的地址指针赋值给变量( 执行该指令时，对象半初始化，可以通过if(xxx!&#x3D;null) )</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(INSTANCE==<span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (Singeleton2.class)&#123;</span><br><span class="line">        <span class="keyword">if</span> (INSTANCE==<span class="literal">null</span>)&#123;</span><br><span class="line">            INSTANCE = <span class="keyword">new</span> <span class="title class_">Singeleton2</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> INSTANCE;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="volatile是虚拟机提供的轻量级的同步机制"><a href="#volatile是虚拟机提供的轻量级的同步机制" class="headerlink" title="volatile是虚拟机提供的轻量级的同步机制"></a>volatile是虚拟机提供的轻量级的同步机制</h3><ol>
-<li>保证线程间可见性  </li>
-<li>不保证原子性  </li>
-<li>禁止指令重排原子类</li>
-</ol>
-<ul>
-<li>解决原子性问题  new AtomicInteger(); </li>
-<li>加锁解决原子性问题  lock(), unlock()</li>
-<li>指令重排  volatile关键字会为变量设置内存屏障</li>
-</ul>
-<p>自己编写的程序不会按照编写的顺序执行，如果数据之间没有依赖性，计算机会对指令进行重排  源代码–&gt;编译器优化–&gt;指令并行重排–&gt;内存系统重排–&gt;执行</p>
-<h3 id="volatile指令重排的原理："><a href="#volatile指令重排的原理：" class="headerlink" title="volatile指令重排的原理："></a>volatile指令重排的原理：</h3><ul>
-<li>在源代码中表示为volatile关键字。    </li>
-<li>在字节码中表现为ACC_VOLATILE。   </li>
-<li>在hotspot层面表现为内存屏障。     </li>
-<li>在c++层面调用了lock指令。</li>
-</ul>
-<h3 id="单例模式：懒汉式-饿汉式"><a href="#单例模式：懒汉式-饿汉式" class="headerlink" title="单例模式：懒汉式+饿汉式"></a>单例模式：懒汉式+饿汉式</h3><ul>
-<li><p>懒汉式在第一次调用的时候才会实例化</p>
-</li>
-<li><p>饿汉式类初始化时就进行实例化</p>
-</li>
-</ul>
-<h3 id="Synchronized锁升级"><a href="#Synchronized锁升级" class="headerlink" title="Synchronized锁升级"></a>Synchronized锁升级</h3><ol>
-<li>无锁时，该对象是个普通对象，锁标志位为01，<strong>偏向锁位为0</strong></li>
-<li>当一个线程A抢到该锁时，锁标志位依然是01，<strong>偏向锁位为1</strong>，记录A线程的线程ID，此时锁升级为<strong>偏向锁</strong></li>
-<li>当线程A再次抢该锁时，锁标志位依然是01，偏向锁位依然为1，线程ID依然是线程A自己的ID，<strong>无需再次加锁解锁和CAS更新对象头</strong>。</li>
-<li>此时，线程B也来抢夺该锁，如果争抢成功，记录B线程的线程ID，如果争抢失败，则说明当前锁存在一定的竞争，偏向锁就升级为<strong>轻量级锁</strong>(轻量级锁是个do-while循环过程即CAS，实际上无锁) ，锁标志位改为00，JVM会在线程的栈中开辟一块单独的空间，里面保存指向对象头MarkWord的指针，同时在对象头MarkWord中保存指向线程栈那块空间的指针。</li>
-<li>轻量级锁循环一定次数之后仍然未抢到锁，会升级至<strong>重量级锁</strong>，<strong>锁标志位改为10</strong>，在这个状态下，未抢到锁的线程都会被阻塞，等待操作系统的调用，在对象头MarkWord中保存指向堆中monitor对象的指针，存在用户态和内核态的转换。<strong>monitorenter</strong> -&gt; 执行同步代码块 -&gt; <strong>monitorexit</strong></li>
-</ol>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230220160048565.png" alt="image-20230220160048565"></p>
-<h3 id="sleep和wait的区别"><a href="#sleep和wait的区别" class="headerlink" title="sleep和wait的区别"></a>sleep和wait的区别</h3><ul>
-<li>sleep()来自Thread类，wait()来自Object类，调用sleep方法线程不会释放对象锁，调用wait方法线程会释放对象锁进入阻塞状态</li>
-<li>调用sleep会睡眠不让出CPU资源，调用wait会让出CPU资源</li>
-<li>sleep睡眠一定时间后会自动唤醒，调用wait方法的线程需要notify方法才能被唤醒</li>
-</ul>
-<h3 id="抽象类和接口的区别"><a href="#抽象类和接口的区别" class="headerlink" title="抽象类和接口的区别"></a>抽象类和接口的区别</h3><ul>
-<li>抽象类用abstract关键字修饰，用extend关键字实现继承，接口用interface关键字修饰，用implements关键字具体实现</li>
-<li>一个类可以实现多个接口，但只能继承一个抽象类</li>
-<li>接口类里面的修饰符只能是public，抽象类里的修饰符没有限制，但是抽象方法不能使用 private 修饰</li>
-<li>接口中不能使用静态代码块，抽象类中可以使用静态代码块</li>
-<li>一个非抽象的类要实现接口，需要把接口中的方法都加以实现，抽象类可以重写接口中的方法，并添加自己的方法，这样子类在重写时，可以直接继承抽象类，而不用直接实现接口</li>
-</ul>
-<h2 id="Spirng部分"><a href="#Spirng部分" class="headerlink" title="Spirng部分"></a>Spirng部分</h2><h3 id="spring事务传播机制"><a href="#spring事务传播机制" class="headerlink" title="spring事务传播机制"></a>spring事务传播机制</h3><p>​	事务的传播是指不同方法的嵌套调用过程中应该使用同一个事务还是不同的事务，出现异常的时候是回滚还是提交</p>
-<ul>
-<li><p>REQUIRED (默认的事务传播机制。当前方法存在事务时，子方法加入该事务，父子方法共用一个事务，无论父子方法哪个异常整个事务会回滚，而当前方法不存在事务时，子方法自己新建一个事务，不影响父方法)</p>
-</li>
-<li><p>REQUIRED_NEW (无论当前方法是否存在事务，子方法都新建一个事务（作用于哪个方法都新建一个事务）。此时父子方法的事务是独立互不影响的。但父方法需要注意子方法抛出的异常，避免因子方法抛出异常，而导致父方法回滚)</p>
-</li>
-<li><p>NESTED (当前方法存在事务时，子方法加入在嵌套事务执行。当父方法事务回滚时，子方法事务也跟着回滚。当子方法事务发送回滚时，如果父事务捕捉了异常，那么就不回滚) </p>
-</li>
-<li><p>Support</p>
-</li>
-<li><p>Mandatory</p>
-</li>
-<li><p>Not_Support</p>
-</li>
-<li><p>Never</p>
-</li>
-</ul>
-<h3 id="spring事务实现原理"><a href="#spring事务实现原理" class="headerlink" title="spring事务实现原理"></a>spring事务实现原理</h3><p>​	spring的事务分为编程式事务和声明式事务</p>
-<ul>
-<li>编程式事务是用户自己通过代码控制事务的处理逻辑</li>
-<li>声明式事务是通过@Transactional注解来实现，当一个方法添加@Transactional注解后，spring会基于这个类生成一个代理对象，通过TransactionInterceptor来实现代理，执行目标方法时代理对象调用invoke(jdk)方法</li>
-<li>如果有事务处理，会先把事务的自动提交关闭，然后执行业务逻辑，如果逻辑没有异常事务会直接提交commitTransactionAfterReturning，如果出现异常则进行回滚操作completeTransactionAfterThrowing，事务执行完毕后清除事务的相关信息cleanupTransactionInfo</li>
-</ul>
-<h3 id="spring事务什么时候失效"><a href="#spring事务什么时候失效" class="headerlink" title="spring事务什么时候失效"></a>spring事务什么时候失效</h3><ul>
-<li>bean对象没有被spring容器管理，即对象没有注入到容器中</li>
-<li>方法的修饰符必须为public</li>
-<li>同一个类中的方法互相调用会导致代理失效进而导致事务失效</li>
-<li>事务中的异常被捕获导致事务不能回滚引发事务失效</li>
-</ul>
-<h3 id="spring框架中使用了哪些设计模式"><a href="#spring框架中使用了哪些设计模式" class="headerlink" title="spring框架中使用了哪些设计模式"></a>spring框架中使用了哪些设计模式</h3><ul>
-<li>工厂模式，spring中的BeanFactory，用于创建bean实例</li>
-<li>单例模式，spring容器中的bean是单例的</li>
-<li>代理模式，spring AOP利用了AspectJ实现，AspectJ底层是动态代理，代理对象具备真实对象的功能并对被代理对象进行加强</li>
-<li>观察者模式，spring中的ApplicationEvent，ApplicationListener，如发布容器刷新完成事件</li>
-<li>策略模式，将多个if-else改为策略模式来实现，如选择ClassPathResource，ServletContextResource，UrlResource，选择 Resource 的实现类也就是确定具体的资源访问策略</li>
-<li>模板模式，子类继承父类，实现父类的抽象方法。在Spring的AbstractApplicationContext类中onRefresh方法提供给我们用子类去扩展</li>
-<li>适配器模式</li>
-<li>装饰者模式</li>
-</ul>
-<h3 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h3><ul>
-<li><p>实例化BeanFactoryPostProcessor类并执行其PostProcessorBeanFactory方法</p>
-</li>
-<li><p>实例化BeanPostProcessor类</p>
-</li>
-<li><p>根据BeanDefinition找到bean的定义信息将其实例化CreateBeanInstance</p>
-</li>
-<li><p>调用populateBean方法对bean中的自定义属性和容器属性进行setter赋值并判断是否有依赖注入</p>
-</li>
-<li><p>如果实现BeanNameAware接口则设置bean的id </p>
-</li>
-<li><p>如果实现BeanPostProcessors接口则调用bean初始化前方法</p>
-</li>
-<li><p>调用afterPropertiesSet方法</p>
-</li>
-<li><p>调用bean初始化方法</p>
-</li>
-<li><p>如果实现BeanPostProcessors接口则调用bean初始化后方法</p>
-</li>
-<li><p>以上操作完成后，bean对象可以被使用</p>
-</li>
-<li><p>销毁容器后调用destory方法</p>
-</li>
-</ul>
-<h3 id="Spring-IOC原理"><a href="#Spring-IOC原理" class="headerlink" title="Spring IOC原理"></a>Spring IOC原理</h3><p>​	全称控制反转，是一种设计思想。IOC意味着你将设计好的对象交给容器控制，而不是自己直接控制。IOC容器就像是一个工厂一样，当需要某个对象时，可以直接从IOC容器中获取，实现了程序间的解耦。把IOC容器的工作模式看做是工厂模式的升华，可以把IOC容器看作是一个工厂，这个工厂里要生产的对象都在配置文件中给出，然后利用反射机制，根据配置文件中给出的类名生成对象</p>
-<h3 id="spring-AOP原理"><a href="#spring-AOP原理" class="headerlink" title="spring AOP原理"></a>spring AOP原理</h3><p>​	概述：aop即面向切面编程，是指在不修改业务代码的情况下，使用动态代理的技术对已有代码实现逻辑增强，实现了解耦的操作。aop主要用于日志、事务、权限校验等场景中，具有jdk代理和cglib代理两种实现方式。当被代理的类有接口的情况下，使用JDK动态代理；没有接口的情况下，使用cglib动态代理</p>
-<p>​	jdk动态代理，创建接口的实现类代理对象</p>
-<p>​	cglib动态代理，创建一个子类继承父类，在子类中调用父类的方法，不影响被代理类的使用</p>
-<p>​	底层原理：</p>
-<ul>
-<li>首先使用注解开启AOP功能</li>
-<li>spring在启动时会在容器创建时，执行registerBeanPostProcessor方法创建用于代理的后置处理器</li>
-<li>在初始化单实例bean方法中<ul>
-<li>首先根据BeanDefinition中的bean定义信息通过反射实例化bean对象</li>
-<li>bean对象初始化后，调用wrapIfNecessary判断是否需要代理	<ul>
-<li>找到被代理对象所有可匹配的增强器</li>
-<li>若有可匹配的增强器则需要代理，创建代理对象</li>
-<li>创建代理对象时会根据被代理类有无接口判断使用jdk还是cglib代理</li>
-<li>将代理对象放入代理工厂ProxyFactory</li>
-<li>将代理对象覆盖原容器中的对象</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>在执行目标方法时代理对象会调用intercept(cglib)或invoke(jdk)方法，根据拦截器链，调用proceed方法依次执行链中的每一个拦截器(前置通知@Before-&gt; 目标方法-&gt; 后置通知@AfterReturning-&gt; 异常通知@AfterThrowing-&gt; 最终通知@After)</li>
-</ul>
-<p>@Around环绕增强</p>
-<ul>
-<li>在目标方法的前和后都能增强功能</li>
-<li>控制目标方法是否执行</li>
-<li>修改目标方法的执行结果。</li>
-</ul>
-<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230219190257989.png" alt="image-20230219190257989" style="zoom: 50%;" />
-
-
-
-<h3 id="BeanPostProcessor后置处理器作用"><a href="#BeanPostProcessor后置处理器作用" class="headerlink" title="BeanPostProcessor后置处理器作用"></a>BeanPostProcessor后置处理器作用</h3><p>后置处理器可用于bean对象初始化前后进行逻辑增强。<br>Spring提供了BeanPostProcessor接口的很多实现类，例如AutowiredAnnotationBeanPostProcessor用于@Autowired注解的实现，AnnotationAwareAspectJAutoProxyCreator用于Spring AOP的动态代理等等。</p>
-<h3 id="XxxAware原理"><a href="#XxxAware原理" class="headerlink" title="XxxAware原理"></a>XxxAware原理</h3><p>XxxAware接口的底层原理是由XxxAwareProcessor实现类实现的，也就是说每一个XxxAware接口都有它自己对应的XxxAwareProcessor实现类。 例如，我们这里以ApplicationContextAware接口为例，ApplicationContextAware接口的底层原理就是由ApplicationContextAwareProcessor类实现的。从ApplicationContextAwareProcessor类的源码可以看出，其实现了BeanPostProcessor接口，本质上是一个后置处理器。</p>
-<h3 id="循环依赖"><a href="#循环依赖" class="headerlink" title="循环依赖"></a>循环依赖</h3><p>spring循环依赖是指A依赖B，B也依赖A，这种情况就会出现循环依赖</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230213201811442.png" alt="image-20230213201811442"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">instanceWrapper = createBeanInstance(beanName, mbd, args);	<span class="comment">//实例化bean对象</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">earlySingletonExposure</span> <span class="operator">=</span> (mbd.isSingleton()&amp;&amp;<span class="built_in">this</span>.allowCircularReferences&amp;&amp;isSingletonCurrentlyInCreation(beanName));</span><br><span class="line">	<span class="keyword">if</span> (earlySingletonExposure)		<span class="comment">//如果是单例且在创建过程中</span></span><br><span class="line">       addSingletonFactory(beanName,()-&gt;getEarlyBeanReference(beanName,mbd,bean)<span class="comment">/**判断是否为代理对象*/</span>); <span class="comment">//无论是否代理都添加到三级缓存</span></span><br><span class="line">populateBean(beanName, mbd, instanceWrapper);		<span class="comment">//完成赋值并且判断是否有依赖注入</span></span><br><span class="line">exposedObject = initializeBean(beanName, exposedObject, mbd);	<span class="comment">//生成代理对象</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>spring通过设计三级缓存来解决循环依赖</p>
-<ul>
-<li>singletonObjects：一级缓存，用来存储已经实例化和完成初始化的单例对象，成品</li>
-<li>earlySingletonObjects：二级缓存，用来存储已经实例化但未完成初始化的单例对象，只能被当做指针曝光以解决循环依赖，半成品</li>
-<li>singletonFactories：三级缓存，所有的单例 bean 在实例化后都会被提前曝光到三级缓存中，存储lambda表达式，用于解决使用aop生成代理对象的问题</li>
-</ul>
-<ol>
-<li>实例化A，加入三级缓存，依赖B</li>
-<li>实例化B，加入三级缓存，依赖A</li>
-<li>A在三级缓存则移动到二级缓存中，A为半成品，B初始化完成，加入一级缓存，B为成品</li>
-<li>A初始化完成，加入一级缓存，A为成品</li>
-</ol>
-<p>在查找缓存时先查找一级缓存，在查找二级缓存，最后查找三级缓存</p>
-<p>使用第三级缓存是因为在populate方法中会判断循环依赖，但是创建代理对象的事件在initializeBean方法中，如果B要注入的是代理对象而不是原始对象，那么就需要取代理对象，在B调用populate方法前提前曝光A，通过lambda表达式可以判断A到底是代理对象还是原始对象</p>
-<p>使用lambda表达式的机制是因为对象只有在被调用的那一刻才可以进行原始对象和代理对象的判断，只有对象需要被调用的时候才真正的执行lambda表达式。</p>
-
+          <h1 id="集合源码"><a href="#集合源码" class="headerlink" title="集合源码"></a>集合源码</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/11/17/java%E5%9F%BA%E7%A1%80%E6%BA%90%E7%A0%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1221,7 +765,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:27:44" itemprop="dateModified" datetime="2023-02-21T22:27:44+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:34:18" itemprop="dateModified" datetime="2023-02-21T22:34:18+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1243,169 +787,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-
-<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="1、从输入url-到网站显示发生了什么"><a href="#1、从输入url-到网站显示发生了什么" class="headerlink" title="1、从输入url 到网站显示发生了什么"></a>1、从输入url 到网站显示发生了什么</h2><h3 id="①在地址栏输入url"><a href="#①在地址栏输入url" class="headerlink" title="①在地址栏输入url"></a>①在地址栏输入url</h3><p>​		URL称为统一资源定位符，用于定位互联网的资源，在地址栏输入URL后，浏览器首先判断URL是否合法，如果不合法输入的内容将会作为搜索条件匹配相关内容。</p>
-<h3 id="②进行DNS解析"><a href="#②进行DNS解析" class="headerlink" title="②进行DNS解析"></a>②进行DNS解析</h3><p>​		浏览器不能直接通过域名找到对应的服务器IP地址，所以需要借助DNS解析，找到对应的IP地址访问。首先系统会检查浏览器缓存和本地hosts文件是否有记录，如果有可以直接完成IP解析；如果没有，继续查询DNS服务器完成域名解析</p>
-<h3 id="③建立TCP连接"><a href="#③建立TCP连接" class="headerlink" title="③建立TCP连接"></a>③建立TCP连接</h3><p>​		当浏览器拿到解析的IP地址后，浏览器会向服务器的(HTTP:80,HTTPS:443)端口发起TCP连接请求，通过TCP三次握手后，建立TCP链接。</p>
-<h3 id="④发送HTTP-x2F-HTTPS请求"><a href="#④发送HTTP-x2F-HTTPS请求" class="headerlink" title="④发送HTTP&#x2F;HTTPS请求"></a>④发送HTTP&#x2F;HTTPS请求</h3><p>​		建立接连后，发出HTTP的GET或POST请求进行数据传输 ( 如果采用HTTPS，会在TCP与HTTP之间添加一层协议做加密和认证服务，HTTPS使用SSL,TLS协议对数据加密、确保数据完整性并确保数据发送到正确的客户端和服务器 )</p>
-<h3 id="⑤服务器响应请求"><a href="#⑤服务器响应请求" class="headerlink" title="⑤服务器响应请求"></a>⑤服务器响应请求</h3><p>​		服务器接收请求后，会向客户端返回一个HTTP响应报文，保护响应头和html文件</p>
-<h3 id="⑥-浏览器解析渲染页面"><a href="#⑥-浏览器解析渲染页面" class="headerlink" title="⑥ 浏览器解析渲染页面"></a>⑥ 浏览器解析渲染页面</h3><p>​		当浏览器收到服务器响应后，开始渲染页面，首先处理HTML标记并构建DOM树，然后处理CSS标记并构建CSSOM树，在然后将DOM树和CSSOM树合并成一个渲染树，将各个节点渲染到页面上</p>
-<h3 id="⑦HTTP请求结束，断开TCP连接"><a href="#⑦HTTP请求结束，断开TCP连接" class="headerlink" title="⑦HTTP请求结束，断开TCP连接"></a>⑦HTTP请求结束，断开TCP连接</h3><p>​		当浏览器页面关闭时，TCP连接会关闭，关闭的过程是四次挥手</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115144222305.png?raw=true" alt="image-20221115144222305"></p>
-<h2 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h2><p>一个网络连接到另一个网络的“关口”，实质上是一个网络通向其他网络的IP地址。实现两个不同网段的设备(IP)进行通信。</p>
-<h3 id="交换机-路由器区别"><a href="#交换机-路由器区别" class="headerlink" title="交换机-路由器区别"></a>交换机-路由器区别</h3><p>交换机负责同一个网段的通信，而路由器负责不同网段的通信</p>
-<h3 id="get与post区别"><a href="#get与post区别" class="headerlink" title="get与post区别"></a>get与post区别</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115144154495.png?raw=true" alt="image-20221115144154495"></p>
-<h3 id="TCP三次挥手"><a href="#TCP三次挥手" class="headerlink" title="TCP三次挥手"></a>TCP三次挥手</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221122164619376.png?raw=true" alt="image-20221122164619376"></p>
-<h4 id="为什么两次挥手不可行："><a href="#为什么两次挥手不可行：" class="headerlink" title="为什么两次挥手不可行："></a>为什么两次挥手不可行：</h4><p>​		采用两次挥手会引发历史链接出现，浪费服务器资源。</p>
-<p>​		原因：客户端发送数据包遇到网络阻塞，发送第二个数据包，此时当服务器接收到客户端旧的SYN时，便会立即建立连接进入 ESTABLISHED 状态，服务器便会建立连接向客户端发送数据，然后客户端才向服务器发送RST连接中止报文，然后新的数据包到达服务器后再次建立链接。在新连接建立之前所发送的数据全部无效，造成资源浪费。</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221122163108513.png?raw=true" alt="image-20221122163108513"></p>
-<p>​		第一次握手丢失：客户端超时重传第一次握手SYN</p>
-<p>​		第二次握手丢失：客户端收不到ACK, 超时重传第一次握手SYN，服务端重传SYN+ACK</p>
-<p>​		第三次握手丢失：服务端重传第二次握手的SYN</p>
-<h4 id="TCP报文格式"><a href="#TCP报文格式" class="headerlink" title="TCP报文格式"></a>TCP报文格式</h4><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221121122620894.png?raw=true" alt="image-20221121122620894"></p>
-<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116211639990.png?raw=true" alt="image-20221116211639990"></p>
-<p>​		第一次挥手丢失：客户端超时重传第一次挥手FIN，客户端断开连接</p>
-<p>​		第二次挥手丢失：客户端收不到ACK, 超时重传第一次挥手FIN，客户端断开连接</p>
-<p>​		第三次挥手丢失：服务端重传第三次挥手的FIN，多次重传还是丢失则服务端断开连接，客户端在FIN_WAIT_2状态中tcp_fin_timeout后断开连接</p>
-<p>​		第四次挥手丢失：服务端重传第三次挥手的FIN，多次重传还是丢失则服务端断开连接，客户端在TIME_WAIT 状态中2MSL (<strong>报文最大生存时间</strong>) 后断开连接</p>
-<h3 id="为什么-TIME-WAIT-等待的时间是-2MSL？"><a href="#为什么-TIME-WAIT-等待的时间是-2MSL？" class="headerlink" title="为什么 TIME_WAIT 等待的时间是 2MSL？"></a>为什么 TIME_WAIT 等待的时间是 2MSL？</h3><p>MSL 与 TTL 的区别： MSL 是最大报文生存时间，而 TTL 是经过路由跳数。首先，，<strong>MSL 应该要大于等于 TTL 消耗为 0 的时间</strong>，MSL&gt;TTL，以确保报文已被自然消亡。TIME_WAIT 等待 2 倍的 MSL，比较合理的解释是： 网络中可能存在来自发送方的数据包，当这些发送方的数据包被接收方处理后又会向对方发送响应，所以一来一回需要等待 2 倍的时间。如果被动关闭方没有收到断开连接的最后的 ACK 报文，此时已经过了1MSL，ACK报文已经失效，触发超时重发 FIN 报文，另一方客户端接收到 FIN 后，会重发 ACK 给被动关闭方， 一来一去正好 2 个 MSL，如果另一方没有收到FIN报文则到达1MSL时，FIN报文失效，此时time_wait已经超过2MSL，客户端断开连接。</p>
-<h3 id="为什么SYN-x2F-FIN不包含数据却要消耗一个序列号"><a href="#为什么SYN-x2F-FIN不包含数据却要消耗一个序列号" class="headerlink" title="为什么SYN&#x2F;FIN不包含数据却要消耗一个序列号"></a>为什么SYN&#x2F;FIN不包含数据却要消耗一个序列号</h3><p>​		因为凡是需要对端进行确认的，都需要消耗TCP报文的序列号，ACK不携带其他数据不需要消耗序列号</p>
-<p>​		序号(sequence number)：seq序号，占32位，用来标识从TCP源端向目的端发送的字节流，发起方发送数据时对此进行标记。</p>
-<p>​		确认号（acknowledgement number）：ack序号，占32位，只有ACK标志位为1时，确认序号字段才有效，ack&#x3D;seq+1。</p>
-<p>​		标志位（Flags）：共6个，即URG、ACK、PSH、RST、SYN、FIN等。具体含义如下：</p>
-<ul>
-<li>URG：紧急指针（urgent pointer）有效。</li>
-<li>ACK：确认序号有效。（为了与确认号ack区分开，我们用大写表示）</li>
-<li>PSH：接收方应该尽快将这个报文交给应用层。</li>
-<li>RST：重置连接。</li>
-<li>SYN：发起一个新连接。</li>
-<li>FIN：释放一个连接。</li>
-</ul>
-<h3 id="TFO-tcp-fast-open-原理"><a href="#TFO-tcp-fast-open-原理" class="headerlink" title="TFO(tcp fast open)原理"></a>TFO(tcp fast open)原理</h3><p>在三次握手，四次挥手的时候，第一次发送SYN包的同时携带着cookie，服务端将cookie存放到header里，此时把cookie存储到本地。当再次发出三次挥手请求的时候携带cookie，并发送请求，服务端可立即响应</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116155726639.png?raw=true" alt="image-20221116155726639"></p>
-<h3 id="TCP的超时重传-RTO"><a href="#TCP的超时重传-RTO" class="headerlink" title="TCP的超时重传 (RTO)"></a>TCP的超时重传 (RTO)</h3><p>​		在发送数据报文时，设定一个定时器，每间隔一段时间RTO，没有收到对方的ACK确认应答报文，就会重发该报文。如果RTO比较小，可能会导致网络阻塞，频繁重传；如果RTO比较大，如果发生丢包，导致长时间才会再次重传。因此我们便采用<strong>Jacobson</strong>算法来计算SRTT：SRTT&#x3D;(1-α)SRTT + αRTT</p>
-<h3 id="TCP的快速重传"><a href="#TCP的快速重传" class="headerlink" title="TCP的快速重传"></a>TCP的快速重传</h3><p>​		快速重传机制不以时间驱动，而是以数据驱动。它基于接收端的反馈信息来引发重传。当发送端发送的某个数据包(2)丢包，接收端未收到时，后方发送的三个数据包(3,4,5)会出现同样的ACK回复报文(ACK 2)，此时会重传丢失的报文，然后修改ACK回复为6</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116172203220.png?raw=true" alt="image-20221116172203220"></p>
-<h3 id="TCP的滑动窗口"><a href="#TCP的滑动窗口" class="headerlink" title="TCP的滑动窗口"></a>TCP的滑动窗口</h3><p>​		指定一个窗口，在该窗口内，发送方无需等待接收方确认便可继续发送数据。接收方每次收到数据包，在发送确认报文的时候，同时告诉发送方，自己的缓存区还有多少空余空间，缓冲区的空余空间就是接收窗口大小，这就是win。TCP的滑动窗口分为两种，发送窗口和接收窗口。</p>
-<p>​		发送窗口包括四部分：已发送已确认，已发送未确认，未发送但可发送，未发送且不可发送。其中发送窗口包含已发送未确认和未发送但可发送。</p>
-<p>​		接收窗口包含三部分：已接收已确认，未接收但可接收，未接收且不可接收</p>
-<h3 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h3><p>​		TCP 提供一种机制可以让「发送方」根据「接收方」的实际接收能力控制发送的数据量，这就是所谓的流量控制。</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116203111210.png?raw=true" alt="image-20221116203111210"></p>
-<h3 id="TCP可靠传输"><a href="#TCP可靠传输" class="headerlink" title="TCP可靠传输"></a>TCP可靠传输</h3><p>​		链路层使用差错检验技术 (如循环冗余检验CRC) 判断在传输过程是否产生了误码。</p>
-<p>​		TCP提供可靠地服务，在传输数据时无差错、不丢失、不重复且有序到达</p>
-<p>​		TCP保证可靠传输的方式有：序列号，确认应答号，建立连接，超时重传，流量控制，拥塞控制</p>
-<h3 id="TCP与UDP协议的区别"><a href="#TCP与UDP协议的区别" class="headerlink" title="TCP与UDP协议的区别"></a>TCP与UDP协议的区别</h3><p>​		TCP：需要建立连接，传输数据完整，可靠传输、超时重传、流量控制、拥塞控制实现安全有序，采用流式传输，TCP支持一对一，tcp首部开销大 20字节(确认号，序列号)；常用于HTTP&#x2F;HTTPS，FTP传输。</p>
-<p>​		UDP：不需要建立链接，传输数据不完整，不稳定且丢包和乱序，通过一个一个数据包传输，支持所有形式；常用于语音通话，udp首部开销小 8字节，视频等即时通讯。</p>
-<h3 id="TCP如何保持连接"><a href="#TCP如何保持连接" class="headerlink" title="TCP如何保持连接"></a>TCP如何保持连接</h3><p>​		在7200s内如果没有任何连接相关的活动(无数据发送)，TCP 保活机制会开始作用，周期性的发送探测包，检测对端是否存活。如果检查到对端存活则会正常响应，TCP的保活时间将会被重置。如果对端崩溃无响应，当探测报文连续几次(间隔75s发9次)发送给对端都无响应时，TCP会报告该连接已死亡。</p>
-<h3 id="各层的协议"><a href="#各层的协议" class="headerlink" title="各层的协议"></a>各层的协议</h3><p>​		应用层：HTTP, SMTP, DNS , FTP，为了让用户和计算机交互</p>
-<p>​		表示层：对传输的数据加密 </p>
-<p>​		会话层：建立、管理、终止会话 </p>
-<p>​		传输层：TCP, UDP</p>
-<p>​		网络层：ARP, ICMP</p>
-<p>​		数据链路层：PPP, CSMA&#x2F;CD</p>
-<p>​		物理层：将帧转化为二进制流传输</p>
-<h3 id="HTTPS比HTTP协议安全"><a href="#HTTPS比HTTP协议安全" class="headerlink" title="HTTPS比HTTP协议安全"></a>HTTPS比HTTP协议安全</h3><p>​		HTTP明文传输，安全性差；HTTPS对传输的数据进行加密，安全性好</p>
-<p>​		HTTP建立连接只需要TCP三次握手；HTTPS建立连接除了三次握手还需要SSL握手</p>
-<p>​		HTTP采用80端口；HTTPS采用443端口，并且采用SSL&#x2F;TLS协议的原因，更耗费资源</p>
-<p>​		TLS&#x2F;SSL的加密方式：对称加密，非对称加密，混合加密</p>
-<h3 id="Https加密过程"><a href="#Https加密过程" class="headerlink" title="Https加密过程"></a>Https加密过程</h3><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230210140442645.png" alt="image-20230210140442645" style="zoom: 67%;" />
-
-<p>HTTPS采用混合加密的方式，在通信建立前采用<strong>非对称加密</strong>的方式，在通信过程中全部使用<strong>对称加密</strong></p>
-<p>SSL&#x2F;TLS 的「握手阶段」涉及<strong>四次</strong>通信：</p>
-<ul>
-<li><p>1、首先客户端向服务端发送加密请求，请求包括</p>
-<ul>
-<li><p>SSL&#x2F;TSL版本号</p>
-</li>
-<li><p>客户端支持的加密算法列表</p>
-</li>
-<li><p>产生一个随机数，我们叫<strong>第1随机数</strong></p>
-</li>
-</ul>
-</li>
-<li><p>2、服务端收到请求后，向客户端发出响应，响应包括</p>
-<ul>
-<li>确认SSL&#x2F;TSL版本号</li>
-<li>确认加密算法</li>
-<li>生成一个随机数，我们叫<strong>第2随机数</strong></li>
-<li>服务器会把自己的公钥注册到CA，服务器再向客户端发送数字证书</li>
-</ul>
-</li>
-<li><p>3、客户端收到服务端一系列响应后，校验数字证书并从证书取出公钥</p>
-<ul>
-<li>生成一个随机数，我们叫第3随机数或者<strong>预主密钥</strong>，客户端计算出会话密钥，此预主密钥通过公钥进行加密并发送给服务端</li>
-</ul>
-</li>
-<li><p>4、服务端收到客户端数据后，使用私钥对预主密钥进行解密，服务端通过第一、二随机数+预主密钥计算出<strong>会话密钥</strong></p>
-<ul>
-<li>服务端向客户端发送加密通信算法改变通知，以后通过<strong>会话密钥</strong>通信</li>
-</ul>
-</li>
-</ul>
-<h3 id="HTTP缓存"><a href="#HTTP缓存" class="headerlink" title="HTTP缓存"></a>HTTP缓存</h3><p>​		包括强制缓存和协商缓存。</p>
-<p>​		强制缓存：只要浏览器判断缓存没有过期，则直接使用浏览器的本地缓存，浏览器决定可否使用缓存。强缓存是利用HTTP响应头部的Cache-Control字段来实现的。流程：浏览器第一次访问服务器资源时，服务器在返回资源的同时，会在Response头部加上Cache-Control，并且设置了相对存活时间；当浏览器再次访问服务器中的该资源时，会将当前时间与Cache-Control中设置的存活时间比较，判断是否过期，如果没有过期，则使用该缓存，如果过期则访问服务器后再缓存。</p>
-<p>​		协商缓存：浏览器与服务端协商之后，通过协商结果判断是否可用本地缓存(更新后老的不可用)。使用协商缓存需要将cache-control字段设为no-cache，协商缓存普遍采用响应头etag搭配请求头if-none-match的方式判断请求资源是否更新( 请求头中if-none-match&#x3D;(etag的值) )，该方式可以在1s内判断资源是否发生改变，如果资源改变则服务器中的etag会发生改变，响应头中的etag同步发生改变，并返回200状态码，更新本地的缓存，如果服务器未更新资源，则etag&#x3D;&#x3D;if-none-match，返回304状态码，从本地缓存中取出资源。而last-modified不能在1s内判断资源是否改变。协商缓存能够解决强制缓存资源不更新的问题。</p>
-<p>​	</p>
-<h3 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><p>​		2xx 代表服务器响应成功</p>
-<ul>
-<li>200 OK</li>
-<li>204</li>
-</ul>
-<p>​		3xx 客户端请求资源改变</p>
-<ul>
-<li>301 永久重定向，跳转到新的url</li>
-<li>302 临时重定向，跳转到新的url</li>
-<li>304 可以继续使用缓存资源</li>
-</ul>
-<p>​		4xx 客户端错误</p>
-<ul>
-<li>400 客户端发送的报文有错</li>
-<li>403 服务器禁止访问资源</li>
-<li>404 服务器上资源不存在</li>
-</ul>
-<p>​		5xx 服务器内部错误</p>
-<ul>
-<li>500 服务器内部发生错误</li>
-<li>501 功能不支持</li>
-<li>502 网关错误</li>
-<li>503 服务器很忙，无法响应</li>
-</ul>
-<h3 id="HTTP协议报文格式"><a href="#HTTP协议报文格式" class="headerlink" title="HTTP协议报文格式"></a>HTTP协议报文格式</h3><p>​		<strong>请求报文</strong>：请求行+请求头+请求体</p>
-<ul>
-<li>请求行：请求方法(GET&#x2F;POST)，http协议版本，发出请求的主机ip和port</li>
-<li>请求头：if-none-match，if-modified-since (文件是否修改，未修改返回304状态码)</li>
-<li>请求体：发出请求时携带的客户端数据</li>
-</ul>
-<p>​		<strong>响应报文</strong>：状态行+响应头+响应体</p>
-<ul>
-<li>状态行：状态码，http协议版本</li>
-<li>响应头：cache-control，etag …</li>
-<li>响应体：服务器返回给客户端的数据</li>
-</ul>
-<h3 id="HTTP-x2F-1-1和HTTP-x2F-2-0"><a href="#HTTP-x2F-1-1和HTTP-x2F-2-0" class="headerlink" title="HTTP&#x2F;1.1和HTTP&#x2F;2.0"></a>HTTP&#x2F;1.1和HTTP&#x2F;2.0</h3><p>​		HTTP&#x2F;1.1：HTTP&#x2F;1.0默认使用短连接，即每次请求建议一次连接，每次都需要三次握手和四次挥手，开销大，不支持断点重传。HTTP&#x2F;1.1默认使用长链接，默认开启Connection：keep-alive；引入缓存策略(Etag,if-none-match)。</p>
-<p>​		HTTP&#x2F;2.0：使用二进制格式传输数据，允许多路复用，同一时刻允许发送多个请求(并行执行)，(http&#x2F;1.1只能串行执行，会发生阻塞)。使用HPACK算法对header数据进行压缩，客户端和服务端各自缓存了一份header表，减小需要传输数据的大小</p>
-<h3 id="DNS负载均衡"><a href="#DNS负载均衡" class="headerlink" title="DNS负载均衡"></a>DNS负载均衡</h3><p>​		DNS服务器中存储着大量的主机记录，他将特定的域名映射对应的ip地址上，当访问某个域名时，会根据域名在DNS中查找主机记录，返回对应的ip地址，在DNS中对于同一个域名，可以配置多个ip地址，当客户端访问DNS服务器时，会采用轮询的算法将请求发送到不同的ip，即不同服务器上。</p>
-<p>​		在使用时通常需要配置两台DNS服务器，一台是主服务器用于提供服务，另一台是备用服务器(主服务器不能用时启用)</p>
-<p>​		优点：将负载均衡工作交给了DNS服务器，不需要独立维护。</p>
-<p>​		缺点：当某个服务器下线时，DNS服务器无法监测下线，会把域名解析到已下线的服务器上。轮询算法不能合理的考虑到不同服务器的负载状态。</p>
-<h3 id="DNS解析过程"><a href="#DNS解析过程" class="headerlink" title="DNS解析过程"></a>DNS解析过程</h3><ol>
-<li>如果主机所询问的本地域名服务器不知道被查询域名的IP地址， 那么本地域名服务器就以DNS客户的身份， 向其<strong>根域名服务器</strong>发出查询。</li>
-<li>当根域名服务器收到本地域名服务器发出的查询请求报文时，要么给出所要查询的IP地址， 要么根域名服务器把自己知道的顶级域名服务器（二级域名服务器）的IP地址告诉本地域名服务器， 让本地域名服务器再向顶级域名服务器查询。</li>
-<li>顶级域名服务器在收到本地域名服务器的查询请求后， 要么给出所要查询的IP地址， 要么告诉本地域名服务器下一步应当向哪一个权限域名服务器（三级域名服务器）进行查询， 本地域名服务器就这样进行迭代查询。</li>
-<li>最后， 知道了所要解析的域名的IP地址， 然后把这个结果返回给发起查询的主机</li>
-</ol>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221121161515794.png?raw=true" alt="image-20221121161515794"></p>
-<h3 id="负载均衡算法有哪些"><a href="#负载均衡算法有哪些" class="headerlink" title="负载均衡算法有哪些"></a>负载均衡算法有哪些</h3><ul>
-<li>轮询法</li>
-<li>加权轮询法 （根据服务器的性能不同，给每个服务器配置一个权重，发挥服务器的最大性能）</li>
-<li>源地址(ip)哈希法</li>
-</ul>
-<h3 id="TCP-UDP-共同占用一个端口号"><a href="#TCP-UDP-共同占用一个端口号" class="headerlink" title="TCP UDP 共同占用一个端口号"></a>TCP UDP 共同占用一个端口号</h3><p>​		在计算机系统中，不同的端口代表不同的应用程序，由于TCP&#x2F;IP传输层的两个协议TCP和UDP是完全独立的两个软件模块，因此各自的端口号也相互独立，如TCP有一个255号端口，UDP也可以有一个255号端口，二者并不冲突。在确认连接时，会根据 port+ip+protocol 传输数据</p>
-<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>代理客户端，为客户端发送请求，向服务器隐藏自己的真实客户端，服务器不知道真正的客户端是谁，正向代理应用（加速器&#x2F;VPN）</p>
-<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>代理服务器来接收客户端的请求，然后将请求转发给内部网络上的服务器，代理服务器再将结果返回给客户端，客户端不知道真正的服务器是谁。</p>
-<p>用处：负载均衡，隐藏服务器的IP地址</p>
-
+          <h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1467,7 +857,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:26:12" itemprop="dateModified" datetime="2023-02-21T22:26:12+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:34:38" itemprop="dateModified" datetime="2023-02-21T22:34:38+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1489,15 +879,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-
-<h2 id="LeetCode-142-环形链表"><a href="#LeetCode-142-环形链表" class="headerlink" title="LeetCode 142  环形链表"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/insertion-sort-list/">LeetCode 142  环形链表</a></h2><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><h4 id="HashMap标记已读数组"><a href="#HashMap标记已读数组" class="headerlink" title="HashMap标记已读数组"></a>HashMap标记已读数组</h4><p>时间复杂度o(n)</p>
-<p>空间复杂度0(n)</p>
-<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><h4 id="将已读数组元素修改为某个值"><a href="#将已读数组元素修改为某个值" class="headerlink" title="将已读数组元素修改为某个值"></a>将已读数组元素修改为某个值</h4><p>时间复杂度o(n)</p>
-<p>空间复杂度0(1)</p>
-<h3 id="方法三："><a href="#方法三：" class="headerlink" title="方法三："></a>方法三：</h3><h4 id="快慢指针法：slow指针和fast指针必定会在环中相遇，然后让slow指针从相遇位置出发，让fast指针从链表起始点出发，两者相遇的位置是链表环的入口"><a href="#快慢指针法：slow指针和fast指针必定会在环中相遇，然后让slow指针从相遇位置出发，让fast指针从链表起始点出发，两者相遇的位置是链表环的入口" class="headerlink" title="快慢指针法：slow指针和fast指针必定会在环中相遇，然后让slow指针从相遇位置出发，让fast指针从链表起始点出发，两者相遇的位置是链表环的入口"></a>快慢指针法：slow指针和fast指针必定会在环中相遇，然后让slow指针从相遇位置出发，让fast指针从链表起始点出发，两者相遇的位置是链表环的入口</h4><p>时间复杂度o(n)</p>
-<p>空间复杂度0(1)</p>
-
+          <h2 id="LeetCode-142-环形链表"><a href="#LeetCode-142-环形链表" class="headerlink" title="LeetCode 142  环形链表"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/insertion-sort-list/">LeetCode 142  环形链表</a></h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/27/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%88%A4%E7%8E%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1559,7 +949,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:29:21" itemprop="dateModified" datetime="2023-02-21T22:29:21+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:35:42" itemprop="dateModified" datetime="2023-02-21T22:35:42+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1581,60 +971,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-
-<h1 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h1><h2 id="消息队列应用场景"><a href="#消息队列应用场景" class="headerlink" title="消息队列应用场景"></a>消息队列应用场景</h2><ul>
-<li>缓存削峰</li>
-<li>解耦</li>
-<li>异步通讯</li>
-</ul>
-<h2 id="kafka的topic操作命令"><a href="#kafka的topic操作命令" class="headerlink" title="kafka的topic操作命令"></a>kafka的topic操作命令</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221017141200142.png?raw=true" alt="topic操作命令"></p>
-<ul>
-<li>.&#x2F;bin&#x2F;kafka-topics.sh –bootstrap-server hadoop1:9092 –topic first –create –partitions 3 –replication-factor 3    </li>
-<li>.&#x2F;bin&#x2F;kafka-topics.sh –bootstrap-server hadoop1:9092 –list</li>
-<li>.&#x2F;bin&#x2F;kafka-topics.sh –bootstrap-server hadoop1:9092 –topic first –describe</li>
-<li>.&#x2F;bin&#x2F;kafka-console-producer.sh –bootstrap-server hadoop1:9092 –topic first</li>
-<li>.&#x2F;bin&#x2F;kafka-console-consumer.sh –bootstrap-server hadoop1:9092 –topic first</li>
-<li>&#x2F;bin&#x2F;kafka-console-consumer.sh –bootstrap-server hadoop1:9092 –topic first –from-beginning</li>
-</ul>
-<h2 id="生产者相关配置"><a href="#生产者相关配置" class="headerlink" title="生产者相关配置"></a>生产者相关配置</h2><ul>
-<li>ProducerConfig.BOOTSRTAP_SERVER_CONFIG            &#x2F;&#x2F;设置kafka连接集群</li>
-<li>ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG        &#x2F;&#x2F;设置key的序列化</li>
-<li>ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG   &#x2F;&#x2F;设置value的序列化</li>
-<li>ProducerConfig.BUFFER_MEMORY_CONFIG			     &#x2F;&#x2F;设置缓存</li>
-<li>ProducerConfig.BATCH_SIZE_CONFIG                           &#x2F;&#x2F;设置每次传输的批次大小</li>
-<li>ProducerConfig.LINGER_MS_CONFIG                            &#x2F;&#x2F;设置linger.ms，传输间隔的时间</li>
-<li>ProducerConfig.COMPRESSION_TYPE_CONFIG           &#x2F;&#x2F;设置传输数据压缩的类型</li>
-<li>ProducerConfig.TRANSACTION_ID_CONFIG                 &#x2F;&#x2F;设置事务id，避免数据重复</li>
-</ul>
-<h2 id="生产者数据发送流程"><a href="#生产者数据发送流程" class="headerlink" title="生产者数据发送流程"></a>生产者数据发送流程</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019095126554.png?raw=true"></p>
-<h3 id="数据可靠性"><a href="#数据可靠性" class="headerlink" title="数据可靠性"></a>数据可靠性</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019095145906.png?raw=true" alt="image-20221019095145906"></p>
-<h3 id="数据重复-用事务和幂等性保证数据不重复"><a href="#数据重复-用事务和幂等性保证数据不重复" class="headerlink" title="数据重复(用事务和幂等性保证数据不重复)"></a>数据重复(用事务和幂等性保证数据不重复)</h3><ul>
-<li>至少一次（at least once）：消息不会丢失，但有可能被重复发送。</li>
-<li>精确一次（exactly once）：消息不会丢失，也不会被重复发送。</li>
-</ul>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019113906587.png?raw=true" alt="image-20221019113906587"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019103137587.png?raw=true" alt="image-20221019103137587"></p>
-<h3 id="数据乱序"><a href="#数据乱序" class="headerlink" title="数据乱序"></a>数据乱序</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019104227555.png?raw=true" alt="image-20221019104227555"></p>
-<h3 id="zookeeper中存储的kafka信息"><a href="#zookeeper中存储的kafka信息" class="headerlink" title="zookeeper中存储的kafka信息"></a>zookeeper中存储的kafka信息</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019105124426.png?raw=true" alt="image-20221019105124426"></p>
-<h3 id="kafka文件存储机制"><a href="#kafka文件存储机制" class="headerlink" title="kafka文件存储机制"></a>kafka文件存储机制</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021090835996.png?raw=true" alt="image-20221021090835996"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021091945986.png?raw=true"></p>
-<h3 id="kafka的高效读写"><a href="#kafka的高效读写" class="headerlink" title="kafka的高效读写"></a>kafka的高效读写</h3><ul>
-<li>分布式集群，并行度高</li>
-<li>才有稀疏索引，快速定位存储的数据</li>
-<li>顺序读写磁盘数据，速度快</li>
-<li>页缓存和零拷贝技术存数据</li>
-</ul>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021093429885.png?raw=true" alt="image-20221021093429885"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021093347710.png?raw=true" alt="image-20221021093347710"></p>
-<h3 id="kafka消费方式"><a href="#kafka消费方式" class="headerlink" title="kafka消费方式"></a>kafka消费方式</h3><ul>
-<li>采用pull模式：消费者主动从broker中主动拉取数据，缺点是如果broker没有数据会陷入循环访问</li>
-<li>每个分区的数据只能由消费者组中一个消费者消费，同一个组内的消费者可以消费不同的分区，消费者组是逻辑上的一个订阅者</li>
-</ul>
-<h3 id="kafka消费者组的初始化流程"><a href="#kafka消费者组的初始化流程" class="headerlink" title="kafka消费者组的初始化流程"></a>kafka消费者组的初始化流程</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095607125.png?raw=true" alt="image-20221021095607125"></p>
-<h3 id="kafka消费者组的消费流程"><a href="#kafka消费者组的消费流程" class="headerlink" title="kafka消费者组的消费流程"></a>kafka消费者组的消费流程</h3><p>系统首先对传输的对象序列化，转换为二进制流传输到kafka生产者中，kafka再将二进制流反序列化传输到消费者手中</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095940320.png?raw=true" alt="image-20221021095940320"></p>
-<h2 id="kafka调优"><a href="#kafka调优" class="headerlink" title="kafka调优"></a>kafka调优</h2>
+          <h1 id="Kafka合集"><a href="#Kafka合集" class="headerlink" title="Kafka合集"></a>Kafka合集</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/16/kafka/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1696,7 +1041,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:29:52" itemprop="dateModified" datetime="2023-02-21T22:29:52+08:00">2023-02-21</time>
+      <time title="修改时间：2023-02-21 22:35:54" itemprop="dateModified" datetime="2023-02-21T22:35:54+08:00">2023-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1718,232 +1063,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>     
-
-<h1 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h1><ul>
-<li>keys k*     列出所有前缀为k的键值</li>
-<li>exists key    判断key是否存在于数据库中</li>
-<li>expire k1 10    设置key的最大生存时间</li>
-<li>ttl k1   查看key的剩余生存时间</li>
-</ul>
-<h1 id="Redis的内存处理"><a href="#Redis的内存处理" class="headerlink" title="Redis的内存处理"></a>Redis的内存处理</h1><h2 id="redis过期删除策略"><a href="#redis过期删除策略" class="headerlink" title="redis过期删除策略"></a>redis过期删除策略</h2><!--more-->
-
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141834880.png?raw=true" alt="image-20221115141834880"></p>
-<h2 id="redis内存淘汰策略"><a href="#redis内存淘汰策略" class="headerlink" title="redis内存淘汰策略"></a>redis内存淘汰策略</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115143017553.png?raw=true?raw=true" alt="image-20221115143017553"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141948937.png?raw=true" alt="image-20221115141948937"></p>
-<h1 id="Redis底层数据结构"><a href="#Redis底层数据结构" class="headerlink" title="Redis底层数据结构"></a>Redis底层数据结构</h1><h2 id="底层的总体架构"><a href="#底层的总体架构" class="headerlink" title="底层的总体架构"></a>底层的总体架构</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115170352663.png?raw=true" alt="image-20221115170352663"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115172440822.png?raw=true" alt="image-20221115172440822"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116104210773.png?raw=true" alt="image-20221116104210773"></p>
-<h2 id="底层string的数据结构"><a href="#底层string的数据结构" class="headerlink" title="底层string的数据结构"></a>底层string的数据结构</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221115141824141.png?raw=true?lastModify=1668564765" alt="image-20221115141824141"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116105202189.png?raw=true" alt="image-20221116105202189"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116105223166.png?raw=true" alt="image-20221116105223166"></p>
-<p>应用场景：</p>
-<ul>
-<li>计数器</li>
-<li>分布式锁</li>
-<li>缓存对象</li>
-</ul>
-<h2 id="底层ZipList数据结构"><a href="#底层ZipList数据结构" class="headerlink" title="底层ZipList数据结构"></a>底层ZipList数据结构</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101924212.png?raw=true" alt="image-20221116101924212"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101939610.png?raw=true" alt="image-20221116101939610"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116145341219.png?raw=true" alt="image-20221116145341219"></p>
-<h2 id="底层QuickList的数据结构"><a href="#底层QuickList的数据结构" class="headerlink" title="底层QuickList的数据结构"></a>底层QuickList的数据结构</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116101250658.png?raw=true" alt="image-20221116101250658"></p>
-<h2 id="Redis中List的整体结构-采用QuickList"><a href="#Redis中List的整体结构-采用QuickList" class="headerlink" title="Redis中List的整体结构(采用QuickList)"></a>Redis中List的整体结构(采用QuickList)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116110707618.png?raw=true" alt="image-20221116110707618"></p>
-<p>应用场景：</p>
-<ul>
-<li>消息队列</li>
-</ul>
-<h2 id="Redis中Set的整体结构-采用Dict或IntSet"><a href="#Redis中Set的整体结构-采用Dict或IntSet" class="headerlink" title="Redis中Set的整体结构(采用Dict或IntSet)"></a>Redis中Set的整体结构(采用Dict或IntSet)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116114206050.png?raw=true" alt="image-20221116114206050"></p>
-<p>应用场景：</p>
-<ul>
-<li><p>点赞</p>
-</li>
-<li><p>共同关注</p>
-</li>
-</ul>
-<h2 id="Redis中ZSet的整体结构-采用ZipList或SkipList-Dict"><a href="#Redis中ZSet的整体结构-采用ZipList或SkipList-Dict" class="headerlink" title="Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)"></a>Redis中ZSet的整体结构(采用ZipList或SkipList+Dict)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115912733.png?raw=true" alt="image-20221116115912733"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115806333.png?raw=true" alt="image-20221116115806333"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116115731949.png?raw=true" alt="image-20221116115731949"></p>
-<p>由于ziplist无法排序并且数据量小，所以在使用ziplist存储结构时，可以在业务编码时进行排序。</p>
-<p>常用命令：</p>
-<ul>
-<li>zadd key score1 value1</li>
-<li>zrem key value1</li>
-<li>zrange key start end</li>
-<li>zincrby key num1 value1 </li>
-<li>zrangebyscore key</li>
-</ul>
-<p>应用场景：</p>
-<ul>
-<li>排行榜</li>
-<li>对点赞数目、电话号码排序</li>
-</ul>
-<h2 id="Redis中Hash的整体结构-ZipList或Dict"><a href="#Redis中Hash的整体结构-ZipList或Dict" class="headerlink" title="Redis中Hash的整体结构(ZipList或Dict)"></a>Redis中Hash的整体结构(ZipList或Dict)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116134731704.png?raw=true" alt="image-20221116134731704"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221116144548959.png?raw=true" alt="image-20221116144548959"></p>
-<p>应用场景：</p>
-<ul>
-<li>缓存用户</li>
-<li>缓存购物车</li>
-</ul>
-<h2 id="Redis中bitmap数据结构和命令"><a href="#Redis中bitmap数据结构和命令" class="headerlink" title="Redis中bitmap数据结构和命令"></a>Redis中bitmap数据结构和命令</h2><p>bitmap底层采用redis中string数据结构存储，即sds，一个字符数组。</p>
-<p>redis中string最大为512MB，能够存储2^32个bitmap数据</p>
-<p>常用命令：</p>
-<ul>
-<li>setbit login_2022_10 2 1    [commend，key，index，value]</li>
-<li>getbit login_2022_10 2</li>
-<li>bitcount login_2022_10 1  [comment，key，value]</li>
-<li>bitpos login_2022_10 1      &#x2F;&#x2F;login_2022_10里面以1开头的下标</li>
-</ul>
-<p>应用场景：</p>
-<ul>
-<li>签到统计</li>
-<li>判断登录状态</li>
-</ul>
-<h2 id="Redis分布式锁解决超买超卖问题"><a href="#Redis分布式锁解决超买超卖问题" class="headerlink" title="Redis分布式锁解决超买超卖问题"></a>Redis分布式锁解决超买超卖问题</h2><p>​		redis虽然支持事务，但是与数据库的事务不同，虽然redis事务能保证原子性，但不能保证一致性。因此需要编写lua脚本搭配redis解决一致性问题</p>
-<h1 id="Redis缓存与集群"><a href="#Redis缓存与集群" class="headerlink" title="Redis缓存与集群"></a>Redis缓存与集群</h1><h2 id="Redis缓存穿透"><a href="#Redis缓存穿透" class="headerlink" title="Redis缓存穿透"></a>Redis缓存穿透</h2><p>​		客户端请求的数据在缓存和数据库中都不存在，缓存永远不会生效，这些请求会一直打入到数据库</p>
-<p>​		解决方法：</p>
-<ul>
-<li><p>缓存空对象：可能造成短期内数据不一致问题，数据库数据修改缓存不知道</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221122200943822.png?raw=true" alt="image-20221122200943822"></p>
-</li>
-<li><p>布隆过滤：占用内存少，实现复杂</p>
-<p>将数据库中的数据利用hash算法转化为hashcode，存储到布隆过滤器(bitMap)里边对应hashcode位置是否为1</p>
-</li>
-</ul>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221122200956718.png?raw=true" alt="image-20221122200956718"></p>
-<h2 id="Redis缓存雪崩"><a href="#Redis缓存雪崩" class="headerlink" title="Redis缓存雪崩"></a>Redis缓存雪崩</h2><p>​		同一时间段大量的缓存key同时失效或者Redis服务宕机，导致大量请求到达数据库，带来巨大压力。</p>
-<p>​		解决方案：</p>
-<ul>
-<li>利用Redis集群高可用</li>
-<li>给不同的key的TTL添加随机值，随机时间到期</li>
-<li>给业务添加多级缓存</li>
-<li>给缓存业务添加降级限流</li>
-</ul>
-<h2 id="Redis缓存击穿（设置热点数据永不过期、更新缓存时，加全局锁，保证只有一个走数据库）"><a href="#Redis缓存击穿（设置热点数据永不过期、更新缓存时，加全局锁，保证只有一个走数据库）" class="headerlink" title="Redis缓存击穿（设置热点数据永不过期、更新缓存时，加全局锁，保证只有一个走数据库）"></a>Redis缓存击穿（设置热点数据永不过期、更新缓存时，加全局锁，保证只有一个走数据库）</h2><p>​		又称为热点Key问题，就是一个频繁访问并且缓存重建业务较复杂的key突然失效了，无数的请求访问会在瞬间给数据库很大冲击。</p>
-<p>​		解决方案：</p>
-<ul>
-<li>互斥锁策略</li>
-<li>逻辑过期策略</li>
-</ul>
-<h2 id="数据库与redis缓存不一致问题"><a href="#数据库与redis缓存不一致问题" class="headerlink" title="数据库与redis缓存不一致问题"></a>数据库与redis缓存不一致问题</h2><ul>
-<li><p>先修改数据库，后修改缓存(不可行)</p>
-</li>
-<li><p>先修改缓存，后修改数据库(不可行)</p>
-</li>
-<li><p>采用分布式锁来进行解决(是否读写分离，分布式读写锁)</p>
-</li>
-</ul>
-<h2 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h2><p>​		RDB：redis数据备份文件，数据快照，把内存中所有数据记录到磁盘中，redis实例故障重启后，从磁盘读取数据快照恢复数据。</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221124203744462.png?raw=true" alt="image-20221124203744462"></p>
-<p>​		RDB的bgsave的基本流程：</p>
-<ul>
-<li><p>fork主进程得到一个子进程，共享内存空间 (本质上是将主进程用于访问内存的页表复制给子进程)</p>
-</li>
-<li><p>子进程通过页表读取内存数据写入新的RDB文件</p>
-</li>
-<li><p>用新的RDB文件替换旧的</p>
-</li>
-</ul>
-<p>​		RDB执行的时机是：①自己设置的save 10 100，②正常关闭服务器</p>
-<p>​		RDB的缺点：每两次持久化之间产生的数据可能会因为宕机而丢失，而且fork子进程耗时间 </p>
-<h2 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h2><p>​		Redis每处理一个写命令都会记录在AOF文件中，是一个命令日志文件。AOF可以每条命令记录刷盘一次，也可以每一秒刷盘一次。AOF文件长度增加一倍或者总体积超过64mb时，触发bgrewriteaof，将AOF文件压缩。</p>
-<h2 id="RDB与AOF对比"><a href="#RDB与AOF对比" class="headerlink" title="RDB与AOF对比"></a>RDB与AOF对比</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221124211547737.png?raw=true" alt="image-20221124211547737"></p>
-<h2 id="主从集群-一主多从，读写分离"><a href="#主从集群-一主多从，读写分离" class="headerlink" title="主从集群(一主多从，读写分离)"></a>主从集群(一主多从，读写分离)</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221209151737449.png" alt="image-20221209151737449"></p>
-<h3 id="数据同步"><a href="#数据同步" class="headerlink" title="数据同步"></a>数据同步</h3><p>​		slave结点加入到集群之后，发出数据同步请求</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125164247130.png?raw=true" alt="image-20221125164247130"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125201625463.png?raw=true" alt="image-20221125201625463"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125193052913.png?raw=true" alt="image-20221125193052913"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125193243372.png?raw=true" alt="image-20221125193243372"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221125202133335.png?raw=true" alt="image-20221125202133335"></p>
-<h2 id="哨兵集群-一个master，多个slave"><a href="#哨兵集群-一个master，多个slave" class="headerlink" title="哨兵集群(一个master，多个slave)"></a>哨兵集群(一个master，多个slave)</h2><p>​		Sentinel具有监控、故障转移、通知的作用</p>
-<p>​		Sentinel每隔1s发送一次ping命令，如果超过一定时间没有响应则认为主观下线，如果主观下线超过一半，则服务下线。当master发生故障时，Sentinel会选择一个slave作为新的master执行slaveof no one，其余结点执行slaveof 新master，修改故障结点配置文件slaveof 新master</p>
-<p>​		Sentinel选举新master的方式：首先判断slave结点与master结点的断开时间长短，断开时间长的slave会被排除，然后判断slave节点的slave-priority值，值越小优先级越高；若slave-priority相同，则判断slave结点的offset大小，越大说明数据越全，优先级高；最后判断slave结点的id，越小优先级越高。</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221209151945054.png" alt="image-20221209151945054"></p>
-<h2 id="分片集群-多个master，多个slave"><a href="#分片集群-多个master，多个slave" class="headerlink" title="分片集群(多个master，多个slave)"></a>分片集群(多个master，多个slave)</h2><p>​		分片集群支持高并发写操作，通过插槽slot存储数据，每个master包含一定数量的slot</p>
-<p>​		故障转移：分为自动故障转移和手动故障转移( cluster failover命令将主-从替换为从-主 )</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126140241320.png?raw=true" alt="image-20221126140241320"></p>
-<h1 id="Redis网络模型"><a href="#Redis网络模型" class="headerlink" title="Redis网络模型"></a>Redis网络模型</h1><h2 id="I-x2F-O多路复用：select，poll，epoll"><a href="#I-x2F-O多路复用：select，poll，epoll" class="headerlink" title="I&#x2F;O多路复用：select，poll，epoll"></a>I&#x2F;O多路复用：select，poll，epoll</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126213756602.png?raw=true" alt="image-20221126213756602"></p>
-<p>​		select存在的问题：</p>
-<ul>
-<li>最大能监听的FD (通过FD可以找到对应的文件) 不超过1024</li>
-<li>每次select都需要把所有要监听的FD(包括部分不需要监听的FD)拷贝到内核空间</li>
-<li>内核将整个FD数组拷贝到用户空间</li>
-<li>用户空间每次要遍历所有FD来判断就绪状态</li>
-</ul>
-<p>​		poll存在的问题：</p>
-<ul>
-<li>poll模式利用链表解决了select中监听FD数量受限的问题，但是由于要监听的FD较多，性能会很低</li>
-</ul>
-<p>​		epoll解决的问题：</p>
-<ul>
-<li>epoll中采用红黑树的结构保存要监听的FD，增删改查效率高，性能不会随着FD数量的增加而下降</li>
-<li>每个FD只需要执行一次epoll_ctl添加到红黑树，无需重复拷贝FD数据到内核空间，准备就绪的FD会添加到list链表中，客户端发送请求给内核(如果链表为空，则等待FD就绪)，执行epoll_wait函数将链表中的结点传到用户空间</li>
-</ul>
-<p>epoll_create：创建epoll实例，包括一颗红黑树，一个链表</p>
-<p>epoll_ctl：注册FD，添加到红黑树</p>
-<p>epoll_wait：链表中的FD就绪，该函数将数据发送到用户空间</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126174401626.png?raw=true" alt="image-20221126174401626"></p>
-<p>​		IO多路复用事件通知机制，当链表中有FD准备就绪时，调用epoll_wait方法可以得到通知，事件通知的模式有两种：</p>
-<ul>
-<li>LevelTriggered(水平触发)：LT，当FD就绪时，会发送多次通知直到数据发送完，epoll默认模式</li>
-<li>EdgeTriggered(边缘触发)：ET，当FD就绪时，只会通知一次，不管数据是否发送完；循环读取数据，搭配NIO</li>
-</ul>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126210244915.png?raw=true" alt="image-20221126210244915"> </p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126214631747.png?raw=true" alt="image-20221126214631747"></p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221126220035968.png?raw=true" alt="image-20221126220035968"></p>
-<h2 id="Redis是单线程还是多线程"><a href="#Redis是单线程还是多线程" class="headerlink" title="Redis是单线程还是多线程"></a>Redis是单线程还是多线程</h2><p>​		redis单线程是指在redis中始终是由主线程来处理客户端请求的，因此redis的单线程就是意味着只有一个线程处理命令</p>
-<p>​		redis多线程是指在redis4.0后除了主线程之外还引入了后台线程，后台线程主要负责异步释放redis内存，在redis6.0之后再网络模型中引入了多线程，提高对多核CPU的利用率。</p>
-<h4 id="redis选择单线程处理命令原因："><a href="#redis选择单线程处理命令原因：" class="headerlink" title="redis选择单线程处理命令原因："></a>redis选择单线程处理命令原因：</h4><ul>
-<li>redis是纯内存操作，执行速度非常快，多线程不会带来很大提升</li>
-<li>多线程会导致上下文切换浪费CPU资源</li>
-<li>多线程要面临线程安全问题，解决安全问题的实现复杂度高</li>
-</ul>
-<h1 id="Redis常见面试题"><a href="#Redis常见面试题" class="headerlink" title="Redis常见面试题"></a>Redis常见面试题</h1><h2 id="Redis大Key的解决方案"><a href="#Redis大Key的解决方案" class="headerlink" title="Redis大Key的解决方案"></a>Redis大Key的解决方案</h2><p>​		采用hash打散的方式存储，将100000条数据打散为1000000&#x2F;1000&#x3D;1000个hash表中，实现打散拆解大Key。在删除redis中的大key时，不使用del命令去处理而是使用unlink key等命令，因为del命令会导致主线程卡顿阻塞。</p>
-<h2 id="Redis作为缓存的话，说下如何保证数据一致性"><a href="#Redis作为缓存的话，说下如何保证数据一致性" class="headerlink" title="Redis作为缓存的话，说下如何保证数据一致性"></a>Redis作为缓存的话，说下如何保证数据一致性</h2><ul>
-<li>延迟双删 (解决并发读写不一致)<ul>
-<li>线程1要想修改数据，先删除缓存，再更新数据库。</li>
-<li>线程2来读缓存发现没有则从数据库中读取，由于线程1未完成数据库的更新，所以线程2读取到旧值并写入缓存</li>
-<li>线程1根据估算sleep一段时间 (大于线程2读数据+写缓存的时间)，缓存被再次删除</li>
-<li>如果有其他线程来读取缓存，会再次从数据库中读取新值</li>
-</ul>
-</li>
-</ul>
-<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211210341364.png" alt="image-20230211210341364" style="zoom:67%;" />
-
-
-
-<ul>
-<li><p>消息队列重试 (缓存删除失败)</p>
-<ul>
-<li>更新数据库</li>
-<li>缓存因为某些问题删除失败</li>
-<li>将需要删除的key发送给消息队列</li>
-<li>程序自己消费消息，获取需要删除的key，继续重试删除操作直到成功</li>
-</ul>
-<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211211841853.png" alt="image-20230211211841853" style="zoom:50%;" />
-</li>
-<li><p>基于binlog (缓存删除失败)</p>
-<ul>
-<li>更新数据库数据</li>
-<li>数据库会将操作信息写入binlog日志当中</li>
-<li>canal订阅binlog日志中所需要的数据以及key</li>
-<li>另起一段非业务代码，获得该信息</li>
-<li>尝试删除缓存操作，发现删除失败</li>
-<li>将这些信息发送至消息队列</li>
-<li>自己从消息队列中获得该数据，重试删除操作。</li>
-</ul>
-</li>
-</ul>
-<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230211212024840.png" alt="image-20230211212024840" style="zoom:67%;" />
-
-
-
-
-
-
-
-
-
-
+          <h1 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/16/redis/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
