@@ -32,7 +32,6 @@
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019095145906.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019113906587.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019103137587.png?raw=true">
-<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019104227555.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019105124426.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021090835996.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021091945986.png?raw=true">
@@ -40,8 +39,9 @@
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021093347710.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095607125.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095940320.png?raw=true">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230327211520206.png">
 <meta property="article:published_time" content="2022-10-16T11:20:46.000Z">
-<meta property="article:modified_time" content="2023-02-21T14:35:42.442Z">
+<meta property="article:modified_time" content="2023-03-27T14:40:06.469Z">
 <meta property="article:author" content="bean">
 <meta property="article:tag" content="八股文">
 <meta name="twitter:card" content="summary">
@@ -131,7 +131,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E5%90%88%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">Kafka合集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">消息队列应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka%E7%9A%84topic%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">kafka的topic操作命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">生产者相关配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E6%95%B0%E6%8D%AE%E5%8F%91%E9%80%81%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">生产者数据发送流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-number">1.4.1.</span> <span class="nav-text">数据可靠性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%87%8D%E5%A4%8D-%E7%94%A8%E4%BA%8B%E5%8A%A1%E5%92%8C%E5%B9%82%E7%AD%89%E6%80%A7%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E9%87%8D%E5%A4%8D"><span class="nav-number">1.4.2.</span> <span class="nav-text">数据重复(用事务和幂等性保证数据不重复)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B9%B1%E5%BA%8F"><span class="nav-number">1.4.3.</span> <span class="nav-text">数据乱序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper%E4%B8%AD%E5%AD%98%E5%82%A8%E7%9A%84kafka%E4%BF%A1%E6%81%AF"><span class="nav-number">1.4.4.</span> <span class="nav-text">zookeeper中存储的kafka信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.5.</span> <span class="nav-text">kafka文件存储机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E7%9A%84%E9%AB%98%E6%95%88%E8%AF%BB%E5%86%99"><span class="nav-number">1.4.6.</span> <span class="nav-text">kafka的高效读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E6%96%B9%E5%BC%8F"><span class="nav-number">1.4.7.</span> <span class="nav-text">kafka消费方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.8.</span> <span class="nav-text">kafka消费者组的初始化流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E7%9A%84%E6%B6%88%E8%B4%B9%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.9.</span> <span class="nav-text">kafka消费者组的消费流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka%E8%B0%83%E4%BC%98"><span class="nav-number">1.5.</span> <span class="nav-text">kafka调优</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E5%90%88%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">Kafka合集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">消息队列特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka%E7%9A%84topic%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">kafka的topic操作命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">生产者相关配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E6%95%B0%E6%8D%AE%E5%8F%91%E9%80%81%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">生产者数据发送流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-number">1.4.1.</span> <span class="nav-text">数据可靠性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E4%BF%9D%E8%AF%81%E4%B8%8D%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9-%E4%BA%8B%E5%8A%A1-%E5%B9%82%E7%AD%89%E6%80%A7"><span class="nav-number">1.4.2.</span> <span class="nav-text">kafka保证不重复消费(事务+幂等性)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper%E4%B8%AD%E5%AD%98%E5%82%A8%E7%9A%84kafka%E4%BF%A1%E6%81%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">zookeeper中存储的kafka信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.4.</span> <span class="nav-text">kafka文件存储机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E7%9A%84%E9%AB%98%E6%95%88"><span class="nav-number">1.4.5.</span> <span class="nav-text">kafka的高效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E6%96%B9%E5%BC%8F"><span class="nav-number">1.4.6.</span> <span class="nav-text">kafka消费方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.7.</span> <span class="nav-text">kafka消费者组的初始化流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E7%9A%84%E6%B6%88%E8%B4%B9%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.8.</span> <span class="nav-text">kafka消费者组的消费流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E6%B6%88%E8%B4%B9%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.4.9.</span> <span class="nav-text">Kafka如何保证消息的消费顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition%E5%89%AF%E6%9C%AC"><span class="nav-number">1.4.10.</span> <span class="nav-text">Partition副本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MQ%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E5%A4%B1%E8%B4%A5"><span class="nav-number">1.4.11.</span> <span class="nav-text">MQ消息处理失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B%E8%BF%87%E5%A4%9A%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86"><span class="nav-number">1.4.12.</span> <span class="nav-text">消息积压过多如何处理</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -157,7 +157,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -232,7 +232,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:35:42" itemprop="dateModified" datetime="2023-02-21T22:35:42+08:00">2023-02-21</time>
+      <time title="修改时间：2023-03-27 22:40:06" itemprop="dateModified" datetime="2023-03-27T22:40:06+08:00">2023-03-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -256,10 +256,10 @@
     <div class="post-body" itemprop="articleBody">
         <h1 id="Kafka合集"><a href="#Kafka合集" class="headerlink" title="Kafka合集"></a>Kafka合集</h1><span id="more"></span>     
 
-<h2 id="消息队列应用场景"><a href="#消息队列应用场景" class="headerlink" title="消息队列应用场景"></a>消息队列应用场景</h2><ul>
-<li>缓存削峰</li>
-<li>解耦</li>
-<li>异步通讯</li>
+<h2 id="消息队列特点"><a href="#消息队列特点" class="headerlink" title="消息队列特点"></a>消息队列特点</h2><ul>
+<li>流量削峰：比如秒杀活动，一般会因为流量过大，从而导致流量暴增，应用挂掉。使用消息队列，服务器接收到用户的请求后，首先写入消息队列，让消息队列去处理数据</li>
+<li>解耦：不同的系统之间解耦，当一个系统出错时，使用消息队列，可以返回给用户成功，先把消息持久化，等系统恢复后在执行对于业务</li>
+<li>异步通讯：将消息写入消息队列，非必要的业务逻辑以异步的方式运行，不影响主流程业务。</li>
 </ul>
 <h2 id="kafka的topic操作命令"><a href="#kafka的topic操作命令" class="headerlink" title="kafka的topic操作命令"></a>kafka的topic操作命令</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221017141200142.png?raw=true" alt="topic操作命令"></p>
 <ul>
@@ -282,21 +282,21 @@
 </ul>
 <h2 id="生产者数据发送流程"><a href="#生产者数据发送流程" class="headerlink" title="生产者数据发送流程"></a>生产者数据发送流程</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019095126554.png?raw=true"></p>
 <h3 id="数据可靠性"><a href="#数据可靠性" class="headerlink" title="数据可靠性"></a>数据可靠性</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019095145906.png?raw=true" alt="image-20221019095145906"></p>
-<h3 id="数据重复-用事务和幂等性保证数据不重复"><a href="#数据重复-用事务和幂等性保证数据不重复" class="headerlink" title="数据重复(用事务和幂等性保证数据不重复)"></a>数据重复(用事务和幂等性保证数据不重复)</h3><ul>
+<h3 id="kafka保证不重复消费-事务-幂等性"><a href="#kafka保证不重复消费-事务-幂等性" class="headerlink" title="kafka保证不重复消费(事务+幂等性)"></a>kafka保证不重复消费(事务+幂等性)</h3><ul>
 <li>至少一次（at least once）：消息不会丢失，但有可能被重复发送。</li>
 <li>精确一次（exactly once）：消息不会丢失，也不会被重复发送。</li>
 </ul>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019113906587.png?raw=true" alt="image-20221019113906587"></p>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019103137587.png?raw=true" alt="image-20221019103137587"></p>
-<h3 id="数据乱序"><a href="#数据乱序" class="headerlink" title="数据乱序"></a>数据乱序</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019104227555.png?raw=true" alt="image-20221019104227555"></p>
 <h3 id="zookeeper中存储的kafka信息"><a href="#zookeeper中存储的kafka信息" class="headerlink" title="zookeeper中存储的kafka信息"></a>zookeeper中存储的kafka信息</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019105124426.png?raw=true" alt="image-20221019105124426"></p>
 <h3 id="kafka文件存储机制"><a href="#kafka文件存储机制" class="headerlink" title="kafka文件存储机制"></a>kafka文件存储机制</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021090835996.png?raw=true" alt="image-20221021090835996"></p>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021091945986.png?raw=true"></p>
-<h3 id="kafka的高效读写"><a href="#kafka的高效读写" class="headerlink" title="kafka的高效读写"></a>kafka的高效读写</h3><ul>
+<h3 id="kafka的高效"><a href="#kafka的高效" class="headerlink" title="kafka的高效"></a>kafka的高效</h3><ul>
 <li>分布式集群，并行度高</li>
-<li>才有稀疏索引，快速定位存储的数据</li>
+<li>采用稀疏索引，快速定位存储的数据</li>
 <li>顺序读写磁盘数据，速度快</li>
 <li>页缓存和零拷贝技术存数据</li>
+<li>Kafka使用了批量压缩，即将多个消息一起压缩</li>
 </ul>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021093429885.png?raw=true" alt="image-20221021093429885"></p>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021093347710.png?raw=true" alt="image-20221021093347710"></p>
@@ -304,10 +304,34 @@
 <li>采用pull模式：消费者主动从broker中主动拉取数据，缺点是如果broker没有数据会陷入循环访问</li>
 <li>每个分区的数据只能由消费者组中一个消费者消费，同一个组内的消费者可以消费不同的分区，消费者组是逻辑上的一个订阅者</li>
 </ul>
+<p>​	除此之外还有一个push模式，服务器端及时地向客户端推送更新动态信息，推模式采用广播方式，不能确保信息发送成功</p>
 <h3 id="kafka消费者组的初始化流程"><a href="#kafka消费者组的初始化流程" class="headerlink" title="kafka消费者组的初始化流程"></a>kafka消费者组的初始化流程</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095607125.png?raw=true" alt="image-20221021095607125"></p>
 <h3 id="kafka消费者组的消费流程"><a href="#kafka消费者组的消费流程" class="headerlink" title="kafka消费者组的消费流程"></a>kafka消费者组的消费流程</h3><p>系统首先对传输的对象序列化，转换为二进制流传输到kafka生产者中，kafka再将二进制流反序列化传输到消费者手中</p>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095940320.png?raw=true" alt="image-20221021095940320"></p>
-<h2 id="kafka调优"><a href="#kafka调优" class="headerlink" title="kafka调优"></a>kafka调优</h2>
+<h3 id="Kafka如何保证消息的消费顺序"><a href="#Kafka如何保证消息的消费顺序" class="headerlink" title="Kafka如何保证消息的消费顺序"></a>Kafka如何保证消息的消费顺序</h3><p>​	每个消息在被添加到分区时，都会分配一个offset，它是消息在此分区中唯一编号，Kafka通过offset保证消息在分区内的顺序，offset的顺序不跨分区能够保证同一个分区内的数据是有序的，我们可以认为一个分区就是一个有序的消息队列。每个Topic可以划分多个分区，同一Topic下的不同分区存储的是完整消息流的一部分，所有partition中数据相加是完整的消息流数据。</p>
+<p>首先保证发送消息有序：</p>
+<ul>
+<li>生产者在发送消息时指定要发送到哪一个分区</li>
+<li>如果指明分区号，可以直接将分区号作为partition值</li>
+<li>如果没有指明分区号但有key的情况下，key.hashcode()对partition的数目取余就是最后的分区值</li>
+</ul>
+<p>其次保证消费顺序有序：</p>
+<ul>
+<li>消费者有多个线程来并发来处理消息</li>
+<li>在消费者端创建多个内存队列，具有相同的key的数据都被分到同一个内存队列中，每个线程分别消费一个内存队列中的消息就能保证消息的顺序性</li>
+</ul>
+<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230327211520206.png" alt="image-20230327211520206" style="zoom:67%;" />
+
+
+
+<h3 id="Partition副本"><a href="#Partition副本" class="headerlink" title="Partition副本"></a>Partition副本</h3><p>​	一个分区可以有一个或多个副本，副本根据是否接受读写请求，又可分为leader副本和follower副本，一个分区有一个leader副本，0个或多个follower副本。Leader副本处理分区所以的读写请求并维护自身与follower副本的状态信息。follower副本作为消费者从leader副本拉取消息进行同步。如果leader副本失效，则通过分区的leader选举器从副本列表中选择一个副本作为新的leader。</p>
+<h3 id="MQ消息处理失败"><a href="#MQ消息处理失败" class="headerlink" title="MQ消息处理失败"></a>MQ消息处理失败</h3><p>​	在生产环境中，MQ会设计两个队列，一个是核心业务队列，一个是死信队列，死信队列是专门用来处理异常情况的。比如说我们在下一些订单遇到异常情况失败时，将该消息转入到提前设置好的死信队列中，在异常期间，所有的订单全部都转入死信队列中，创建一个后台线程不断监视系统能够正常运行，如果系统能够正常运行，后台线程就从死信队列中消费异常期间处理失败的订单，重新消费这些信息。</p>
+<h3 id="消息积压过多如何处理"><a href="#消息积压过多如何处理" class="headerlink" title="消息积压过多如何处理"></a>消息积压过多如何处理</h3><ul>
+<li>如果是kafka的consumer消费能力不足，比如消费的数据量少于生产的数据量，则增加topic的partition个数，增加消费者组消费者数量。</li>
+<li>如果在生产消息时，大量的消息打到一个分区上，出现Kafka分区间数据不均衡，需要合理的设置key，比如加个随机数</li>
+<li>消费线程每次拉取的消息数可以适当调大，如果拉取过多导致拉取消息超时，kafka会认为这个消费者消费能力不足，把消费者踢出消费组。</li>
+</ul>
+
     </div>
 
     

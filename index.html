@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -168,6 +168,258 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">项目实现</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-28 21:26:25" itemprop="dateCreated datePublished" datetime="2023-03-28T21:26:25+08:00">2023-03-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-30 12:58:39" itemprop="dateModified" datetime="2023-03-30T12:58:39+08:00">2023-03-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="使用kaptcha做验证码"><a href="#使用kaptcha做验证码" class="headerlink" title="使用kaptcha做验证码"></a>使用kaptcha做验证码</h3><p>1、kaptchaConfig配置验证码生成规则</p>
+<p>2、前端发出&#x2F;kaptcha请求</p>
+<p>3、服务端生成4位验证码，生成UUID存储cookie中，以UUID作为key，验证码作为value，60s过期时间存储在redis中</p>
+<p>4、生成验证码对应的图片，通过流传到前端，前端显示图片</p>
+<p>5、登录时取cookie中的UUID，通过UUID取出验证码，如果验证码错误进行校验，正确则校验用户账密</p>
+<p>6、校验成功则生产登录凭证loginTicket (userId，ticket)，cooike中保存(ticket)，保存在redis中 (ticket：loginTicket)</p>
+<p>7、用户登录成功后访问界面时，被LoginInteceptor拦截进入preHandle方法，取出cookie中的ticket，redis通过ticket取出loginTicket校验用户登录状态</p>
+<p>8、将用户信息存储到ThreadLocal内部，并对登录的用户进行授权</p>
+<p>9、当前端视图渲染之后afterCompletion，手动清除当前线程Threadlocals map中的Threadlocal数据</p>
+<h3 id="用户点赞和关注"><a href="#用户点赞和关注" class="headerlink" title="用户点赞和关注"></a>用户点赞和关注</h3><p>使用redis的set结构存储用户点赞情况，set的key为帖子id，value值为用户的id，判断set中是否有该用户点赞记录，如果标记已点赞状态，可以取消点赞，从set中移出该数据，如果是点赞则触发点赞事件，系统向被点赞的用户发送点赞的通知</p>
+<p>使用redis的zset结构存储用户关注情况，zset的key为用户的id，value值为用户的id，score为关注的时间，判断zset中是否有该用户关注记录，如果标记已关注状态，可以取消关注，从zset中移出该数据，如果是关注则触发关注事件，系统向被关注的用户发送关注的通知</p>
+<h3 id="使用本地缓存Caffeine"><a href="#使用本地缓存Caffeine" class="headerlink" title="使用本地缓存Caffeine"></a>使用本地缓存Caffeine</h3><p>项目启动时，将帖子列表缓存到本地，帖子总数缓存到本地</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/26/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/26/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">排序算法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-26 14:46:27 / 修改时间：14:49:14" itemprop="dateCreated datePublished" datetime="2023-03-26T14:46:27+08:00">2023-03-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BubbleSortTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        <span class="type">int</span> i,j,k;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;arr.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;arr.length-<span class="number">2</span>-i;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                    arr[j] = arr[j]^arr[j+<span class="number">1</span>];</span><br><span class="line">                    arr[j+<span class="number">1</span>] = arr[j]^arr[j+<span class="number">1</span>];</span><br><span class="line">                    arr[j] = arr[j]^arr[j+<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">            System.out.print(arr[i]+<span class="string">&quot;  &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**小顶堆排序</span></span><br><span class="line"><span class="comment"> * 1、建堆---在建堆的时候调整堆，从最后一个父节点开始向上遍历，遍历的元素下浮      createHeap</span></span><br><span class="line"><span class="comment"> * 2、堆排序---取出堆顶元素，将堆底元素放入堆顶，下浮      adjustHeap</span></span><br><span class="line"><span class="comment"> *      1、共n个元素，每次将第一个元素下浮，共进行n-1轮</span></span><br><span class="line"><span class="comment"> * 空间复杂度O(n)</span></span><br><span class="line"><span class="comment"> * 时间复杂度O(nlogn) 建堆O(n) 排序O(nlogn)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HeapSortTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">HeapSortTest</span> <span class="variable">heapSortTest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HeapSortTest</span>();</span><br><span class="line">        <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        heapSortTest.heapSort(arr);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> a : arr) &#123;</span><br><span class="line">            System.out.print(a+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">heapSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">        <span class="comment">//创造最小堆初始化</span></span><br><span class="line">        createHeap(arr);</span><br><span class="line">        <span class="comment">//堆排序过程</span></span><br><span class="line">        <span class="type">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;arr.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            temp = arr[arr.length-<span class="number">1</span>-i];</span><br><span class="line">            arr[arr.length-<span class="number">1</span>-i] = arr[<span class="number">0</span>];</span><br><span class="line">            arr[<span class="number">0</span>] = temp;</span><br><span class="line">            adjustHeap(<span class="number">0</span>,arr.length-i-<span class="number">1</span>,arr);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">createHeap</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> arr.length/<span class="number">2</span>-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            adjustHeap(i,arr.length,arr);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//小顶堆</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">adjustHeap</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> len, <span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[i];</span><br><span class="line">        <span class="type">int</span> j;</span><br><span class="line">        <span class="keyword">for</span> (j = i*<span class="number">2</span>+<span class="number">1</span>; j&lt;len; j=j*<span class="number">2</span>+<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (j+<span class="number">1</span>&lt;len&amp;&amp;arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (temp&gt;arr[j])&#123;</span><br><span class="line">                arr[i] = arr[j];</span><br><span class="line">                i = j;</span><br><span class="line">            &#125;<span class="keyword">else</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        arr[i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">QuickSortTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">QuickSort</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> left,<span class="type">int</span> right)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left&lt;right)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">privot</span> <span class="operator">=</span> getPrivot(array,left,right);</span><br><span class="line">            QuickSort(array,left,privot-<span class="number">1</span>);</span><br><span class="line">            QuickSort(array,privot+<span class="number">1</span>,right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getPrivot</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> left,<span class="type">int</span> right)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">privot</span> <span class="operator">=</span> array[left];</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">            <span class="keyword">while</span>(right&gt;left&amp;&amp;array[right]&gt;privot) right--;</span><br><span class="line">            <span class="keyword">if</span>(array[right]&lt;privot)    array[left] = array[right];</span><br><span class="line">            <span class="keyword">while</span>(right&gt;left&amp;&amp;array[left]&lt;privot)  left++;</span><br><span class="line">            <span class="keyword">if</span>(array[left]&gt;privot) array[right] = array[left];</span><br><span class="line">        &#125;</span><br><span class="line">        array[left] = privot;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">QuickSortTest</span> <span class="variable">quickSortTest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">QuickSortTest</span>();</span><br><span class="line">        <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        quickSortTest.QuickSort(arr,<span class="number">0</span>,arr.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> a : arr) &#123;</span><br><span class="line">            System.out.print(a+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(nlogn)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MergeSortTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">mergeSort</span><span class="params">(<span class="type">int</span>[] arr,<span class="type">int</span>[] temp,<span class="type">int</span> left,<span class="type">int</span> right)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left&lt;right)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (left+right)/<span class="number">2</span>;</span><br><span class="line">            mergeSort(arr,temp,left,mid);</span><br><span class="line">            mergeSort(arr,temp,mid+<span class="number">1</span>,right);</span><br><span class="line">            <span class="type">int</span> <span class="variable">start1</span> <span class="operator">=</span> left, end1 = mid, start2 = mid+<span class="number">1</span>, end2 = right;</span><br><span class="line">            <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> start1;</span><br><span class="line">            <span class="keyword">while</span> (start1&lt;=end1&amp;&amp;start2&lt;=end2)     temp[index++] = arr[start1]&lt;arr[start2] ? arr[start1++]: arr[start2++];</span><br><span class="line">            <span class="keyword">while</span> (start1&lt;=end1)     temp[index++] = arr[start1++];</span><br><span class="line">            <span class="keyword">while</span> (start2&lt;=end2)     temp[index++] = arr[start2++];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i=left;i&lt;=right;i++)</span><br><span class="line">                arr[i] = temp[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">MergeSortTest</span> <span class="variable">mergeSortTest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MergeSortTest</span>();</span><br><span class="line">        <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[arr.length];</span><br><span class="line">        mergeSortTest.mergeSort(arr,temp,<span class="number">0</span>,arr.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> a : arr) &#123;</span><br><span class="line">            System.out.print(a+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/26/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/26/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-26 14:41:03 / 修改时间：14:46:10" itemprop="dateCreated datePublished" datetime="2023-03-26T14:41:03+08:00">2023-03-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBloomFilter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//默认位数组的大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">DEFAULT_SIZE</span> <span class="operator">=</span> <span class="number">2</span> &lt;&lt; <span class="number">14</span>;</span><br><span class="line">    <span class="comment">//不同的hash参数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] HASH_PARAM = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">3</span>,<span class="number">13</span>,<span class="number">31</span>,<span class="number">131</span>,<span class="number">1313</span>,<span class="number">13131</span>&#125;;</span><br><span class="line">    <span class="comment">//位数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">BitSet</span> <span class="variable">bits</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BitSet</span>(DEFAULT_SIZE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyBloomFilter</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//同多个hash算法向位数组中添加元素 </span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;HASH_PARAM.length; i++)&#123;</span><br><span class="line">            bits.set(getHash(HASH_PARAM[i],obj),<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断是否存在，所有hash值都为1可能会存在</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">mightContains</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">res</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;HASH_PARAM.length; i++)&#123;</span><br><span class="line">            res = res &amp;&amp; bits.get(getHash(HASH_PARAM[i],obj));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取对象对应的hash值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getHash</span><span class="params">(<span class="type">int</span> hashParam, Object obj)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> obj.hashCode()^(obj.hashCode() &gt;&gt;&gt; <span class="number">16</span>) &amp; (DEFAULT_SIZE-<span class="number">1</span>)^hashParam;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//可能出现误判概率，但很低</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="type">MyBloomFilter</span> <span class="variable">myBloomFilter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyBloomFilter</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000000</span>;i++)&#123;</span><br><span class="line">            myBloomFilter.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">20000000</span>;i++)&#123;</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">ans</span> <span class="operator">=</span> myBloomFilter.mightContains(i);</span><br><span class="line">            <span class="keyword">if</span> (ans)    count++;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -213,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-15 20:13:27" itemprop="dateModified" datetime="2023-03-15T20:13:27+08:00">2023-03-15</time>
+      <time title="修改时间：2023-03-20 12:34:04" itemprop="dateModified" datetime="2023-03-20T12:34:04+08:00">2023-03-20</time>
     </span>
 
   
@@ -226,28 +478,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="函数索引优化，为表中添加虚拟字段，为虚拟字段添加索引"><a href="#函数索引优化，为表中添加虚拟字段，为虚拟字段添加索引" class="headerlink" title="函数索引优化，为表中添加虚拟字段，为虚拟字段添加索引"></a>函数索引优化，为表中添加虚拟字段，为虚拟字段添加索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="number">1</span>) </span><br><span class="line"><span class="keyword">FROM</span> (</span><br><span class="line">      <span class="keyword">SELECT</span> <span class="built_in">MAX</span>(u.lname) <span class="keyword">AS</span> userId, <span class="built_in">COUNT</span>(t.userid) <span class="keyword">AS</span> loginCount</span><br><span class="line">		, <span class="built_in">MAX</span>(t.timestamp) <span class="keyword">AS</span> <span class="type">timeStamp</span></span><br><span class="line">     <span class="keyword">FROM</span> tpl_huawei_log_events_t_1 t</span><br><span class="line">     <span class="keyword">INNER</span> <span class="keyword">JOIN</span> tpl_user_t u <span class="keyword">ON</span> <span class="built_in">LOWER</span>(u.w3_account) <span class="operator">=</span> <span class="built_in">LOWER</span>(t.userid)</span><br><span class="line">       <span class="keyword">WHERE</span> t.operate <span class="keyword">IN</span> (<span class="string">&#x27;User login&#x27;</span>)</span><br><span class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span> t.userid</span><br><span class="line">	<span class="keyword">ORDER</span> <span class="keyword">BY</span> subStr(<span class="type">timeStamp</span>, <span class="number">1</span>, <span class="number">10</span>) <span class="keyword">DESC</span>, <span class="built_in">COUNT</span>(t.userid) <span class="keyword">DESC</span></span><br><span class="line">) t</span><br></pre></td></tr></table></figure>
-
-<p>使用了LOWER函数，即使列上建了索引，也使用不到，解决方案：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在tpl_user_t表W3_ACCOUNT字段添加虚拟列和索引，在mysql数据库执行以下脚本：</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tpl_user_t <span class="keyword">ADD</span> lower_W3_ACCOUNT <span class="type">varchar</span>(<span class="number">100</span>) GENERATED ALWAYS <span class="keyword">AS</span> (<span class="built_in">LOWER</span>(W3_ACCOUNT )) VIRTUAL;</span><br><span class="line"><span class="keyword">CREATE</span> INDEX idx_lower_W3_ACCOUNT <span class="keyword">ON</span> tpl_user_t(lower_W3_ACCOUNT);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="CompletableFuture优化执行逻辑"><a href="#CompletableFuture优化执行逻辑" class="headerlink" title="CompletableFuture优化执行逻辑"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hama1993/p/10534202.html">CompletableFuture优化执行逻辑</a></h3><ul>
-<li>对于同一个方法中相互独立的模块，可以开启线程池启用多个线程去执行各个模块，执行时间为最长的一个模块</li>
-<li>对于同一个方法中既有相互独立也有相互关联的模块时，采用<code>CompletableFuture</code>，对于相互独立的模块直接异步执行，相关的模块通过<code>CompletableFuture</code>的<code>thenApply</code>实现单依赖关联，<code>thenCompose</code>实现多依赖关联</li>
-</ul>
-<h3 id="排查线程，CPU，内存使用问题"><a href="#排查线程，CPU，内存使用问题" class="headerlink" title="排查线程，CPU，内存使用问题"></a>排查线程，CPU，内存使用问题</h3><ul>
-<li><p>jstack pid 排查进程中的线程堆栈信息，查看进程中是否有死锁出现</p>
-</li>
-<li><p>top指令查看linux各个线程的cpu使用情况</p>
-</li>
-<li><p>jconsole  		查看各个线程的运行情况检测死锁，CPU使用率，活跃线程数，堆内存使用情况，进程中类的使用情况</p>
-</li>
-<li><p>jvirualvm 		查看各个线程的运行情况检测死锁，CPU使用率，活跃线程数，堆内存使用情况，进程中类的使用情况，手动执行垃圾回收</p>
-</li>
-</ul>
-
+          <h3 id="函数索引优化，为表中添加虚拟字段，为虚拟字段添加索引"><a href="#函数索引优化，为表中添加虚拟字段，为虚拟字段添加索引" class="headerlink" title="函数索引优化，为表中添加虚拟字段，为虚拟字段添加索引"></a>函数索引优化，为表中添加虚拟字段，为虚拟字段添加索引</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/08/%E4%BC%98%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -401,7 +640,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:39:43" itemprop="dateModified" datetime="2023-02-21T22:39:43+08:00">2023-02-21</time>
+      <time title="修改时间：2023-03-26 15:13:04" itemprop="dateModified" datetime="2023-03-26T15:13:04+08:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -585,7 +824,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-19 15:41:44" itemprop="dateModified" datetime="2023-03-19T15:41:44+08:00">2023-03-19</time>
+      <time title="修改时间：2023-04-13 22:12:19" itemprop="dateModified" datetime="2023-04-13T22:12:19+08:00">2023-04-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -611,98 +850,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/09/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/23/linux%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
-      <meta itemprop="name" content="bean">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我要去大厂">
-      <meta itemprop="description" content="博客记录学习生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 我要去大厂">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/23/linux%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">linux命令</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-11-23 15:23:52" itemprop="dateCreated datePublished" datetime="2022-11-23T15:23:52+08:00">2022-11-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-15 20:11:56" itemprop="dateModified" datetime="2023-03-15T20:11:56+08:00">2023-03-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">面试题</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/11/23/linux%E5%91%BD%E4%BB%A4/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -769,7 +916,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-19 16:12:33" itemprop="dateModified" datetime="2023-03-19T16:12:33+08:00">2023-03-19</time>
+      <time title="修改时间：2023-04-02 16:44:05" itemprop="dateModified" datetime="2023-04-02T16:44:05+08:00">2023-04-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -861,7 +1008,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-19 15:25:34" itemprop="dateModified" datetime="2023-03-19T15:25:34+08:00">2023-03-19</time>
+      <time title="修改时间：2023-03-26 15:59:38" itemprop="dateModified" datetime="2023-03-26T15:59:38+08:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -909,192 +1056,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/27/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%88%A4%E7%8E%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
-      <meta itemprop="name" content="bean">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我要去大厂">
-      <meta itemprop="description" content="博客记录学习生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 我要去大厂">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/27/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%88%A4%E7%8E%AF/" class="post-title-link" itemprop="url">算法-链表判环</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-27 16:41:21" itemprop="dateCreated datePublished" datetime="2022-10-27T16:41:21+08:00">2022-10-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:34:38" itemprop="dateModified" datetime="2023-02-21T22:34:38+08:00">2023-02-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="LeetCode-142-环形链表"><a href="#LeetCode-142-环形链表" class="headerlink" title="LeetCode 142  环形链表"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/insertion-sort-list/">LeetCode 142  环形链表</a></h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/27/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E5%88%A4%E7%8E%AF/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/16/kafka/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
-      <meta itemprop="name" content="bean">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我要去大厂">
-      <meta itemprop="description" content="博客记录学习生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 我要去大厂">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/16/kafka/" class="post-title-link" itemprop="url">kafka</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-16 19:20:46" itemprop="dateCreated datePublished" datetime="2022-10-16T19:20:46+08:00">2022-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:35:42" itemprop="dateModified" datetime="2023-02-21T22:35:42+08:00">2023-02-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">面试题</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Kafka合集"><a href="#Kafka合集" class="headerlink" title="Kafka合集"></a>Kafka合集</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/16/kafka/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

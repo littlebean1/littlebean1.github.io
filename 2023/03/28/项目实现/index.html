@@ -20,30 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Linux">
+    <meta name="description" content="使用kaptcha做验证码1、kaptchaConfig配置验证码生成规则 2、前端发出&#x2F;kaptcha请求 3、服务端生成4位验证码，生成UUID存储cookie中，以UUID作为key，验证码作为value，60s过期时间存储在redis中 4、生成验证码对应的图片，通过流传到前端，前端显示图片 5、登录时取cookie中的UUID，通过UUID取出验证码，如果验证码错误进行校验，正">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux命令">
-<meta property="og:url" content="http://example.com/2022/11/23/linux%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="项目实现">
+<meta property="og:url" content="http://example.com/2023/03/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="我要去大厂">
-<meta property="og:description" content="Linux">
+<meta property="og:description" content="使用kaptcha做验证码1、kaptchaConfig配置验证码生成规则 2、前端发出&#x2F;kaptcha请求 3、服务端生成4位验证码，生成UUID存储cookie中，以UUID作为key，验证码作为value，60s过期时间存储在redis中 4、生成验证码对应的图片，通过流传到前端，前端显示图片 5、登录时取cookie中的UUID，通过UUID取出验证码，如果验证码错误进行校验，正">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221204204727229.png?raw=true">
-<meta property="article:published_time" content="2022-11-23T07:23:52.000Z">
-<meta property="article:modified_time" content="2023-03-15T12:11:56.010Z">
+<meta property="article:published_time" content="2023-03-28T13:26:25.000Z">
+<meta property="article:modified_time" content="2023-03-30T04:58:39.469Z">
 <meta property="article:author" content="bean">
-<meta property="article:tag" content="八股文">
+<meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221204204727229.png?raw=true">
 
 
-<link rel="canonical" href="http://example.com/2022/11/23/linux%E5%91%BD%E4%BB%A4/">
+<link rel="canonical" href="http://example.com/2023/03/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/11/23/linux%E5%91%BD%E4%BB%A4/","path":"2022/11/23/linux命令/","title":"linux命令"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/03/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/","path":"2023/03/28/项目实现/","title":"项目实现"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>linux命令 | 我要去大厂</title>
+<title>项目实现 | 我要去大厂</title>
   
 
 
@@ -119,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">1.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5CPU%E8%BF%87%E9%AB%98%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.1.</span> <span class="nav-text">排查CPU过高问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E5%91%BD%E4%BB%A4%E5%90%88%E9%9B%86-https-blog-csdn-net-wojiaopanpan-article-details-7286430"><span class="nav-number">1.0.2.</span> <span class="nav-text">[linux命令合集][https:&#x2F;&#x2F;blog.csdn.net&#x2F;wojiaopanpan&#x2F;article&#x2F;details&#x2F;7286430]</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8kaptcha%E5%81%9A%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">使用kaptcha做验证码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%82%B9%E8%B5%9E%E5%92%8C%E5%85%B3%E6%B3%A8"><span class="nav-number">2.</span> <span class="nav-text">用户点赞和关注</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98Caffeine"><span class="nav-number">3.</span> <span class="nav-text">使用本地缓存Caffeine</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -134,7 +132,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -145,7 +143,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -184,7 +182,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/23/linux%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
@@ -197,12 +195,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="linux命令 | 我要去大厂">
+      <meta itemprop="name" content="项目实现 | 我要去大厂">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          linux命令
+          项目实现
         </h1>
 
         <div class="post-meta-container">
@@ -213,23 +211,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-11-23 15:23:52" itemprop="dateCreated datePublished" datetime="2022-11-23T15:23:52+08:00">2022-11-23</time>
+      <time title="创建时间：2023-03-28 21:26:25" itemprop="dateCreated datePublished" datetime="2023-03-28T21:26:25+08:00">2023-03-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-15 20:11:56" itemprop="dateModified" datetime="2023-03-15T20:11:56+08:00">2023-03-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">面试题</span></a>
-        </span>
+      <time title="修改时间：2023-03-30 12:58:39" itemprop="dateModified" datetime="2023-03-30T12:58:39+08:00">2023-03-30</time>
     </span>
 
   
@@ -242,48 +231,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><span id="more"></span>     
-
-<h3 id="排查CPU过高问题"><a href="#排查CPU过高问题" class="headerlink" title="排查CPU过高问题"></a>排查CPU过高问题</h3><p>top命令：动态显示系统中进程的相关信息，包括内存占用，CPU占用，进程ID</p>
-<p>第一行显示系统当前时间，系统运行时间，当前登录的用户数目</p>
-<p>第二行显示系统当前的进程数目，总进程数，正在运行的进程数，睡眠的进程数</p>
-<p>第三行显示CPU的相关信息</p>
-<p>第四行显示物理内存的总量和使用情况 (使用+空闲+缓存 &#x3D; 总量)</p>
-<p>第五行显示交换区总量和使用情况 (使用+空闲+缓存 &#x3D; 总量)</p>
-<p>下面显示的一些进程的详细信息</p>
-<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221204204727229.png?raw=true" alt="image-20221204204727229" style="zoom: 67%;" />
-
-<h3 id="linux命令合集-https-blog-csdn-net-wojiaopanpan-article-details-7286430"><a href="#linux命令合集-https-blog-csdn-net-wojiaopanpan-article-details-7286430" class="headerlink" title="[linux命令合集][https://blog.csdn.net/wojiaopanpan/article/details/7286430]"></a>[linux命令合集][<a target="_blank" rel="noopener" href="https://blog.csdn.net/wojiaopanpan/article/details/7286430]">https://blog.csdn.net/wojiaopanpan/article/details/7286430]</a></h3><ul>
-<li><p>ps命令：查看系统正在运行的进程的情况，包括进程号，CPU运行进程时间，进程运行的命令</p>
-</li>
-<li><p>netstat命令：用来查看linux系统的网络状态，netstat -ntlp</p>
-<ul>
-<li>-t:tcp，-u:udp，-a:all，-l:listening，-p:进程id和程序名，-r:路由表，-n:显示ip&#x2F;port</li>
-</ul>
-</li>
-<li><p>sort file1 -k 2	&#x2F;&#x2F;对第二列数据排序</p>
-</li>
-<li><p>uniq -l file1       &#x2F;&#x2F;按连续顺序统计重复行</p>
-</li>
-<li><p>tail -10 file1</p>
-</li>
-<li><p>head -10 file1</p>
-</li>
-<li><p>mkdir</p>
-</li>
-<li><p>rmdir</p>
-</li>
-<li><p>touch</p>
-</li>
-<li><p>find &#x2F;root&#x2F;test -name file1</p>
-</li>
-<li><p>df (dist free)</p>
-</li>
-<li><p>du (dist use)</p>
-</li>
-<li><p>history</p>
-</li>
-</ul>
+        <h3 id="使用kaptcha做验证码"><a href="#使用kaptcha做验证码" class="headerlink" title="使用kaptcha做验证码"></a>使用kaptcha做验证码</h3><p>1、kaptchaConfig配置验证码生成规则</p>
+<p>2、前端发出&#x2F;kaptcha请求</p>
+<p>3、服务端生成4位验证码，生成UUID存储cookie中，以UUID作为key，验证码作为value，60s过期时间存储在redis中</p>
+<p>4、生成验证码对应的图片，通过流传到前端，前端显示图片</p>
+<p>5、登录时取cookie中的UUID，通过UUID取出验证码，如果验证码错误进行校验，正确则校验用户账密</p>
+<p>6、校验成功则生产登录凭证loginTicket (userId，ticket)，cooike中保存(ticket)，保存在redis中 (ticket：loginTicket)</p>
+<p>7、用户登录成功后访问界面时，被LoginInteceptor拦截进入preHandle方法，取出cookie中的ticket，redis通过ticket取出loginTicket校验用户登录状态</p>
+<p>8、将用户信息存储到ThreadLocal内部，并对登录的用户进行授权</p>
+<p>9、当前端视图渲染之后afterCompletion，手动清除当前线程Threadlocals map中的Threadlocal数据</p>
+<h3 id="用户点赞和关注"><a href="#用户点赞和关注" class="headerlink" title="用户点赞和关注"></a>用户点赞和关注</h3><p>使用redis的set结构存储用户点赞情况，set的key为帖子id，value值为用户的id，判断set中是否有该用户点赞记录，如果标记已点赞状态，可以取消点赞，从set中移出该数据，如果是点赞则触发点赞事件，系统向被点赞的用户发送点赞的通知</p>
+<p>使用redis的zset结构存储用户关注情况，zset的key为用户的id，value值为用户的id，score为关注的时间，判断zset中是否有该用户关注记录，如果标记已关注状态，可以取消关注，从zset中移出该数据，如果是关注则触发关注事件，系统向被关注的用户发送关注的通知</p>
+<h3 id="使用本地缓存Caffeine"><a href="#使用本地缓存Caffeine" class="headerlink" title="使用本地缓存Caffeine"></a>使用本地缓存Caffeine</h3><p>项目启动时，将帖子列表缓存到本地，帖子总数缓存到本地</p>
 
     </div>
 
@@ -293,21 +252,18 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" rel="tag"># 八股文</a>
+              <a href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag"># 项目</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/11/17/java%E5%9F%BA%E7%A1%80/" rel="prev" title="java基础">
-                  <i class="fa fa-chevron-left"></i> java基础
+                <a href="/2023/03/26/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="prev" title="排序算法">
+                  <i class="fa fa-chevron-left"></i> 排序算法
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/12/09/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="next" title="JUC并发编程">
-                  JUC并发编程 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

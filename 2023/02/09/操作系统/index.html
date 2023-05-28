@@ -27,11 +27,15 @@
 <meta property="og:site_name" content="我要去大厂">
 <meta property="og:description" content="操作系统合集">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230325153043126.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230325153126219.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230325153147982.png">
 <meta property="article:published_time" content="2023-02-09T13:54:56.000Z">
-<meta property="article:modified_time" content="2023-02-21T14:39:43.480Z">
+<meta property="article:modified_time" content="2023-03-26T07:13:04.819Z">
 <meta property="article:author" content="bean">
 <meta property="article:tag" content="八股文">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230325153043126.png">
 
 
 <link rel="canonical" href="http://example.com/2023/02/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
@@ -117,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%90%88%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">操作系统合集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BB%84%E6%88%90%EF%BC%9A"><span class="nav-number">1.0.1.</span> <span class="nav-text">进程的组成：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.0.2.</span> <span class="nav-text">线程和进程的区别</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%90%88%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">操作系统合集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BB%84%E6%88%90%EF%BC%9A"><span class="nav-number">1.0.1.</span> <span class="nav-text">进程的组成：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.0.2.</span> <span class="nav-text">线程和进程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="nav-number">1.0.3.</span> <span class="nav-text">进程间的通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98"><span class="nav-number">1.0.4.</span> <span class="nav-text">共享内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%B6%E6%8B%B7%E8%B4%9D"><span class="nav-number">1.0.5.</span> <span class="nav-text">零拷贝</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -132,7 +136,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -143,7 +147,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -218,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:39:43" itemprop="dateModified" datetime="2023-02-21T22:39:43+08:00">2023-02-21</time>
+      <time title="修改时间：2023-03-26 15:13:04" itemprop="dateModified" datetime="2023-03-26T15:13:04+08:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -258,6 +262,29 @@
 </ul>
 </li>
 </ul>
+<h3 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h3><ul>
+<li>共享内存：不同进程通过共享的内存区传递消息</li>
+<li>管道：是半双工的（即数据只能在一个方向上流动），具有固定的读端和写端；内核和用户空间进行四次的数据拷贝</li>
+<li>消息队列：是一系列保存在内核中的消息的链表。用户进程可以向消息队列添加消息，也可以从中读取特定类型的消息；内核和用户空间进行四次的数据拷贝</li>
+</ul>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>​	共享内存是一种最高效的进程间的通信方式，进程可以直接读写内存，而进程之间不需要通过任何数据的拷贝。内核中有一块供多个进程交换信息的内存区，可由需要访问的进程将内存区映射到自己的私有地址空间。进程之间可以读写内核的这一内存区，而不需要进行数据拷贝。由于出现多个进程共享一段内存的情况，需要依靠互斥锁，信号量等同步机制来实现内存共享的功能。</p>
+<h3 id="零拷贝"><a href="#零拷贝" class="headerlink" title="零拷贝"></a>零拷贝</h3><p>概念：零拷贝并不是没有拷贝数据，而是减少用户态、内核态的切换次数以及CPU拷贝次数</p>
+<ul>
+<li>传统的读数据流程</li>
+</ul>
+<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230325153043126.png" alt="image-20230325153043126" style="zoom:50%;" />
+
+<ul>
+<li>mmap+write：把内核空间和用户空间的虚拟地址映射到同一个物理地址，将内核中的读缓冲区与用户空间的缓冲区进行映射，所有的IO都在内核中完成<br>1.用户进程通过调用mmap方法向操作系统内核发起IO调用，上下文从用户态切换至内核态<br>2.CPU利用DMA控制器，将数据从硬盘拷贝到内核缓冲区<br>3.上下文从内核态切换回用户态，mmap方法返回<br>4.用户进程通过调用write方法向操作系统内核再次发起IO调用，上下文从用户态切换至内核态<br>5.CPU将内核缓冲区的数据拷贝到socket缓冲区<br>6.CPU利用DMA控制器，将数据从socket缓冲器拷贝到网卡，上下文从内核态切换至用户态，write方法返回</li>
+</ul>
+<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230325153126219.png" alt="image-20230325153126219" style="zoom:50%;" />
+
+<ul>
+<li>sendfile：在两个文件之间传输数据，它是在操作系统内核中操作的，避免了数据从内核缓冲区和用户缓冲区之间的拷贝操作，因此可以使用它来实现零拷贝<br>1.用户进程发起sendfile系统调用，上下文从用户态切换至内核态<br>2.DMA控制器将数据从硬盘拷贝到内核缓冲区<br>3.CPU将读缓冲区中的数据拷贝到socket缓冲区<br>4.DMA控制器异步把数据从socket缓冲器拷贝到网卡<br>5.上下文从内核态切换至用户态，sendfile函数返回</li>
+</ul>
+<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20230325153147982.png" alt="image-20230325153147982" style="zoom:50%;" />
+
+<p>kafka传输数据快原因就是因为底层采用了sendfile零拷贝技术</p>
 
     </div>
 
