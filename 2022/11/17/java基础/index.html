@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230328204154238.png">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/Image.png">
 <meta property="article:published_time" content="2022-11-17T08:49:50.000Z">
-<meta property="article:modified_time" content="2023-05-28T11:36:27.105Z">
+<meta property="article:modified_time" content="2023-05-28T11:40:27.455Z">
 <meta property="article:author" content="bean">
 <meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-28 19:36:27" itemprop="dateModified" datetime="2023-05-28T19:36:27+08:00">2023-05-28</time>
+      <time title="修改时间：2023-05-28 19:40:27" itemprop="dateModified" datetime="2023-05-28T19:40:27+08:00">2023-05-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -256,7 +256,8 @@
     <div class="post-body" itemprop="articleBody">
         <h1 id="集合源码"><a href="#集合源码" class="headerlink" title="集合源码"></a>集合源码</h1><span id="more"></span>     
 
-<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="hashmap底层扩容"><a href="#hashmap底层扩容" class="headerlink" title="hashmap底层扩容"></a>hashmap底层扩容</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165105613.png?raw=true" alt="image-20221117165105613"></p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="hashmap底层扩容"><a href="#hashmap底层扩容" class="headerlink" title="hashmap底层扩容"></a>hashmap底层扩容</h3><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165105613.png?raw=true" alt="image-20221117165105613" style="zoom: 80%;" />
+
 <h3 id="HashMap的put方法"><a href="#HashMap的put方法" class="headerlink" title="HashMap的put方法"></a>HashMap的put方法</h3><ul>
 <li>首先判断hashmap维护的Node数组table是否为null，长度是否为0，如果为空则对table数组进行resize扩容</li>
 <li>根据传递过来的key计算hash码得到数组的位置</li>
@@ -268,7 +269,10 @@
 <li>如果超过阈值则扩容</li>
 </ul>
 <h3 id="hashmap通过entrySet遍历"><a href="#hashmap通过entrySet遍历" class="headerlink" title="hashmap通过entrySet遍历"></a>hashmap通过entrySet遍历</h3><p>Node类实现了Map.Entry的接口，所以在遍历时可以直接遍历Entry并使用Entry的getkey() 与 getvalue()</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165047896.png?raw=true" alt="image-20221117165047896"></p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221117165047896.png?raw=true" alt="image-20221117165047896" style="zoom:80%;" />
+
+
+
 <h3 id="HashSet底层原理"><a href="#HashSet底层原理" class="headerlink" title="HashSet底层原理"></a>HashSet底层原理</h3><p>​	HashSet内部维护了一个HashMap，在执行set.add操作时，会调用HashMap的put函数，以存储的值作为key，随机创建对象new Object()作为value填充到map，其他的过程与hashmap完全一致。</p>
 <h3 id="HashTable底层原理"><a href="#HashTable底层原理" class="headerlink" title="HashTable底层原理"></a>HashTable底层原理</h3><ul>
 <li>该类维护一个Enrty<?,?>的数组，数组中每一项都有一条链表，方法上都被Synchronized关键字修饰实现并发同步</li>
@@ -545,7 +549,8 @@
 <h3 id="BeanPostProcessor后置处理器作用"><a href="#BeanPostProcessor后置处理器作用" class="headerlink" title="BeanPostProcessor后置处理器作用"></a>BeanPostProcessor后置处理器作用</h3><p>后置处理器可用于bean对象初始化前后进行逻辑增强。<br>Spring提供了BeanPostProcessor接口的很多实现类，例如AutowiredAnnotationBeanPostProcessor用于@Autowired注解的实现，AnnotationAwareAspectJAutoProxyCreator用于Spring AOP的动态代理等等。</p>
 <h3 id="XxxAware原理"><a href="#XxxAware原理" class="headerlink" title="XxxAware原理"></a>XxxAware原理</h3><p>XxxAware接口的底层原理是由XxxAwareProcessor实现类实现的，也就是说每一个XxxAware接口都有它自己对应的XxxAwareProcessor实现类。 例如，我们这里以ApplicationContextAware接口为例，ApplicationContextAware接口的底层原理就是由ApplicationContextAwareProcessor类实现的。从ApplicationContextAwareProcessor类的源码可以看出，其实现了BeanPostProcessor接口，本质上是一个后置处理器。</p>
 <h3 id="循环依赖"><a href="#循环依赖" class="headerlink" title="循环依赖"></a>循环依赖</h3><p>spring循环依赖是指A依赖B，B也依赖A，这种情况就会出现循环依赖</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230213201811442.png" alt="image-20230213201811442"></p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230213201811442.png" alt="image-20230213201811442" style="zoom:80%;" />
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">instanceWrapper = createBeanInstance(beanName, mbd, args);	<span class="comment">//实例化bean对象</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">earlySingletonExposure</span> <span class="operator">=</span> (mbd.isSingleton()&amp;&amp;<span class="built_in">this</span>.allowCircularReferences&amp;&amp;isSingletonCurrentlyInCreation(beanName));</span><br><span class="line">	<span class="keyword">if</span> (earlySingletonExposure)		<span class="comment">//如果是单例且在创建过程中</span></span><br><span class="line">       addSingletonFactory(beanName,()-&gt;getEarlyBeanReference(beanName,mbd,bean)<span class="comment">/**判断是否为代理对象*/</span>); <span class="comment">//无论是否代理都添加到三级缓存</span></span><br><span class="line">populateBean(beanName, mbd, instanceWrapper);		<span class="comment">//完成赋值并且判断是否有依赖注入</span></span><br><span class="line">exposedObject = initializeBean(beanName, exposedObject, mbd);	<span class="comment">//生成代理对象</span></span><br></pre></td></tr></table></figure>
 
 
@@ -622,7 +627,10 @@
 </ul>
 <h3 id="拦截器与过滤器的执行顺序"><a href="#拦截器与过滤器的执行顺序" class="headerlink" title="拦截器与过滤器的执行顺序"></a>拦截器与过滤器的执行顺序</h3><p>过滤器Filter是在请求进入容器后，但在进入servlet之前进行预处理，请求结束是在servlet处理完以后。</p>
 <p>拦截器 Interceptor 是在请求进入servlet后，在进入Controller之前进行预处理的，Controller 中渲染了对应的视图之后请求结束。</p>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230328204050336.png" alt="image-20230328204050336"></p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230328204050336.png" alt="image-20230328204050336" style="zoom:80%;" />
+
+
+
 <h3 id="多个拦截器的执行顺序"><a href="#多个拦截器的执行顺序" class="headerlink" title="多个拦截器的执行顺序"></a>多个拦截器的执行顺序</h3><ul>
 <li><p>根据当前请求，找到HandlerExecutionChain，顺序执行所有拦截器的 preHandle方法</p>
 </li>
@@ -631,8 +639,16 @@
 <li><p>如果当前拦截器preHandler返回为false。直接倒序执行所有已经执行了的拦截器的 afterCompletion；</p>
 </li>
 </ul>
-<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230328204154238.png" alt="image-20230328204154238"></p>
-<h3 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/Image.png" alt="Image"></p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230328204154238.png" alt="image-20230328204154238" style="zoom:80%;" />
+
+
+
+<h3 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h3><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/Image.png" alt="Image" style="zoom:67%;" />
+
+
+
+
+
 
     </div>
 
