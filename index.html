@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,6 +168,112 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/26/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/26/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7/" class="post-title-link" itemprop="url">实习收获</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-26 20:05:04" itemprop="dateCreated datePublished" datetime="2023-09-26T20:05:04+08:00">2023-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-28 14:19:39" itemprop="dateModified" datetime="2023-09-28T14:19:39+08:00">2023-09-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="记录实习"><a href="#记录实习" class="headerlink" title="记录实习"></a>记录实习</h2><h3 id="线上事故处理-刷数"><a href="#线上事故处理-刷数" class="headerlink" title="线上事故处理-刷数"></a>线上事故处理-刷数</h3><ul>
+<li>事故背景</li>
+<li>解决方案</li>
+</ul>
+<h3 id="代码编写的原则"><a href="#代码编写的原则" class="headerlink" title="代码编写的原则"></a>代码编写的原则</h3><ul>
+<li><p>git命名规范，</p>
+</li>
+<li><p>写代码分为两个层面：结构+优化</p>
+</li>
+<li><p>以数据转换器为例，不要入侵核心代码，尽可能将实现的内容抽象出来，提高代码的可扩展性</p>
+</li>
+</ul>
+<h3 id="git命令学习"><a href="#git命令学习" class="headerlink" title="git命令学习"></a>git命令学习</h3><ul>
+<li>git cherry-pick</li>
+<li>git rebase</li>
+<li>git rebase -i head^3</li>
+<li>git reset –hard</li>
+</ul>
+<h3 id="需求介绍"><a href="#需求介绍" class="headerlink" title="需求介绍"></a>需求介绍</h3><h4 id="1、saleforce到Data360的数据同步采用增量-全量的方式"><a href="#1、saleforce到Data360的数据同步采用增量-全量的方式" class="headerlink" title="1、saleforce到Data360的数据同步采用增量+全量的方式"></a>1、saleforce到Data360的数据同步采用增量+全量的方式</h4><ul>
+<li><p>需求背景</p>
+<ul>
+<li>Data360作为crm系统的数据中台，负责了同步数据的任务，他的下游是saleforce系统，上层是KA360，GB360等应用。</li>
+<li>以同步saleforce的mysql数据库为例，Data360要对saleforce中部分表中的部分字段产生的binlog进行监听，以binlog为基准进行增量同步。除增量同步以外，当mysql想要增加表中字段时，如果不额外处理会造成增量同步退化为全量同步。因此有必要去做全量同步来解决这种全表更新的情况。</li>
+</ul>
+</li>
+<li><p>技术选择</p>
+<ul>
+<li>字节的Dbus，内部封装了RMQ，支持全量+增量的解决方案。在增量同步的情况下主要负责监听binlog日志，将binlog日志发送到RMQ中让上游系统消费；在全量同步的情况下负责将mysql表中的数据以每次8192条读取并发送到RMQ中。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -714,7 +820,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/09/%E5%9C%BA%E6%99%AF%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/09/%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
@@ -732,7 +838,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/09/%E5%9C%BA%E6%99%AF%E9%A2%98/" class="post-title-link" itemprop="url">场景题</a>
+          <a href="/2023/02/09/%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">场景设计</a>
         </h2>
 
         <div class="post-meta-container">
@@ -750,7 +856,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-21 22:34:07" itemprop="dateModified" datetime="2023-02-21T22:34:07+08:00">2023-02-21</time>
+      <time title="修改时间：2023-09-28 14:20:02" itemprop="dateModified" datetime="2023-09-28T14:20:02+08:00">2023-09-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -775,7 +881,7 @@
           <h1 id="场景题合集"><a href="#场景题合集" class="headerlink" title="场景题合集"></a>场景题合集</h1>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/02/09/%E5%9C%BA%E6%99%AF%E9%A2%98/#more" rel="contents">
+              <a class="btn" href="/2023/02/09/%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -960,98 +1066,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/11/23/linux%E5%91%BD%E4%BB%A4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/17/java%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
-      <meta itemprop="name" content="bean">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我要去大厂">
-      <meta itemprop="description" content="博客记录学习生活">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 我要去大厂">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/17/java%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">java基础</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-11-17 16:49:50" itemprop="dateCreated datePublished" datetime="2022-11-17T16:49:50+08:00">2022-11-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-03 12:44:29" itemprop="dateModified" datetime="2023-09-03T12:44:29+08:00">2023-09-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">面试题</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="集合源码"><a href="#集合源码" class="headerlink" title="集合源码"></a>集合源码</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/11/17/java%E5%9F%BA%E7%A1%80/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
