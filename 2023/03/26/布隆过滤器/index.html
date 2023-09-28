@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344public class MyBloomFilter &amp;#123;    &#x2F;&#x2F;默认位数组的大小    private static final int DEFAULT_SIZE &#x3D; 2 &lt;&lt; 14;    &#x2F;&#x2F;不同的">
+    <meta name="description" content="布隆过滤器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="布隆过滤器">
 <meta property="og:url" content="http://example.com/2023/03/26/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/index.html">
 <meta property="og:site_name" content="我要去大厂">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344public class MyBloomFilter &amp;#123;    &#x2F;&#x2F;默认位数组的大小    private static final int DEFAULT_SIZE &#x3D; 2 &lt;&lt; 14;    &#x2F;&#x2F;不同的">
+<meta property="og:description" content="布隆过滤器">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-26T06:41:03.000Z">
-<meta property="article:modified_time" content="2023-09-03T04:46:01.473Z">
+<meta property="article:modified_time" content="2023-09-28T06:24:29.834Z">
 <meta property="article:author" content="bean">
 <meta property="article:tag" content="手写算法">
 <meta name="twitter:card" content="summary">
@@ -104,7 +104,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -117,6 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">布隆过滤器</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -217,7 +218,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-03 12:46:01" itemprop="dateModified" datetime="2023-09-03T12:46:01+08:00">2023-09-03</time>
+      <time title="修改时间：2023-09-28 14:24:29" itemprop="dateModified" datetime="2023-09-28T14:24:29+08:00">2023-09-28</time>
     </span>
 
   
@@ -230,7 +231,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <span id="more"></span>     
+        <h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><span id="more"></span>     
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBloomFilter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//默认位数组的大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">DEFAULT_SIZE</span> <span class="operator">=</span> <span class="number">2</span> &lt;&lt; <span class="number">14</span>;</span><br><span class="line">    <span class="comment">//不同的hash参数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>[] HASH_PARAM = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">3</span>,<span class="number">13</span>,<span class="number">31</span>,<span class="number">131</span>,<span class="number">1313</span>,<span class="number">13131</span>&#125;;</span><br><span class="line">    <span class="comment">//位数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">BitSet</span> <span class="variable">bits</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BitSet</span>(DEFAULT_SIZE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyBloomFilter</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//同多个hash算法向位数组中添加元素 </span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;HASH_PARAM.length; i++)&#123;</span><br><span class="line">            bits.set(getHash(HASH_PARAM[i],obj),<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断是否存在，所有hash值都为1可能会存在</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">mightContains</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">res</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;HASH_PARAM.length; i++)&#123;</span><br><span class="line">            res = res &amp;&amp; bits.get(getHash(HASH_PARAM[i],obj));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取对象对应的hash值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getHash</span><span class="params">(<span class="type">int</span> hashParam, Object obj)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> obj.hashCode()^(obj.hashCode() &gt;&gt;&gt; <span class="number">16</span>) &amp; (DEFAULT_SIZE-<span class="number">1</span>)^hashParam;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//可能出现误判概率，但很低</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="type">MyBloomFilter</span> <span class="variable">myBloomFilter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyBloomFilter</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000000</span>;i++)&#123;</span><br><span class="line">            myBloomFilter.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">20000000</span>;i++)&#123;</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">ans</span> <span class="operator">=</span> myBloomFilter.mightContains(i);</span><br><span class="line">            <span class="keyword">if</span> (ans)    count++;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
