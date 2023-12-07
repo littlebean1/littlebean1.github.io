@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CRM AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT应用">
+<meta property="og:url" content="http://example.com/2023/12/07/GPT%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="我要去大厂">
+<meta property="og:description" content="CRM AI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=YzQ1NmVlOGY5OGNkZTEyN2E5YWNkMmE0YWQ3NDNkOTNfck84THFMWk1YTnptTmFJbVBiYkNScFdOSnpVUWFTeVFfVG9rZW46TVgyQ2J1dTVCb253bDF4UG1NTWN5eVlabmFnXzE2OTkyNTA3OTA6MTY5OTI1NDM5MF9WNA">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107153816313.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107160205141.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107154929278.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107155125537.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107160846564.png">
+<meta property="article:published_time" content="2023-12-07T06:41:02.000Z">
+<meta property="article:modified_time" content="2023-12-07T08:02:49.171Z">
+<meta property="article:author" content="bean">
+<meta property="article:tag" content="实习收获">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=YzQ1NmVlOGY5OGNkZTEyN2E5YWNkMmE0YWQ3NDNkOTNfck84THFMWk1YTnptTmFJbVBiYkNScFdOSnpVUWFTeVFfVG9rZW46TVgyQ2J1dTVCb253bDF4UG1NTWN5eVlabmFnXzE2OTkyNTA3OTA6MTY5OTI1NDM5MF9WNA">
+
+
+<link rel="canonical" href="http://example.com/2023/12/07/GPT%E5%BA%94%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/12/07/GPT%E5%BA%94%E7%94%A8/","path":"2023/12/07/GPT应用/","title":"GPT应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>GPT应用 | 我要去大厂</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">我要去大厂</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CRM-AI"><span class="nav-number">1.</span> <span class="nav-text">CRM AI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E8%83%8C%E6%99%AF"><span class="nav-number">1.0.1.</span> <span class="nav-text">业务背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E8%81%8C%E8%B4%A3"><span class="nav-number">1.0.2.</span> <span class="nav-text">工作职责</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%BD%E5%8A%9B-amp-%E5%9C%BA%E6%99%AF%E7%A0%94%E7%A9%B6"><span class="nav-number">1.0.3.</span> <span class="nav-text">能力&amp;场景研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%8C%91%E6%88%98"><span class="nav-number">1.0.4.</span> <span class="nav-text">主要挑战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%8C%91%E6%88%98"><span class="nav-number">1.0.5.</span> <span class="nav-text">解决挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-2-%E9%94%80%E5%94%AE%E6%95%B0%E6%8D%AE%E9%97%AE%E7%AD%94%E5%8A%A9%E6%89%8B"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">1.6.2 销售数据问答助手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AA%E6%9D%A5%E8%A7%84%E5%88%92"><span class="nav-number">1.0.6.</span> <span class="nav-text">未来规划</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%94%E7%B3%BB%E4%BA%BA%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">联系人管理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bean"
+      src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+  <p class="site-author-name" itemprop="name">bean</p>
+  <div class="site-description" itemprop="description">博客记录学习生活</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/07/GPT%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="GPT应用 | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GPT应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-07 14:41:02 / 修改时间：16:02:49" itemprop="dateCreated datePublished" datetime="2023-12-07T14:41:02+08:00">2023-12-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="CRM-AI"><a href="#CRM-AI" class="headerlink" title="CRM AI"></a>CRM AI</h1><span id="more"></span>     
+
+<h3 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h3><p>CRM销售业务特点：数据质量高，但多以非结构化的形式存储（关键的信息集中出现于长文本中）。以前只能通过人工阅读来进行提取（关键词）、分类（趋势）和总结（情况），而GPT的发展使得这部分人力可以被辅助&#x2F;代替。</p>
+<h3 id="工作职责"><a href="#工作职责" class="headerlink" title="工作职责"></a>工作职责</h3><ol>
+<li><p>研究GPT在CRM业务中的应用场景，分析场景落地遇到的挑战（token、qpm、等待时长…），使用工程能力和产品思维解决这些挑战。</p>
+</li>
+<li><p>作为CRM AI的研发Owner，制定迭代方案：</p>
+<ol>
+<li><table>
+<thead>
+<tr>
+<th><strong>问题</strong></th>
+<th><strong>方案</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应该有什么？</td>
+<td><strong>AI基建</strong>（限流、负载均衡、GPT、LangChain）-&gt; <strong>功能模块</strong>（ASK AI、AI字段、销售助手）                                                                              -&gt; <strong>管理后台</strong>（动态配置、数据分析）</td>
+</tr>
+<tr>
+<td>顺序是什么？</td>
+<td></td>
+</tr>
+<tr>
+<td>如何保证进度？</td>
+<td>拆分业务目标，每双周为业务提供新功能提高业务满意度；使用meego管理时间点</td>
+</tr>
+<tr>
+<td>如何保证系统稳定性？</td>
+<td>在保证负载最大利用率的前提下，限制GPT的请求频率，避免GPT过载情况</td>
+</tr>
+<tr>
+<td>扩展性和可维护性？</td>
+<td>抽象原子能力（机器人交互、单客户总结、封装GPT统一能力）、管理后台记录任务执行情况</td>
+</tr>
+<tr>
+<td>未来目标？</td>
+<td>统一功能入口嵌入IM（机器人、插件），根据用户的问题，通过意图解析使用不同的功能组合。</td>
+</tr>
+<tr>
+<td>之后新技术引入</td>
+<td>向量数据库、GPT的Function call、图像处理</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+</li>
+<li><p>作为Owner带领2个同学在两个月内完成4个AI产品上线（ASK AI、AI字段、跟进记录订阅、销售问答助手），无线上bug反馈，减少销售同学40%检索信息的时间。<strong>整体架构:</strong></p>
+</li>
+</ol>
+<p>暂时无法在飞书文档外展示此内容</p>
+<h3 id="能力-amp-场景研究"><a href="#能力-amp-场景研究" class="headerlink" title="能力&amp;场景研究"></a>能力&amp;场景研究</h3><p><strong>业务场景分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>场景分类</strong></th>
+<th><strong>场景描述</strong></th>
+<th><strong>场景举例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单个意图的问题</td>
+<td>想要知道符合某种条件的客户list、商机list、…</td>
+<td>跟进记录中提到过SAP的CSM服务的客户有哪些</td>
+</tr>
+<tr>
+<td>想要知道符合某种条件的list的单行维度的文字总结性、数据汇总性结果</td>
+<td>赢单客户这周有什么进展</td>
+<td></td>
+</tr>
+<tr>
+<td>想要知道符合某种条件的list的其他维度的文字总结性、数据汇总性结果</td>
+<td>东区、北区、南区这几个团队上周哪个团队赢单金额最大</td>
+<td></td>
+</tr>
+<tr>
+<td>多种意图问题</td>
+<td>客户list+单行维度的总结性信息</td>
+<td>我团队今天哪些客户出现了负面事件，出现了哪些负面事件</td>
+</tr>
+<tr>
+<td>对结果呈现有一定的要求</td>
+<td>需要对结果进行一定的排序、筛选需要对结果进行再次加工需要一定格式的结果</td>
+<td>只输出赢单金额最多top20的客户进展情况以问题中说明的一种格式进行输出（表格）将结果以X字段进行分组以柱状图形式呈现</td>
+</tr>
+</tbody></table>
+<p><strong>GPT****能力分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>GPT****版本</strong></th>
+<th><strong>token限制</strong></th>
+<th><strong>qpm****限制</strong></th>
+<th><strong>回复速度</strong></th>
+<th><strong>流式输出</strong></th>
+<th><strong>Function Call</strong></th>
+<th><strong>结合****向量数据库</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GPT-3.5-turbo</td>
+<td>4096&#x2F;次（随负载变动）</td>
+<td>200（随负载变动）</td>
+<td>10-20s</td>
+<td>✅</td>
+<td>❌（turbo-16支持）</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>GPT-4-32k</td>
+<td>320000&#x2F;次</td>
+<td>100</td>
+<td>20-60s</td>
+<td>✅</td>
+<td>❌（0613支持）</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>GPT-4比GPT-3.5贵30倍</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="主要挑战"><a href="#主要挑战" class="headerlink" title="主要挑战"></a>主要挑战</h3><ol>
+<li><strong>GPT****资源：</strong>会随当前总负载变动而变动（支持的qpm和token数浮动），如何最大限度的使用GPT的资源？</li>
+<li><strong>QPM****限制：</strong>如何应对高请求量的场景？（300+用户每分钟5000+请求）每分钟请求数超标后如何处理？如何避免GPT宕机的同时，保证用户的体验？</li>
+<li><strong>Token限制：</strong>每次的Token限制使得上下文输入有限，多轮对话和大文本量场景如何处理？</li>
+<li><strong>回复速度：</strong>GPT响应速度极慢，如何减少用户的平均等待时间？</li>
+<li><strong>Prompt****：</strong>如何解析用户意图并将其拆分成子任务？如何实现自然语言转SQL？如何解析真实业务问题？</li>
+<li><strong>会话边界：</strong>如何区分“会话”的边界？用户是根据上下文继续对话还是开启了一个新会话？</li>
+<li><strong>其他挑战：</strong>如何处理业务敏感信息？如何监控整体情况？如何动态调整prompt？如何利用历史GPT的回复？</li>
+</ol>
+<h3 id="解决挑战"><a href="#解决挑战" class="headerlink" title="解决挑战"></a>解决挑战</h3><p><strong>1.5.1</strong> <strong>解决<strong><strong>GPT</strong></strong>限制和资源</strong></p>
+<ol>
+<li><p><strong>QPM****：</strong></p>
+<ol>
+<li><p>由于GPT单请求的处理时间至少10s，使用消息队列有序消费天然保证限流（qpm&lt;&#x3D;6），但会浪费大量GPT资源（qpm&#x3D;200）。</p>
+</li>
+<li><p><strong>悲观策略：</strong>使用单queue消息队列限流 + 并行处理：将消息队列的消费速度限制在规定qpm内，并在消费端使用协程池保证消息处理速度大于消费者消费速度（由于GPT的响应时间至少10s，串行处理会导致消息堆积和资源浪费）。但因为负载变动，可用qpm会增加，如何用到这一部分qpm使资源利用最大化？</p>
+</li>
+<li><p><strong>乐观策略：</strong>消息队列不加流量限制，每一个请求被协程池直接消费，当有请求的返回是负载超限时则停止消费、自旋重试，等待负载恢复。但会导致请求响应时间的方差过大，外部视角看系统不稳定。</p>
+</li>
+<li><p><strong>悲观 + 乐观策略：</strong>流量限制太死和没有限制都不是最优解，找到限流平衡 + 合适的超限机制：</p>
+</li>
+<li><p>限流策略</p>
+<ul>
+<li><p>通过在不同时间段对GPT进行压测实验，找到qpm变化规律，根据该规律设计对应的限流策略。</p>
+</li>
+<li><p><img src="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=YzQ1NmVlOGY5OGNkZTEyN2E5YWNkMmE0YWQ3NDNkOTNfck84THFMWk1YTnptTmFJbVBiYkNScFdOSnpVUWFTeVFfVG9rZW46TVgyQ2J1dTVCb253bDF4UG1NTWN5eVlabmFnXzE2OTkyNTA3OTA6MTY5OTI1NDM5MF9WNA" alt="img"></p>
+</li>
+<li><p>压测结论：qpm跟随时间变化不明显（字节买的Azure机器同时用在国内和海外）</p>
+</li>
+<li><table>
+<thead>
+<tr>
+<th><strong>限流策略名称</strong></th>
+<th><strong>限流策略描述</strong></th>
+<th><strong>是否采用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>按时间变动qpm</td>
+<td>对于不同时间段使用不同的qpm：适用于qpm随时间变动明显的情况</td>
+<td>❌qpm随时间没有明显变化</td>
+</tr>
+<tr>
+<td>固定qpm</td>
+<td>对当天的qpm的变动情况通过概率论计算出合理的固定值</td>
+<td>✅保证稳定性的同时工作量低</td>
+</tr>
+<tr>
+<td>动态qpm</td>
+<td>根据当前时间区间内的负载情况（失败率情况），动态增加或减少下一个时间区间的qpm。</td>
+<td>⏸️工作量大，未来优化方向</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>根据概率计算，消息队列的流量限制在350qpm</p>
+</li>
+</ul>
+</li>
+<li><p>超限机制</p>
+<ul>
+<li><strong>主<strong><strong>协程</strong></strong>：</strong>读取redis中的“GPT负载”标志，若当前负载正常则使用协程池的空闲协程进行处理；若当前负载超限，则阻塞主协程并不断轮训“GPT负载”标志，当负载正常后继续使用空闲协程处理请求。</li>
+<li><strong>子<strong><strong>协程</strong></strong>：</strong>进行GPT调用正常返回则无需处理；若已经进行GPT调用但返回“负载超限”，则自旋等待每10秒再进行GPT调用，若自旋过程中GPT调用成功，则更改Redis中的“GPT负载”标志。</li>
+<li>暂时无法在飞书文档外展示此内容</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>Token：</strong></p>
+</li>
+</ol>
+<ul>
+<li>缓解Token限制：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>大文本处理方法</strong></th>
+<th><strong>处理方法描述</strong></th>
+<th><strong>是否采用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>向量数据库</td>
+<td>将客户信息（跟进记录）进行文本切分后存入向量数据库将用户问题放到向量数据库中检索对应的客户信息将检索出的客户信息作为上下文询问GPT</td>
+<td>❌检索结果不可靠存在信息丢失情况</td>
+</tr>
+<tr>
+<td>分别询问-集中总结</td>
+<td>将客户跟进记录进行切分，将切分后的结果询问GPT用户问题将并行询问后的切片结果吐给GPT再进行总结</td>
+<td>✅GPT基于的上下文全面</td>
+</tr>
+</tbody></table>
+<ul>
+<li>提前压缩：提前将每一条跟进记录使用GPT进行压缩，减少每一条的跟进记录的token数量。</li>
+<li>提高Token使用率：<ul>
+<li><p><strong>悲观策略：</strong>将上下文拼装prompts前进行token数量校验，将超过4096token限制（但真实token校验阈值会更少，因为还需要预留token给GPT回答问题）的上下文进行切割，分别询问GPT。然后把GPT的多次回答再吐给GPT进行总结，总结后的即为最终结果。</p>
+</li>
+<li><p><strong>乐观策略：</strong>不提前校验token数量，先把完整的上下文拼装的prompt吐给GPT。若GPT无应答则只取前20条跟进记录进行询问。</p>
+</li>
+<li><p><strong>悲观 + 乐观策略</strong></p>
+</li>
+<li><p>通过不断实验找到token的波动范围：至少4096tokens，大多数时间可以达到8000tokens，最高值达到14000tokens。</p>
+</li>
+<li><p>设置8000token限制，如果超限了则进行“文本切分，分别询问，统一总结”；若果没有超限则正常询问，如果GPT无法回答，则重复进行“文本切分，分别询问，统一总结”。</p>
+</li>
+<li><p>暂时无法在飞书文档外展示此内容</p>
+</li>
+</ul>
+</li>
+<li><strong>改进：</strong>某些业务问题使用“分别询问-集中总结”效果不是非常好（ex. 这个客户的对于飞书态度如何？可能之前一年都是消极的，最近一个月是积极的，GPT会得出消极的结论，但实际情况应该以最近态度为准）。</li>
+</ul>
+<p><strong>1.5.2</strong> <strong>解决回复速度：定位热点问题，引入缓存以及缓存更新机制</strong></p>
+<ul>
+<li>定位热点问题<ul>
+<li>CRM的AI是重业务产品，在不同的业务场景会有明显的热点问题。当前优先级最高的业务场景是“总结&#x2F;提取跟进记录的内容”，和PM同学一起同业务方调研，积累该业务场景的热点问题，并对这些热点问题抽象，最终做成多个推荐prompts供用户使用。<a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/LuDldEs7ToZgqmxhp7Oceccenvd">GTM - AI 对话的业务场景</a></li>
+</ul>
+</li>
+<li>主动缓存预热<ul>
+<li><p><strong>思路：</strong>根据每个客户的跟进记录，将上述热点问题的答案提前批量询问GPT，然后存到缓存中。当用户命中某个客户的热点问题时，可以将缓存结果直接返回给用户。更新方式：当某个客户的跟进记录有更新时，则把该客户的所有热点问题根据新的跟进记录，重新询问GPT。</p>
+</li>
+<li><p><strong>缺点：</strong>当前客户量200000+，而且业务同学的关注客户有明显的正态分布，如果所有客户都提前预热缓存会浪费大量的GPT资源和费用。</p>
+</li>
+</ul>
+</li>
+<li>被动缓存更新<ul>
+<li><p>只有在用户第一次主动询问GPT某一个客户的热点问题时，才会将结果放入缓存中，同时将该次询问使用到最新跟进记录的时间戳放入缓存。每次从缓存中取结果时判断缓存中的时间戳和当前最新跟进记录的时间戳是否相等，若相等则使用缓存，若不相等则重新询问GPT。</p>
+</li>
+<li><p>暂时无法在飞书文档外展示此内容</p>
+</li>
+<li><p><strong>改进：</strong>初始的业务场景很聚焦（总结&#x2F;提取跟进记录的内容），热点问题可枚举。之后支持的业务场景多样，热点问题方法可能难以支持。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.5.3</strong> *<em>训练</em><em><strong>prompt</strong></em>*：解析用户意图&#x2F;**<strong>NL2SQL</strong></p>
+<ul>
+<li>调试成果：<ul>
+<li>训练出CRM AI各个业务场景使用的prompt（卡片推送、意图解析、NL2SQL等）。<a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/SFGxdbCRYofrUwxWwPgc71xAnGf">CRM AI使用 Prompts</a> </li>
+<li>训练出可以拆解基于多客户场景的用户意图解析方法（将用户的一个问题拆分为两个问题：1.对于单个客户的问题；2.将所有单个客户问题的答案如何总结）。<a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/OzdWdMzPSon4uLxWYoVcXrlFnvc">训练解析意图的prompt</a> </li>
+<li>训练出可以将用户有筛选意图的语言转换成SQL。<a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/UdlEdgCq3odU5IxBq14cwhevnUc">筛选客户范围sql的prompt</a></li>
+</ul>
+</li>
+<li>调试技巧：<ul>
+<li>将调试过程中遇到的回答错误的情况，进行抽象做成反例输入给GPT，要求其避免。</li>
+<li>给GPT提供详细的正面例子，让GPT仿照样例进行分析和回答。</li>
+<li>指定GPT的角色，说明该角色具有的知识储备和能提供的服务范围。</li>
+<li>对当前的业务场景和涉及的内容作出详细解释。</li>
+</ul>
+</li>
+<li>评估效果：<ul>
+<li><strong>NL2SQL****：</strong>构造“用户问题 - 正确SQL - 正确结果”测试数据集，不断跑数据集并修正prompt，正确率达到90%以上算通过。</li>
+<li><strong>用户意图解析：</strong>构造“用户问题 - 拆分结果”测试数据集，因为是NL转NL，需要PM同学配合判断拆分结果是否符合预期。30个case正确率达到90%以上算通过。</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.5.4</strong> <strong>解决会话边界</strong></p>
+<p>如果是有页面的AI产品，这个问题很好解决：前端可以直接加一个开始结束对话按钮，后端以会话维度区分消息。但如果想把AI产品作为robot融入IM中（尤其是群聊的场景），按钮的方式难以实现会使用户困惑，而且当前开放平台不支持群聊按钮。如何在多人群聊中实现AI产品的多轮对话，同时隔离每个会话？</p>
+<ul>
+<li><p>消息树 + 消息引用 + 多轮对话prompt</p>
+<ul>
+<li><p>会话边界：通过消息引用来建立消息树。继续引用上次消息就还在会话内；没有引用消息，新@助手发消息时就是开启新的会话。</p>
+</li>
+<li><p>实现多轮对话prompt：</p>
+<ul>
+<li>&#96;&#96;&#96;JSON<br>“以下内容分为三部分，每个部分以“***”间隔：第一个部分是销售拜访一个客户的跟进记录，内容包含事实与观点，按照拜访日期倒排，每篇跟进记录以“&#x3D;&#x3D;&#x3D;”间隔；第二个部分是针对第一部分的所有跟进记录提出的几个问题和对应的答案，按照问题的提问的先后顺序排列，一组问答和另一组问答以“+++”区分；第三个部分是你需要回答的问题，在第三部分你需要把第一部分的所有跟进记录作为背景信息，并把第二部分的问题和答案当成参考，来客观的回答第三部分的问题。<br> 这部分是销售拜访同一个客户的跟进记录，内容包含事实与观点，按照拜访日期倒排放在“&#x3D;&#x3D;&#x3D;开始&#x3D;&#x3D;&#x3D;”和“&#x3D;&#x3D;&#x3D;结束&#x3D;&#x3D;&#x3D;”之间，每篇跟进记录以“&#x3D;&#x3D;&#x3D;”间隔。<br> &#x3D;&#x3D;&#x3D;开始&#x3D;&#x3D;&#x3D;<br> {follow_records}<br> &#x3D;&#x3D;&#x3D;结束&#x3D;&#x3D;&#x3D;<br> 这部分是你与我基于跟进记录作为上下文展开的历史会话，单条会话包含问题与回答，按照问题提出的时间倒排放在“+++开始”和“+++结束”之间，每组问答之间以“+++”间隔。若“+++开始+++”和“+++结束+++”之间没有数据则忽视这部分。<br> +++开始+++<br> {history_questions}<br> +++结束+++<br> 你现在的角色是{role}，你具有这个角色所有的专业知识与丰富的经验，请按照上方的跟进记录以及你我之间的历史会话、你的专业知识与经验，回答我提的问题：{question}。”<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 消息树：</span><br><span class="line"></span><br><span class="line">    - 从空<span class="meta">@助手的第一条消息作为根节点来构建消息树，消息树中的每个节点会在redis中对应一个键值对：此节点到跟节点的路径（无需关注子节点），这个路径上的消息即为实现多轮对话用的历史问答。</span></span><br><span class="line">    - 一次一次的有序问答会生成无分叉的树（红树）；基于历史某个问答重新进行会话（蓝树），实际上这将一个会话拆分为两个（会话2、会话3）。</span><br><span class="line">    - 在群里中依然可以选择“私有会话”和“公共会话”。“私有会话”是指只有会话发起人（消息树跟节点记录的用户ID）才可以在本会话中问问题；“公共会话”是指群里所有人都可以基于当前会话各自分叉会话，或者一起协作会话维持一条会话链。</span><br><span class="line"></span><br><span class="line">暂时无法在飞书文档外展示此内容</span><br><span class="line"></span><br><span class="line"><span class="symbol">*</span><span class="symbol">*</span>1.5.4<span class="symbol">*</span><span class="symbol">*</span> <span class="symbol">*</span><span class="symbol">*</span>解决其他挑战：脱敏 + 管理后台<span class="symbol">*</span><span class="symbol">*</span></span><br><span class="line"></span><br><span class="line">- 业务脱敏：</span><br><span class="line">  - 使用正则表达式将公司名称、产品名称、联系方式等信息替换为代称，并保存替换映射关系</span><br><span class="line">  - 将GPT回复后的内容使用保存的映射关系进行数据还原</span><br><span class="line">  - <span class="symbol">*</span><span class="symbol">*</span>后期优化：<span class="symbol">*</span><span class="symbol">*</span>引入GPT自身来判断哪些字段是敏感信息，用来筛选出正则匹配不到的“客户昵称”</span><br><span class="line">- 管理后台：</span><br><span class="line">  - 将GPT的返回结果以客户维度和用户维度保存下来，支持后期分析用户行为和某个客户的主要关注点。</span><br><span class="line">  - 监控当前GPT的超时情况，将消息队列的qpm和token抽成动态配置，特殊情况可以人为干预。</span><br><span class="line">  - 将所有使用的prompt抽成动态配置，可以实时调试和更新效果最好的prompt。</span><br><span class="line"></span><br><span class="line"><span class="comment">### 关键项目</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#### 1.6.1 AI字段补全</span></span><br><span class="line"></span><br><span class="line">业务同学的工作场景大都是在表格中。在大客户量场景下，为了减少业务同学对客户跟进情况等字段进行汇总的时间，CRM AI提供AI字段补全的功能：用户可以选择一个AI字段，对表格中的客户进行批量新字段补全。</span><br><span class="line"></span><br><span class="line">- 使用介绍：[AI字段使用指南](https://bytedance.feishu.cn/docx/Mkg1dmdfMovd3uxUSyLcGMDGn1d) </span><br><span class="line"></span><br><span class="line"><span class="symbol">*</span><span class="symbol">*</span>主要流程<span class="symbol">*</span><span class="symbol">*</span></span><br><span class="line"></span><br><span class="line">暂时无法在飞书文档外展示此内容</span><br><span class="line"></span><br><span class="line"><span class="symbol">*</span><span class="symbol">*</span>服务调用<span class="symbol">*</span><span class="symbol">*</span></span><br><span class="line"></span><br><span class="line">暂时无法在飞书文档外展示此内容</span><br><span class="line"></span><br><span class="line"><span class="symbol">*</span><span class="symbol">*</span>挑战：<span class="symbol">*</span><span class="symbol">*</span></span><br><span class="line"></span><br><span class="line">一次AI字段作业对应一张数据表格，每次AI字段作业会有1000个子任务，每一个子任务对应这个表格中的一行数据。多次AI字段作业的子任务混杂在一个无序队列中，如何高效的进行结果的收集和表格的汇总？</span><br><span class="line"></span><br><span class="line"><span class="symbol">*</span><span class="symbol">*</span>解决方案：<span class="symbol">*</span><span class="symbol">*</span></span><br><span class="line"></span><br><span class="line">【用户ID - 当前时间戳】可以唯一确定一次AI字段作业，【用户ID - 当前时间戳 - 客户ID】可以唯一确定一个子任务</span><br><span class="line"></span><br><span class="line">- 每次AI字段作业在Redis中存储两个键值对：</span><br><span class="line"></span><br><span class="line">  - |<span class="string"> **KEY**                                         </span>|<span class="string"> **VALUE**                                        </span>|</span><br><span class="line">    |<span class="string"> ----------------------------------------------- </span>|<span class="string"> ------------------------------------------------ </span>|</span><br><span class="line">    |<span class="string"> 【用户ID - 问题名称 - 当前时间戳 - result】     </span>|<span class="string"> Map&#123;【用户ID - 当前时间戳 - 客户ID】:  GPT结果 &#125; </span>|</span><br><span class="line">    |<span class="string"> 【用户ID - 问题名称 - 当前时间戳 - finish_num】 </span>|<span class="string"> 本次AI字段作业完成的任务数量                     </span>|</span><br><span class="line"></span><br><span class="line">- 消息体中记录属于哪一个AI字段作业，并记录该作业任务总数:</span><br><span class="line"></span><br><span class="line">  - ```JSON</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;email&quot;</span>:<span class="string">&quot;houxxxxx@bytedance.com&quot;</span>,</span><br><span class="line">        <span class="string">&quot;time_stamp&quot;</span>:<span class="string">&quot;2023-08-28 15:37:09.717631441 +0800 CST m=+932657.273326071&quot;</span>,</span><br><span class="line">        <span class="string">&quot;index&quot;</span>:1,</span><br><span class="line">        <span class="string">&quot;account_id&quot;</span>:<span class="string">&quot;001BB000005IxdgYAC&quot;</span>,</span><br><span class="line">        <span class="string">&quot;prompt&quot;</span>:<span class="string">&quot;no data&quot;</span>,</span><br><span class="line">        <span class="string">&quot;total_number&quot;</span>:1000,</span><br><span class="line">        <span class="string">&quot;user_access_token&quot;</span>:<span class="string">&quot;u-3vmWYtVMp6ZqnVmwAJUaLb4hhxW1k0YHrwwxxxxxxx&quot;</span>,</span><br><span class="line">        <span class="string">&quot;open_id&quot;</span>:<span class="string">&quot;ou_adc9e78b28a09908cf26e1818fxxxxx&quot;</span>,</span><br><span class="line">        <span class="string">&quot;answer&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;account_to_index_map&quot;</span>:null,</span><br><span class="line">        <span class="string">&quot;field_name&quot;</span>:<span class="string">&quot;竞品&quot;</span>,</span><br><span class="line">        <span class="string">&quot;field_value&quot;</span>:<span class="string">&quot;有没有提到钉钉或者企微&quot;</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>每次消息处理时，把消息处理的结果放入redis的结果map中，然后将本次作业的任务完成数+1，然后check任务完成数是否等于任务总数，如果等于则触发任务结果收集逻辑：将本次AI作业的结果Map读取到内存中然后一次开放平台调用写入到目标表格中。</p>
+<h4 id="1-6-2-销售数据问答助手"><a href="#1-6-2-销售数据问答助手" class="headerlink" title="1.6.2 销售数据问答助手"></a>1.6.2 销售数据问答助手</h4><p>问答助手可以被拉入任何一个群或者私聊，用户可以通过自然语言描述来圈定客户范围，然后对该范围内的客户向GPT询问业务问题（第一期支持客户历史跟进记录），可以实现会话内记忆能力和多轮对话。</p>
+<p>70%问题模板：<strong>根据客户属性字段筛选出特定范围的客户列表 + 对这些客户的跟进记录进行提取&#x2F;总结</strong></p>
+<p><strong>实现思路：</strong></p>
+<ul>
+<li>根据用户问题解析出：选定的客户范围、针对每一个客户的问题、将每个客户的答案进行聚合，3个prompt</li>
+<li>根据“选定的客户范围”prompt，返回给用户sheet表格，允许用户微调查询结果</li>
+<li>根据“针对每一个客户的问题”prompt，调用“AI字段补全”功能对sheet表格内的客户，对每一个客户进行询问</li>
+<li>根据“将每个客户的答案进行聚合”prompt，对于表格中的补全结果进行聚合</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>阶段</strong></th>
+<th><strong>prompt****作用</strong></th>
+<th><strong>prompt****样例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一阶段prompt</td>
+<td>根据客户大宽表将用户的第一个子问题转换为SQL</td>
+<td><a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/SFGxdbCRYofrUwxWwPgc71xAnGf">CRM AI使用 Prompts</a></td>
+</tr>
+<tr>
+<td>第二阶段prompt</td>
+<td>将用户的第二个问题按意图拆分为：问单个客户的问题（第三阶段prompt）聚合所有客户回复（第四阶段prompt）</td>
+<td><a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/SFGxdbCRYofrUwxWwPgc71xAnGf">CRM AI使用 Prompts</a></td>
+</tr>
+<tr>
+<td>第三阶段prompt</td>
+<td>根据从库中取出来的分片跟进记录询问GPT单个客户的问题（AI字段补全）</td>
+<td><a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/SFGxdbCRYofrUwxWwPgc71xAnGf">CRM AI使用 Prompts</a></td>
+</tr>
+<tr>
+<td>第四阶段prompt</td>
+<td>将多个分片的GPT回答进行汇总</td>
+<td><a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/SFGxdbCRYofrUwxWwPgc71xAnGf">CRM AI使用 Prompts</a></td>
+</tr>
+<tr>
+<td>第五阶段prompt</td>
+<td>将汇总后的结果按用户第三个问题的样式进行输出</td>
+<td><a target="_blank" rel="noopener" href="https://bytedance.feishu.cn/docx/SFGxdbCRYofrUwxWwPgc71xAnGf">CRM AI使用 Prompts</a></td>
+</tr>
+</tbody></table>
+<ul>
+<li>将机器人返回的消息判断是不是消息根节点（新对话开启），若是则使用第一阶段prompt拆分用户问题</li>
+<li>使用第一阶段prompt自然语言转SQL。</li>
+<li>使用SQL在客户大宽表中筛选出对应的客户，用户可以对返回的客户表格进行微调。</li>
+<li>使用第二阶段prompt拆分用户问题。</li>
+<li>查询筛选出的客户的所有跟进记录（AI字段补全）。</li>
+<li>将跟进记录进行分片分别用第三阶段prompt询问GPT（AI字段补全）。</li>
+<li>将多个分片的结果用第四阶段prompt进行汇总。</li>
+<li>使用第五阶段prompt格式输出样式。</li>
+</ul>
+<p>暂时无法在飞书文档外展示此内容</p>
+<h3 id="未来规划"><a href="#未来规划" class="headerlink" title="未来规划"></a>未来规划</h3><ol>
+<li><p><strong>产品上：</strong></p>
+<ol>
+<li>统一功能入口嵌入IM，实现思维链模型：解析用户意图-&gt; 拆解实现步骤-&gt;每个步骤选用合适的功能组合。</li>
+<li>在缓解token限制中，些业务问题使用“分别询问-集中总结”效果不是非常好，需要寻找新的token解决方法。</li>
+</ol>
+</li>
+<li><p><strong>技术上：</strong></p>
+<ol>
+<li>引入机器学习概念，根据过去时间段GPT的负载情况（失败率情况）预测未来时间区间的负载，动态增加或减少下一个时间区间的qpm和token规则。</li>
+<li>初始的业务场景很聚焦（总结&#x2F;提取跟进记录的内容），热点问题可枚举。之后支持的业务场景多样，热点问题方法可能难以支持，找到其他可以使用工程减少GPT平均响应时间的方法。</li>
+<li>使用AI手段，根据积累下的用户&#x2F;客户问题，分析用户行为和每个客户的关注点，帮助定位热点问题。</li>
+<li>Prompt是未来的核心资产，继续优化各个场景使用的prompt。</li>
+<li>探索function call和向量数据库如何和当前功能模型结合</li>
+</ol>
+<h1 id="联系人管理"><a href="#联系人管理" class="headerlink" title="联系人管理"></a>联系人管理</h1></li>
+</ol>
+<p><strong>项目****时序图</strong></p>
+<p>暂时无法在飞书文档外展示此内容</p>
+<p><strong>主要难点</strong></p>
+<ul>
+<li><p><strong>快速获取联系人上级汇报线 + 更新上级避免出现环</strong></p>
+<ul>
+<li><p>引入缓存机制，每个用户会维护两组映射关系：“我的上级k-v”、“我的下级k-list”:</p>
+</li>
+<li><table>
+<thead>
+<tr>
+<th>我的上级</th>
+<th><code>&#123;&quot;g_account_contact_id_1551585&quot;: &quot;g_account_contact_id_1551589&quot;&#125;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>我的下级</td>
+<td><code>&#123;&quot;g_account_contact_id_1551585&quot;: [&quot;g_account_contact_id_1551589&quot;, &quot;g_account_contact_id_1551589&quot;, &quot;g_account_contact_id_1551589&quot;]&#125;</code></td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>获取联系人X的上级汇报线：</strong>缓存中递归读取“我的上级”中所有联系人ID并记录层级，然后一次查询获取所有上级联系人详情，并按层级进行排序。</p>
+</li>
+<li><p><strong>更新联系人X的直属上级：</strong></p>
+</li>
+<li><p>递归获取X新上级的“我的上级”，校验联系人X在这个汇报线中是否存在，若存在则有环，更新失败</p>
+</li>
+<li><p>将X的“我的上级”更改为新上级的联系人ID。</p>
+</li>
+<li><p>更新X新上级的“我的下级list”，更新X老上级的“我的下级list”。</p>
+</li>
+<li><p><strong>获取联系人X的下级：</strong>读取缓存中X的“我的下级”。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>10万+联系人数据同步</strong></p>
+<ul>
+<li><p>17000个KA客户，每个客户的联系人数量0-200不等，联系人总量100000+。挑战：</p>
+</li>
+<li><p><strong>问题：</strong>数据源有联表查询和数据聚合操作，单次查询客户过多耗时太久，并行查询会造成数据库压力过大。</p>
+</li>
+<li><p><strong>解决：</strong>每次查询两个客户的联系人。</p>
+</li>
+<li><p><strong>问题：</strong>同步效率太低。</p>
+</li>
+<li><p><strong>解决：</strong>使用协程池并行处理。主协程不断从外部读数据，协程池内的子协程加工字段和写入数据。</p>
+</li>
+<li><p><strong>问题：</strong>过多的数据库I&#x2F;O导致aPaaS对象整体性能降低，而且大部分数据库I&#x2F;O并没有使用充分导致I&#x2F;O数量上升。某些客户只有1个联系人也需要一次单独的读写I&#x2F;O。</p>
+</li>
+<li><p><strong>解决：</strong>因为aPaaS单次写操作最大支持500条数据，使用容量为500的队列。子协程通过锁来实现共享队列的并发写，当某协程写入队列时发现队列已满则触发写库操作，将500条数据更新的到数据库中。继而清空队列，再把当前协程剩下的数据放入队列中。</p>
+</li>
+<li><p>暂时无法在飞书文档外展示此内容</p>
+</li>
+</ul>
+</li>
+<li><p><strong>计算每个联系人的跟进次数和最近跟进日期</strong></p>
+<ul>
+<li>将包含本次查询联系人的所有跟进记录取出来，统计每个联系人在跟进记录中出现的次数，并记录最近一次根基记录的时间。</li>
+</ul>
+</li>
+</ul>
+<p><strong>主要功能</strong></p>
+<ul>
+<li>联系人模块提供20个HTTP、RPC接口：<ul>
+<li>联系人列表页：用户鉴权接口、根据客户ID获取联系人接口、联系人判重接口、获取角色映射关系接口。</li>
+<li>联系人详情页：获取联系人详细信息接口、获取联系人角色接口、更新aPaaS数据接口。</li>
+<li>联系人看板页：联系人同步接口、联系人按客户&#x2F;角色维度聚合接口、获取联系人直属上级接口。</li>
+<li>运维：初始联系人数据全量刷新接口。</li>
+</ul>
+</li>
+<li>利用文本命中结合的方式进行“职位”（文本）到“角色”的映射：<ul>
+<li>将包含职位中包含特定关键词的联系人的角色字段赋值。</li>
+<li>使用文本命中和GPT关键词提取配合进行赋值：GPT作为辅助，以文本命中为主。</li>
+</ul>
+</li>
+<li>客户下有联系人更新时通知客户 &amp; 统计客户下的建联情况：<ul>
+<li>当有用户编辑客户下的联系人时，在对应的客户群发送通知卡片。</li>
+<li>在客户建联盘点页面，展示当前客户不同角色的建联数量和每个角色的最近跟进日期。</li>
+</ul>
+</li>
+</ul>
+<p>总结：</p>
+<p>在GPT选型上，选用GPT4.0，对时间的要求没有那么高，但是更加要求正确性，token的限制放宽且无需将传输的数据分片处理</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107153816313.png" alt="image-20231107153816313"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107160205141.png" alt="image-20231107160205141"></p>
+<p>并发性：</p>
+<ul>
+<li>GPT的本身QPM限制为350，我们要对GPT本身的限制去做限流处理<ul>
+<li>悲观策略：使用单queue消息队列限流 + 并行处理：将消息队列的消费速度限制在规定qpm内，并在消费端使用协程池保证消息处理速度大于消费者消费速度</li>
+<li>乐观策略：消息队列不加流量限制，每一个请求被协程池直接消费，当有请求的返回是负载超限时则停止消费、自旋重试，等待负载恢复。但会导致请求响应时间的方差过大，外部视角看系统不稳定。</li>
+<li>限流平衡+超限机制：通过在不同时间段对GPT进行压测实验，得出结论qpm跟随时间变化不明显。依据平均请求数将消息队列的流量限制在350qpm，主线程读取redis中的“GPT负载”标志，若当前负载超限则阻塞，当负载正常后继续使用线程池中的空闲线程处理请求，子线程进行GPT调用正常返回则无需处理，若已经进行GPT调用但返回“负载超限”，则自旋等待每10秒再进行GPT调用，若自旋过程中GPT调用成功，则更改Redis中的“GPT负载”标志。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107154929278.png" alt="image-20231107154929278"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107155125537.png" alt="image-20231107155125537"></p>
+<p>AI字段补全模块服务调用：</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231107160846564.png" alt="image-20231107160846564"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7/" rel="tag"># 实习收获</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/07/AI%E5%AD%97%E6%AE%B5/" rel="prev" title="AI字段">
+                  <i class="fa fa-chevron-left"></i> AI字段
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bean</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="sf-apaas同步优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sf-apaas同步优化">
+<meta property="og:url" content="http://example.com/2023/12/07/sf-apaas%E5%90%8C%E6%AD%A5%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="我要去大厂">
+<meta property="og:description" content="sf-apaas同步优化">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTU5ZDUxODRkNDdjMzUwYTQ1ODk1ZDBhZTYxOWRlZDlfZTFvRUs5dTNWUlk3OGRIc1hkWU95Z0VaVVVRbDl5SDFfVG9rZW46UU5idGJoUjhnb1c1bW54bW1aUmNwYTBXbnN3XzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA">
+<meta property="og:image" content="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=NjI1M2UwNjc4NDcyNGRlNWM1MWQ4NTliMGQ2NmY1YzlfYTdXdGNuUU1mM2lTZHhzbUZzbjlneTlVSjdVNkZoaWxfVG9rZW46VFNoU2JqQ3cxb0R0N3p4MEpPOGMyVnJNbnRnXzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA">
+<meta property="og:image" content="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTAyNmM1ODkwMmI4OTBkODdiMGUzNmEwMjBlZGRhOTZfODg2VDhvalRLRHFUTnAwS3d0SlNiTWpCYVMwUDVmblhfVG9rZW46UzdKQ2I1V3pob2cxS0x4M2p6UGNnRUE5bmxkXzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA">
+<meta property="og:image" content="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=NmFjMmE5MDdhZTMxZjZhNWJjZjkzNjBkMTExMDQ0MzhfQzRTM2VzbnV1QXlBSXJQNXYzdkR0VTZKaU16MGlwdkNfVG9rZW46WG5RUGJBVERlbzQ2N0t4T0pNZ2NpaTRQbkJlXzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA">
+<meta property="article:published_time" content="2023-12-07T06:39:38.000Z">
+<meta property="article:modified_time" content="2023-12-07T08:01:53.526Z">
+<meta property="article:author" content="bean">
+<meta property="article:tag" content="实习收获">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTU5ZDUxODRkNDdjMzUwYTQ1ODk1ZDBhZTYxOWRlZDlfZTFvRUs5dTNWUlk3OGRIc1hkWU95Z0VaVVVRbDl5SDFfVG9rZW46UU5idGJoUjhnb1c1bW54bW1aUmNwYTBXbnN3XzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA">
+
+
+<link rel="canonical" href="http://example.com/2023/12/07/sf-apaas%E5%90%8C%E6%AD%A5%E4%BC%98%E5%8C%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/12/07/sf-apaas%E5%90%8C%E6%AD%A5%E4%BC%98%E5%8C%96/","path":"2023/12/07/sf-apaas同步优化/","title":"sf-apaas同步优化"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>sf-apaas同步优化 | 我要去大厂</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">我要去大厂</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sf-apaas%E5%90%8C%E6%AD%A5%E4%BC%98%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">sf-apaas同步优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">业务背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E8%83%8C%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">技术背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E9%87%8F-%E5%A2%9E%E9%87%8F%E7%9A%84%E8%A1%94%E6%8E%A5%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">全量+增量的衔接问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DBus%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE%E5%8E%9F%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">DBus拉取数据原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">总体设计与流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dbus%E8%A7%A3%E5%86%B3%E6%B6%88%E8%B4%B9%E4%B9%B1%E5%BA%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">Dbus解决消费乱序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.2.</span> <span class="nav-text">Event事件对象的数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E6%A8%A1%E5%9D%97%E6%96%B9%E6%A1%88"><span class="nav-number">1.4.3.</span> <span class="nav-text">数据同步模块方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80-%E5%A4%84%E7%90%86%E9%87%8D%E5%A4%8D%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">方案一: 处理重复的方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91%EF%BC%9A"><span class="nav-number">1.4.4.</span> <span class="nav-text">程序执行逻辑：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nvwa-x2F-sync-apass"><span class="nav-number">1.4.5.</span> <span class="nav-text">nvwa&#x2F;sync_apass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E9%87%8F%E5%92%8C%E5%A2%9E%E9%87%8F%E9%9B%86%E7%BE%A4"><span class="nav-number">1.4.6.</span> <span class="nav-text">全量和增量集群</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bean"
+      src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+  <p class="site-author-name" itemprop="name">bean</p>
+  <div class="site-description" itemprop="description">博客记录学习生活</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/07/sf-apaas%E5%90%8C%E6%AD%A5%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="sf-apaas同步优化 | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sf-apaas同步优化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-07 14:39:38 / 修改时间：16:01:53" itemprop="dateCreated datePublished" datetime="2023-12-07T14:39:38+08:00">2023-12-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="sf-apaas同步优化"><a href="#sf-apaas同步优化" class="headerlink" title="sf-apaas同步优化"></a>sf-apaas同步优化</h1><span id="more"></span>     
+
+<h2 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h2><ol>
+<li>数仓会每天回溯从SF同步的数据，回溯会更新数据的lut字段，aPaaS使用lut字段进行增量同步。这导致：在数仓回溯时，sPaaS进行的并不是真实的增量同步，极端情况是全量同步。</li>
+<li>aPaaS同步数据的定时任务间隔时间长，执行效率低</li>
+</ol>
+<h2 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h2><ol>
+<li>DBus:</li>
+</ol>
+<p>内部结构：</p>
+<ul>
+<li>数据源组件：DBus支持多种数据源，包括MySQL、Oracle、SQL Server等关系型数据库，以及HBase、Redis等非关系型数据库。DBus通过数据源组件来连接不同的数据源，获取增量数据，并将数据写入到消息队列中。</li>
+<li>消息队列组件：DBus使用Kafka作为消息队列，将增量数据写入到Kafka中，并通过Kafka的高吞吐量和高可靠性来保证数据的可靠传输和高效处理。</li>
+<li>消费者组件：DBus使用消费者组件来消费Kafka中的数据，并将数据写入到目标数据源中。DBus支持多种消费者组件，包括Hadoop、Hive、HBase、Redis等，可以将数据同步到不同的目标数据源中。</li>
+<li>. 控制台组件：DBus提供了Web控制台，用于管理和监控DBus的运行状态。控制台组件可以实时查看DBus的运行状态、数据同步情况和错误日志等信息，方便用户进行管理和维护。</li>
+</ul>
+<p>DBus 可以充当数据传输的一个中介，它是一个消息总线系统，主要用于进程间通信，可以帮助不同的进程之间进行数据传输和通信。 DBus 提供了一种简单的机制，使得应用程序可以相互发现和通信，从而实现了进程间的解耦和协作。DBus 可以将消息从一个进程传递到另一个进程，同时还支持广播和多播等方式，方便不同进程之间的数据传输和通信。 DBus 的工作原理是，每个进程都可以注册一个或多个对象，这些对象可以提供一些接口和方法，其他进程可以通过这些接口和方法来访问这些对象。DBus 会维护一个对象的列表，当其他进程需要访问某个对象时，DBus 会将请求转发给相应的进程，从而实现进程间的通信和数据传输。</p>
+<ol>
+<li>DSyncer:</li>
+</ol>
+<p>DSyncer 可以解析 MySQL 的 binlog 日志，实现 MySQL 数据库的实时同步和备份。DSyncer 支持多种 binlog 格式，包括 ROW、STATEMENT 和 MIXED 格式，可以根据实际需求进行选择。 DSyncer 的 binlog 解析功能基于 Canal 实现，可以实现高效的 binlog 解析和同步。DSyncer 可以将 binlog 日志解析成数据变更事件，然后将这些事件实时同步到其他数据源，例如 Redis、MongoDB、Elasticsearch 等。DSyncer 支持多种同步方式，包括全量同步、增量同步等，可以根据实际需求进行选择。 使用 DSyner 解析 binlog 日志可以实现 MySQL 数据库的实时同步和备份，保证数据的安全性和可靠性。同时，DSyncer 还提供了丰富的监控和报警功能，方便企业进行数据同步的管理和维护。</p>
+<ol>
+<li>Canal:</li>
+</ol>
+<p>Canal 在某种程度上可以看作是 Dbus 和 Dsyncer 的组合，但是它是一个独立的数据同步工具，由阿里巴巴开源，具有自己独特的特点和优势。 Canal 和 Dbus 类似，都是基于消息总线的方式实现数据传输和通信，但是 Canal 更加专注于 MySQL 数据库的实时同步和备份，而 Dbus 则更加通用，可以用于不同进程之间的通信和数据传输。 Canal 和 Dsyncer 类似，都是用于实时同步 MySQL 数据库的变更到其他数据源，例如 Redis、Elasticsearch 等，但是 Canal 更加灵活和可扩展，支持多种 binlog 格式和数据源，同时还提供了丰富的监控和报警功能，方便企业进行数据同步的管理和维护。 总的来说，Canal 在某种程度上可以看作是 Dbus 和 Dsyncer 的组合，但是它是一个独立的数据同步工具，具有自己独特的特点和优势。开发者可以根据实际需求选择合适的工具</p>
+<ol>
+<li>Canal和Dbus实现区别：</li>
+</ol>
+<p>Canal 是将解析后的更改事件放入消息队列，而不是将 binlog 直接放入消息队列。 Canal 的工作原理是通过在 MySQL 数据库中安装一个插件，监听数据库中的 binlog</p>
+<p>DBus 是被数据库中变化的数据触发的，而不是被 binlog 触发的。将binlog写入消息队列</p>
+<p>就像是mysql的group by的实现原理类似的思想</p>
+<ol>
+<li>为什么有了Canal之后还要有DBus和DSyncer</li>
+</ol>
+<p>Canal是轻量级的适用于简单的数据同步场景，DBus和DSyncer适用于大规模数据同步和离线&#x2F;实时分析场景</p>
+<p>当需要同步大规模的数据时，Canal可能会出现性能瓶颈，导致数据同步的延迟和不稳定性。</p>
+<h3 id="全量-增量的衔接问题"><a href="#全量-增量的衔接问题" class="headerlink" title="全量+增量的衔接问题"></a>全量+增量的衔接问题</h3><ul>
+<li><p>把增量数据同步到rocketmq中，不去消费</p>
+</li>
+<li><p>提工单开始全量同步</p>
+</li>
+<li><p>全量同步结束后，消费开启全量同步的时间之后rocketmq所产生的增量数据</p>
+<ul>
+<li>由于先接入增量同步，在消费了全量同步的情况下，增量同步中的有些消息已过时，再次消费可能会出现老数据覆盖的情况。</li>
+</ul>
+</li>
+<li><p>同时在全量同步期间（有时间跨度），有可能全量和增量分别执行一次insert语句，mq能保证不丢失但不能保证不重复因此要求目标端存储需要具备幂等性</p>
+</li>
+</ul>
+<h2 id="DBus拉取数据原理"><a href="#DBus拉取数据原理" class="headerlink" title="DBus拉取数据原理"></a>DBus拉取数据原理</h2><ul>
+<li>MySQL增量迁移，是从MySQL的主库拉取binlog，本质上是模拟一个slave，master会把变更发送到dbus上。<ul>
+<li>单线程读取binlog，放到一个内存队列中</li>
+<li>单线程做数据转换，binlog中只有字段顺序和字段值，dbus会加上字段名、字段类型等信息，把处理结果放到另一个内存队列中</li>
+<li>有一个线程读取内存队列并做数据分发，根据主键值计算hash，把数据分成64份，由64个线程并发写mq，每个线程最多1024条数据，默认用batch的方式发送这1024条数据</li>
+</ul>
+</li>
+<li>MySQL全量迁移，是从MySQL的主库（或从库，支持配置），通过select语句查询数据，有做分段查询，每次查询8192行，大致语法为：select * from xxx where id &gt; xxx  order by id limit 8192 。全量迁移每个表之间是串行读取数据。一个库如果有多个实例，实例之间是并行拉取数据的。</li>
+</ul>
+<p>如果在以往情况下，只采用apaas执行增量同步会导致每次回溯数据时更新整张表的数据，由于apaas的限制，需要同步八小时才能将数据同步完成；因此在增量消费的前提下，加入了全量消费，创建工单时调用DBus，每次读取8192条数据到DBus中，然后由DBus转为事件对象批量发送到MQ中。这种方式避免了大量数据需要一条条的放入到MQ。</p>
+<p>为保证数据全量迁移，需要先提工单创建增量dbus，确认增量dbus工单finish以后，再提工单发全量的dbus任务。然后消费的时候，先消费全量的dbus topic，消费完成后再消费增量的topic，从topic开始位置开始消费。需要注意的是，dbus增量的topic通常只会保存1-2天的数据。整体接入步骤如下：</p>
+<ol>
+<li>发起dbus增量迁移，从当前位置开始同步变更</li>
+<li>发起dbus全量迁移，生成对应MQ消息</li>
+<li>消费dbus全量迁移的数据</li>
+<li>待第三步的全量迁移消息消费完成后，开始消费dbus增量迁移的数据</li>
+</ol>
+<p><img src="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTU5ZDUxODRkNDdjMzUwYTQ1ODk1ZDBhZTYxOWRlZDlfZTFvRUs5dTNWUlk3OGRIc1hkWU95Z0VaVVVRbDl5SDFfVG9rZW46UU5idGJoUjhnb1c1bW54bW1aUmNwYTBXbnN3XzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA" alt="img"></p>
+<p>同步配置流程：</p>
+<ul>
+<li>首先在apaas上的对象中创建新字段</li>
+<li>然后在mysql上创建新字段，数仓定时将新字段中的数据同步过来</li>
+<li>数仓同步完数据后，如果新字段也需要监听（创建增量工单，除监听原来的字段外，增加新增的字段进行监听）</li>
+<li>增量工单创建完成后，创建全量工单，将增量同步产生的数据放入dbus的增量topic中，全量放入全量topic</li>
+<li>若有全量同步，则优先进行全量消费，完成后进行增量消费</li>
+</ul>
+<h2 id="总体设计与流程"><a href="#总体设计与流程" class="headerlink" title="总体设计与流程"></a>总体设计与流程</h2><p><img src="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=NjI1M2UwNjc4NDcyNGRlNWM1MWQ4NTliMGQ2NmY1YzlfYTdXdGNuUU1mM2lTZHhzbUZzbjlneTlVSjdVNkZoaWxfVG9rZW46VFNoU2JqQ3cxb0R0N3p4MEpPOGMyVnJNbnRnXzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA" alt="img"></p>
+<p><img src="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTAyNmM1ODkwMmI4OTBkODdiMGUzNmEwMjBlZGRhOTZfODg2VDhvalRLRHFUTnAwS3d0SlNiTWpCYVMwUDVmblhfVG9rZW46UzdKQ2I1V3pob2cxS0x4M2p6UGNnRUE5bmxkXzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA" alt="img"></p>
+<ol>
+<li>DBus监听mysql数据变化并将对应的binlog写入RMQ的增量复制topic中</li>
+<li>开启全量同步，一次性将全量的binlog写入RMQ的全量复制topic中<ol>
+<li>问题：为什么先开启增量复制再开启全量复制？</li>
+</ol>
+</li>
+</ol>
+<p>如果先开启增量复制再开启全量复制，在这间隙中的修改语句可能被遗漏</p>
+<ol>
+<li><p>问题：为什么要设计增量+全量复制的这样一种机制 </p>
+</li>
+<li><p>问题：为什么要去data360读取数据，但是写数据的时候是由KA&#x2F;GB360把数据写入到mysql @周帅宇 </p>
+</li>
+<li><p>通过Dsyncer将binlog转化为标准事件，然后完成过滤（只关心特定的变化），合并（同一行的改动合并成一个change），投递到RocketMQ供后续模块消费（先消费全量topic，再消费增量topic）</p>
+<ol>
+<li>问题：如何保证转化成标准事件的消息有序？</li>
+</ol>
+</li>
+</ol>
+<p>通过携带partition key来指定queue实现</p>
+<ol>
+<li>问题：增量topic和全量topic 可能有重复或者过期binlog，如何避免消费？</li>
+</ol>
+<p> 设计redis+mysql存储已经完成消费的消息（事件类型+时间戳缓存，保留7天时间，因为dbus只处理7天内的消息，每次先判断是否有更大的时间戳的binlog被消费，如果有则直接取Mysql中最新的数据同步。</p>
+<ol>
+<li><p>问题：上下游流量监控</p>
+</li>
+<li><p>批量执行2345过程（应视为一个事务，只有全部执行成功才返回ACK，否则会进行重试）</p>
+</li>
+<li><p>4不成功的数据会写回RMQ重试，再次失败则提示人工检查</p>
+</li>
+</ol>
+<h3 id="Dbus解决消费乱序"><a href="#Dbus解决消费乱序" class="headerlink" title="Dbus解决消费乱序"></a><strong>Dbus</strong>解决消费乱序</h3><p>dbus事件可能会有重复和乱序的可能，需要对这两种场景进行处理。为处理乱序问题，设计将经过dbus处理的消息记录下来，dbus发送时判断数据库中是否存在比该事件时间戳更大的事件，若存在，说明该条消息是乱序消息，重新读取mysql中的数据，手动构造发送一条全字段变更的消息。</p>
+<p>暂时无法在飞书文档外展示此内容</p>
+<p>创建mysql表用于将dbus发出的事件存档，具体字段如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> ldic360_sf_event_data_record</span><br><span class="line">(</span><br><span class="line">    id           <span class="type">bigint</span> unsigned             <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;id&#x27;</span></span><br><span class="line">        <span class="keyword">primary</span> key,</span><br><span class="line">    custom_id    <span class="type">varchar</span>(<span class="number">128</span>)     <span class="keyword">default</span> <span class="string">&#x27;&#x27;</span>  <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;业务事件id&#x27;</span>,</span><br><span class="line">    event_time   <span class="type">bigint</span> unsigned  <span class="keyword">default</span> <span class="string">&#x27;0&#x27;</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;事件时间ms&#x27;</span>,</span><br><span class="line">    event_type   <span class="type">varchar</span>(<span class="number">30</span>)      <span class="keyword">default</span> <span class="string">&#x27;&#x27;</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;事件类型&#x27;</span>,</span><br><span class="line">    payload      text                        <span class="keyword">null</span> comment <span class="string">&#x27;原始事件体&#x27;</span>,</span><br><span class="line">    created      <span class="type">bigint</span> unsigned <span class="keyword">default</span> <span class="string">&#x27;0&#x27;</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">    updated      <span class="type">bigint</span> unsigned <span class="keyword">default</span> <span class="string">&#x27;0&#x27;</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;更新时间&#x27;</span>,</span><br><span class="line">    tenant_key   <span class="type">varchar</span>(<span class="number">30</span>)     <span class="keyword">default</span> <span class="string">&#x27;&#x27;</span>  <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;租户标识&#x27;</span>,</span><br><span class="line">    namespace_id <span class="type">varchar</span>(<span class="number">30</span>)     <span class="keyword">default</span> <span class="string">&#x27;&#x27;</span>  <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;业务线标识&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>Dbus里面的partitionKey是如何设置的？</p>
+<p><img src="https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=NmFjMmE5MDdhZTMxZjZhNWJjZjkzNjBkMTExMDQ0MzhfQzRTM2VzbnV1QXlBSXJQNXYzdkR0VTZKaU16MGlwdkNfVG9rZW46WG5RUGJBVERlbzQ2N0t4T0pNZ2NpaTRQbkJlXzE2OTMzODQ3NDY6MTY5MzM4ODM0Nl9WNA" alt="img"></p>
+<h3 id="Event事件对象的数据类型"><a href="#Event事件对象的数据类型" class="headerlink" title="Event事件对象的数据类型"></a>Event事件对象的数据类型</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> BinlogEvent <span class="keyword">struct</span> &#123;<span class="string">` `</span>    SfID       <span class="type">string</span>                            json:<span class="string">&quot;sf_id&quot;</span><span class="string">` `</span>    EventTable <span class="type">string</span>                            json:<span class="string">&quot;event_table&quot;</span><span class="string">` `</span>    EventType  <span class="type">string</span>                            json:<span class="string">&quot;event_type&quot;</span><span class="string">` `</span>    EventTime  <span class="type">int64</span>                             json:<span class="string">&quot;event_time&quot;</span><span class="string">` `</span>    ChangeData <span class="keyword">map</span>[<span class="type">string</span>]*BinlogEventChangeData json:<span class="string">&quot;change_data&quot;</span><span class="string">` `</span>&#125;<span class="string">` `</span><span class="keyword">type</span> BinlogEventChangeData <span class="keyword">struct</span> &#123;<span class="string">` `</span>    BeforeValue  <span class="keyword">interface</span>&#123;&#125; json:<span class="string">&quot;before_value&quot;</span><span class="string">` `</span>    AfterValue   <span class="keyword">interface</span>&#123;&#125; json:<span class="string">&quot;after_value&quot;</span><span class="string">` `</span>    AfterUpdated <span class="keyword">interface</span>&#123;&#125; json:<span class="string">&quot;after_updated&quot;</span><span class="string">` `</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据同步模块方案"><a href="#数据同步模块方案" class="headerlink" title="数据同步模块方案"></a>数据同步模块方案</h3><table>
+<thead>
+<tr>
+<th><strong>方案</strong></th>
+<th><strong>优点</strong></th>
+<th><strong>缺点</strong></th>
+<th><strong>是否推荐</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方案一：事件作为原数据，通过事件中的数据更新aPaaS对象</td>
+<td>可以直接通过事件中的数据，更新数据无依赖上游mysql，只关注事件本身</td>
+<td>需要处理重复+乱序消费的场景</td>
+<td>推荐</td>
+</tr>
+<tr>
+<td>方案二：事件作为触发器，每次回查原有mysql数据库最新数据</td>
+<td>不用对乱序+重复消息进行处理消息合并+批查询处理后，每类实体的多个消息体只触发一次回查mysql动作，每次批处理消息对mysql查询的次数等于该批次消息中的实体类别数</td>
+<td>依赖上游数据表，没有与上游数据源解耦，上游变化时，需要进一步做适配</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="方案一-处理重复的方式"><a href="#方案一-处理重复的方式" class="headerlink" title="方案一: 处理重复的方式"></a>方案一: 处理重复的方式</h4><p>dbus、mq都有可能重复投递消息，需要在消费时对重复消息进行过滤，设计redis+mysql存储已经完成消费的消息，每次先判断是否该消息是否被消费，如果没有则被消费。</p>
+<p>消息重复投递的原因：</p>
+<ul>
+<li>消息发送失败后的重试、消息消费失败后的重试：因为网络故障延迟等原因发送消息失败时，会重现发送消息直到消息发送成功或者达到最大发送次数 （保证消息不丢失），如果重试消息发送成功并且之前的消息也发送成功就会出现重复消息</li>
+<li>对于RocketMQ内部维护了每条消息的msgid，可以通过msgid进行去重判断</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>方案</strong></th>
+<th><strong>优点</strong></th>
+<th><strong>是否推荐</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方案一：redis+事件类型+时间戳缓存，保留7天时间（dbus只处理7天内的消息）。</td>
+<td>速度快只查一次redis</td>
+<td>推荐</td>
+</tr>
+<tr>
+<td>方案二：复用dbus的表，存在同一个表中，已经完成事件处理的消息，每次批量更新后，每条消息都会保存在该表中。</td>
+<td>能存档</td>
+<td></td>
+</tr>
+<tr>
+<td>方案三：redis+数据库存档，先查redis</td>
+<td>速度快能存档</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="程序执行逻辑："><a href="#程序执行逻辑：" class="headerlink" title="程序执行逻辑："></a>程序执行逻辑：</h3><p>1、初始化DBus全量消费者-&gt;initDbusFullConsumer，初始化DBus增量消费者-&gt;initDbusIncrementConsumer，初始化RMQProducer-&gt;initMQProducer</p>
+<p>2、从配置文件中读取需要监听的表和列，增量消费者对多个table表添加对应的handler，后监听mysql-binlog</p>
+<p>3、获取binlog数据调用ToEvent将binlog转换为事件(封装为event对象)，调用 producer.send()发送到RMQ</p>
+<p>4、RMQ批量拉取消息(200条)，将拉取到的消息分成对象，每个对象存储一个表名称和表中修改的记录idsList</p>
+<h3 id="nvwa-x2F-sync-apass"><a href="#nvwa-x2F-sync-apass" class="headerlink" title="nvwa&#x2F;sync_apass"></a>nvwa&#x2F;sync_apass</h3><p>Dubs包：</p>
+<ul>
+<li>full_consumer：全量消费, 调用HandleSingleMessage()处理每条数据到list, 后调用 producer.BatchSend(list)</li>
+<li>increment_consumer：增量消费, 调用ToEvent将binlog转换为事件(封装为event对象)，调用 producer.send()</li>
+</ul>
+<p>updateAction, insertAction, deleteAction 三种消费类型</p>
+<ul>
+<li>manager：start() 启动全量、增量消费，创建DBus增量消费者并监听binlog，增量消费者对多个table表添加对应的handler，全量消费单个handler</li>
+<li>produce：向mq发送数据 -为啥有个批处理发送，4条队列 topic-tag-increment_sync_apaas；topic-tag-sync_apaas；topic-tag-retry_update_sync_apaas；topic-retrytag-sync_apaas  为啥只有一个生产者</li>
+<li>Init：根据是全量消费还是增量消费，初始化消息队列并启动处理程序</li>
+</ul>
+<p>Apaas包：</p>
+<ul>
+<li>open_sdk：调用apaas接口查数据</li>
+<li>transformer：转换sf-&gt;apaas的数据格式</li>
+<li>consumer：调用SFBinlogBatchHandler()批量消费数据</li>
+</ul>
+<h3 id="全量和增量集群"><a href="#全量和增量集群" class="headerlink" title="全量和增量集群"></a>全量和增量集群</h3><ul>
+<li>全量迁移和增量迁移分别为不同的集群。增量迁移集群默认数据保留2天。</li>
+<li>全量迁移根据表的大小，还分为两个集群，一个集群用于同步超大表数据（100亿行以上），另一个集群用于同步普通的表。正常全量集群（dbus_stock）数据保留7天，超大表全量集群（dbus_stock_big）数据保留<strong>5小时</strong>。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7/" rel="tag"># 实习收获</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/07/%E5%85%B3%E9%94%AE%E5%85%88%E7%94%9F/" rel="prev" title="关键先生">
+                  <i class="fa fa-chevron-left"></i> 关键先生
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/07/AI%E5%AD%97%E6%AE%B5/" rel="next" title="AI字段">
+                  AI字段 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bean</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
