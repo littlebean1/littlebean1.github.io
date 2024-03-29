@@ -44,10 +44,12 @@
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221205224025496.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221207153257584.png?raw=true">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221207153311723.png?raw=true">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240307150619284.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240307150533018.png">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230903174039749.png">
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230903181609014.png">
 <meta property="article:published_time" content="2022-09-22T10:26:10.000Z">
-<meta property="article:modified_time" content="2023-12-07T07:54:49.766Z">
+<meta property="article:modified_time" content="2024-03-27T14:39:10.085Z">
 <meta property="article:author" content="bean">
 <meta property="article:tag" content="Mysql">
 <meta name="twitter:card" content="summary">
@@ -137,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql-%E8%BF%9B%E9%98%B6"><span class="nav-number">1.</span> <span class="nav-text">mysql 进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql5-7-%E5%92%8C-mysql8-0%E5%9C%A8%E7%BC%96%E7%A0%81%E6%96%B9%E9%9D%A2%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">mysql5.7 和 mysql8.0在编码方面的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql5-7"><span class="nav-number">1.1.1.</span> <span class="nav-text">mysql5.7:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql8-0"><span class="nav-number">1.1.2.</span> <span class="nav-text">mysql8.0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">mysql的逻辑结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">存储引擎：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory%E5%BC%95%E6%93%8E"><span class="nav-number">1.3.1.</span> <span class="nav-text">Memory引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB%E5%BC%95%E6%93%8E"><span class="nav-number">1.3.2.</span> <span class="nav-text">InnoDB引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyIsam%E5%BC%95%E6%93%8E"><span class="nav-number">1.3.3.</span> <span class="nav-text">MyIsam引擎</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">索引分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash%E7%B4%A2%E5%BC%95%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.4.2.</span> <span class="nav-text">hash索引的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-number">1.4.3.</span> <span class="nav-text">B+树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88B-%E6%A0%91%E4%B8%80%E8%88%AC%E9%9C%80%E8%A6%81%E4%B8%89%E5%B1%82"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">为什么B+树一般需要三层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B%E6%A0%91%E4%B8%8EB-%E6%A0%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">B树与B+树的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-%E6%A0%91%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">B+树的缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%B1%E5%93%8DB-%E6%A0%91%E7%A3%81%E7%9B%98IO%E7%9A%84%E5%9B%A0%E7%B4%A0%EF%BC%8CB-%E6%A0%91%E6%AF%8F%E4%B8%80%E5%B1%82%E8%B6%8A%E5%AE%BD%E8%B6%8A%E5%A5%BD%E5%90%97"><span class="nav-number">1.4.3.4.</span> <span class="nav-text">影响B+树磁盘IO的因素，B+树每一层越宽越好吗</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%88%97%E7%B4%A2%E5%BC%95%EF%BC%9A"><span class="nav-number">1.4.4.</span> <span class="nav-text">单列索引：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.5.</span> <span class="nav-text">唯一索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.6.</span> <span class="nav-text">全文索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95-%E6%8C%87%E9%92%88%E5%8D%A0%E7%94%A86B"><span class="nav-number">1.4.7.</span> <span class="nav-text">聚簇索引 (指针占用6B)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95-%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95%EF%BC%8C%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.8.</span> <span class="nav-text">二级索引 (联合索引，非聚簇索引)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.4.9.</span> <span class="nav-text">联合索引的注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E6%83%85%E5%86%B5%E4%B8%8B%E4%B8%8D%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.</span> <span class="nav-text">哪些情况下不应该使用索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MyIsam"><span class="nav-number">1.5.1.</span> <span class="nav-text">MyIsam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E8%A1%A8%E6%88%96%E8%80%85%E4%BA%8C%E6%AC%A1%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.5.2.</span> <span class="nav-text">回表或者二次查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.3.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88"><span class="nav-number">1.5.4.</span> <span class="nav-text">索引失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E5%92%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.5.5.</span> <span class="nav-text">主键索引和唯一索引的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84ACID%E5%8E%9F%E7%90%86"><span class="nav-number">1.6.</span> <span class="nav-text">事务的ACID原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.6.1.</span> <span class="nav-text">事务与隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redo-log"><span class="nav-number">1.6.2.</span> <span class="nav-text">redo log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undo-log"><span class="nav-number">1.6.3.</span> <span class="nav-text">undo log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E6%97%A5%E5%BF%97%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.6.4.</span> <span class="nav-text">三大日志执行流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVCC"><span class="nav-number">1.7.</span> <span class="nav-text">MVCC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb%E5%BC%95%E6%93%8E%E4%B8%AD%E6%AF%8F%E4%B8%AA%E8%A1%8C%E8%AE%B0%E5%BD%95%E9%83%BD%E5%90%AB%E6%9C%89%E9%9A%90%E8%97%8F%E5%AD%97%E6%AE%B5%EF%BC%9A"><span class="nav-number">1.7.1.</span> <span class="nav-text">innodb引擎中每个行记录都含有隐藏字段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E9%93%BE%EF%BC%9A"><span class="nav-number">1.7.2.</span> <span class="nav-text">版本链：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReadView%E7%9A%84%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="nav-number">1.7.3.</span> <span class="nav-text">ReadView的组成结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8B%E7%9A%84MVCC"><span class="nav-number">1.7.4.</span> <span class="nav-text">可重复读隔离级别下的MVCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8B%E7%9A%84MVCC"><span class="nav-number">1.7.5.</span> <span class="nav-text">读已提交隔离级别下的MVCC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%B2%92%E5%BA%A6"><span class="nav-number">1.8.</span> <span class="nav-text">锁的粒度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E9%94%81"><span class="nav-number">1.8.1.</span> <span class="nav-text">表锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E9%94%81"><span class="nav-number">1.8.2.</span> <span class="nav-text">行锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%B4%E9%9A%99%E9%94%81%E3%80%81%E4%B8%B4%E9%94%AE%E9%94%81%E3%80%81%E8%AE%B0%E5%BD%95%E9%94%81"><span class="nav-number">1.8.3.</span> <span class="nav-text">间隙锁、临键锁、记录锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8RR%E7%BA%A7%E5%88%AB%E4%B8%8B%EF%BC%8C%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E4%B8%A4%E7%A7%8D%EF%BC%9A"><span class="nav-number">1.8.3.1.</span> <span class="nav-text">在RR级别下，解决幻读的方式有两种：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innodb%E5%BC%95%E6%93%8E%E6%9C%89%E5%93%AA%E4%BA%9B%E9%94%81%EF%BC%8C%E9%BB%98%E8%AE%A4%E4%BD%BF%E7%94%A8%E4%BB%80%E4%B9%88%E9%94%81"><span class="nav-number">1.9.</span> <span class="nav-text">innodb引擎有哪些锁，默认使用什么锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97"><span class="nav-number">1.10.</span> <span class="nav-text">Mysql慢查询日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%B0%83%E4%BC%98sql"><span class="nav-number">1.10.1.</span> <span class="nav-text">如何调优sql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#varchar-10-%E5%8F%AF%E4%BB%A5%E5%AD%98%E5%82%A810%E4%B8%AA%E5%AD%97%E6%AF%8D%E3%80%8110%E4%B8%AA%E6%95%B0%E5%AD%97%E3%80%8110%E4%B8%AA%E6%B1%89%E5%AD%97"><span class="nav-number">1.10.2.</span> <span class="nav-text">varchar(10)可以存储10个字母、10个数字、10个汉字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%8Emysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98%EF%BC%8C%E8%8B%A5mysql%E5%AE%95%E6%9C%BA%E4%BA%86%E6%97%A0%E6%B3%95%E5%86%99%E5%85%A5%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">1.10.3.</span> <span class="nav-text">如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E4%B8%ADselect%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">1.10.4.</span> <span class="nav-text">MySQL中select语句的执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXPLAIN"><span class="nav-number">1.10.5.</span> <span class="nav-text">EXPLAIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%8C%83%E5%BC%8F"><span class="nav-number">1.10.6.</span> <span class="nav-text">数据库三大范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#truncate%E5%92%8Cdelete%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.10.7.</span> <span class="nav-text">truncate和delete的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#limit%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2100w%E6%9D%A1%E6%95%B0%E6%8D%AE%E6%95%88%E7%8E%87%E4%BD%8E"><span class="nav-number">1.10.8.</span> <span class="nav-text">limit分页查询100w条数据效率低</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%BB%B6%E8%BF%9F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.10.9.</span> <span class="nav-text">Mysql主从同步延迟的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%8E%9F%E7%90%86-GTID"><span class="nav-number">1.10.10.</span> <span class="nav-text">Mysql主从同步原理-GTID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%90%8E%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">1.10.11.</span> <span class="nav-text">分库分表后读写分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%89%AB%E6%8F%8F%E5%85%A8%E5%BA%93-ShardingJDBC"><span class="nav-number">1.10.12.</span> <span class="nav-text">分库分表扫描全库-ShardingJDBC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">1.10.13.</span> <span class="nav-text">update的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%AD%97%E6%AE%B5%E5%8E%9F%E7%90%86"><span class="nav-number">1.10.14.</span> <span class="nav-text">MySQL添加新字段原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql"><span class="nav-number">1.10.15.</span> <span class="nav-text">Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BB%BA%E8%AE%AE%E5%8D%95%E8%A1%A8%E6%95%B0%E6%8D%AE%E9%87%8F%E4%B8%8D%E8%A6%81%E8%B6%85%E8%BF%87%E4%B8%A4%E5%8D%83%E4%B8%87"><span class="nav-number">1.10.15.1.</span> <span class="nav-text">MySQL为什么建议单表数据量不要超过两千万</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql%E5%A4%A7%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E6%85%A2"><span class="nav-number">1.10.15.2.</span> <span class="nav-text">Mysql大表查询数据慢</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%EF%BC%9A"><span class="nav-number">1.10.16.</span> <span class="nav-text">mysql主从同步：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E4%B9%8B%E9%97%B4%E7%9A%84binlog%E6%98%AF%E6%8B%89%E8%BF%98%E6%98%AF%E6%8E%A8"><span class="nav-number">1.10.16.1.</span> <span class="nav-text">mysql主从之间的binlog是拉还是推</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">1.10.16.2.</span> <span class="nav-text">mysql主从同步过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%BB%B6%E8%BF%9F%E7%9A%84%E5%8E%9F%E5%9B%A0%E4%B8%8E%E8%A7%A3%E5%86%B3"><span class="nav-number">1.10.16.3.</span> <span class="nav-text">mysql主从同步延迟的原因与解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E6%9C%9F%E9%97%B4%E4%B8%BB%E8%8A%82%E7%82%B9%E5%AE%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">1.10.16.4.</span> <span class="nav-text">mysql主从同步期间主节点宕机数据丢失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql%E4%BA%8B%E5%8A%A1%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4"><span class="nav-number">1.10.16.5.</span> <span class="nav-text">Mysql事务二阶段提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binlog%E7%9A%84WAL%E6%9C%BA%E5%88%B6"><span class="nav-number">1.10.16.6.</span> <span class="nav-text">Binlog的WAL机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canal%E7%9B%91%E5%90%ACmysql-binlog%EF%BC%9A"><span class="nav-number">1.10.17.</span> <span class="nav-text">Canal监听mysql binlog：</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql-%E8%BF%9B%E9%98%B6"><span class="nav-number">1.</span> <span class="nav-text">mysql 进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql5-7-%E5%92%8C-mysql8-0%E5%9C%A8%E7%BC%96%E7%A0%81%E6%96%B9%E9%9D%A2%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">mysql5.7 和 mysql8.0在编码方面的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql5-7"><span class="nav-number">1.1.1.</span> <span class="nav-text">mysql5.7:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql8-0"><span class="nav-number">1.1.2.</span> <span class="nav-text">mysql8.0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">mysql的逻辑结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">存储引擎：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory%E5%BC%95%E6%93%8E"><span class="nav-number">1.3.1.</span> <span class="nav-text">Memory引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB%E5%BC%95%E6%93%8E"><span class="nav-number">1.3.2.</span> <span class="nav-text">InnoDB引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyIsam%E5%BC%95%E6%93%8E"><span class="nav-number">1.3.3.</span> <span class="nav-text">MyIsam引擎</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">索引分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash%E7%B4%A2%E5%BC%95%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.4.2.</span> <span class="nav-text">hash索引的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-number">1.4.3.</span> <span class="nav-text">B+树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88B-%E6%A0%91%E4%B8%80%E8%88%AC%E9%9C%80%E8%A6%81%E4%B8%89%E5%B1%82"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">为什么B+树一般需要三层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B%E6%A0%91%E4%B8%8EB-%E6%A0%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">B树与B+树的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-%E6%A0%91%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">B+树的缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%B1%E5%93%8DB-%E6%A0%91%E7%A3%81%E7%9B%98IO%E7%9A%84%E5%9B%A0%E7%B4%A0%EF%BC%8CB-%E6%A0%91%E6%AF%8F%E4%B8%80%E5%B1%82%E8%B6%8A%E5%AE%BD%E8%B6%8A%E5%A5%BD%E5%90%97"><span class="nav-number">1.4.3.4.</span> <span class="nav-text">影响B+树磁盘IO的因素，B+树每一层越宽越好吗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-%E6%A0%91-or-%E8%B7%B3%E8%A1%A8"><span class="nav-number">1.4.3.5.</span> <span class="nav-text">B+树 or 跳表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%88%97%E7%B4%A2%E5%BC%95%EF%BC%9A"><span class="nav-number">1.4.4.</span> <span class="nav-text">单列索引：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.5.</span> <span class="nav-text">唯一索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.6.</span> <span class="nav-text">全文索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95-%E6%8C%87%E9%92%88%E5%8D%A0%E7%94%A86B-tinyInt-8B-int-32B"><span class="nav-number">1.4.7.</span> <span class="nav-text">聚簇索引 (指针占用6B, tinyInt-8B, int 32B)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95-%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95%EF%BC%8C%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.8.</span> <span class="nav-text">二级索引 (联合索引，非聚簇索引)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.4.9.</span> <span class="nav-text">联合索引的注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E6%83%85%E5%86%B5%E4%B8%8B%E4%B8%8D%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.10.</span> <span class="nav-text">哪些情况下不应该使用索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyIsam"><span class="nav-number">1.4.11.</span> <span class="nav-text">MyIsam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E8%A1%A8%E6%88%96%E8%80%85%E4%BA%8C%E6%AC%A1%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.12.</span> <span class="nav-text">回表或者二次查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.13.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88"><span class="nav-number">1.4.14.</span> <span class="nav-text">索引失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E5%92%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.15.</span> <span class="nav-text">主键索引和唯一索引的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8"><span class="nav-number">1.4.16.</span> <span class="nav-text">索引下推</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84ACID%E5%8E%9F%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">事务的ACID原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.5.1.</span> <span class="nav-text">事务与隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redo-log"><span class="nav-number">1.5.2.</span> <span class="nav-text">redo log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undo-log"><span class="nav-number">1.5.3.</span> <span class="nav-text">undo log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E6%97%A5%E5%BF%97%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.5.4.</span> <span class="nav-text">三大日志执行流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVCC"><span class="nav-number">1.6.</span> <span class="nav-text">MVCC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb%E5%BC%95%E6%93%8E%E4%B8%AD%E6%AF%8F%E4%B8%AA%E8%A1%8C%E8%AE%B0%E5%BD%95%E9%83%BD%E5%90%AB%E6%9C%89%E9%9A%90%E8%97%8F%E5%AD%97%E6%AE%B5%EF%BC%9A"><span class="nav-number">1.6.1.</span> <span class="nav-text">innodb引擎中每个行记录都含有隐藏字段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E9%93%BE%EF%BC%9A"><span class="nav-number">1.6.2.</span> <span class="nav-text">版本链：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReadView%E7%9A%84%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="nav-number">1.6.3.</span> <span class="nav-text">ReadView的组成结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8B%E7%9A%84MVCC"><span class="nav-number">1.6.4.</span> <span class="nav-text">可重复读隔离级别下的MVCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8B%E7%9A%84MVCC"><span class="nav-number">1.6.5.</span> <span class="nav-text">读已提交隔离级别下的MVCC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E7%B2%92%E5%BA%A6"><span class="nav-number">1.7.</span> <span class="nav-text">锁的粒度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E9%94%81"><span class="nav-number">1.7.1.</span> <span class="nav-text">表锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E9%94%81"><span class="nav-number">1.7.2.</span> <span class="nav-text">行锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%B4%E9%9A%99%E9%94%81%E3%80%81%E4%B8%B4%E9%94%AE%E9%94%81%E3%80%81%E8%AE%B0%E5%BD%95%E9%94%81"><span class="nav-number">1.7.3.</span> <span class="nav-text">间隙锁、临键锁、记录锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8RR%E7%BA%A7%E5%88%AB%E4%B8%8B%EF%BC%8C%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.7.3.1.</span> <span class="nav-text">在RR级别下，解决幻读的方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innodb%E5%BC%95%E6%93%8E%E6%9C%89%E5%93%AA%E4%BA%9B%E9%94%81%EF%BC%8C%E9%BB%98%E8%AE%A4%E4%BD%BF%E7%94%A8%E4%BB%80%E4%B9%88%E9%94%81"><span class="nav-number">1.8.</span> <span class="nav-text">innodb引擎有哪些锁，默认使用什么锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97"><span class="nav-number">1.9.</span> <span class="nav-text">Mysql慢查询日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%B0%83%E4%BC%98sql"><span class="nav-number">1.9.1.</span> <span class="nav-text">如何调优sql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#varchar-10-%E5%8F%AF%E4%BB%A5%E5%AD%98%E5%82%A810%E4%B8%AA%E5%AD%97%E6%AF%8D%E3%80%8110%E4%B8%AA%E6%95%B0%E5%AD%97%E3%80%8110%E4%B8%AA%E6%B1%89%E5%AD%97"><span class="nav-number">1.9.2.</span> <span class="nav-text">varchar(10)可以存储10个字母、10个数字、10个汉字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E4%B8%ADselect%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">1.9.3.</span> <span class="nav-text">MySQL中select语句的执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXPLAIN"><span class="nav-number">1.9.4.</span> <span class="nav-text">EXPLAIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%8C%83%E5%BC%8F"><span class="nav-number">1.9.5.</span> <span class="nav-text">数据库三大范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#truncate%E5%92%8Cdelete%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.9.6.</span> <span class="nav-text">truncate和delete的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#limit%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2100w%E6%9D%A1%E6%95%B0%E6%8D%AE%E6%95%88%E7%8E%87%E4%BD%8E"><span class="nav-number">1.9.7.</span> <span class="nav-text">limit分页查询100w条数据效率低</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%BB%B6%E8%BF%9F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.9.8.</span> <span class="nav-text">Mysql主从同步延迟的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%8E%9F%E7%90%86-GTID"><span class="nav-number">1.9.9.</span> <span class="nav-text">Mysql主从同步原理-GTID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%90%8E%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">1.9.10.</span> <span class="nav-text">分库分表后读写分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%89%AB%E6%8F%8F%E5%85%A8%E5%BA%93-ShardingJDBC"><span class="nav-number">1.9.11.</span> <span class="nav-text">分库分表扫描全库-ShardingJDBC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%AD%97%E6%AE%B5%E5%8E%9F%E7%90%86"><span class="nav-number">1.9.12.</span> <span class="nav-text">MySQL添加新字段原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql"><span class="nav-number">1.9.13.</span> <span class="nav-text">Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BB%BA%E8%AE%AE%E5%8D%95%E8%A1%A8%E6%95%B0%E6%8D%AE%E9%87%8F%E4%B8%8D%E8%A6%81%E8%B6%85%E8%BF%87%E4%B8%A4%E5%8D%83%E4%B8%87"><span class="nav-number">1.9.13.1.</span> <span class="nav-text">MySQL为什么建议单表数据量不要超过两千万</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql%E5%A4%A7%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E6%85%A2"><span class="nav-number">1.9.13.2.</span> <span class="nav-text">Mysql大表查询数据慢</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%EF%BC%9A"><span class="nav-number">1.9.14.</span> <span class="nav-text">mysql主从同步：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">1.9.14.1.</span> <span class="nav-text">mysql主从同步过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%BB%B6%E8%BF%9F%E7%9A%84%E5%8E%9F%E5%9B%A0%E4%B8%8E%E8%A7%A3%E5%86%B3"><span class="nav-number">1.9.14.2.</span> <span class="nav-text">mysql主从同步延迟的原因与解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E6%9C%9F%E9%97%B4%E4%B8%BB%E8%8A%82%E7%82%B9%E5%AE%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1"><span class="nav-number">1.9.14.3.</span> <span class="nav-text">mysql主从同步期间主节点宕机数据丢失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E4%B8%BB%E4%BB%8E%E4%B9%8B%E9%97%B4%E7%9A%84binlog%E6%98%AF%E6%8B%89%E8%BF%98%E6%98%AF%E6%8E%A8"><span class="nav-number">1.9.14.4.</span> <span class="nav-text">mysql主从之间的binlog是拉还是推</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql%E4%BA%8B%E5%8A%A1%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4"><span class="nav-number">1.9.14.5.</span> <span class="nav-text">Mysql事务二阶段提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binlog%E7%9A%84WAL%E6%9C%BA%E5%88%B6"><span class="nav-number">1.9.14.6.</span> <span class="nav-text">Binlog的WAL机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canal%E7%9B%91%E5%90%ACmysql-binlog%EF%BC%9A"><span class="nav-number">1.9.15.</span> <span class="nav-text">Canal监听mysql binlog：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nosql%E4%BC%98%E7%82%B9"><span class="nav-number">1.9.16.</span> <span class="nav-text">nosql优点</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -152,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -238,7 +240,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-07 15:54:49" itemprop="dateModified" datetime="2023-12-07T15:54:49+08:00">2023-12-07</time>
+      <time title="修改时间：2024-03-27 22:39:10" itemprop="dateModified" datetime="2024-03-27T22:39:10+08:00">2024-03-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,7 +313,7 @@
 <li>只能用于简单的比较，不能进行范围查询</li>
 <li>数据的存储是无序的，使用order by时需要重排序</li>
 </ul>
-<h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><p>​		B+树种结点占用一个页16KB，非叶子结点不存储数据，只存储主键值和页面索引 (费聚簇索引格外存储索引列)，叶子结点存储真实数据。B+树的各个叶子结点之间形成一个双向链表，叶子结点内部是一个单向链表。此外B+树结点只存储索引项，但是B树结点需要存储数据浪费空间导致可一个页可索引的数目少，而且B+树通过链表查找速度快。                                                       </p>
+<h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><p>​		B+树种结点占用一个页16KB，非叶子结点不存储数据，只存储主键值和页面索引 (非聚簇索引格外存储索引列)，叶子结点存储真实数据。B+树的各个叶子结点之间形成一个双向链表，叶子结点内部是一个单向链表。此外B+树结点只存储索引项，但是B树结点需要存储数据浪费空间导致可一个页可索引的数目少，而且B+树通过链表查找速度快。                                                       </p>
 <h4 id="为什么B-树一般需要三层"><a href="#为什么B-树一般需要三层" class="headerlink" title="为什么B+树一般需要三层"></a>为什么B+树一般需要三层</h4><p>​		InnoDB存储引擎中页的大小为16KB ，假设一个索引项长为16B，则三层B+树可以存储1000 * 1000 *  1000个索引项，实际情况中，每个节点可能填不满，因此B+树的高度个能达到3-4层。Mysql的InnoDB存储引擎将根节点常驻内存(根节点的地址是永恒不变的，每次扩充根节点地址始终是最上层)，因此要查找某一键值需要2-3次磁盘I&#x2F;O操作。Mysql底层数据结构采用B+树，B+树的一个结点大小为16K，所以mysql一页大小为16k，B+树的叶子结点存储数据页，非叶子结点存储索引页。一页中有多个行数据，一行包括记录字段，roll_pointer，trx_id，row_id(没有主键时自动生成)。</p>
 <h4 id="B树与B-树的区别"><a href="#B树与B-树的区别" class="headerlink" title="B树与B+树的区别"></a>B树与B+树的区别</h4><ul>
 <li>B树种所有的结点都存储真实数据，B+树只有叶子结点存储真实数据，非叶子结点存储索引项</li>
@@ -321,11 +323,17 @@
 </ul>
 <h4 id="B-树的缺点"><a href="#B-树的缺点" class="headerlink" title="B+树的缺点"></a>B+树的缺点</h4><ul>
 <li>如果主键不是递增的，会导致每次插入数据产生大量的数据迁移，影响性能</li>
-<li>即使主键是有序的，随着新数据的插入叶子结点会慢慢分裂，分裂后的数据可能在磁盘上相隔很远，会产生大量的随机IO</li>
+<li>即使主键是有序的，随着新数据频繁的插入和删除，叶子结点会频繁分裂和合并，影响性能</li>
 </ul>
 <h4 id="影响B-树磁盘IO的因素，B-树每一层越宽越好吗"><a href="#影响B-树磁盘IO的因素，B-树每一层越宽越好吗" class="headerlink" title="影响B+树磁盘IO的因素，B+树每一层越宽越好吗"></a>影响B+树磁盘IO的因素，B+树每一层越宽越好吗</h4><ul>
 <li>mysql每一页的大小也就是B+树的节点大小，当页越大时，一个页存储的索引数目越多，每一层能够存放的页也就越多，在数据量一定的情况下，页越大，B+树越低，磁盘IO越少</li>
 <li>不是越宽越好，如果B+树节点过大，会导致内存无法一次性加载一个节点，导致额外的磁盘IO操作，降低性能。</li>
+</ul>
+<h4 id="B-树-or-跳表"><a href="#B-树-or-跳表" class="headerlink" title="B+树 or 跳表"></a>B+树 or 跳表</h4><ul>
+<li><p>为什么mysql不用跳表用B+树：InnoDB存储引擎中页的大小为16KB，B+树的一页大小为16KB，对于层高为3的B+树来说，可以存储接近2kw条数据，2的24次方。由于调表是采用了多层链表的结构，并需要维持相邻两层的比例为1 : 2，这就导致如果跳表想要存储2kw条数据，需要构造一个层高为24的多层链表，一旦跳表高度达到该量级，在进行数据查询时最多会调用24次磁盘I&#x2F;O，不仅如此，采用跳表存储2kw数据时最下面一层会存2kw条数据，层层相加，也需要增大磁盘空间的开销，大大降低了索引效率</p>
+</li>
+<li><p>为什么redis用跳表不用B+树：首先redis是基于内存的kv数据库，所有读写操作都在内存中发生因此不会发生磁盘I&#x2F;O操作，此外，通常情况下redis不会允许过大的key存在，会将大key拆分，如果某个zset中有5000条记录，层高也不会很高。因此在redis中层高不是跳表的劣势</p>
+</li>
 </ul>
 <h3 id="单列索引："><a href="#单列索引：" class="headerlink" title="单列索引："></a>单列索引：</h3><p>​		又称单列索引，在普通的字段上添加索引</p>
 <h3 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h3><p>​		添加唯一约束时，会自动创建唯一索引</p>
@@ -333,24 +341,25 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from news where MATCH (content) against (&#x27;我们&#x27; in Boolean MODE); </span><br></pre></td></tr></table></figure>
 
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230323210112613.png" alt="image-20230323210112613"></p>
-<h3 id="聚簇索引-指针占用6B"><a href="#聚簇索引-指针占用6B" class="headerlink" title="聚簇索引 (指针占用6B)"></a>聚簇索引 (指针占用6B)</h3><p>​		表中的记录与数据存储处在一起，以主键id为索引，整个B+树存储在.ibd文件中</p>
+<h3 id="聚簇索引-指针占用6B-tinyInt-8B-int-32B"><a href="#聚簇索引-指针占用6B-tinyInt-8B-int-32B" class="headerlink" title="聚簇索引 (指针占用6B, tinyInt-8B, int 32B)"></a>聚簇索引 (指针占用6B, tinyInt-8B, int 32B)</h3><p>​		表中的记录与数据存储处在一起，以主键id为索引，整个B+树存储在.ibd文件中，即.ibd文件中存储着索引与真实数据</p>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221208142355072.png?raw=true?raw=true" alt="image-20221208142355072"></p>
 <p>一个非主键字段</p>
 <h3 id="二级索引-联合索引，非聚簇索引"><a href="#二级索引-联合索引，非聚簇索引" class="headerlink" title="二级索引 (联合索引，非聚簇索引)"></a>二级索引 (联合索引，非聚簇索引)</h3><p>​		叶子节点中存储的是<strong>索引的字段+主键</strong>，通过主键去聚簇索引中找到需要的值 (回表)</p>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221208144432411.png?raw=true" alt="image-20221208144432411"></p>
-<h3 id="联合索引的注意事项"><a href="#联合索引的注意事项" class="headerlink" title="联合索引的注意事项"></a>联合索引的注意事项</h3><p>​		将查询需求频繁或者字段选择性高的列放在索引的前面。</p>
+<h3 id="联合索引的注意事项"><a href="#联合索引的注意事项" class="headerlink" title="联合索引的注意事项"></a>联合索引的注意事项</h3><p>​		将查询需求频繁或者字段选择性高的列放在索引的前面</p>
 <p>​		为经常需要排序、分组的字段建立索引</p>
 <p>​		连接查询有索引的表当被驱动</p>
-<h2 id="哪些情况下不应该使用索引"><a href="#哪些情况下不应该使用索引" class="headerlink" title="哪些情况下不应该使用索引"></a>哪些情况下不应该使用索引</h2><ol>
-<li>数据唯一性差的字段不要使用索引，回表次数过多(访问磁盘)</li>
+<p>​		查询语句的条件最好覆盖索引中的所有列，以便索引被充分利用</p>
+<h3 id="哪些情况下不应该使用索引"><a href="#哪些情况下不应该使用索引" class="headerlink" title="哪些情况下不应该使用索引"></a>哪些情况下不应该使用索引</h3><ol>
+<li>数据重复性高的字段不要使用索引，回表次数过多(访问磁盘)</li>
 <li>频繁更新的字段不要使用索引</li>
 <li>字段不在where语句出现时不要添加索引</li>
 <li>数据量少的表不要使用索引</li>
 </ol>
-<h3 id="MyIsam"><a href="#MyIsam" class="headerlink" title="MyIsam"></a>MyIsam</h3><p>​		myisam的索引方式都是非聚簇索引，这意味着myisam中建立的索引全部都是二级索引，都需要回表操作，但是与InnoDB不同的是，innoDB的回表是拿主键到聚簇索引找到对应的记录；myisam的回表拿到的是对应记录的地址，查询速度很快。</p>
+<h3 id="MyIsam"><a href="#MyIsam" class="headerlink" title="MyIsam"></a>MyIsam</h3><p>​		myisam的索引方式都是非聚簇索引，这意味着myisam中建立的索引全部都是二级索引，都需要回表操作，但是与InnoDB不同的是，innoDB的回表是拿主键到聚簇索引找到对应的记录；myisam的回表拿到的是对应记录的地址，查询速度很快。(查询过程在.myi索引文件中，返回数据实在.myd数据文件中)</p>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221208153018169.png?raw=true" alt="image-20221208153018169"></p>
-<h3 id="回表或者二次查询"><a href="#回表或者二次查询" class="headerlink" title="回表或者二次查询"></a>回表或者二次查询</h3><p>​		使用聚簇索引查询可以直接定位到记录，而非聚簇索引(不包括覆盖索引)通常需要扫描两遍索引树，即先通过非聚簇索引索引定位到主键值，在通过聚簇索引定位到行记录，这就是所谓的回表查询，它的性能比扫描一遍索引树低。</p>
-<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>​		一个索引包含了满足查询结果的数据叫覆盖索引。在建立非聚复合索引时，包括这整个sql语句的所有属性列都在整个 (索引+主键) 中时，可以直接从B+树叶子结点中取出数据，不需要回表。有主键是因为B+树结点必然包含着主键列，回表是通过主键来完成的</p>
+<h3 id="回表或者二次查询"><a href="#回表或者二次查询" class="headerlink" title="回表或者二次查询"></a>回表或者二次查询</h3><p>​		使用聚簇索引查询可以直接定位到记录，而非聚簇索引(<strong>不包括覆盖索引</strong>)通常需要扫描两遍索引树，即先通过非聚簇索引索引定位到主键值，在通过聚簇索引定位到行记录，这就是所谓的回表查询，它的性能比扫描一遍索引树低。</p>
+<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>​		一个索引包含了满足查询结果的数据叫覆盖索引。在建立非聚合索引时，包括这整个sql语句的所有属性列都在整个 (索引+主键) 中时，可以直接从B+树叶子结点中取出数据，不需要回表。有主键是因为B+树结点必然包含着主键列，回表是通过主键来完成的</p>
 <p>​		</p>
 <h3 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h3><ul>
 <li><p>where语句中有计算，函数，类型转换会导致索引失效</p>
@@ -376,6 +385,21 @@
 <li>主键是一个唯一性索引，唯一性索引不一定是主键</li>
 <li>主键可以被其他表引用为外键，唯一键不可以</li>
 </ul>
+<h3 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/chuixue24/article/details/130267267">索引下推</a></h3><p>优点：减少回表次数和引擎层传递给服务层的数据量，默认开启</p>
+<p>没有使用索引下推的情况，查询过程为：(在引擎层查询完数据返回给服务层再筛选一遍)</p>
+<ol>
+<li>存储引擎根据where条件中name索引字段，找到符合条件的3个主键ID，设置多个字段的索引只会命中第一个字段 </li>
+<li>然后二次回表查询，根据这3个主键ID去主键索引上找到3个整行记录</li>
+<li>把数据返回给MySQL Server层，再根据where中age条件，筛选出符合要求的一行记录</li>
+<li>返回给客户端</li>
+</ol>
+<p>使用索引下推的情况，查询过程为：(在引擎层查询完数据后又在引擎层做筛选)</p>
+<ol>
+<li>存储引擎根据where条件中name索引字段，找到符合条件的3行记录，再用age条件在引擎层中筛选出符合条件的主键ID</li>
+<li>然后二次回表查询，根据这一个主键ID去主键索引上找到该整行记录</li>
+<li>把数据返回给MySQL Server层</li>
+<li>返回给客户端</li>
+</ol>
 <h2 id="事务的ACID原理"><a href="#事务的ACID原理" class="headerlink" title="事务的ACID原理"></a>事务的ACID原理</h2><h3 id="事务与隔离级别"><a href="#事务与隔离级别" class="headerlink" title="事务与隔离级别"></a>事务与隔离级别</h3><p>​		事务是一系列操作的集合，是一个执行单元。</p>
 <p>​		事务的四个特性：原子性，一致性，隔离性，持久性</p>
 <p>​		隔离级别：脏读(未提交读取)，不可重复读(delete，update，针对某条数据，多次读取信息不一致)，幻读(insert，针对大量信息，多次读取数据数目不一样)</p>
@@ -387,7 +411,7 @@
 </li>
 <li><p>持久性通过redo log实现，redo log用于数据库崩溃后数据恢复，存储于磁盘中</p>
 </li>
-<li><p>bin log记录修改表结构和表中数据的SQL语句，用于集群中备份数据</p>
+<li><p>bin log记录修改表结构和表中数据的SQL语句(statement模式)，raw存储修改前后的数据，用于集群中备份数据</p>
 </li>
 </ul>
 <h3 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h3><p>​		重做日志：记录的是事务提交时数据页的物理修改，用来实现事务的持久性</p>
@@ -415,7 +439,8 @@
 </li>
 </ul>
 <h3 id="三大日志执行流程"><a href="#三大日志执行流程" class="headerlink" title="三大日志执行流程"></a>三大日志执行流程</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230320215203630.png" alt="image-20230320215203630"></p>
-<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><h3 id="innodb引擎中每个行记录都含有隐藏字段："><a href="#innodb引擎中每个行记录都含有隐藏字段：" class="headerlink" title="innodb引擎中每个行记录都含有隐藏字段："></a>innodb引擎中每个行记录都含有隐藏字段：</h3><ul>
+<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><p>​	MVCC利用undolog中记录的版本链和ReadView来实现，ReadView用来辅助判断某个数据的某个版本对当前事务是否可见</p>
+<h3 id="innodb引擎中每个行记录都含有隐藏字段："><a href="#innodb引擎中每个行记录都含有隐藏字段：" class="headerlink" title="innodb引擎中每个行记录都含有隐藏字段："></a>innodb引擎中每个行记录都含有隐藏字段：</h3><ul>
 <li>DB_TRX_ID：记录插入这条记录或最后一次修改该记录的事务ID</li>
 <li>DB_ROLL_PTR：回滚指针，配合undo log，指向这条记录的上一个版本</li>
 <li><em>DB_ROW_ID：隐藏主键，如果表中无主键，则会添加该字段</em></li>
@@ -426,13 +451,14 @@
 
 <h3 id="版本链："><a href="#版本链：" class="headerlink" title="版本链："></a>版本链：</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221205214426932.png?raw=true" alt="image-20221205214426932"></p>
 <h3 id="ReadView的组成结构："><a href="#ReadView的组成结构：" class="headerlink" title="ReadView的组成结构："></a>ReadView的组成结构：</h3><ul>
-<li><p>trx_id：事务的id</p>
+<li><p>trx_id：当前正在执行的事务的id</p>
 </li>
 <li><p>trx_ids：已执行但还未提交的事务的列表，[10,20]</p>
 </li>
 <li><p>up_limit_id：trx_ids表中最小的事务id，表示活跃事务的id下限</p>
-</li>
-<li><p>low_limit_id：事务id不能超过所有事务中id的最大值+1</p>
+<ul>
+<li>low_limit_id：事务id不能超过所有事务中id的最大值+1</li>
+</ul>
 </li>
 </ul>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221205222840342.png?raw=true" alt="image-20221205222840342"></p>
@@ -460,7 +486,7 @@
 </ul>
 <p>​		记录锁：分为S型记录锁和X型记录锁，针对已存在的记录。当一个事务获取了一条记录的S型记录锁后，其他事务也可以继续获取该记录的S型记录锁，但不可取X型记录锁。当一个事务获取了一条记录的X型记录锁后，其他事务既不可以继续获取该记录的S型记录锁，也不获取X型记录锁。</p>
 <p>​		间隙锁：针对不存在的记录，该锁是为了防止插入幻影记录而提出的。当我们在访问某条不存在的记录时，会对该记录主键所位于的区间添加间隙锁，如果后来其他本事务或事务执行insert操作，且主键位于间隙锁的区间内，则会阻塞insert操作。</p>
-<p>​		记录锁和间隙锁可以同时用，并不冲突。如果对一条记录加了gap锁，不会限制其他事务对该记录加记录锁	</p>
+<p>​		记录锁和间隙锁可以同时用，并不冲突。如果对一条记录加了gap锁，不会限制其他事务对该记录加记录锁</p>
 <h3 id="间隙锁、临键锁、记录锁"><a href="#间隙锁、临键锁、记录锁" class="headerlink" title="间隙锁、临键锁、记录锁"></a>间隙锁、临键锁、记录锁</h3><p>临键锁 &#x3D; 间隙锁+记录锁 &lt;&#x3D;&gt; (8,16] &#x3D; (8,16)+[16]<br>记录锁：行锁，防止其它事务 新增&#x2F;更新&#x2F;删除 该行<br>间隙锁：锁住一个区间，防止其它事务修改该区间的记录，可读</p>
 <p>select * from user where userId &#x3D; 16 for update;</p>
 <ul>
@@ -483,10 +509,37 @@
 </ul>
 </li>
 </ul>
-<h4 id="在RR级别下，解决幻读的方式有两种："><a href="#在RR级别下，解决幻读的方式有两种：" class="headerlink" title="在RR级别下，解决幻读的方式有两种："></a>在RR级别下，解决幻读的方式有两种：</h4><ul>
-<li>快照读(读取旧数据)是通过MVCC和undo log来实现的</li>
-<li>当前读(读取最新数据)是通过加记录锁和间隙锁来实现的。</li>
+<h4 id="在RR级别下，解决幻读的方式"><a href="#在RR级别下，解决幻读的方式" class="headerlink" title="在RR级别下，解决幻读的方式"></a>在RR级别下，解决幻读的方式</h4><p>幻读是指在同一个事务中，前后两次查询相同的范围时，得到的结果不一致，<strong>快照读和当前读一起使用的时候就会产生幻读</strong><br>第一个事务里面我们执行了一个范围查询，这个时候满足条件的数据只有一条<br>第二个事务里面，它插入了一行数据，并且提交了<br>接着第一个事务再去查询的时候，得到的结果比第一查询的结果多出来了一条数据。</p>
+<ul>
+<li><p>当前读： 在读取数据时直接读取数据库中的最新版本</p>
+<ul>
+<li><p>select … lock in share mode，select … for update</p>
+</li>
+<li><p>update，delete，insert</p>
+</li>
 </ul>
+</li>
+<li><p>快照读：通过MVCC+undolog实现，当某个数据正在被修改的时候，会读取该数据的旧版本，保证读写不冲突</p>
+<ul>
+<li>简单的select操作，不用加锁</li>
+</ul>
+</li>
+</ul>
+<p>解决方案：将简单的select操作改为当前读(添加for update)，改为当前读后通过对目标数据加记录锁和间隙锁来实现，就不止是给数据库中已有的 n 个记录加上了行锁，还同时加了 n + 1 个间隙锁（这两个合起来也成为 Next-Key Lock 临键锁）。也就是说，在数据库一行行扫描的过程中，不仅扫描到的行加上了行锁，还给行两边的空隙也加上了锁。这样就确保了其他事务无法再插入新的记录，避免了幻读的出现。</p>
+<ul>
+<li>select中未加for update出现幻读</li>
+</ul>
+<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240307150619284.png" alt="image-20240307150619284" style="zoom:67%;" />
+
+<ul>
+<li>select中已加for update，由于对目标数据加了临键锁 (记录锁+间隙锁)，避免幻读</li>
+</ul>
+<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240307150533018.png" alt="image-20240307150533018" style="zoom:67%;" />
+
+
+
+
+
 <h2 id="innodb引擎有哪些锁，默认使用什么锁"><a href="#innodb引擎有哪些锁，默认使用什么锁" class="headerlink" title="innodb引擎有哪些锁，默认使用什么锁"></a>innodb引擎有哪些锁，默认使用什么锁</h2><p>​		共享锁，排他锁，意向锁，自增锁，记录锁，间隙锁，临键锁，插入意向锁</p>
 <p>​		MyISAM和InnoDB都支持表级锁，但是InnoDB默认的是行级锁</p>
 <h2 id="Mysql慢查询日志"><a href="#Mysql慢查询日志" class="headerlink" title="Mysql慢查询日志"></a>Mysql慢查询日志</h2><ul>
@@ -505,7 +558,7 @@
 <li><p>修改SQL语句或者创建索引，尽量让SQL走索引</p>
 </li>
 </ul>
-<h3 id="varchar-10-可以存储10个字母、10个数字、10个汉字"><a href="#varchar-10-可以存储10个字母、10个数字、10个汉字" class="headerlink" title="varchar(10)可以存储10个字母、10个数字、10个汉字"></a>varchar(10)可以存储10个字母、10个数字、10个汉字</h3><h3 id="如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办"><a href="#如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办" class="headerlink" title="如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办"></a>如何解决与mysql数据同步问题，若mysql宕机了无法写入怎么办</h3><h3 id="MySQL中select语句的执行过程"><a href="#MySQL中select语句的执行过程" class="headerlink" title="MySQL中select语句的执行过程"></a>MySQL中select语句的执行过程</h3><ul>
+<h3 id="varchar-10-可以存储10个字母、10个数字、10个汉字"><a href="#varchar-10-可以存储10个字母、10个数字、10个汉字" class="headerlink" title="varchar(10)可以存储10个字母、10个数字、10个汉字"></a>varchar(10)可以存储10个字母、10个数字、10个汉字</h3><h3 id="MySQL中select语句的执行过程"><a href="#MySQL中select语句的执行过程" class="headerlink" title="MySQL中select语句的执行过程"></a>MySQL中select语句的执行过程</h3><ul>
 <li><p>连接器：TCP三次握手建立连接，校验用户身份</p>
 </li>
 <li><p>查询缓存：在缓存中查找是否存在结果,如果存在直接返回,否则继续执行.MySQL8.0删除了查询缓存</p>
@@ -523,7 +576,7 @@
 </ul>
 <h3 id="EXPLAIN"><a href="#EXPLAIN" class="headerlink" title="EXPLAIN"></a>EXPLAIN</h3><p>extra列</p>
 <ul>
-<li><p>using index ：使用覆盖索引</p>
+<li><p>using index ：使用到覆盖索引</p>
 </li>
 <li><p>using where ：sql使用where条件</p>
 </li>
@@ -533,15 +586,15 @@
 <p>type列</p>
 <ul>
 <li>all ：全表扫描</li>
-<li>ref ：使用非唯一性索引</li>
-<li>index：索引树扫描</li>
+<li>ref ：使用了联表查询，命中索引</li>
+<li>index：索引全表扫描,把索引从头到尾扫了一遍。这里包含两种情况:一种是查询使用了覆盖索引,那么它只需要扫描索引就可以获得数据,这个效率要比全表扫描要快,因为索引通常比数据表小,而且还能避免二次查询。在extra中显示Using index,反之,如果在索引上进行全表扫描,没有Using index的提示</li>
 <li>const ：只匹配到一条数据</li>
 </ul>
 <h3 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h3><p>1NF：表中字段不可再分</p>
-<p>2NF：无非主属性对主属性的部分函数依赖</p>
-<p>3NF：无非主属性对主属性的传递函数依赖</p>
-<h3 id="truncate和delete的区别"><a href="#truncate和delete的区别" class="headerlink" title="truncate和delete的区别"></a>truncate和delete的区别</h3><p>truncate table 会删除表中所有的数据，自增主键重置为1，当表中有外键的时候需要先删除外键否则删除数据失败，truncate table操作无法回滚</p>
-<p>delete from table 可以删除表中部分数据，可以删除所有数据，delete表数据可以回滚</p>
+<p>2NF：无非主属性对主属性的部分函数依赖 (主键a,b  属性c，c依赖a)</p>
+<p>3NF：无非主属性对主属性的传递函数依赖 (主键a,b  属性c,d，c依赖d)</p>
+<h3 id="truncate和delete的区别"><a href="#truncate和delete的区别" class="headerlink" title="truncate和delete的区别"></a>truncate和delete的区别</h3><p>truncate table 会删除表中所有的数据，自增主键重置，当表中有外键的时候需要先删除外键否则删除数据失败，truncate table操作无法回滚</p>
+<p>delete from table 可以删除表中部分数据，可以删除所有数据，delete表数据可以回滚 （binlog中执行delete语句之前的所有语句）</p>
 <h3 id="limit分页查询100w条数据效率低"><a href="#limit分页查询100w条数据效率低" class="headerlink" title="limit分页查询100w条数据效率低"></a>limit分页查询100w条数据效率低</h3><ul>
 <li>select userId,userName,address from user order by userName limit 1000,10</li>
 <li>该语句的执行效率低，添加索引idx_userName可以提高查询效率</li>
@@ -550,30 +603,28 @@
 <li>select userId,userName,address from user u1 join (select userId from user order by userName limit 10000,10) u2 on u1.userId &#x3D; u2.userId</li>
 <li>采用手动回表的方式，即在分页查询数据时先查出前100010条数据的userId，因为userId是主键，所以查询不会回表。查询到userId后再通过连表查询出需要回表的数据。需要注意分页的数据不要过多否则会影响效率</li>
 </ul>
-<h3 id="Mysql主从同步延迟的问题"><a href="#Mysql主从同步延迟的问题" class="headerlink" title="Mysql主从同步延迟的问题"></a>Mysql主从同步延迟的问题</h3><p>1、全同步复制</p>
+<h3 id="Mysql主从同步延迟的问题"><a href="#Mysql主从同步延迟的问题" class="headerlink" title="Mysql主从同步延迟的问题"></a>Mysql主从同步延迟的问题</h3><p>1、全同步复制，半同步复制，异步复制，如果对时延要求高采用主从异步复制的策略，要求不高则采用全&#x2F;半同步复制</p>
 <p>2、redis缓存时延时间</p>
 <p>3、以字节为例，大部分情况下都是读主写主，不做读写分离。如果业务对时延无要求则读从库</p>
 <h3 id="Mysql主从同步原理-GTID"><a href="#Mysql主从同步原理-GTID" class="headerlink" title="Mysql主从同步原理-GTID"></a>Mysql主从同步原理-GTID</h3><p>1）当主数据库进行数据更新时，会在事务前产生GTID号，一同记录到binlog日志中。</p>
 <p>2）从数据库端的I&#x2F;O线程将变更的binlog数据，写入到本地的中继日志（relay log）中。</p>
 <p>3）从数据库端的SQL线程从中继日志中获取GTID号，然后对比本地的Binlog查看是否有记录。如果有则说明该GTID的事务已经执行，此时从数据库会忽略。</p>
 <p>4）如果没有记录，则从数据库就会从中继日志中获取数据并执行该GTID的事务，并记录到binlog中。根据GTID号可以知道事务最初是在哪个数据库上提交的。</p>
-<h3 id="分库分表后读写分离"><a href="#分库分表后读写分离" class="headerlink" title="分库分表后读写分离"></a>分库分表后读写分离</h3><h3 id="分库分表扫描全库-ShardingJDBC"><a href="#分库分表扫描全库-ShardingJDBC" class="headerlink" title="分库分表扫描全库-ShardingJDBC"></a>分库分表扫描全库-ShardingJDBC</h3><h3 id="update的过程"><a href="#update的过程" class="headerlink" title="update的过程"></a>update的过程</h3><h3 id="MySQL添加新字段原理"><a href="#MySQL添加新字段原理" class="headerlink" title="MySQL添加新字段原理"></a>MySQL添加新字段原理</h3><p>​		在向一个已有的数据表中添加新字段时，MySQL会将所有数据行都复制到一个新的数据表中，然后添加新字段，最后再将数据行复制回原来的数据表中。这个过程可能需要花费很长时间，而且会占用大量的系统资源。建议在非高峰期执行这个操作，以避免影响系统的正常运行。数据文件idb在磁盘上是一行一行顺序存储的，添加新字段时数据文件不易操作，所以需要借助一个临时数据表</p>
+<h3 id="分库分表后读写分离"><a href="#分库分表后读写分离" class="headerlink" title="分库分表后读写分离"></a>分库分表后读写分离</h3><h3 id="分库分表扫描全库-ShardingJDBC"><a href="#分库分表扫描全库-ShardingJDBC" class="headerlink" title="分库分表扫描全库-ShardingJDBC"></a>分库分表扫描全库-ShardingJDBC</h3><h3 id="MySQL添加新字段原理"><a href="#MySQL添加新字段原理" class="headerlink" title="MySQL添加新字段原理"></a>MySQL添加新字段原理</h3><p>​		数据文件idb在磁盘上是一行一行顺序存储的，添加新字段时数据文件不易操作，所以需要借助一个临时数据表。在向一个已有的数据表中添加新字段时，MySQL会将所有数据行都复制到一个新的数据表中，然后添加新字段，最后再将数据行复制回原来的数据表中。这个过程可能需要花费很长时间，而且会占用大量的系统资源。建议在非高峰期执行这个操作，以避免影响系统的正常运行。</p>
 <h3 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h3><h4 id="MySQL为什么建议单表数据量不要超过两千万"><a href="#MySQL为什么建议单表数据量不要超过两千万" class="headerlink" title="MySQL为什么建议单表数据量不要超过两千万"></a>MySQL为什么建议单表数据量不要超过两千万</h4><p>以mysql底层引擎为innodb为例，索引采用b+树的结构，为减少磁盘io一般设计b+树为3层结构</p>
 <p>在3层结构的情况下，mysql页大小为16KB，若单条记录大小为1KB，则理论情况下b+树叶子一页可以存储16条数据，非叶子存储16KB&#x2F;16B &#x3D; 1K条索引，3层结构可以存储1k * 1k * 16 &#x3D; 1600百万条，具体可存储多少条依据单条记录大小而定</p>
 <h4 id="Mysql大表查询数据慢"><a href="#Mysql大表查询数据慢" class="headerlink" title="Mysql大表查询数据慢"></a>Mysql大表查询数据慢</h4><ul>
 <li>合理建立索引</li>
 <li>根据时间等字段水平分区</li>
 </ul>
-<h3 id="mysql主从同步："><a href="#mysql主从同步：" class="headerlink" title="mysql主从同步："></a>mysql主从同步：</h3><h4 id="mysql主从之间的binlog是拉还是推"><a href="#mysql主从之间的binlog是拉还是推" class="headerlink" title="mysql主从之间的binlog是拉还是推"></a>mysql主从之间的binlog是拉还是推</h4><p>主从采用半同步复制时：主节点执行sql语句之后，向从节点推送binlog日志</p>
-<p>主从采用异步复制时：主节点执行sql语句之后，从节点向主节点拉取binlog日志</p>
-<h4 id="mysql主从同步过程"><a href="#mysql主从同步过程" class="headerlink" title="mysql主从同步过程"></a>mysql主从同步过程</h4><p>首先从节点通过主从协议与主节点建立连接，连接成功后，slave启动一个i&#x2F;o线程读取master的binlog到本地的relay-log中继日志中，此外从节点还有一个sql线程，用来读取relay-log中的内容转为实际的sql语句并执行。但该方式会有两个问题：主节点宕机数据丢失，同步延迟</p>
+<h3 id="mysql主从同步："><a href="#mysql主从同步：" class="headerlink" title="mysql主从同步："></a>mysql主从同步：</h3><h4 id="mysql主从同步过程"><a href="#mysql主从同步过程" class="headerlink" title="mysql主从同步过程"></a>mysql主从同步过程</h4><p>首先从节点通过主从协议与主节点建立连接，连接成功后，slave启动一个i&#x2F;o线程读取master的binlog到本地的relay-log中继日志中，此外从节点还有一个sql线程，用来读取relay-log中的内容转为实际的sql语句并执行。但该方式会有两个问题：<strong>主节点宕机数据丢失，同步延迟</strong></p>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230903174039749.png" alt="image-20230903174039749"></p>
 <h4 id="mysql主从同步延迟的原因与解决"><a href="#mysql主从同步延迟的原因与解决" class="headerlink" title="mysql主从同步延迟的原因与解决"></a>mysql主从同步延迟的原因与解决</h4><ul>
 <li><p>mysql主节点在mvcc机制下支持并发修改，产生过多的DML binlog，超出了从节点sql thread的处理能力</p>
 </li>
 <li><p>从节点中有大型的query语句导致查询时间长，由于读写冲突问题，从节点不能及时处理relay log中的数据</p>
 </li>
-<li><p>解决：使用比主节点处理能力更好的从节点解决从节点sql处理能力不够的问题；在业务与mysql间添加缓存层，降低mysql读压力</p>
+<li><p>解决：使用比主节点处理能力更好的从节点解决从节点sql处理能力不够的问题；在业务与mysql间<strong>添加缓存层，降低mysql读压力</strong></p>
 </li>
 </ul>
 <h4 id="mysql主从同步期间主节点宕机数据丢失"><a href="#mysql主从同步期间主节点宕机数据丢失" class="headerlink" title="mysql主从同步期间主节点宕机数据丢失"></a>mysql主从同步期间主节点宕机数据丢失</h4><p>​	binlog 的写入逻辑比较简单：<code>事务执行过程中，先把日志写到 binlog cache，事务提交的时候，再把 binlog cache 写到 binlog 文件中</code>。</p>
@@ -585,6 +636,18 @@
 </ul>
 <img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230903181609014.png" alt="image-20230903181609014" style="zoom:67%;" />
 
+<h4 id="mysql主从之间的binlog是拉还是推"><a href="#mysql主从之间的binlog是拉还是推" class="headerlink" title="mysql主从之间的binlog是拉还是推"></a>mysql主从之间的binlog是拉还是推</h4><ul>
+<li><p>采用异步复制时：</p>
+<ul>
+<li>slave 与 master 建立连接之后，会把当前哪个 binlog 文件和具体偏移位置告诉 master。主库会启动一个dump线程，根据传过来的（file，pos）在本地的binlog中查找，并把binlog发送给slave。这个过程是 pull 模式。</li>
+</ul>
+</li>
+<li><p>采用半同步复制时 (不确定)</p>
+<ul>
+<li>由于主节点在需要接受从结点发来的ack之后才会执行成功commit，因此此处采用的是主节点将binlog推送到从结点中，等待从结点的响应</li>
+</ul>
+</li>
+</ul>
 <h4 id="Mysql事务二阶段提交"><a href="#Mysql事务二阶段提交" class="headerlink" title="Mysql事务二阶段提交"></a>Mysql事务二阶段提交</h4><ul>
 <li><p>为什么需要两阶段提交</p>
 <ul>
@@ -594,7 +657,7 @@
 </li>
 <li><p>什么是两阶段提交</p>
 <ul>
-<li>两阶段提交就是将一个事务的提交状态分成两个阶段来提交：prepare 阶段和 commit 阶段。在事务提交前数据会保存在redolog buffer和binlog buffer中。在 prepare 阶段，事务会先写 redo log 并将其标记为 prepare 状态刷入磁盘；在 commit 阶段，事务会将 redo log 标记为 commit 状态，并将 binlog 落盘。这样，无论数据库在哪个时刻发生宕机，都可以根据 redo log 和 binlog 的状态来判断事务是否提交，并保证数据的一致性。</li>
+<li>两阶段提交就是将一个事务的提交状态分成两个阶段来提交：prepare 阶段和 commit 阶段。在事务提交前数据会保存在redolog buffer和binlog buffer中。在 prepare 阶段，事务会先写 redo log 并将其标记为 prepare 状态刷入磁盘；在 commit 阶段，将 binlog 落盘，并将 redo log 标记为 commit 状态。这样，无论数据库在哪个时刻发生宕机，都可以根据 redo log 和 binlog 的状态来判断事务是否提交，并保证数据的一致性。</li>
 </ul>
 </li>
 <li><p>为什么两阶段提交能保证数据一致性：</p>
@@ -605,7 +668,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="Binlog的WAL机制"><a href="#Binlog的WAL机制" class="headerlink" title="Binlog的WAL机制"></a>Binlog的WAL机制</h4><p>WAL (Write Ahead Log)：预写日志，在执行SQL时，并不立即将数据刷入磁盘，先将数据写入到内存中的binlog日志中，再将内存中的binlog日志刷到磁盘中。好处是不用每一次操作都实时把数据写入磁盘。</p>
+<h4 id="Binlog的WAL机制"><a href="#Binlog的WAL机制" class="headerlink" title="Binlog的WAL机制"></a>Binlog的WAL机制</h4><p>WAL (Write Ahead Log)：预写日志，在执行SQL时，并不立即将数据刷入磁盘，先将数据写入到内存中的binlog buffer中，再异步地将内存中的binlog buffer刷到磁盘中，然后再将实际数据写入到磁盘，从而保证数据的持久性，好处是不用每一次操作都实时把数据写入磁盘，以便在系统崩溃时可以进行数据恢复</p>
 <h3 id="Canal监听mysql-binlog："><a href="#Canal监听mysql-binlog：" class="headerlink" title="Canal监听mysql binlog："></a>Canal监听mysql binlog：</h3><ul>
 <li><p>直接从canal客户端读取数据</p>
 <ul>
@@ -622,8 +685,13 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">相关配置</span><br><span class="line">## MYSQL</span><br><span class="line">canal.instance.master.address=<span class="number">192.168</span><span class="number">.84</span><span class="number">.138</span>:<span class="number">3306</span>		<span class="comment">//mysql的地址</span></span><br><span class="line">canal.instance.filter.regex=test\..*						<span class="comment">//监听的数据库名字</span></span><br><span class="line">\## MQ</span><br><span class="line">canal.mq.servers=mq1:<span class="number">5672</span>,mq2:<span class="number">5672</span>,mq3:<span class="number">5672</span></span><br><span class="line">canal.mq.exchange=canal.exchange</span><br><span class="line">canal.mq.username=guest</span><br><span class="line">canal.mq.password=guest</span><br><span class="line">canal.mq.flatMessage=<span class="literal">false</span></span><br><span class="line">canal.mq.canalBatchSize=<span class="number">50</span></span><br><span class="line">canal.mq.compressionType=none</span><br><span class="line">canal.mq.plugin.name=rabbitmq</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">相关配置</span><br><span class="line">## MYSQL</span><br><span class="line">canal.instance.master.address=<span class="number">192.168</span><span class="number">.84</span><span class="number">.138</span>:<span class="number">3306</span>		<span class="comment">//mysql的地址</span></span><br><span class="line">canal.instance.filter.regex=test\..*						<span class="comment">//配置需要监听的数据库名字、表名字、表的属性的名字</span></span><br><span class="line">\## MQ</span><br><span class="line">canal.mq.servers=mq1:<span class="number">5672</span>,mq2:<span class="number">5672</span>,mq3:<span class="number">5672</span></span><br><span class="line">canal.mq.exchange=canal.exchange</span><br><span class="line">canal.mq.username=guest</span><br><span class="line">canal.mq.password=guest</span><br><span class="line">canal.mq.flatMessage=<span class="literal">false</span></span><br><span class="line">canal.mq.canalBatchSize=<span class="number">50</span></span><br><span class="line">canal.mq.compressionType=none</span><br><span class="line">canal.mq.plugin.name=rabbitmq</span><br></pre></td></tr></table></figure>
 
+
+
+<h3 id="nosql优点"><a href="#nosql优点" class="headerlink" title="nosql优点"></a>nosql优点</h3><p>容易扩展，有多种数据结构存储数据，可存储图片、视频等资源</p>
+<p>读写性能高，无需创建字段，可以自定义数据格式</p>
+<p>具有非关系性，数据之间没有关系，非常容易扩展</p>
 
     </div>
 
@@ -640,13 +708,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/09/18/%E5%AD%A6%E4%B9%A0%E6%89%93%E5%8D%A1-1/" rel="prev" title="学习打卡-1">
-                  <i class="fa fa-chevron-left"></i> 学习打卡-1
+                <a href="/2022/09/22/Netty/" rel="prev" title="Netty">
+                  <i class="fa fa-chevron-left"></i> Netty
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/09/22/Netty/" rel="next" title="Netty">
-                  Netty <i class="fa fa-chevron-right"></i>
+                <a href="/2022/09/29/git%E5%AD%A6%E4%B9%A0/" rel="next" title="git学习">
+                  git学习 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -668,7 +736,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

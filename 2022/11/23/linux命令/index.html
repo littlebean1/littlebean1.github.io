@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230629134419839.png">
 <meta property="og:image" content="c:\Users\19094\AppData\Local\Temp\BNZ.64981ac23253c3e5\image.png">
 <meta property="article:published_time" content="2022-11-23T07:23:52.000Z">
-<meta property="article:modified_time" content="2023-09-03T04:47:46.638Z">
+<meta property="article:modified_time" content="2024-03-20T05:08:25.785Z">
 <meta property="article:author" content="bean">
 <meta property="article:tag" content="八股文">
 <meta name="twitter:card" content="summary">
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">1.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5CPU%E8%BF%87%E9%AB%98%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.1.</span> <span class="nav-text">排查CPU过高问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E5%91%BD%E4%BB%A4%E5%90%88%E9%9B%86-https-blog-csdn-net-wojiaopanpan-article-details-7286430"><span class="nav-number">1.0.2.</span> <span class="nav-text">[linux命令合集][https:&#x2F;&#x2F;blog.csdn.net&#x2F;wojiaopanpan&#x2F;article&#x2F;details&#x2F;7286430]</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">1.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5CPU%E8%BF%87%E9%AB%98%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.1.</span> <span class="nav-text">排查CPU过高问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E5%91%BD%E4%BB%A4%E5%90%88%E9%9B%86-https-blog-csdn-net-wojiaopanpan-article-details-7286430"><span class="nav-number">1.0.2.</span> <span class="nav-text">[linux命令合集][https:&#x2F;&#x2F;blog.csdn.net&#x2F;wojiaopanpan&#x2F;article&#x2F;details&#x2F;7286430]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inode%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.0.3.</span> <span class="nav-text">inode的作用</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -136,7 +136,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -222,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-03 12:47:46" itemprop="dateModified" datetime="2023-09-03T12:47:46+08:00">2023-09-03</time>
+      <time title="修改时间：2024-03-20 13:08:25" itemprop="dateModified" datetime="2024-03-20T13:08:25+08:00">2024-03-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -246,7 +246,12 @@
     <div class="post-body" itemprop="articleBody">
         <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><span id="more"></span>     
 
-<h3 id="排查CPU过高问题"><a href="#排查CPU过高问题" class="headerlink" title="排查CPU过高问题"></a>排查CPU过高问题</h3><p>top命令：动态显示系统中进程的相关信息，包括内存占用，CPU占用，进程ID</p>
+<h3 id="排查CPU过高问题"><a href="#排查CPU过高问题" class="headerlink" title="排查CPU过高问题"></a>排查CPU过高问题</h3><ul>
+<li>top命令：动态显示系统中进程的相关信息，包括进程的内存占用，CPU占用，进程ID</li>
+<li>选出CPU占用高的进程id，执行top -H -p pid</li>
+<li>jstack pid | grep 线程id，通过该命令查看线程的允许状态</li>
+</ul>
+<p>关于top命令：</p>
 <p>第一行显示系统当前时间，系统运行时间，当前登录的用户数目</p>
 <p>第二行显示系统当前的进程数目，总进程数，正在运行的进程数，睡眠的进程数</p>
 <p>第三行显示CPU的相关信息</p>
@@ -254,6 +259,12 @@
 <p>第五行显示交换区总量和使用情况 (使用+空闲+缓存 &#x3D; 总量)</p>
 <p>下面显示的一些进程的详细信息</p>
 <img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221204204727229.png?raw=true" alt="image-20221204204727229" style="zoom: 67%;" />
+
+
+
+
+
+
 
 <h3 id="linux命令合集-https-blog-csdn-net-wojiaopanpan-article-details-7286430"><a href="#linux命令合集-https-blog-csdn-net-wojiaopanpan-article-details-7286430" class="headerlink" title="[linux命令合集][https://blog.csdn.net/wojiaopanpan/article/details/7286430]"></a>[linux命令合集][<a target="_blank" rel="noopener" href="https://blog.csdn.net/wojiaopanpan/article/details/7286430]">https://blog.csdn.net/wojiaopanpan/article/details/7286430]</a></h3><ul>
 <li><p>ps命令：查看系统正在运行的进程的情况，包括进程号，CPU运行进程时间，进程运行的命令</p>
@@ -280,6 +291,7 @@
 <li>history</li>
 </ul>
 <p><img src="C:\Users\19094\AppData\Local\Temp\BNZ.64981ac23253c3e5\image.png" alt="image"></p>
+<h3 id="inode的作用"><a href="#inode的作用" class="headerlink" title="inode的作用"></a>inode的作用</h3><p>inode是linux文件系统中的一个数据结构，它存储了文件的元数据，如文件名、文件大小、文件权限、文件访问时间、文件所有者等信息。inode相当于一个文件的索引，还存储了文件的物理位置信息，包括文件数据块的地址、大小和位置等。</p>
 
     </div>
 
@@ -324,7 +336,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
