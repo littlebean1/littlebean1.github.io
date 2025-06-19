@@ -38,7 +38,7 @@
 <meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240311194016934.png">
 <meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240311193820644.png">
 <meta property="article:published_time" content="2023-02-20T12:21:29.000Z">
-<meta property="article:modified_time" content="2024-03-27T14:08:33.763Z">
+<meta property="article:modified_time" content="2024-04-11T07:45:30.591Z">
 <meta property="article:author" content="bean">
 <meta property="article:tag" content="八股文">
 <meta name="twitter:card" content="summary">
@@ -128,7 +128,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM%E5%90%88%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">JVM合集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.1.</span> <span class="nav-text">JVM组成结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">java类加载过程                     </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">1.0.3.</span> <span class="nav-text">双亲委派机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E6%83%B3%E7%94%A8%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">1.0.4.</span> <span class="nav-text">不想用双亲委派模型怎么办</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9B%B8%E7%AD%89"><span class="nav-number">1.0.5.</span> <span class="nav-text">如何判断两个类相等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%86%85%E5%AD%98%E5%88%92%E5%88%86"><span class="nav-number">1.0.6.</span> <span class="nav-text">JVM内存划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">1.0.7.</span> <span class="nav-text">Java对象的创建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.8.</span> <span class="nav-text">内存分配的线程安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="nav-number">1.0.9.</span> <span class="nav-text">Java对象的内存结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E4%B8%ADinit%E5%92%8Cclinit%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.10.</span> <span class="nav-text">Java中init和clinit方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.0.11.</span> <span class="nav-text">对象的访问定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%AD%98%E6%B4%BB"><span class="nav-number">1.0.12.</span> <span class="nav-text">JVM如何判断对象是否存活</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.13.</span> <span class="nav-text">Java的四种引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%9E%83%E5%9C%BE%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-number">1.0.14.</span> <span class="nav-text">JVM垃圾清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jvm-GC%E5%88%86%E7%B1%BB"><span class="nav-number">1.0.15.</span> <span class="nav-text">Jvm GC分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">1.0.16.</span> <span class="nav-text">Jvm垃圾收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%A0%86%E5%88%86%E9%85%8D%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-number">1.0.17.</span> <span class="nav-text">Java堆分配对象的原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E7%B9%81Full-GC"><span class="nav-number">1.0.18.</span> <span class="nav-text">频繁Full GC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.0.18.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">1.0.18.2.</span> <span class="nav-text">解决办法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">1.0.19.</span> <span class="nav-text">内存泄漏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8AOOM%E7%9A%84%E6%8E%92%E6%9F%A5"><span class="nav-number">1.0.20.</span> <span class="nav-text">线上OOM的排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5arthas%EF%BC%8C%E4%B8%BB%E8%A6%81%E7%94%A8%E4%BA%8E%E6%8E%92%E6%9F%A5%E6%8E%A5%E5%8F%A3%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.21.</span> <span class="nav-text">线上问题排查arthas，主要用于排查接口问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B3%95"><span class="nav-number">1.0.22.</span> <span class="nav-text">三色标记法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%8F%82%E6%95%B0%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.23.</span> <span class="nav-text">JVM参数总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E5%B7%A5%E5%85%B7"><span class="nav-number">1.0.24.</span> <span class="nav-text">排查问题工具</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM%E5%90%88%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">JVM合集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.1.</span> <span class="nav-text">JVM组成结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">java类加载过程                     </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6"><span class="nav-number">1.0.3.</span> <span class="nav-text">双亲委派机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E6%83%B3%E7%94%A8%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">1.0.4.</span> <span class="nav-text">不想用双亲委派模型怎么办</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9B%B8%E7%AD%89"><span class="nav-number">1.0.5.</span> <span class="nav-text">如何判断两个类相等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%86%85%E5%AD%98%E5%88%92%E5%88%86"><span class="nav-number">1.0.6.</span> <span class="nav-text">JVM内存划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">1.0.7.</span> <span class="nav-text">Java对象的创建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90-%E9%BB%98%E8%AE%A4%E5%BC%80%E5%90%AF"><span class="nav-number">1.0.8.</span> <span class="nav-text">逃逸分析 (默认开启)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.9.</span> <span class="nav-text">内存分配的线程安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="nav-number">1.0.10.</span> <span class="nav-text">Java对象的内存结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E4%B8%ADinit%E5%92%8Cclinit%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.11.</span> <span class="nav-text">Java中init和clinit方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.0.12.</span> <span class="nav-text">对象的访问定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%AD%98%E6%B4%BB"><span class="nav-number">1.0.13.</span> <span class="nav-text">JVM如何判断对象是否存活</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.14.</span> <span class="nav-text">Java的四种引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%9E%83%E5%9C%BE%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-number">1.0.15.</span> <span class="nav-text">JVM垃圾清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jvm-GC%E5%88%86%E7%B1%BB"><span class="nav-number">1.0.16.</span> <span class="nav-text">Jvm GC分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">1.0.17.</span> <span class="nav-text">Jvm垃圾收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%A0%86%E5%88%86%E9%85%8D%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-number">1.0.18.</span> <span class="nav-text">Java堆分配对象的原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E7%B9%81Full-GC"><span class="nav-number">1.0.19.</span> <span class="nav-text">频繁Full GC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.0.19.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">1.0.19.2.</span> <span class="nav-text">解决办法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">1.0.20.</span> <span class="nav-text">内存泄漏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8AOOM%E7%9A%84%E6%8E%92%E6%9F%A5"><span class="nav-number">1.0.21.</span> <span class="nav-text">线上OOM的排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5arthas%EF%BC%8C%E4%B8%BB%E8%A6%81%E7%94%A8%E4%BA%8E%E6%8E%92%E6%9F%A5%E6%8E%A5%E5%8F%A3%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.22.</span> <span class="nav-text">线上问题排查arthas，主要用于排查接口问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B3%95"><span class="nav-number">1.0.23.</span> <span class="nav-text">三色标记法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM%E5%8F%82%E6%95%B0%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.24.</span> <span class="nav-text">JVM参数总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E5%B7%A5%E5%85%B7"><span class="nav-number">1.0.25.</span> <span class="nav-text">排查问题工具</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -143,7 +143,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -229,7 +229,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-27 22:08:33" itemprop="dateModified" datetime="2024-03-27T22:08:33+08:00">2024-03-27</time>
+      <time title="修改时间：2024-04-11 15:45:30" itemprop="dateModified" datetime="2024-04-11T15:45:30+08:00">2024-04-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -254,6 +254,7 @@
         <h1 id="JVM合集"><a href="#JVM合集" class="headerlink" title="JVM合集"></a>JVM合集</h1><span id="more"></span>     
 
 <h3 id="JVM组成结构"><a href="#JVM组成结构" class="headerlink" title="JVM组成结构"></a>JVM组成结构</h3><p>​	程序在执行之前先要把java代码转换成字节码（class文件），jvm首先需要把字节码通过一定的方式 <strong>类加载器</strong> 把文件加载到内存中 <strong>运行时数据区</strong>，而字节码文件是jvm的一套指令集规范，并不能直接交个底层操作系统去执行，因此需要特定的命令解析器 <strong>执行引擎</strong> 将字节码翻译成底层系统指令再交由CPU去执行，而这个过程中需要调用其他语言的接口 <strong>本地库接口</strong> 来实现整个程序的功能</p>
+<p>​	Java平台的跨平台特性，从最基础的角度来说，不同操作系统或者平台上的JVM是不同的，因为JVM要把Java字节码编译成为机器码，机器码才是真正物理硬件执行的指令集。由于不同操作系统或者平台的硬件架构不同，所以必须制作不同的JVM，安装在不同的操作系统或者平台上。字节码并不能够直接运行在操作系统之上，执行引擎的任务就是将字节码指令编译为对应平台上的本地机器指令</p>
 <h3 id="java类加载过程"><a href="#java类加载过程" class="headerlink" title="java类加载过程                     "></a>java类加载过程                     <img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230221213330928.png" alt="image-20230221213330928"></h3><p>Loading：  </p>
 <ul>
 <li>通过一个类的全类名获取当前类的二进制字节流  </li>
@@ -305,7 +306,8 @@
 <li>堆：存放对象实例，几乎所有的对象实例以及数组都在这里分配内存，字符串常量池</li>
 <li>字符串常量池：底层是通过StringTable来实现的，本质是HashSet<String>，StringTable中保存字符串对象的引用，引用指向堆中的字符串对象</li>
 <li>元空间：(1.8以前称为方法区，在堆内，有内存限制OutOfMemoryError)，1.8以后使用本地内存，存储类信息，方法信息，运行时常量池</li>
-<li>直接内存：又称为堆外内存，由操作系统管理，避免了在 Java 堆和 Native 堆之间来回复制数据，能够显著提高性能</li>
+<li>直接内存：又称为堆外内存，由操作系统管理，避免了在 Java 堆和 Native 堆之间来回复制数据，能够显著提高性能。未采用直接内存时，应用程序需要数据需要将数据从磁盘加载到内核缓冲区再加载到jvm堆内存中然后被应用程序使用；采用直接内存后，用户程序需要数据将数据从磁盘中读出放入直接内存，用户程序直接读取直接内存中的数据。节省了数据从内核缓冲区复制到jvm堆中的过程</li>
+<li>本地内存是堆外内存，包括元空间和直接内存</li>
 </ul>
 <h3 id="Java对象的创建过程"><a href="#Java对象的创建过程" class="headerlink" title="Java对象的创建过程"></a>Java对象的创建过程</h3><ul>
 <li>类加载检查：虚拟机遇到一条 new 指令时，检查这个类是否已被加载过、连接和初始化过，没有则加载</li>
@@ -318,6 +320,11 @@
 <li>设置对象头：存放锁标志，哈希码，GC年龄</li>
 <li>执行init方法：执行父类和子类的构造函数</li>
 </ul>
+<h3 id="逃逸分析-默认开启"><a href="#逃逸分析-默认开启" class="headerlink" title="逃逸分析 (默认开启)"></a>逃逸分析 (默认开启)</h3><p>​		判断当前方法中创建的对象是否会逃逸出当前方法的使用范围，如果只会在当前方法访问即不发生逃逸，对于不会发生逃逸创建出来的对象，会直接进行标量替换，由于标量都是一些基本数据类型，因此实现在栈上的局部变量表中存储，即栈上分配</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先通过逃逸分析判断创建的对象是否跑出allocate()方法的作用域，没跑出则进行标量替换</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyObject</span> &#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">double</span> b;</span><br><span class="line"></span><br><span class="line">    MyObject(<span class="type">int</span> a, <span class="type">double</span> b) &#123;</span><br><span class="line">      <span class="built_in">this</span>.a = a;</span><br><span class="line">      <span class="built_in">this</span>.b = b;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">allocate</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">MyObject</span> <span class="variable">myObject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyObject</span>(<span class="number">2019</span>, <span class="number">2019.0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">allocate</span><span class="params">()</span> &#123;	<span class="comment">//替换后的结果</span></span><br><span class="line">       <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">2019</span>;</span><br><span class="line">       <span class="type">double</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">2019.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5000000</span>; i++) &#123;</span><br><span class="line">          allocate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="内存分配的线程安全问题"><a href="#内存分配的线程安全问题" class="headerlink" title="内存分配的线程安全问题"></a><strong>内存分配的线程安全问题</strong></h3><p>​		虚拟机采用两种方式来保证线程安全</p>
 <ul>
 <li>采用CAS机制，配合失败重试的方式保证更新操作的原子性，效率低。</li>
@@ -348,7 +355,7 @@
 <h3 id="JVM如何判断对象是否存活"><a href="#JVM如何判断对象是否存活" class="headerlink" title="JVM如何判断对象是否存活"></a>JVM如何判断对象是否存活</h3><p> 判断对象是否存活有两种方式：引用计数法和可达性分析算法。     </p>
 <ul>
 <li>引用计数法：对于内存中的一个对象A，如果存在一个对象引用了A，则A的引用计数器就加1，如果引用失效，引用计数器就减1。当A的引用计数器的值为0时，表示对象A不会被使用，可进行回收。此方法不能解决循环引用，JVM未采取该垃圾收集算法。     </li>
-<li>可达性分析算法：执行高效，能够解决循环引用的问题。以GC roots为起点，搜索过得路径称为引用链，如果对象没有任何引用链，就意味着该对象已经死亡，可标记为垃圾对象。GC roots可以是虚拟机栈中引用的对象，本地方法栈中引用的对象，元空间静态属性和常量引用的对象 ，同步锁持有的对象</li>
+<li>可达性分析算法：执行高效，能够解决循环引用的问题。以GC roots为起点，搜索过得路径称为引用链，如果对象没有任何引用链，就意味着该对象已经死亡，可标记为垃圾对象。GC roots可以是<strong>虚拟机栈中引用的对象，本地方法栈中引用的对象，元空间静态属性和常量引用的对象 ，同步锁持有的对象</strong></li>
 </ul>
 <h3 id="Java的四种引用类型"><a href="#Java的四种引用类型" class="headerlink" title="Java的四种引用类型"></a>Java的四种引用类型</h3><ul>
 <li>强引用：Object object &#x3D; new Object()，只要强引用关系在，垃圾收集器就永远不会回收掉被引用的对象</li>
@@ -383,7 +390,7 @@
 <h3 id="Jvm垃圾收集器"><a href="#Jvm垃圾收集器" class="headerlink" title="Jvm垃圾收集器"></a>Jvm垃圾收集器</h3><ul>
 <li>Serial：串行，标记-复制+标记-压缩</li>
 <li>Parnew：并行，标记-复制+标记-压缩</li>
-<li>Parallel Scavenge (JDK8默认)：并行，标记-复制+标记-压缩，是一个吞吐量优先的并行垃圾收集器</li>
+<li>Parallel Scavenge + Parallel Old (JDK8默认)：并行，标记-复制+标记-压缩，是一个吞吐量优先的并行垃圾收集器</li>
 <li>CMS (Concurrent-Mark-Sweep)收集器：是一款老年代收集器，可以配合新生代的Serial和ParNew收集器一起使用，减少垃圾回收的停顿时间，垃圾收集线程与用户线程并发减少停顿时间<ul>
 <li>初始标记：停止用户线程STW，仅标记所有与GC root直接相连的对象</li>
 <li>并发标记：GC与用户线程并发执行，遍历所有GC root可达的对象</li>
@@ -408,6 +415,7 @@
 <li>GC停顿时间过长(长于0.5至1秒)。</li>
 </ul>
 </li>
+<li>内存抖动：内存中频繁地进行对象的分配和回收，特别是在短时间内有大量对象被创建或销毁的现象。内存抖动会导致垃圾回收器GC频繁运行，影响程序性能。G1能够容忍内存抖动</li>
 </ul>
 <p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230220145528147.png" alt="image-20230220145528147"></p>
 <h3 id="Java堆分配对象的原则"><a href="#Java堆分配对象的原则" class="headerlink" title="Java堆分配对象的原则"></a>Java堆分配对象的原则</h3><ul>
@@ -458,6 +466,11 @@
 </ul>
 </li>
 <li>thread：CPU飙高，查看系统中各个线程的运行信息，打印CPU彪高的线程的栈信息</li>
+<li>方法中IO操作频繁，需要从磁盘中读取数据，这期间CPU会切换到其他线程导致上下文切换的开销，IO操作会触发中断打断CPU的正常运行。</li>
+<li>火焰图 Profiler：分析CPU使用情况和函数调用堆栈，查看函数的调用频率，分析函数的CPU占用时间<ul>
+<li>profiler start，profiler stop，开始记录火焰图和停止记录火焰图</li>
+</ul>
+</li>
 </ul>
 <h3 id="三色标记法"><a href="#三色标记法" class="headerlink" title="三色标记法"></a>三色标记法</h3><p>​		CMS，G1，golang垃圾收集器标记算法，利用三种颜色并发标记的可达性分析算法</p>
 <ul>
@@ -569,7 +582,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
