@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="消息队列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消息队列">
+<meta property="og:url" content="http://example.com/2022/10/16/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.html">
+<meta property="og:site_name" content="我要去大厂">
+<meta property="og:description" content="消息队列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221017141200142.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019095126554.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019105124426.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021090835996.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021091945986.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095607125.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095940320.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230327211520206.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230922162426813.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240309152251041.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230918205642480.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919110122210.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919125402843.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919131353538.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919131832919.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919130252142.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240311143844736.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919155633211.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231009171629542.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231009165909180.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230920163542666.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230920144018726.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/dabf6a66fb298df07878fda2ff98f4f0.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019113906587.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019103137587.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021090835996.png?raw=true">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231008212915684.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240413153734464.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240413153744662.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240413153630062.png">
+<meta property="og:image" content="c:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240413160624972.png">
+<meta property="og:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231008210444050.png">
+<meta property="article:published_time" content="2022-10-16T11:20:46.000Z">
+<meta property="article:modified_time" content="2025-06-19T06:06:09.295Z">
+<meta property="article:author" content="bean">
+<meta property="article:tag" content="八股文">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221017141200142.png?raw=true">
+
+
+<link rel="canonical" href="http://example.com/2022/10/16/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/10/16/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/","path":"2022/10/16/消息队列/","title":"消息队列"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>消息队列 | 我要去大厂</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">我要去大厂</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">消息队列特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka%E7%9A%84topic%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">kafka的topic操作命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">生产者相关配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E6%95%B0%E6%8D%AE%E5%8F%91%E9%80%81%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">生产者数据发送流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper%E4%B8%AD%E5%AD%98%E5%82%A8%E7%9A%84kafka%E4%BF%A1%E6%81%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">zookeeper中存储的kafka信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">kafka文件存储机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E6%96%B9%E5%BC%8F"><span class="nav-number">1.4.3.</span> <span class="nav-text">kafka消费方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.4.</span> <span class="nav-text">kafka消费者组的初始化流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E7%9A%84%E6%B6%88%E8%B4%B9%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.5.</span> <span class="nav-text">kafka消费者组的消费流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka%E5%92%8CRocket%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9"><span class="nav-number">1.4.6.</span> <span class="nav-text">Kafka和Rocket如何保证消息的顺序消费</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition%E5%89%AF%E6%9C%AC"><span class="nav-number">1.4.7.</span> <span class="nav-text">Partition副本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dbus"><span class="nav-number">1.4.8.</span> <span class="nav-text">Dbus</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%B1%E5%BA%8F%E9%97%AE%E9%A2%98%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.4.8.1.</span> <span class="nav-text">乱序问题产生的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DBus%E7%9A%84%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86"><span class="nav-number">1.4.8.2.</span> <span class="nav-text">DBus的内部原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka-gt-BMQ-%E7%A6%BB%E7%BA%BF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-number">1.4.9.</span> <span class="nav-text">Kafka -&gt; BMQ 离线消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#kafka%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="nav-number">1.4.9.1.</span> <span class="nav-text">kafka发展历史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BMQ%E6%9E%B6%E6%9E%84-%EF%BC%88%E8%AE%A1%E7%AE%97%E5%AD%98%E5%82%A8%E5%88%86%E7%A6%BB%EF%BC%8C%E5%88%86%E4%B8%BA%E8%AE%A1%E7%AE%97%E5%B1%82%E5%92%8C%E5%AD%98%E5%82%A8%E5%B1%82%EF%BC%89"><span class="nav-number">1.4.9.2.</span> <span class="nav-text">BMQ架构 （计算存储分离，分为计算层和存储层）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E4%B8%8EBMQ%E5%AF%B9%E6%AF%94"><span class="nav-number">1.4.9.3.</span> <span class="nav-text">Kafka与BMQ对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BMQ%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8-DBus"><span class="nav-number">1.4.9.4.</span> <span class="nav-text">BMQ高级应用-DBus</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RMQ"><span class="nav-number">1.4.10.</span> <span class="nav-text">RMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">1.4.10.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AE%95%E6%9C%BA%E5%AF%BC%E8%87%B4%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1%EF%BC%88ack%E6%9C%BA%E5%88%B6%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%89"><span class="nav-number">1.4.10.2.</span> <span class="nav-text">机器宕机导致数据丢失（ack机制的原理）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%B7%E7%9B%98"><span class="nav-number">1.4.10.2.1.</span> <span class="nav-text">数据刷盘</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97"><span class="nav-number">1.4.10.3.</span> <span class="nav-text">延迟队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.10.4.</span> <span class="nav-text">RocketMQ结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MQ%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%92%8C%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B"><span class="nav-number">1.4.11.</span> <span class="nav-text">MQ如何排查和处理消息积压</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%AD%E5%87%BA%E7%8E%B0%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B"><span class="nav-number">1.4.11.1.</span> <span class="nav-text">应用场景中出现消息积压</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka"><span class="nav-number">1.4.12.</span> <span class="nav-text">Kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#kafka%E5%88%86%E5%8C%BA%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.4.12.1.</span> <span class="nav-text">kafka分区的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kafka%E4%B8%AD%E6%B6%88%E8%B4%B9%E8%80%85%E9%87%8D%E5%90%AF%E6%88%96%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81offset"><span class="nav-number">1.4.12.2.</span> <span class="nav-text">kafka中消费者重启或网络问题如何保证offset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0offset%E7%9A%84%E6%96%B9%E5%BC%8F-%EF%BC%88%E5%8C%85%E6%8B%AC%E5%85%B6%E4%BB%96MQ%EF%BC%89"><span class="nav-number">1.4.12.3.</span> <span class="nav-text">更新offset的方式 （包括其他MQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E7%9A%84%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1-%E7%94%9F%E4%BA%A7%E4%B8%8D%E4%B8%A2%E5%A4%B1%EF%BC%8C%E6%B6%88%E8%B4%B9%E4%B9%9F%E4%B8%8D%E4%B8%A2%E5%A4%B1"><span class="nav-number">1.4.12.4.</span> <span class="nav-text">Kafka的如何保证消息不丢失 (生产不丢失，消费也不丢失)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ISR%EF%BC%88In-Sync-Replicas%EF%BC%89-%E5%88%86%E5%8C%BA%E5%89%AF%E6%9C%AC%E9%80%89%E4%B8%BE"><span class="nav-number">1.4.12.5.</span> <span class="nav-text">ISR（In-Sync Replicas）+ 分区副本选举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E4%BF%9D%E8%AF%81%E7%94%9F%E4%BA%A7%E6%B6%88%E6%81%AF%E4%B8%8D%E9%87%8D%E5%A4%8D-%EF%BC%88kafka%E7%8B%AC%E6%9C%89RMQ%E6%97%A0%EF%BC%8C%E4%BB%85%E7%94%9F%E4%BA%A7%E8%80%85%E7%AB%AF-%E5%B9%82%E7%AD%89%E6%80%A7-At-Least-Once-x3D-x3D-gt-Exactly-Once%EF%BC%89"><span class="nav-number">1.4.12.6.</span> <span class="nav-text">Kafka保证生产消息不重复 （kafka独有RMQ无，仅生产者端  -  幂等性+At Least Once&#x3D;&#x3D;&gt;Exactly Once）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9-%EF%BC%88%E5%8C%85%E6%8B%AC%E5%85%B6%E4%BB%96MQ%EF%BC%89"><span class="nav-number">1.4.12.7.</span> <span class="nav-text">Kafka重复消费 （包括其他MQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E6%B6%88%E8%B4%B9%E5%A4%B1%E8%B4%A5%E9%87%8D%E8%AF%95-%EF%BC%88RMQ%E6%9C%89%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E5%92%8C%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97%EF%BC%89"><span class="nav-number">1.4.12.8.</span> <span class="nav-text">Kafka消费失败重试 （RMQ有重试机制和死信队列）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafk%E4%BF%9D%E8%AF%81%E9%AB%98%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88%E5%8C%85%E6%8B%AC%E5%85%B6%E4%BB%96MQ%EF%BC%89"><span class="nav-number">1.4.12.9.</span> <span class="nav-text">Kafk保证高可用性（包括其他MQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E6%9E%B6%E6%9E%84"><span class="nav-number">1.4.12.10.</span> <span class="nav-text">Kafka架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E5%90%9E%E5%90%90%E9%87%8F%E5%A4%A7"><span class="nav-number">1.4.12.11.</span> <span class="nav-text">Kafka吞吐量大</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kakfa%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%89%AF%E6%9C%AC%E5%90%8C%E6%AD%A5"><span class="nav-number">1.4.12.12.</span> <span class="nav-text">Kakfa的主从副本同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E9%9B%86%E7%BE%A4%E6%89%A9%E5%AE%B9%E5%88%86%E5%8C%BA%E9%87%8D%E5%88%86%E9%85%8D"><span class="nav-number">1.4.12.13.</span> <span class="nav-text">Kafka集群扩容分区重分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E9%9B%86%E7%BE%A4%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.12.14.</span> <span class="nav-text">Kafka集群动态配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka%E7%9A%84Controller"><span class="nav-number">1.4.12.15.</span> <span class="nav-text">Kafka的Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%84%E4%B8%AA%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.12.16.</span> <span class="nav-text">各个消息队列的区别</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bean"
+      src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+  <p class="site-author-name" itemprop="name">bean</p>
+  <div class="site-description" itemprop="description">博客记录学习生活</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/16/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F18%2F20210718183516_c5a92.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1666018689&t=8347c2b828598fc354614daabb33aead">
+      <meta itemprop="name" content="bean">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要去大厂">
+      <meta itemprop="description" content="博客记录学习生活">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="消息队列 | 我要去大厂">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          消息队列
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-16 19:20:46" itemprop="dateCreated datePublished" datetime="2022-10-16T19:20:46+08:00">2022-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-19 14:06:09" itemprop="dateModified" datetime="2025-06-19T14:06:09+08:00">2025-06-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">面试题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h1><span id="more"></span>     
+
+<h2 id="消息队列特点"><a href="#消息队列特点" class="headerlink" title="消息队列特点"></a>消息队列特点</h2><ul>
+<li>流量削峰：比如秒杀活动，一般会因为流量过大，从而导致流量暴增，应用挂掉。使用消息队列，服务器接收到用户的请求后，首先写入消息队列，让消息队列去处理数据</li>
+<li>解耦：不同的系统之间解耦，当一个系统出错时，使用消息队列，可以返回给用户成功，先把消息持久化，等系统恢复后在执行对于业务</li>
+<li>异步通讯：将消息写入消息队列，非必要的业务逻辑以异步的方式运行，不影响主流程业务。</li>
+</ul>
+<h2 id="kafka的topic操作命令"><a href="#kafka的topic操作命令" class="headerlink" title="kafka的topic操作命令"></a>kafka的topic操作命令</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221017141200142.png?raw=true" alt="topic操作命令"></p>
+<ul>
+<li>.&#x2F;bin&#x2F;kafka-topics.sh –bootstrap-server hadoop1:9092 –topic first –create –partitions 3 –replication-factor 3    </li>
+<li>.&#x2F;bin&#x2F;kafka-topics.sh –bootstrap-server hadoop1:9092 –list</li>
+<li>.&#x2F;bin&#x2F;kafka-topics.sh –bootstrap-server hadoop1:9092 –topic first –describe</li>
+<li>.&#x2F;bin&#x2F;kafka-console-producer.sh –bootstrap-server hadoop1:9092 –topic first</li>
+<li>.&#x2F;bin&#x2F;kafka-console-consumer.sh –bootstrap-server hadoop1:9092 –topic first</li>
+<li>&#x2F;bin&#x2F;kafka-console-consumer.sh –bootstrap-server hadoop1:9092 –topic first –from-beginning</li>
+</ul>
+<h2 id="生产者相关配置"><a href="#生产者相关配置" class="headerlink" title="生产者相关配置"></a>生产者相关配置</h2><ul>
+<li>ProducerConfig.BOOTSRTAP_SERVER_CONFIG            &#x2F;&#x2F;设置kafka连接集群</li>
+<li>ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG        &#x2F;&#x2F;设置key的序列化</li>
+<li>ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG   &#x2F;&#x2F;设置value的序列化</li>
+<li>ProducerConfig.BUFFER_MEMORY_CONFIG			     &#x2F;&#x2F;设置缓存</li>
+<li>ProducerConfig.BATCH_SIZE_CONFIG                           &#x2F;&#x2F;设置每次传输的批次大小</li>
+<li>ProducerConfig.LINGER_MS_CONFIG                            &#x2F;&#x2F;设置linger.ms，传输间隔的时间</li>
+<li>ProducerConfig.COMPRESSION_TYPE_CONFIG           &#x2F;&#x2F;设置传输数据压缩的类型</li>
+<li>ProducerConfig.TRANSACTION_ID_CONFIG                 &#x2F;&#x2F;设置事务id，避免数据重复</li>
+</ul>
+<h2 id="生产者数据发送流程"><a href="#生产者数据发送流程" class="headerlink" title="生产者数据发送流程"></a>生产者数据发送流程</h2><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019095126554.png?raw=true"></p>
+<h3 id="zookeeper中存储的kafka信息"><a href="#zookeeper中存储的kafka信息" class="headerlink" title="zookeeper中存储的kafka信息"></a>zookeeper中存储的kafka信息</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019105124426.png?raw=true" alt="image-20221019105124426"></p>
+<h3 id="kafka文件存储机制"><a href="#kafka文件存储机制" class="headerlink" title="kafka文件存储机制"></a>kafka文件存储机制</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021090835996.png?raw=true" alt="image-20221021090835996"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021091945986.png?raw=true"></p>
+<h3 id="kafka消费方式"><a href="#kafka消费方式" class="headerlink" title="kafka消费方式"></a>kafka消费方式</h3><ul>
+<li>采用pull模式：消费者主动从broker中主动拉取数据，缺点是如果broker没有数据会陷入循环访问</li>
+<li>每个分区的数据只能由消费者组中一个消费者消费，同一个组内的消费者可以消费不同的分区，消费者组是逻辑上的一个订阅者</li>
+</ul>
+<p>​	除此之外还有一个push模式，服务器端及时地向客户端推送更新动态信息，推模式采用广播方式，不能确保信息发送成功</p>
+<h3 id="kafka消费者组的初始化流程"><a href="#kafka消费者组的初始化流程" class="headerlink" title="kafka消费者组的初始化流程"></a>kafka消费者组的初始化流程</h3><p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095607125.png?raw=true" alt="image-20221021095607125"></p>
+<h3 id="kafka消费者组的消费流程"><a href="#kafka消费者组的消费流程" class="headerlink" title="kafka消费者组的消费流程"></a>kafka消费者组的消费流程</h3><p>系统首先对传输的对象序列化，转换为二进制流传输到kafka生产者中，kafka再将二进制流反序列化传输到消费者手中</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021095940320.png?raw=true" alt="image-20221021095940320"></p>
+<h3 id="Kafka和Rocket如何保证消息的顺序消费"><a href="#Kafka和Rocket如何保证消息的顺序消费" class="headerlink" title="Kafka和Rocket如何保证消息的顺序消费"></a>Kafka和Rocket如何保证消息的顺序消费</h3><p><strong>Rocketmq的消费模式分为两种：顺序消费和并发消费</strong></p>
+<ul>
+<li>顺序消费：同一时刻一个MessageQueue只有一个实例的一个线程来消费，吞吐量低于并发消费</li>
+<li>并发消费：同一时刻一个MessageQueue可以由一个实例的多个线程来并发消费，吞吐量高</li>
+</ul>
+<p><strong>顺序消费又分两种，全局顺序消费和局部顺序消费</strong></p>
+<ul>
+<li>对于消息的局部顺序消费，所有消息只需要保证在业务上有序，适用于对性能要求高的业务，步骤为：<ul>
+<li>消息顺序发送</li>
+<li>消息顺序存储</li>
+<li>消息顺序消费</li>
+</ul>
+</li>
+<li>对于消息的全局顺序消费，即所有消息必须完全有序，该方式仅适用于绝少数情况，如监听mysql binlog日志需要全局的顺序消息，步骤为：<ul>
+<li>消息发送到集群中的指定topic的指定分区，可直接指定分区号</li>
+<li>消息顺序消费，在多线程情况下控制消费者端只有一个线程消费数据，完全契合FIFO的原则</li>
+</ul>
+</li>
+</ul>
+<p><strong>首先保证发送消息有序：</strong></p>
+<ul>
+<li>生产者在发送消息时指定要发送到哪一个分区</li>
+<li>如果指明分区号，可以直接将分区号作为partition值</li>
+<li>如果没有指明分区号但有key的情况下，key.hashcode()对partition的数目取余就是最后的分区值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建Kafka Producer    </span></span><br><span class="line">Producer&lt;String, String&gt; producer = <span class="keyword">new</span> <span class="title class_">KafkaProducer</span>&lt;&gt;(props);         </span><br><span class="line"><span class="comment">// 发送消息到指定topic: your-topic下，对key做hash操作并取余得到指定分区号，也可以将key替换为明确分区号：0,1,2</span></span><br><span class="line">ProducerRecord&lt;String, String&gt; record = <span class="keyword">new</span> <span class="title class_">ProducerRecord</span>&lt;&gt;(<span class="string">&quot;your-topic&quot;</span>, <span class="string">&quot;key&quot;</span>, <span class="string">&quot;value&quot;</span>);        </span><br><span class="line">producer.send(record);</span><br></pre></td></tr></table></figure>
+
+<p><strong>然后保证消息顺序存储：</strong></p>
+<ul>
+<li>每个消息在被添加到分区时，都会分配一个offset，它是消息在此分区中唯一编号，MQ通过offset保证消息在分区内的顺序，offset的顺序不跨分区能够保证同一个分区内的数据是有序的，我们可以认为一个分区就是一个有序的消息队列。每个Topic可以划分多个分区，同一Topic下的不同分区存储的是完整消息流的一部分，同一个Topic所有分区partition中数据相加是完整的消息流数据。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87RocketMQ%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E6%80%A7%E8%83%BD%EF%BC%9F.md"><strong>其次保证消费顺序有序：</strong></a></p>
+<ul>
+<li><p>对于已开源的RocketMQ，通常只支持分布式系统中同一时刻每个message queue只被一个消费者中的一个线程消费，通过轮询或平均分配算法将不同的message queue分发到不同的消费者中，<strong>定时向 broker 申请对队列加 clientId 分布式锁，保证 rebalance 时一个队列也只能被一个消费者消费</strong>，通过synchronized锁保证message queue只有一个线程消费，效率很低。大体过程为，启动一个核心线程为20的线程池，启动一个消费者线程从broker中拉取消息，将拉取到的消息存储到一个LinkedBlockingQueue中，线程池中多个线程只有一个线程可以消费LinkedBlockingQueue中的数据。</p>
+</li>
+<li><p>对于一些性能要求高的场景，企业会优化RocketMQ中message queue的顺序消费模型。大体过程为，启动一个核心线程为20的线程池，创建一个大小为核心线程数的LinkedBlockingQueue列表，启动一个消费者线程从broker中拉取消息，将拉取到的消息按照key路由到阻塞队列列表中的某个阻塞队列中，线程池中每个线程都对应一个LinkedBlockingQueue，由此实现了多个线程对message queue的并发顺序消费</p>
+</li>
+<li><p>(Kafka将多个partition分到不同的消费者端-服务器，利用内存队列的形式并发处理) 采用RoundRobin策略 (此外还有range策略，sticky策略) 将kafka集群中多个topic的多个partition轮询划分给多个消费者。把所有的partition和所有的consumer列举出来，然后按照hashcode进行排序，最后再通过轮询算法来分配partition给每个消费者。</p>
+</li>
+</ul>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230327211520206.png" alt="image-20230327211520206" style="zoom:67%;" />
+
+<ul>
+<li>此外，在使⽤顺序消息时，⼀定要注意其异常情况的出现，当消费者消费失败后，RocketMQ会自动不断地间隔一定时间重复消费消息，超过一定的重试次数会将数据发送到死信队列中，设置合理的重试时间与重试次数，及时解决问题，避免出现大量消费失败，导致MQ出现消息堆积。</li>
+</ul>
+<h3 id="Partition副本"><a href="#Partition副本" class="headerlink" title="Partition副本"></a>Partition副本</h3><p>​	一个分区可以有零个或多个副本，副本根据是否接受读写请求，又可分为leader副本和follower副本，一个分区有一个leader副本，0个或多个follower副本。Leader副本处理分区所有的读写请求并维护自身与follower副本的状态信息。follower副本作为消费者从leader副本拉取消息进行同步。如果leader副本失效，则通过分区的leader选举器从副本列表中选择一个副本作为新的leader。</p>
+<h3 id="Dbus"><a href="#Dbus" class="headerlink" title="Dbus"></a>Dbus</h3><h4 id="乱序问题产生的原因"><a href="#乱序问题产生的原因" class="headerlink" title="乱序问题产生的原因"></a>乱序问题产生的原因</h4><p>​	网络阻塞且消息不丢失引发的重试机制所导致</p>
+<h4 id="DBus的内部原理"><a href="#DBus的内部原理" class="headerlink" title="DBus的内部原理"></a>DBus的内部原理</h4><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230922162426813.png" alt="image-20230922162426813" style="zoom:50%;" />
+
+
+
+<h3 id="Kafka-gt-BMQ-离线消息队列"><a href="#Kafka-gt-BMQ-离线消息队列" class="headerlink" title="Kafka -&gt; BMQ 离线消息队列"></a>Kafka -&gt; BMQ 离线消息队列</h3><h4 id="kafka发展历史"><a href="#kafka发展历史" class="headerlink" title="kafka发展历史"></a>kafka发展历史</h4><p>topic，paritition，offset</p>
+<p>同一个topic中单个partition内部消费是有序的，多个partition之间消费是无序的</p>
+<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240309152251041.png" alt="image-20240309152251041" style="zoom: 67%;" />
+
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230918205642480.png" alt="image-20230918205642480" style="zoom: 25%;" />
+
+<p>工单页面</p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919110122210.png" alt="image-20230919110122210" style="zoom: 33%;" />
+
+<h4 id="BMQ架构-（计算存储分离，分为计算层和存储层）"><a href="#BMQ架构-（计算存储分离，分为计算层和存储层）" class="headerlink" title="BMQ架构 （计算存储分离，分为计算层和存储层）"></a><a target="_blank" rel="noopener" href="https://developer.volcengine.com/articles/7325343303150272539">BMQ架构 （计算存储分离，分为计算层和存储层）</a></h4><p>生产者发送数据时将数据发送给Proxy层，Proxy层对数据进行压缩发送到Broker，Broker会将多个写请求合并后把数据同步到分布式文件系统(HDFS)中，将元数据(更新的segment索引信息、元信息)存储到KV数据库ABase中</p>
+<p>消费者在消费消息时通过Proxy层直接从HDFS中读取数据，无需通过Broker，判断读取的消息的预留标志位是否有压缩标识，有则进行解压缩</p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919125402843.png" alt="image-20230919125402843" style="zoom:25%;" />
+
+<p>HDFS中Partition是个抽象的概念，实际上是通过多个Segment存储，Segment中存储着多个MessageSet，每个MessageSet存储着多条压缩之后的消息。在消息消费时可以把Partition看成一个<code>map&lt;int,list&lt;int&gt;&gt;</code>的数据类型，类似于分块查找的方式找到offset往后消费</p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919131353538.png" alt="image-20230919131353538" style="zoom:25%;" />
+
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919131832919.png" alt="image-20230919131832919" style="zoom:25%;" />
+
+<h4 id="Kafka与BMQ对比"><a href="#Kafka与BMQ对比" class="headerlink" title="Kafka与BMQ对比"></a>Kafka与BMQ对比</h4><p>​	采用计算存储分离的方式解决了kafka在重启机器和增加新机器时需要占用大量带宽从其他Broker中同步数据，将重启时间从分钟级优化到秒级。kafka集群进行扩容缩容时需要进行rebalance操作涉及大量IO，但是BMQ支持弹性扩缩容，无需rebalance等任何操作</p>
+<p>​	kafka将数据存储在本地磁盘上，难以实现云化，BMQ将数据存储在分布式文件存储系统中，不同partition中的不同segment被存储在不同的机器上的不同磁盘中，避免因为单机磁盘瓶颈引发的数据生产和消费问题，将IO压力分散到各个机器上提高了吞吐量</p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919130252142.png" alt="image-20230919130252142" style="zoom:25%;" />
+
+<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240311143844736.png" alt="image-20240311143844736" style="zoom: 67%;" />
+
+<h4 id="BMQ高级应用-DBus"><a href="#BMQ高级应用-DBus" class="headerlink" title="BMQ高级应用-DBus"></a>BMQ高级应用-DBus</h4><p>​		通过在系统中创建增量或全量工单，读取DBus的工单里的配置数据，DBus Server根据工单和kunlun配置从mysql中读取指定量的数据发送到BMQ中，nvwa系统读取kunlun的DBus的配置文件并注册增量和全量消费者处理器，实现DBus增量和全量的handle方法，将BMQ中的数据转换为Event对象发送到RMQ中进行后续处理。</p>
+<p>​		封装为DBus的优点：支持配置化topic，与业务解耦，使用更加灵活；简化客户端的配置如序列化方式等</p>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230919155633211.png" alt="image-20230919155633211" style="zoom:25%;" />
+
+
+
+<h3 id="RMQ"><a href="#RMQ" class="headerlink" title="RMQ"></a>RMQ</h3><h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><ul>
+<li><p>NameServer集群：存储broker集群的ip和topic路由信息等元数据，与Producer、Consumer定期交互，获取当前topic的queue情况以及broker的ip，进行消息的生产和消费</p>
+</li>
+<li><p>Broker集群：采用主从架构，从Broker负责同步主Broker中的数据便于Broker出现事故进行替换</p>
+</li>
+<li><p>Producer Proxy集群：由于RocketMQ主要是针对java语言设计的，对其他语言的兼容程度差问题多。为了避免为每个语言写很重的sdk，将通用的模块集中到Proxy中，如容灾、鉴权等</p>
+</li>
+</ul>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231009171629542.png" alt="image-20231009171629542" style="zoom: 50%;" />
+
+<p>Proxy层设计：业务端引用SDK包括GRPC SDK(适用大众语言)和HTTP SDK(适用小众语言)，Proxy支持GRPC和HTTP协议，包含GRPC Server，HTTP Server以及RMQ的Native SDK</p>
+<ul>
+<li>GRPC网络协议：以二进制传输数据，主用于微服务中各个服务间的通信</li>
+<li>HTTP网络协议：以文本传输数据，主用于浏览器和服务器之间的通信</li>
+</ul>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231009165909180.png" alt="image-20231009165909180" style="zoom: 50%;" />
+
+<h4 id="机器宕机导致数据丢失（ack机制的原理）"><a href="#机器宕机导致数据丢失（ack机制的原理）" class="headerlink" title="机器宕机导致数据丢失（ack机制的原理）"></a>机器宕机导致数据丢失（ack机制的原理）</h4><h5 id="数据刷盘"><a href="#数据刷盘" class="headerlink" title="数据刷盘"></a>数据刷盘</h5><ul>
+<li><p>同步刷盘：当消息被写入到内存之后，会立刻会立刻通知刷盘线程刷盘，然后等待刷盘完成，刷盘线程执行完成后唤醒等待的线程，返回消息写成功的状态。延迟高，数据不会丢失</p>
+</li>
+<li><p>异步刷盘：当消息写入到broker的内存中之后即返回写成功状态，并不会等待消息从内存中写入磁盘就返回。如果发生断电可能会丢失，延迟低，数据丢失 （大部分采用）</p>
+</li>
+</ul>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230920163542666.png" alt="image-20230920163542666" style="zoom: 33%;" />
+
+
+
+<h4 id="延迟队列"><a href="#延迟队列" class="headerlink" title="延迟队列"></a>延迟队列</h4><p>设置延时时间，当延时时间到达后才会消费消息。首先生产者端将消息发送给某个topic，broker接收到消息后将该消息暂存至特定的topic中，该topic内有多个延迟时间不同延迟队列，开启定时任务轮询topic，如果消息已达约定的投递时间则将消息重新放到应到的topic中。字节RMQ相对于传统的RocketMQ对延迟队列的时间做了更精细扩展，增加了延迟队列的数量</p>
+<h4 id="RocketMQ结构"><a href="#RocketMQ结构" class="headerlink" title="RocketMQ结构"></a>RocketMQ结构</h4><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20230920144018726.png" alt="image-20230920144018726" style="zoom: 25%;" />
+
+
+
+<h3 id="MQ如何排查和处理消息积压"><a href="#MQ如何排查和处理消息积压" class="headerlink" title="MQ如何排查和处理消息积压"></a>MQ如何排查和处理消息积压</h3><p>通过监控面板查看某个queue的lag变化</p>
+<ul>
+<li>排查<ul>
+<li>判断消费客户端是否启动成功</li>
+<li>大量消息消费失败不断重试</li>
+<li>消费能力不够，消费太慢，消费者消费能力差</li>
+<li>查看可视化面板grafana判断是否出现数据倾斜</li>
+</ul>
+</li>
+<li>解决<ul>
+<li>Broker中的queue数少于consumer group中的消费者数导致有些消费者空闲，或者broker中queue数量大于消费者数量</li>
+<li>消费者线程不够，适当增加消费者中并发线程的数量</li>
+<li>消费者在从queue中拉取数据时可以适当增大拉取的数据量，但不宜拉取过多，否则会导致拉取消息超时，kafka认为消费者能力不足踢出消费者组</li>
+<li>数据倾斜，某个queue中写入过量数据发生堆积，可以增加topic将数据均匀发送到其他topic并增加消费者组进行消费，也可设置合理的key或加随机数</li>
+<li>判断业务是否重要，跳过非重要的消息</li>
+<li>优化消费者的消费逻辑</li>
+</ul>
+</li>
+</ul>
+<h4 id="应用场景中出现消息积压"><a href="#应用场景中出现消息积压" class="headerlink" title="应用场景中出现消息积压"></a>应用场景中出现消息积压</h4><ul>
+<li>判断数据是否可丢弃重新消费，比如在增量同步的过程中因为某些表中的数据丢失导致消息消费失败引发消息重试出现消息积压越来越多的情况，如果我们可以进行全量同步的话可以直接丢弃掉增量消费失败的数据重新同步。</li>
+<li>如果积压的数据不可丢弃，查看日志判断消费失败的原因，以当前遇到的场景为例，出现消费失败是因为<code>product</code>表的数据未同步成功，其他表<code>(lead线索表、order_form_item线下订单行表)</code>的数据依赖该表<code>product</code>的数据导致其他表的数据也消费失败，引发消息堆积，在这个情况下，可以重新全量同步一次丢失的数据<code>product主要报错表</code>，其他引用缺失数据<code>product</code>的数据<code>(lead线索表、order_form_item线下订单行表)</code>在后续重试消费时会消费成功，在考虑该情况下，我们会对全量同步的数据与增量同步的数据设置两个queue，不应让增量产生的阻塞阻碍全量的同步</li>
+</ul>
+<h3 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h3><h4 id="kafka分区的作用"><a href="#kafka分区的作用" class="headerlink" title="kafka分区的作用"></a>kafka分区的作用</h4><p><img src="https://img-blog.csdnimg.cn/img_convert/dabf6a66fb298df07878fda2ff98f4f0.png" alt="图片"></p>
+<ul>
+<li>将topic分区为多个partition后，可以方便kafka多个副本备份，提高系统的可用性</li>
+<li>若分区，一个消费者组可以并发消费一个topic中的多个分区；若不分区，只能一个消费者消费topic，否则无法保证topic的顺序消费</li>
+</ul>
+<h4 id="kafka中消费者重启或网络问题如何保证offset"><a href="#kafka中消费者重启或网络问题如何保证offset" class="headerlink" title="kafka中消费者重启或网络问题如何保证offset"></a>kafka中消费者重启或网络问题如何保证offset</h4><p>​		消费者组中每个消费者消费固定分区，同一个消费者组中一个消费者消费完topic某分区后其他消费者不能继续消费该分区，不同消费者组可以重复消费同一topic。kafka通过consumer position记录每个分区的消费状态（<code>消费者组 + 主题 + 分区 + offset</code> 确定消费位置），当消费完成时，broker收到确认，consumer position指向下次消费的offset，kafka有一个内置的topic用来保存offset。</p>
+<h4 id="更新offset的方式-（包括其他MQ）"><a href="#更新offset的方式-（包括其他MQ）" class="headerlink" title="更新offset的方式 （包括其他MQ）"></a>更新offset的方式 （包括其他MQ）</h4><ul>
+<li>自动提交：称为<code>[at most once]</code>消费者拉取到消息后就更新offset，无论是否消费成功</li>
+<li>手动提交：称为<code>[at least once]</code>消费者拉取到消息后等到消费完成返回ack后调用<code>consumer.commitSync()</code>手动更新offset，如果消费失败offset不会更新</li>
+</ul>
+<h4 id="Kafka的如何保证消息不丢失-生产不丢失，消费也不丢失"><a href="#Kafka的如何保证消息不丢失-生产不丢失，消费也不丢失" class="headerlink" title="Kafka的如何保证消息不丢失 (生产不丢失，消费也不丢失)"></a>Kafka的如何保证消息不丢失 (生产不丢失，消费也不丢失)</h4><ul>
+<li><p>首先，数据丢失分为两个情况：</p>
+<ul>
+<li><p>当我们写数据时一般都是往leader写数据，但如果这个时候leader挂了，follower还没来得及同步数据，那这时候数据就丢失了</p>
+<ul>
+<li>生产者消息不丢失，每个partition的ISR（In-Sync Replicas）列表中都至少要有个follower，在写入时候必须leader和其中一个follower (ack&#x3D;all且min.insync.replicas&#x3D;1，ack&#x3D;all相当于开启副本确认机制，minisr&#x3D;1表示至少有一个follower同步到leader的数据) 都写入成功才算成功，即follower收到消息后给leader发送ack后才认为消息存储成功<ul>
+<li><p>ack&#x3D;0：速度最快，最不可靠。生产者发送消息后不会等待集群任何确认并认为消息已成功发送。</p>
+</li>
+<li><p>ack&#x3D;1：默认的确认级别，也称为”leader确认”。生产者发送消息后会等待分区的leader确认消息已成功写入到其本地日志，一旦领导者确认，生产者会认为消息已成功发送。该模式下，如果leader成功写入消息但在复制给其他副本时发生故障，消息可能会丢失。</p>
+</li>
+<li><p>ack&#x3D;all或ack&#x3D;-1：等待所有副本确认。在这个级别下,生产者发送消息后会等待所有分区副本都确认消息已成功写入到它们的本地日志,然后才才认为消息已成功发送。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>除此之外当网络出现波动导致broker未接收到消息或者broker接收到消息已存储但未返回ack时，都会触发生产者的重传机制</p>
+<ul>
+<li>在该情况下不会出现消息丢失，但是可能会发生消息重复的现象，kafka内部通过 <code>幂等性+At Least Once</code> 保证消息的不重复</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>消费者消息不丢失，消费者关闭自动提交offset机制</p>
+</li>
+</ul>
+<h4 id="ISR（In-Sync-Replicas）-分区副本选举"><a href="#ISR（In-Sync-Replicas）-分区副本选举" class="headerlink" title="ISR（In-Sync Replicas）+ 分区副本选举"></a>ISR（In-Sync Replicas）+ 分区副本选举</h4><p>​	Kafka中用于保证数据可靠性和高可用性的机制。ISR是指与leader副本保持同步的副本集合。当leader副本发生故障时，ISR中的某个副本会被选举为新的leader副本。只有在ISR中的副本才能被选举为新的leader副本，因为它们保证了数据的一致性。如果某个副本与leader副本失去同步，它将被从ISR中移除，直到与leader副本重新保持同步才会被加入到ISR中。当Leader副本宕机时，Kafka会自动从<strong>ISR中选则第一个Follower副本</strong>作为新的Leader副本。如果一个Follower副本超过10秒未向Leader副本发起Fetch请求，那么Kafka就认为该Follower副本与leader是不同步的，从ISR中移除。当ISR中只剩余一个结点时即只剩Leader副本，如果此时Leader副本挂掉了，会导致该分区无Leader，可是ISR是空，此时该怎么选举新Leader呢？<strong>Kafka把所有不在ISR中的存活副本都称为非同步副本</strong>，非同步副本落后Leader太多，因此，如果选择这些副本作为新Leader，就可能出现数据的丢失，选举这种非同步副本的过程称为<strong>Unclean领导者选举</strong>。</p>
+<h4 id="Kafka保证生产消息不重复-（kafka独有RMQ无，仅生产者端-幂等性-At-Least-Once-x3D-x3D-gt-Exactly-Once）"><a href="#Kafka保证生产消息不重复-（kafka独有RMQ无，仅生产者端-幂等性-At-Least-Once-x3D-x3D-gt-Exactly-Once）" class="headerlink" title="Kafka保证生产消息不重复 （kafka独有RMQ无，仅生产者端  -  幂等性+At Least Once&#x3D;&#x3D;&gt;Exactly Once）"></a>Kafka保证生产消息不重复 （kafka独有RMQ无，仅生产者端  -  幂等性+At Least Once&#x3D;&#x3D;&gt;Exactly Once）</h4><ul>
+<li><p>生产消息不重复，当生产者发送消息给broker但是由于网络波动原因broker已将数据存储但未发送成功ack，导致生产者重复发送消息引发消息重复；kafka利用幂等性来解决生产消息重复问题，在生产消息时会给消息添加上（pid，partition号，sequence number序列号）来保证broker中消息的唯一性。对于每一条生产的消息，其producer id，需要发往的partition号，seqNumber序列号都是唯一的，重复的消息会根据三元组来判断。</p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019113906587.png?raw=true" alt="image-20221019113906587"></p>
+<p><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221019103137587.png?raw=true" alt="image-20221019103137587"></p>
+</li>
+</ul>
+<h4 id="Kafka重复消费-（包括其他MQ）"><a href="#Kafka重复消费-（包括其他MQ）" class="headerlink" title="Kafka重复消费 （包括其他MQ）"></a>Kafka重复消费 （包括其他MQ）</h4><ul>
+<li>重复消费出现的原因：设置offset为手动提交，当消费者端消费完成后返回ack前kafka宕机会导致offset没有更新，kafka重启后会继续从原来的offset开始消费，导致出现重复消费的情况</li>
+<li>如果是插入操作，可对数据库中字段设置唯一索引</li>
+<li>每条消息在生产时添加唯一标识，将已经消费的数据通过唯一标识存储到redis中，每次消费时判断是否在redis中存在，如果存在则放弃消费 （项目中判断重复消费的情况是将 <strong>时间戳+事件类型</strong> 作为唯一标识来判断）</li>
+<li>使用布隆过滤器+redis的方式，相对于直接访问redis可以提高效率，布隆过滤器可以判断大多数的数据是否存在，如果布隆过滤器存在为了避免误差再校验一遍redis，如果不存在则真正不存在。<ul>
+<li>上面的方法：处理数据先查redis，如果redis中不存在则插入，如果redis存在则不操作 (无数据访问2次redis，有数据访问1次redis，且无数据概率高)</li>
+<li>下面的方法：处理数据先查布隆过滤器，如果布隆过滤器没有则插入布隆过滤器中并存入redis，如果布隆过滤器有则查redis判断是否存在 (无数据访问1次redis，有数据或者出现冲突访问1~2次redis，且无数据概率高，数据量级上去后可大幅度减少redis访问次数，但布隆过滤器无法删除数据要定期清理)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Kafka消费失败重试-（RMQ有重试机制和死信队列）"><a href="#Kafka消费失败重试-（RMQ有重试机制和死信队列）" class="headerlink" title="Kafka消费失败重试 （RMQ有重试机制和死信队列）"></a>Kafka消费失败重试 （RMQ有重试机制和死信队列）</h4><ul>
+<li>Kafka本身没有消费失败后的重试机制，需要程序手动去实现失败重试，设置重试次数和重拾间隔</li>
+<li>解决方案：创建一个新的topic作为重试队列，将消费失败的消息发送到重试队列，每隔一段时间消费重试队列中的数据，或者编写代码处理重试队列中的数据</li>
+<li>但是对于消费失败的情况，我们要判断是否会引发消息堆积，因为如果大量数据都发生失败重试的情况会引起消息队列中堆积的数据越来越多</li>
+<li>对于之前做过的需求，比如通过天眼查api查询天眼查中的企业信息，由于天眼查api设置了限流，所以在查询过程中会出现查询失败报错的情况<ul>
+<li>可以采用重试机制每隔一段时间重试一次，对于无法消费查询到的数据存储起来单独处理</li>
+<li>可以借用RocketMQ，将查询失败的消息发送给RocketMQ做重试操作，对于多次重试失败的数据可以放到RocketMQ的死信队列中单独处理</li>
+</ul>
+</li>
+</ul>
+<h4 id="Kafk保证高可用性（包括其他MQ）"><a href="#Kafk保证高可用性（包括其他MQ）" class="headerlink" title="Kafk保证高可用性（包括其他MQ）"></a>Kafk保证高可用性（包括其他MQ）</h4><ul>
+<li>集群架构：一个集群多台broker，某个broker出现故障其他broker可以继续工作</li>
+<li>消费者组：一个消费者组包含多个消费者，每个消费者负责处理某个 Partition 中的消息</li>
+<li>多副本：每个分区都可以配置多个副本，其中一个副本为Leader副本，其他副本为Follower副本。Leader副本负责处理读写请求，Follower副本负责复制Leader副本的数据。</li>
+</ul>
+<h4 id="Kafka架构"><a href="#Kafka架构" class="headerlink" title="Kafka架构"></a>Kafka架构</h4><ul>
+<li>Producer</li>
+<li>Consumer</li>
+<li>Broker<ul>
+<li>topic：发送到Kafka的消息都有一个唯一的类别，称为topic</li>
+<li>partition：每个Topic会被分成若干个partition,每个partition对应一个文件夹,每个partition由若干个segment组成，segment存储了实际的消息</li>
+</ul>
+</li>
+</ul>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20221021090835996.png?raw=true" alt="image-20221021090835996" style="zoom: 50%;" />
+
+<ul>
+<li>Controller：也是一个broker,除了具有基本broker的功能外,还负责分区选举和故障切换</li>
+<li>Zookeeper：为kafka集群选举新leader，维护每个kafka节点的broker与partition的对应关系，记录每个分区的offset情况以便消费者重启时继续消费，作为注册中心记录每个broker的ip与端口，消费者组发生变化时进行rebalance</li>
+<li>ISR(In Sync Replica)：每个分区包含一个ISR列表,里面都是和master数据保持一致的副本(包括master)</li>
+</ul>
+<img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231008212915684.png" alt="image-20231008212915684" style="zoom: 33%;" />
+
+<h4 id="Kafka吞吐量大"><a href="#Kafka吞吐量大" class="headerlink" title="Kafka吞吐量大"></a>Kafka吞吐量大</h4><ul>
+<li>采用零拷贝和页缓存技术，消费数据时无需将磁盘中的数据拷贝到内存中</li>
+<li>刷盘策略采用异步刷盘，虽然可能会因为宕机导致数据丢失但是延迟低</li>
+<li>一个消费者组可以并发消费一个topic的多个partition</li>
+<li>内部不设失败重试策略，虽可能因为异常丢失部分数据但是不会因为重试降低吞吐量</li>
+<li>生产消息顺序写入，写入数据的时候由于单个Partition是末尾添加所以速度快，写快</li>
+<li>采用稀疏索引，读取数据时利用二分法可以快速定位要读取的数据，读快</li>
+</ul>
+<h4 id="Kakfa的主从副本同步"><a href="#Kakfa的主从副本同步" class="headerlink" title="Kakfa的主从副本同步"></a><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/112118">Kakfa的主从副本同步</a></h4><p>​	首先，Follower副本采用拉模式，多个Follower副本异步拉取Leader副本中的数据。具体同步过程是采用了高水位的机制实现</p>
+<p>​	名词解释：</p>
+<ul>
+<li>LEO (Log End Offset日志末端位移)：表示将分区的数据已存储到磁盘的offset位置</li>
+<li>HW (Hight Watermark高水位)：高水位之前的消息被认为是已提交的消息，之后的被认为是未提交的消息 (消费者不能消费)</li>
+</ul>
+<p>​	当生产者发送一条消息时，Leader 和 Follower 副本对应的高水位是怎么被更新的呢？首先是初始状态：</p>
+<p><img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240413153734464.png" alt="image-20240413153734464"></p>
+<p>​		当生产者给主题分区发送一条消息后，Leader 副本成功将消息写入了本地磁盘，故Leader副本的 LEO 值被更新为 1，Follower 再次尝试从 Leader 拉取消息。和之前不同的是，这次有消息可以拉取了，因此状态进一步变更为：<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240413153744662.png" alt="image-20240413153744662"></p>
+<p>​	这时，Follower 副本也成功地更新 LEO 为 1。此时，Leader 和 Follower 副本的 LEO 都是 1，但各自的高水位依然是 0，还没有被更新。它们需要在下一轮的拉取中被更新：<img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240413153630062.png" alt="image-20240413153630062"></p>
+<p>在新一轮的拉取请求中，由于位移值是 0 的消息已经拉取成功，因此 Follower 副本这次请求拉取的是位移值 &#x3D;1 的消息。Leader 副本接收到此请求后，更新 Leader 高水位为 1。做完这些之后，它会将当前已更新过的高水位值 1 发送给 Follower 副本。Follower 副本接收到以后，也将自己的高水位值更新成 1。一个broker中有多个分区，在进行数据同步时，每个分区都会有对应的线程去Leader副本中发起Fetch请求拉数据</p>
+<h4 id="Kafka集群扩容分区重分配"><a href="#Kafka集群扩容分区重分配" class="headerlink" title="Kafka集群扩容分区重分配"></a>Kafka集群扩容分区重分配</h4><p>​	新添加的Kafka节点机器是不会自动分配数据的，所以无法分担集群的负载，除非我们新建一个Topic，此时新的Topic会使用新添加的Kafka节点机器。如果我们想新添加的Kafka节点机器能够分担集群存储，需要手动将部分分区移动到新添加的Kafka节点机器上。官方提供了kafka-reassign-partitions.sh脚本来执行分区重分配操作。主要是将老节点上的副本迁移到新的节点上，然后删除老节点上的分区数据。</p>
+<p><img src="C:\Users\19094\AppData\Roaming\Typora\typora-user-images\image-20240413160624972.png" alt="image-20240413160624972"></p>
+<h4 id="Kafka集群动态配置"><a href="#Kafka集群动态配置" class="headerlink" title="Kafka集群动态配置"></a>Kafka集群动态配置</h4><p>​	所谓动态，就是指修改参数值后，无需重启Broker就能立即生效，在单个broker中的server.properties中配置的参数称之为静态参数</p>
+<p>​	Kafka将动态Broker参数保存在Zookeeper的znode中，使用Kafka自带的Kafka自带的Kafka-configs脚本，已经修改会立刻监听到变更，无需重启broker</p>
+<h4 id="Kafka的Controller"><a href="#Kafka的Controller" class="headerlink" title="Kafka的Controller"></a>Kafka的Controller</h4><p>​	Kafka集群中始终只有一个Controller Broker，Broker集群在启动时会尝试去 ZooKeeper中创建 &#x2F;controller 节点，第一个成功创建 &#x2F;controller 节点的 Broker 会被指定为控制器。Controller有多种职责，维护集群中每个broker的信息，包括topic信息，分区信息，分区offset，每个分区的Leader和ISR信息，当前存活的broker列表。</p>
+<p>​	ZooKeeper可以监听各个Broker的状态。有Broker宕机后与ZooKeeper断开连接，ZooKeeper中znode节点被创建、删除、子节点数量发生变化，ZooKeeper监听到该变更后，会将该变更发送给Controller Broker，这样Controller Broker就可以得知有Broker宕机了，此时Controller根据ISR机制决定哪些Broker上的Follower副本变成Leader副本。有Broker加入集群后与ZooKeeper建立连接，ZooKeeper中znode节点监听到节点数量发生变化，将变更发送给Controller，Controller感知到变化后更新自己存储存活的Broker列表以及新的Broker信息。</p>
+<h4 id="各个消息队列的区别"><a href="#各个消息队列的区别" class="headerlink" title="各个消息队列的区别"></a>各个消息队列的区别</h4><img src="https://gitlab.com/littlebean1/photoproject/-/raw/main/image-20231008210444050.png" alt="image-20231008210444050" style="zoom:50%;" />
+
+<ul>
+<li><p>消息回溯</p>
+<ul>
+<li>Kafka理论上可以按照Offset来回溯消息</li>
+<li>RocketMQ支持按照时间来回溯消息，精度毫秒，例如从一天之前的某时某分某秒开始重新消费消息</li>
+</ul>
+</li>
+<li><p>同步刷盘</p>
+<ul>
+<li>RocketMQ支持异步实时刷盘，同步刷盘，同步Replication，异步Replication</li>
+<li>Kafka使用异步刷盘方式，异步Replication</li>
+</ul>
+</li>
+<li><p>缓存生产消息</p>
+<ul>
+<li>Kafka生产者生产一条消息时，消息并没有立即发送到 Broker 而是缓存起来，然后直接向业务返回成功，当缓存的消息达到一定数量或到一定时间时再批量发送给 Broker</li>
+</ul>
+</li>
+<li><p>重试机制</p>
+<ul>
+<li>Kafka本身不支持消息消费失败重试需要手动去做</li>
+<li>RocketMQ本身支持消息的消费失败重试机制，当重试一定次数之后会将最终消费失败的消息发送到死信队列中</li>
+</ul>
+</li>
+<li><p>分布式事务</p>
+<ul>
+<li>RocketMQ支持事务消息</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" rel="tag"># 八股文</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/12/%E7%AE%97%E6%B3%95-java%E8%AF%AD%E6%B3%95api/" rel="prev" title="算法-java语法api">
+                  <i class="fa fa-chevron-left"></i> 算法-java语法api
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/16/redis/" rel="next" title="redis">
+                  redis <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bean</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
